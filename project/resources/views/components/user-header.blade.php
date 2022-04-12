@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="css/app.css">
 {{-- ログインする前のもの --}}
 <header>
 	<div class="flex items-center justify-between  flex-shrink-0 w-full h-16 px-10 bg-white bg-opacity-75 shadow-lg">
@@ -12,7 +11,7 @@
           新規登録
         </a>
       </button>
-      <button class="bg-gray-500 hover:bg-grey-800 text-white font-bold py-1 px-4 rounded ml-2">
+      <button class="bg-gray-500 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded ml-2">
         <a href="">
           ログイン
         </a>

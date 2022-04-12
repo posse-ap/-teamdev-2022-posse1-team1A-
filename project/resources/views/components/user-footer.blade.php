@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="css/footer.css">
-<link rel="stylesheet" href="css/app.css">
-
 <footer class="footer px-10 bg-gray-500 w-full h-16 px-10">
 <div class="flex items-center justify-between flex-shrink-0 px-10">
   <a class="" href="">
