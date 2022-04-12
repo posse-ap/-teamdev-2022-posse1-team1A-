@@ -17,4 +17,5 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
     require('autoprefixer'),
 ])
     .postCss('resources/css/terms-of-service.css', 'public/css')
+    .postCss('resources/css/footer.css', 'public/css')
 ;

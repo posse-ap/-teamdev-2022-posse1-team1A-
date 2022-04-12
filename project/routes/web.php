@@ -23,6 +23,6 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/user-header', function () {
+Route::get('/user-footer', function () {
     return view('components.user-header');
 });
