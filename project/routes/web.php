@@ -24,5 +24,5 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/user-footer', function () {
-    return view('components.user-header');
+    return view('components.user-footer');
 });

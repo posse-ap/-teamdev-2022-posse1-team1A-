@@ -7,7 +7,7 @@
       <p class="flex ml-2 items-center"><b>Anovey<b></p>
     </div>
 		<div class="flex flex-row-reverse ml-auto mr-0">
-      <button class=" bg-blue-800 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded ml-2">
+      <button class="bg-blue-800 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded ml-2">
         <a href="">
           新規登録
         </a>
