@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Chat;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ScheduleStatusSeeder extends Seeder
+class ChatSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,17 +16,15 @@ class ScheduleStatusSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('schedule_statuses')->truncate();
-        DB::table('schedule_statuses')->insert([
+        DB::table('chats')->truncate();
+        DB::table('chats')->insert([
             [
-                'name' => 'pending'
-            ],
-            [
-                'name' => 'cancelled'
-            ],
-            [
-                'name' => 'finished'
+                'client_user_id' => 1,
+                'respondent_user_id' => 4,
             ],
         ]);
+        $chats = Chat::factory()
+                ->count(40)
+                ->create();
     }
 }

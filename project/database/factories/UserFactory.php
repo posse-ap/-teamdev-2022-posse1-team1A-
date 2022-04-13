@@ -4,6 +4,9 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Role;
+use App\Models\AccountStatus;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -19,9 +22,17 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'nickname' => $this->faker->firstKanaName(),
+            'icon' => 'img/user-icon.jpeg',
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'company' => $this->faker->company(),
+            'department' => '経理部',
+            'length_of_service' => '5年',
+            'is_search_target' => true,
+            'account_status_id' => AccountStatus::getActiveId(),
+            'role_id' => Role::getUserId(),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
     }

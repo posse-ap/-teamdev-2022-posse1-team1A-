@@ -15,7 +15,8 @@ class AccountStatusSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('account_statuses')->insert(
+        DB::table('account_statuses')->truncate();
+        DB::table('account_statuses')->insert([
             [
                 'name' => 'active'
             ],
@@ -25,6 +26,6 @@ class AccountStatusSeeder extends Seeder
             [
                 'name' => 'withdrawn'
             ],
-        );
+        ]);
     }
 }

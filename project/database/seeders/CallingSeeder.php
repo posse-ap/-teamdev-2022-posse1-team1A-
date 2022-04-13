@@ -5,8 +5,9 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Calling;
 
-class ScheduleStatusSeeder extends Seeder
+class CallingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,17 +16,15 @@ class ScheduleStatusSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('schedule_statuses')->truncate();
-        DB::table('schedule_statuses')->insert([
+        DB::table('callings')->truncate();
+        DB::table('callings')->insert([
             [
-                'name' => 'pending'
-            ],
-            [
-                'name' => 'cancelled'
-            ],
-            [
-                'name' => 'finished'
+                'chat_id' => 1,
+                'calling_time' => 4000,
             ],
         ]);
+        $calling = Calling::factory()
+                ->count(30)
+                ->create();
     }
 }
