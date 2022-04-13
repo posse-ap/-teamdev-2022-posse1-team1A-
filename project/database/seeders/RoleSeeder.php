@@ -15,7 +15,8 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert(
+        DB::table('roles')->truncate();
+        DB::table('roles')->insert([
             [
                 'name' => 'User'
             ],
@@ -25,6 +26,6 @@ class RoleSeeder extends Seeder
             [
                 'name' => 'Bot'
             ],
-        );
+        ]);
     }
 }
