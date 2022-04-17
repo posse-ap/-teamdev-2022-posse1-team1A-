@@ -13,6 +13,7 @@
 
 @push('styles')
     <link rel="stylesheet" href="https://unpkg.com/ress@4.0.0/dist/ress.min.css">
+    <link rel="stylesheet" href="{{ asset('css/top.css') }}">
 @endpush
 
 @section('content')
