@@ -18,3 +18,4 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
 ])
     .postCss('resources/css/footer.css', 'public/css')
 ;
+mix.postCss('resources/css/search.css', 'public/css');

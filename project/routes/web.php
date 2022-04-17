@@ -26,3 +26,7 @@ require __DIR__.'/auth.php';
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 });
+
+Route::get('/search', function () {
+    return view('user.search');
+});
