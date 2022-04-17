@@ -20,18 +20,6 @@
   margin-right: 0.25rem;
 }
 
-/* h1 {
-  font-size: 40px;
-} */
-
-h2 {
-  /* font-size: 24px; */
-}
-
-p {
-  font-size: 18px;
-}
-
 section {
   padding: 80px 0;
 }
@@ -60,7 +48,6 @@ section {
 
 .wide-triangle {
   width: 100vw;
-  /* height: 0; */
   border-left: 50vw solid #668BED;
   border-right: 50vw solid #668BED;
   border-top: 70px solid #F9FAFB;
@@ -109,9 +96,16 @@ section {
 }
 
 @media (max-width: 768px) {
+  section {
+    padding: 40px 0;
+  }
 
   .fv-img {
     margin-left: 20vw;
+  }
+
+  .wide-triangle {
+    border-top: 40px solid #F9FAFB;
   }
 
   .feature-explain-right {

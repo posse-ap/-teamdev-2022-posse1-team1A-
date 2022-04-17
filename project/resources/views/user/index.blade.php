@@ -79,19 +79,19 @@
                 <div class="md:flex flex-row w-full">
                     <div class="md:w-4/12">
                         <div class="text-center mt-3">
-                            <img src="{{ asset('img/worries1.png') }}" alt="思考する人" class="w-10/12 mx-auto">
+                            <img src="{{ asset('img/worries1.png') }}" alt="思考する人" class="w-6/12 md:w-10/12 mx-auto">
                         </div>
                         <p class="text-center text-sm lg:text-lg font-thin">相談できる人がいない</p>
                     </div>
                     <div class="md:w-4/12">
                         <div class="mt-3">
-                            <img src="{{ asset('img/worries2.png') }}" alt="考える人" class="w-10/12 mx-auto">
+                            <img src="{{ asset('img/worries2.png') }}" alt="考える人" class="w-6/12 md:w-10/12 mx-auto">
                         </div>
                         <p class="text-center text-sm lg:text-lg font-thin">企業の本当の情報が分からない</p>
                     </div>
                     <div class="md:w-4/12">
                         <div class="mt-3">
-                            <img src="{{ asset('img/worries3.png') }}" alt="時計を見る人" class="w-10/12 mx-auto">
+                            <img src="{{ asset('img/worries3.png') }}" alt="時計を見る人" class="w-6/12 md:w-10/12 mx-auto">
                         </div>
                         <p class="text-center text-sm lg:text-lg font-thin">時間がない</p>
                     </div>
@@ -110,15 +110,15 @@
                     <span class="text-blue text-lg lg:text-2xl">About</span><br>
                     "Anovey"とは？
                 </h2>
-                <div class="items-center lg:flex">
-                    <div class="w-full lg:w-1/2">
+                <div class="items-center md:flex">
+                    <div class="w-full md:w-1/2">
                         <div class="">
                             <div class="">
-                                <p class="font-bold mb-5 text-base lg:text-xl text-center lg:text-left">
+                                <p class="font-bold mb-5 text-base lg:text-xl text-center md:text-left">
                                     企業の方と匿名で相談ができる<br>
                                     転職相談プラットフォームです。
                                 </p>
-                                <p class="font-thin text-sm lg:text-base text-center lg:text-left">
+                                <p class="font-thin text-sm lg:text-base text-center md:text-left">
                                     時間もない、相談できる人もいない・・・<br>
                                     そんな悩みを抱えているあなたにぴったりな、<br>
                                     匿名で転職先の人に相談できるサービスです。
@@ -127,9 +127,9 @@
                         </div>
                     </div>
 
-                    <div class="relative flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2">
-                        <img class="w-full h-full max-w-md" src="{{ asset('/img/team-meeting.png') }}" alt="ミーティングをする人々">
-                        <div class="ellipse hidden lg:block"></div>
+                    <div class="relative flex items-center justify-center w-full mt-6 md:mt-0 md:w-1/2">
+                        <img class="w-8/12 md:w-10/12 mx-auto" src="{{ asset('/img/team-meeting.png') }}" alt="ミーティングをする人々">
+                        <div class="ellipse hidden md:block"></div>
                     </div>
                 </div>
             </div>
@@ -168,7 +168,7 @@
                         <div class="feature-explain-left flex items-center">
                             <div
                                 class="feature-box bg-white w-10/12 mr-auto md:w-full flex items-center py-10 md:py-12 px-8 md:px-16 rounded-r-xl shadow">
-                                <div>
+                                <div class="ml-auto">
                                     <p class="feature-lead text-navy text-3xl lg:text-4xl mb-5">
                                         02
                                     </p>
