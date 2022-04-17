@@ -26,3 +26,6 @@ require __DIR__.'/auth.php';
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 });
+
+// chat画面製作中
+Route::get('/chat', 'App\Http\Controllers\ChatController@index')->name('chat.index');
