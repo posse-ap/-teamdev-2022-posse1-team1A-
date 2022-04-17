@@ -27,5 +27,8 @@ Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 });
 
-// chat画面製作中
+// chat一覧画面製作中
 Route::get('/chat', 'App\Http\Controllers\ChatController@index')->name('chat.index');
+
+// chat画面製作中
+Route::get('/chat/main', 'App\Http\Controllers\ChatController@main')->name('chat.main');

@@ -11,4 +11,10 @@ class ChatController extends Controller
         // return view('index', compact('total'));
         return view('chat.index');
     }
+
+    public function main(Request $request){
+
+        // return view('index', compact('total'));
+        return view('chat.main');
+    }
 }
