@@ -1,4 +1,4 @@
-<footer class="footer px-10 bg-gray-500 w-full h-16 px-10">
+<footer class="footer px-10 bg-gray-500 w-full h-16 px-10 sticky bottom-0">
 <div class="flex items-center justify-between flex-shrink-0 px-10">
   <a class="" href="">
     <div class="flex w-8 h-8 ml-0 mr-1">

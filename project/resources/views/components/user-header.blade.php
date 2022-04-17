@@ -1,5 +1,5 @@
 {{-- ログインする前のもの --}}
-<header>
+<header class="sticky top-0">
 	<div class="flex items-center justify-between  flex-shrink-0 w-full h-16 px-10 bg-white bg-opacity-75 shadow-lg">
     <div class="flex w-8 h-8 ml-0 mr-auto">
       <img src="img/logo-black.png" alt="logo-black.png">
