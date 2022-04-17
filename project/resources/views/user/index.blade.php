@@ -107,7 +107,7 @@
         <section class="overflow-hidden">
             <div class="container mx-auto px-6">
                 <h2 class="text-center text-lg lg:text-4xl mb-10">
-                    <span class="text-blue text-lg lg:text-2xl">About</span><br>
+                    <span class="text-blue text-base lg:text-2xl inline-block md:mb-5">About</span><br>
                     "Anovey"とは？
                 </h2>
                 <div class="items-center md:flex">
@@ -138,7 +138,7 @@
         <section class="bg-gray-50">
             <div class="container mx-auto px-6">
                 <h2 class="text-center text-lg lg:text-4xl mb-5">
-                    <span class="text-blue text-lg lg:text-2xl">Feature</span><br>
+                    <span class="text-blue text-base lg:text-2xl inline-block md:mb-3">Feature</span><br>
                     サービスの特徴
                 </h2>
 
@@ -204,7 +204,7 @@
         <section>
             <div class="container mx-auto px-6">
                 <h2 class="text-center text-lg lg:text-4xl mb-10">
-                    <span class="text-blue text-lg lg:text-2xl">Flow</span><br>
+                    <span class="text-blue text-base lg:text-2xl inline-block md:mb-3">Flow</span><br>
                     ご利用の流れ
                 </h2>
 
