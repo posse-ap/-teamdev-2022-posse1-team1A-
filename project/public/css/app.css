@@ -614,9 +614,6 @@ select {
 .right-0 {
   right: 0px;
 }
-.bottom-0 {
-  bottom: 0px;
-}
 .left-0 {
   left: 0px;
 }
@@ -753,6 +750,12 @@ select {
 }
 .w-full {
   width: 100%;
+}
+.w-3\/12 {
+  width: 25%;
+}
+.w-6\/12 {
+  width: 50%;
 }
 .w-4\/5 {
   width: 80%;
@@ -1000,6 +1003,9 @@ select {
 }
 .pb-7 {
   padding-bottom: 1.75rem;
+}
+.pl-10 {
+  padding-left: 2.5rem;
 }
 .pt-6 {
   padding-top: 1.5rem;
@@ -1464,8 +1470,21 @@ select {
   .sm\:text-right {
     text-align: right;
   }
+
+  .sm\:text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
 }
 @media (min-width: 768px) {
+
+  .md\:flex {
+    display: flex;
+  }
+
+  .md\:w-full {
+    width: 100%;
+  }
 
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1480,6 +1499,10 @@ select {
   }
 }
 @media (min-width: 1024px) {
+
+  .lg\:w-6\/12 {
+    width: 50%;
+  }
 
   .lg\:px-8 {
     padding-left: 2rem;
