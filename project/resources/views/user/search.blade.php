@@ -1,7 +1,6 @@
 @extends('layouts.anovey')
 
 @push('styles')
-    <link rel="stylesheet" href="https://unpkg.com/ress@4.0.0/dist/ress.min.css">
     <link rel="stylesheet" href="{{ asset('css/search.css') }}">
 @endpush
 
@@ -56,7 +55,8 @@
                                 <div>
                                     <div class="flex items-center mb-3 md:mb-5">
                                         <p class="text-base md:text-xl mr-5">たかし</p>
-                                        <p class="font-thin text-sm md:text-base">相談満足度：90%</p>
+                                        {{-- TODO:相互評価機能実装後作成 --}}
+                                        {{-- <p class="font-thin text-sm md:text-base">相談満足度：90%</p> --}}
                                     </div>
                                     <div class="md:flex mt-auto items-end">
                                         <p class="font-thin mr-5 text-sm md:text-base">〇〇会社・△△部署</p>
@@ -83,7 +83,7 @@
                                 <div>
                                     <div class="flex items-center mb-3 md:mb-5">
                                         <p class="text-base md:text-xl mr-5">たかし</p>
-                                        <p class="font-thin text-sm md:text-base">相談満足度：90%</p>
+                                        {{-- <p class="font-thin text-sm md:text-base">相談満足度：90%</p> --}}
                                     </div>
                                     <div class="md:flex mt-auto items-end">
                                         <p class="font-thin mr-5 text-sm md:text-base">〇〇会社・△△部署</p>
