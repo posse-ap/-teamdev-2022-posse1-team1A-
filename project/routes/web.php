@@ -13,19 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
-Route::get('/', function () {
-    return view('user.index');
-});
+Route::get('/', 'App\Http\Controllers\UserScreenController@index')->name('UserScreen_index');
 
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');

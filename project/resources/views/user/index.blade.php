@@ -1,18 +1,14 @@
 @extends('layouts.anovey')
 @section('meta')
-    <meta name="description" content="ここにmeta descriptionが入ります" />
+    <meta name="description" content="転職者と企業を匿名で繋ぐマッチングプラットフォームです。独りで転職に悩む人に向けたこのサービスでは、内定先で働く人の生の情報を手に入れることができます。" />
 
-    <meta property="og:title" content="ページの タイトル" />
-    <meta property="og:description" content="ページのディスクリプション" />
-    <meta property="og:type" content="ページの種類" />
-    <meta property="og:url" content="ページの URL" />
-    <meta property="og:image" content="サムネイル画像の URL" />
-    <meta property="og:site_name" content="サイト名" />
+    <meta property="og:title" content="Anovey 転職者と企業を匿名で繋ぐマッチングプラットフォーム" />
+    <meta property="og:description" content="転職者と企業を匿名で繋ぐマッチングプラットフォームです。独りで転職に悩む人に向けたこのサービスでは、内定先で働く人の生の情報を手に入れることができます。" />
+    <meta property="og:type" content="website" />
     <meta property="og:locale" content="ja_JP"  />
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="https://unpkg.com/ress@4.0.0/dist/ress.min.css">
     <link rel="stylesheet" href="{{ asset('css/top.css') }}">
 @endpush
 
@@ -51,7 +47,7 @@
         </section>
 
         <div class="max-w-screen-xl mx-auto py-5">
-            <h2 class="text-center my-4 text-lg lg:text-xl">Anoveyをご利用中の企業</h2>
+            <h2 class="text-center my-4 text-lg lg:text-xl">Anoveyで相談できる企業</h2>
             <div class="flex items-center">
                 <div class="w-1/5 mx-auto">
                     <img src="{{ asset('img/recruit-logo.jpeg') }}" alt="RECRUIT">
@@ -162,7 +158,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="md:flex md:flex-row-reverse">
+                    <div class="md:flex md:flex-row-reverse md:my-5 lg:my-0">
                         <div class="md:w-6/12">
                             <img src="{{ asset('/img/feature2.png') }}" alt="閃いた人" class="w-10/12 mx-auto">
                         </div>
@@ -216,6 +212,7 @@
                             <p class="md:w-8/12 text-base lg:text-base">アカウント新規作成</p>
                         </div>
                         <p class="md:w-6/12 font-thin text-sm lg:text-base">
+                            {{-- TODO: 新規登録画面のリンクを貼る --}}
                             <a href="">新規登録画面</a>よりアカウントを作成してください。
                         </p>
                     </div>
