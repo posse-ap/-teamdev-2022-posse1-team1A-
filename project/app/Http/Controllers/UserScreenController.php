@@ -10,4 +10,9 @@ class UserScreenController extends Controller
     {
         return view('user.index');
     }
+
+    public function search()
+    {
+        return view('user.search');
+    }
 }

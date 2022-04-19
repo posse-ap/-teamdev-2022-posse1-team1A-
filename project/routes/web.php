@@ -21,6 +21,8 @@ require __DIR__.'/auth.php';
 
 Route::get('/', 'App\Http\Controllers\UserScreenController@index')->name('UserScreen_index');
 
+Route::get('/search', 'App\Http\Controllers\UserScreenController@search')->name('UserScreen_search');
+
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 });
