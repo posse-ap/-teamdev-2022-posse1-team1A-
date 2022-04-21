@@ -45,9 +45,9 @@ class UserScreenController extends Controller
                 });
             }
 
-            $users = $query->paginate(5);
+            $users = $query->paginate(20);
         } else {
-            $users = User::where('role_id', Role::getUserId())->where('is_search_target', true)->paginate(5);
+            $users = User::where('role_id', Role::getUserId())->where('is_search_target', true)->paginate(20);
         }
 
         return view('user.search', compact('users', 'keyword'));
