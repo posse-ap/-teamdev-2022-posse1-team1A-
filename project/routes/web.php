@@ -21,7 +21,9 @@ require __DIR__.'/auth.php';
 
 Route::get('/', 'App\Http\Controllers\UserScreenController@index')->name('UserScreen_index');
 
-Route::get('/search', 'App\Http\Controllers\UserScreenController@search')->name('UserScreen_search');
+Route::post('/', 'App\Http\Controllers\UserScreenController@search')->name('UserScreen_search');
+
+Route::get('/search/{keyword?}', 'App\Http\Controllers\UserScreenController@result')->name('UserScreen_result');
 
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');

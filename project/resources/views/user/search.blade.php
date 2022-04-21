@@ -5,7 +5,6 @@
 @endpush
 
 @section('content')
-
     @include('components.user-header')
 
     <main>
@@ -29,77 +28,57 @@
                         </p>
                     </div>
                 </div>
-                <div class="flex mt-8 space-y-3 space-y-0 flex-row">
-                    <input type="text"
+                <form class="flex mt-8 space-y-3 space-y-0 flex-row" action="{{ route('UserScreen_search') }}"
+                    method="POST">
+                    @csrf
+                    <input type="text" name="keyword" value="{{ $keyword }}"
                         class="w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
                         placeholder="企業名や部署名などのフリーワード">
 
-                    <button
+                    <button type="submit"
                         class="p-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-800 rounded-lg w-auto mx-4 hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
-                        <img src="{{ asset('img/search.svg') }}" alt="">
+                        <img src="{{ asset('img/search.svg') }}" alt="検索">
                     </button>
-                </div>
+                </form>
             </div>
         </section>
 
         <section>
             <div class="container mx-auto px-6 md:px-20">
-                <p class="font-thin mb-5">検索結果 2件</p>
-                <div class="bg-gray-50 p-4 md:px-10 md:py-14 mb-5">
-                    <div class="md:flex items-center md:ustify-between">
-                        <div class="flex">
-                            <div class="user-icon mr-5 border w-16 h-16">
-                                <img src="{{ asset('img/user1.png') }}" alt="ユーザー1">
-                            </div>
-                            <div class="flex items-center">
-                                <div>
-                                    <div class="flex items-center mb-3 md:mb-5">
-                                        <p class="text-base md:text-xl mr-5">たかし</p>
-                                        {{-- TODO:相互評価機能実装後作成 --}}
-                                        {{-- <p class="font-thin text-sm md:text-base">相談満足度：90%</p> --}}
-                                    </div>
-                                    <div class="md:flex mt-auto items-end">
-                                        <p class="font-thin mr-5 text-sm md:text-base">〇〇会社・△△部署</p>
-                                        <p class="font-thin text-sm md:text-base">勤務期間：10年</p>
-                                    </div>
+                <p class="font-thin mb-5">検索結果 {{ $users->count() }}件</p>
 
+                @foreach ($users as $user)
+                    <div class="bg-gray-50 p-4 md:px-10 md:py-14 mb-5">
+                        <div class="md:flex items-center md:ustify-between">
+                            <div class="flex">
+                                <div class="user-icon mr-5 border w-16 h-16">
+                                    <img src="{{ asset($user->icon) }}" alt="ユーザー1">
+                                </div>
+                                <div class="flex items-center">
+                                    <div>
+                                        <div class="flex items-center mb-3 md:mb-5">
+                                            <p class="text-base md:text-xl mr-5">{{ $user->nickname }}</p>
+                                            {{-- TODO:相互評価機能実装後作成 --}}
+                                            {{-- <p class="font-thin text-sm md:text-base">相談満足度：90%</p> --}}
+                                        </div>
+                                        <div class="md:flex mt-auto items-end">
+                                            <p class="font-thin mr-5 text-sm md:text-base">
+                                                {{ $user->company }}・{{ $user->department }}</p>
+                                            <p class="font-thin text-sm md:text-base">勤務期間：{{ $user->length_of_service }}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="md:ml-auto mt-5 md:mt-0">
-                            <button class="block mx-auto px-4 py-2 font-xs md:font-medium text-white capitalize transition-colors duration-200 transform bg-blue rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-                                チャットする
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-gray-50 p-4 md:px-10 md:py-14 mb-5">
-                    <div class="md:flex items-center md:ustify-between">
-                        <div class="flex">
-                            <div class="user-icon mr-5 border w-16 h-16">
-                                <img src="{{ asset('img/user1.png') }}" alt="ユーザー1">
-                            </div>
-                            <div class="flex items-center">
-                                <div>
-                                    <div class="flex items-center mb-3 md:mb-5">
-                                        <p class="text-base md:text-xl mr-5">たかし</p>
-                                        {{-- <p class="font-thin text-sm md:text-base">相談満足度：90%</p> --}}
-                                    </div>
-                                    <div class="md:flex mt-auto items-end">
-                                        <p class="font-thin mr-5 text-sm md:text-base">〇〇会社・△△部署</p>
-                                        <p class="font-thin text-sm md:text-base">勤務期間：10年</p>
-                                    </div>
-
-                                </div>
+                            <div class="md:ml-auto mt-5 md:mt-0">
+                                <button
+                                    class="block mx-auto px-4 py-2 font-xs md:font-medium text-white capitalize transition-colors duration-200 transform bg-blue rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                    チャットする
+                                </button>
                             </div>
                         </div>
-                        <div class="md:ml-auto mt-5 md:mt-0">
-                            <button class="block mx-auto px-4 py-2 font-xs md:font-medium text-white capitalize transition-colors duration-200 transform bg-blue rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-                                チャットする
-                            </button>
-                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
         </section>
 
