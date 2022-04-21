@@ -22,7 +22,7 @@ class UserScreenController extends Controller
         return redirect()->route('UserScreen_result', ['keyword' => $keyword]);
     }
 
-    public function result($keyword)
+    public function result($keyword="")
     {
 
         $query = User::query();
@@ -45,9 +45,9 @@ class UserScreenController extends Controller
                 });
             }
 
-            $users = $query->get();
+            $users = $query->paginate(5);
         } else {
-            $users = User::where('role_id', Role::getUserId())->where('is_search_target', true)->get();
+            $users = User::where('role_id', Role::getUserId())->where('is_search_target', true)->paginate(5);
         }
 
         return view('user.search', compact('users', 'keyword'));

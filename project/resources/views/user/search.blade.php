@@ -45,7 +45,7 @@
 
         <section>
             <div class="container mx-auto px-6 md:px-20">
-                <p class="font-thin mb-5">検索結果 {{ $users->count() }}件</p>
+                <p class="font-thin mb-5">検索結果 {{ $users->total() }}件</p>
 
                 @foreach ($users as $user)
                     <div class="bg-gray-50 p-4 md:px-10 md:py-14 mb-5">
@@ -79,6 +79,7 @@
                         </div>
                     </div>
                 @endforeach
+                {{ $users->links() }}
             </div>
         </section>
 
