@@ -9,24 +9,24 @@
     <div class="md:flex justify-between w-full">
       <div class="flex justify-between md:w-full lg:w-6/12">
         <a class="w-6/12" href="">
-          <p class=" flex text-white h-8 items-center text-sm hover:text-gray-800 justify-center">
+          <p class=" flex text-white h-8 items-center text-xs hover:text-gray-800 justify-center">
             利用規約
           </p>
         </a>
         <a class="w-6/12" href="">
-          <p class=" flex text-white h-8 items-center text-sm hover:text-gray-800 justify-center">
+          <p class=" flex text-white h-8 items-center text-xs hover:text-gray-800 justify-center">
             個人情報保護方針
           </p>
         </a>
       </div>
       <div class="flex justify-between md:w-full lg:w-6/12">
         <a class="w-6/12" href="">
-          <p class=" flex text-white h-8 items-center text-sm hover:text-gray-800 justify-center">
+          <p class=" flex text-white h-8 items-center text-xs hover:text-gray-800 justify-center">
             運営会社
           </p>
         </a>
         <a class="w-6/12" href="">
-          <p class=" flex text-white h-8 items-center text-sm hover:text-gray-800 justify-center">
+          <p class=" flex text-white h-8 items-center text-xs hover:text-gray-800 justify-center">
           お問い合わせ
         </p>
       </a>
