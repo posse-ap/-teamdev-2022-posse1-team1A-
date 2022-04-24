@@ -7,7 +7,7 @@
             background-color: rgb(226 232 240);
         }
         .cards {
-          height: calc( 100vh - 230px );;
+          height: calc( 100vh - 215px );;
         }
         @media screen and (max-width: 1024px) {
           .side_nav {
@@ -113,9 +113,9 @@
                   @csrf
                   <input type="hidden" value="{{ $chatRoomId}}" name="chatRoomId">
                   <input type="hidden" value="{{ $client_user->id}}" name="user_id">
-                  <input type="text" class="block m-5 p-3 bg-slate-100 rounded-full w-full" name="comment">
+                  <input type="text" class="block m-5 bg-slate-100 rounded-full w-full" name="comment">
                   <div class="icon w-28">
-                    <button class="bg-gray-400 hover:bg-blue-700 text-white font-bold py-1 px-3 rounded">送信</button>
+                    <button class="bg-gray-400 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">送信</button>
                   </div>
                 </form>
                 <div class="flex items-center ">
