@@ -54,3 +54,13 @@
   color: blue;
   font-size: 22px;
 }
+
+.bg-blue-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(6 22 99 / var(--tw-bg-opacity));
+}
+
+.bg-lightblue-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(227 245 254/ var(--tw-bg-opacity));
+}

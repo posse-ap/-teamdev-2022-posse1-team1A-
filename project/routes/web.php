@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,23 @@ Route::get('/', 'App\Http\Controllers\UserScreenController@index')->name('UserSc
 
 Route::get('/search', 'App\Http\Controllers\UserScreenController@search')->name('UserScreen_search');
 
+Route::get('/admin/userlist', 'App\Http\Controllers\AdminController@userlist');
+
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+// Route::get('/admin/userlist',function () {
+//     return view('admin.user-list');
+// });
