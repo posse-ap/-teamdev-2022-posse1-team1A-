@@ -3,9 +3,10 @@
     <meta name="description" content="転職者と企業を匿名で繋ぐマッチングプラットフォームです。独りで転職に悩む人に向けたこのサービスでは、内定先で働く人の生の情報を手に入れることができます。" />
 
     <meta property="og:title" content="Anovey 転職者と企業を匿名で繋ぐマッチングプラットフォーム" />
-    <meta property="og:description" content="転職者と企業を匿名で繋ぐマッチングプラットフォームです。独りで転職に悩む人に向けたこのサービスでは、内定先で働く人の生の情報を手に入れることができます。" />
+    <meta property="og:description"
+        content="転職者と企業を匿名で繋ぐマッチングプラットフォームです。独りで転職に悩む人に向けたこのサービスでは、内定先で働く人の生の情報を手に入れることができます。" />
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="ja_JP"  />
+    <meta property="og:locale" content="ja_JP" />
 @endsection
 
 @push('styles')
@@ -26,16 +27,18 @@
                                 マッチングプラットフォーム
                             </h1>
 
-                            <div class="flex mt-8 space-y-3 space-y-0 flex-row">
-                                <input type="text"
+                            <form class="flex mt-8 space-y-3 space-y-0 flex-row" action="{{ route('user_search') }}"
+                                method="POST">
+                                @csrf
+                                <input type="text" name="keyword" value="{{ $keyword }}"
                                     class="w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
                                     placeholder="企業名や部署名などのフリーワード">
 
-                                <button
+                                <button type="submit"
                                     class="p-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-800 rounded-lg w-auto mx-4 hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
                                     <img src="{{ asset('img/search.svg') }}" alt="検索">
                                 </button>
-                            </div>
+                            </form>
                         </div>
                     </div>
 
@@ -125,7 +128,8 @@
                     </div>
 
                     <div class="relative flex items-center justify-center w-full mt-6 md:mt-0 md:w-1/2">
-                        <img class="w-8/12 md:w-10/12 mx-auto" src="{{ asset('/img/team-meeting.png') }}" alt="ミーティングをする人々">
+                        <img class="w-8/12 md:w-10/12 mx-auto" src="{{ asset('/img/team-meeting.png') }}"
+                            alt="ミーティングをする人々">
                         <div class="ellipse hidden md:block"></div>
                     </div>
                 </div>
