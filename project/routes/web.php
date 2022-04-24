@@ -32,3 +32,4 @@ Route::get('/chat', 'App\Http\Controllers\ChatController@index')->name('chat.ind
 
 // chat画面製作中
 Route::get('/chat/main', 'App\Http\Controllers\ChatController@main')->name('chat.main');
+Route::post('/chat/post', 'App\Http\Controllers\ChatController@post')->name('chat.post');
