@@ -27,7 +27,7 @@
                                 マッチングプラットフォーム
                             </h1>
 
-                            <form class="flex mt-8 space-y-3 space-y-0 flex-row" action="{{ route('UserScreen_search') }}"
+                            <form class="flex mt-8 space-y-3 space-y-0 flex-row" action="{{ route('user_search') }}"
                                 method="POST">
                                 @csrf
                                 <input type="text" name="keyword" value="{{ $keyword }}"

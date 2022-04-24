@@ -7,7 +7,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class UserScreenController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
@@ -19,7 +19,7 @@ class UserScreenController extends Controller
     {
         $keyword = $request->keyword;
 
-        return redirect()->route('UserScreen_result', ['keyword' => $keyword]);
+        return redirect()->route('user_result', ['keyword' => $keyword]);
     }
 
     public function result($keyword="")

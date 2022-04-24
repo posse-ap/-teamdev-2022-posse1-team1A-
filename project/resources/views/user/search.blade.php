@@ -28,7 +28,7 @@
                         </p>
                     </div>
                 </div>
-                <form class="flex mt-8 space-y-3 space-y-0 flex-row" action="{{ route('UserScreen_search') }}"
+                <form class="flex mt-8 space-y-3 space-y-0 flex-row" action="{{ route('user_search') }}"
                     method="POST">
                     @csrf
                     <input type="text" name="keyword" value="{{ $keyword }}"
@@ -52,7 +52,7 @@
                         <div class="md:flex items-center md:ustify-between">
                             <div class="flex">
                                 <div class="user-icon mr-5 border w-16 h-16">
-                                    <img src="{{ asset($user->icon) }}" alt="ユーザー1">
+                                    <img src="{{ asset($user->icon) }}" alt="ユーザーアイコン">
                                 </div>
                                 <div class="flex items-center">
                                     <div>
