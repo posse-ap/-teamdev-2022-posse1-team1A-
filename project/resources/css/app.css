@@ -24,6 +24,11 @@
   margin-right: 0.25rem;
 }
 
+.bg-yellow-700 {
+  --tw-bg-opacity: 1;
+  background-color: yellow;
+}
+
 .bg-yellow-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 210 1 / var(--tw-bg-opacity));
