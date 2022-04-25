@@ -6,16 +6,39 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Chat;
 use App\Models\ChatRecord;
+use App\Models\InterviewSchedule;
 
 class ChatController extends Controller
 {
     public function index(Request $request){
+        $interviewSchedules = InterviewSchedule::all();
+        // ユーザーIDを取得
+        $userId       = 1;
+        // チャットルームの情報を取得
+        $chatRooms    = Chat::where('client_user_id', '=', $userId)
+                            ->where('is_finished', '=', 0)
+                            ->get();
+        // チャットルームの相手の名前を取得
+        foreach ($chatRooms as $key => $chatRoom) {
+            $chatRoom->respondent_user_name      = User::where('id', '=', $chatRoom->respondent_user_id)->first()->name;
+            $chatRoom->newestChatRecord          = ChatRecord::where('user_id', '=', $chatRoom->respondent_user_id)
+            ->orderBy('created_at', 'desc')
+            ->first();
 
-        // return view('index', compact('total'));
-        return view('chat.index');
+            // 指定文字数以上になった場合、「...」で省略されるようにします
+            $chatRoom->newestChatRecord->comment = mb_strimwidth( $chatRoom->newestChatRecord->comment, 0, 30, '…', 'UTF-8' );;
+
+            if (InterviewSchedule::where('chat_id', '=', $chatRoom->id)->first()->schedule_status_id) {
+                $chatRoom->schedule    = InterviewSchedule::where('chat_id', '=', $chatRoom->id)->first()->schedule;
+                $chatRoom->schedule    = substr($chatRoom->schedule,5,11);
+                $chatRoom->schedule    = str_replace('-', '/', $chatRoom->schedule);
+            }
+        }
+        // dd($chatRooms);
+        return view('chat.index', compact('chatRooms'));
     }
 
-    public function main(Request $request){
+    public function main(){
         // チャットルームのidを受け取る
         $chatRoomId      = 1;
 
