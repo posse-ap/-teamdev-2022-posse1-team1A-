@@ -64,3 +64,22 @@
   --tw-bg-opacity: 1;
   background-color: rgb(227 245 254/ var(--tw-bg-opacity));
 }
+
+.bg-red-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 113 113/ var(--tw-bg-opacity));
+}
+
+.bg-grey-100{
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 249 249/ var(--tw-bg-opacity));
+}
+
+.text-blue-800{
+  color: #071764;
+}
+
+.text-5xl {
+  font-size: 3rem; /* 48px */
+  line-height: 1;
+}
