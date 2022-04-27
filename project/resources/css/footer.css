@@ -4,12 +4,3 @@ body{
   margin:0; /*　追加*/
   height: 100%;
 }
-
-/*中略*/
-
-#footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-}
