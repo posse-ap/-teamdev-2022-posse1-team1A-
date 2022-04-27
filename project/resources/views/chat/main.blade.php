@@ -2,22 +2,9 @@
 
 @section('content')
     @include('components.user-header')
-    <style>
-        body {
-            background-color: rgb(226 232 240);
-        }
-        .cards {
-          height: calc( 100vh - 215px );;
-        }
-        @media screen and (max-width: 1024px) {
-          .side_nav {
-            display: none;
-          }
-          .container {
-            padding-left: 0;
-          }
-        }
-    </style>
+    @push('styles')
+      <link rel="stylesheet" href="{{asset('css/chatMain.css')}}">
+    @endpush
     <div class="wrapper container mx-auto pl-4 mb-0 pb-0 bg-white font-normal">
         <div class='flex flex-wrap'>
             <div class="w-full lg:w-1/4 border-r border-zinc-300 side_nav">
@@ -65,7 +52,6 @@
                       @if ($chatRecord->user_id == $client_user->id)
                         <div class="card flex items-center justify-end">
                           <div class="icon w-14 h-14">
-                            {{-- <img src="{{ asset('img/menIcon.png') }}" alt=""> --}}
                           </div>
                           <div class="time mt-auto mb-5">
                             <span class="text-slate-400 block">{{$chatRecord->date}}</span>
@@ -74,6 +60,7 @@
                             {{$chatRecord->comment}}
                           </div>
                         </div>
+                      {{-- チャットボット発言用の分岐 --}}
                       @elseif ($chatRecord->user_id == 3)
                         <div class="card flex items-center">
                           <div class="icon w-14 h-14">
@@ -90,7 +77,7 @@
                         <div class="card flex items-center h-max">
                           <div class="icon w-14 h-14">
                             @if ($chatRecord->user_id != $chatRecords[$key + 1]->user_id)
-                              <img src="{{ asset('img/menIcon.png') }}" alt="">
+                              <img src="{{ asset('img/menIcon.png') }}" alt="依頼者ユーザーのアイコン">
                             @endif
                             {{-- <img src="{{ asset($respondent_user_icon) }}" alt=""> --}}
                             {{-- 画像登録機能が完成されたらでいいかな? --}}
@@ -121,8 +108,10 @@
                 <div class="flex items-center ">
                 </div>
             </div>
-            <script>
-              let target = document.getElementById('scroll-inner');
-              target.scrollIntoView(false);
-            </script>
+            @push('scripts_bottom')
+              <script>
+                let target = document.getElementById('scroll-inner');
+                target.scrollIntoView(false);
+              </script>
+            @endpush
         @endsection

@@ -7,7 +7,7 @@
     <div class="wrapper container mx-auto px-4 mb-5 pb-5">
         <div>
           <div class="flex items-center py-4 mx-auto overflow-y-auto whitespace-nowrap font-thin">
-              <a href="/" class="text-gray-600">
+              <a href="{{ route('UserScreen_index') }}" class="text-gray-600">
                   トップ
               </a>
               <span class="mx-5 text-gray-500">
@@ -44,7 +44,7 @@
                 class="user-row flex flex-col items-center justify-between cursor-pointer mb-3 p-1 duration-300 sm:flex-row sm:py-4 sm:pl-2 sm:pr-4 bg-amber-100">
                 <div class="user flex items-center text-center flex-col sm:flex-row sm:text-left">
                     <div class="avatar-content mb-2.5 sm:mb-0 sm:mr-5">
-                        <img class="avatar w-16 h-16" src="img/men.png" />
+                        <img class="avatar w-16 h-16" src="{{ asset('img/men.png') }}" />
                     </div>
                     <div class="user-body flex flex-col mb-4 sm:mb-0 sm:mr-4 pl-4">
                         <div class="skills flex flex-col">
@@ -65,7 +65,7 @@
                 class="user-row flex flex-col items-center justify-between cursor-pointer mb-3 p-1 duration-300 sm:flex-row sm:py-4 sm:pl-2 sm:pr-4 bg-amber-100">
                 <div class="user flex items-center text-center flex-col sm:flex-row sm:text-left">
                     <div class="avatar-content mb-2.5 sm:mb-0 sm:mr-5">
-                        <img class="avatar w-16 h-16" src="img/woman.png" />
+                        <img class="avatar w-16 h-16" src="{{ asset('img/woman.png') }}" />
                     </div>
                     <div class="user-body flex flex-col mb-4 sm:mb-0 sm:mr-4 pl-4">
                         <div class="skills flex flex-col">
@@ -86,7 +86,7 @@
                 class="user-row flex flex-col items-center justify-between cursor-pointer mb-3 p-1 duration-300 sm:flex-row sm:py-4 sm:pl-2 sm:pr-4 bg-amber-100">
                 <div class="user flex items-center text-center flex-col sm:flex-row sm:text-left">
                     <div class="avatar-content mb-2.5 sm:mb-0 sm:mr-5">
-                        <img class="avatar w-16 h-16" src="img/men.png" />
+                        <img class="avatar w-16 h-16" src="{{ asset('img/men.png') }}" />
                     </div>
                     <div class="user-body flex flex-col mb-4 sm:mb-0 sm:mr-4 pl-4">
                         <div class="skills flex flex-col">

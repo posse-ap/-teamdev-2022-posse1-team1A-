@@ -10,8 +10,6 @@ use App\Models\ChatRecord;
 class ChatController extends Controller
 {
     public function index(Request $request){
-
-        // return view('index', compact('total'));
         return view('chat.index');
     }
 
@@ -23,8 +21,8 @@ class ChatController extends Controller
         $chat            = Chat::find($chatRoomId);
 
         // チャットルームの参加者情報を取得
-        $client_user     = User::where('id', '=', $chat->client_user_id)->first();
-        $respondent_user = User::where('id', '=', $chat->respondent_user_id)->first();
+        $client_user     = User::find($chat->client_user_id);
+        $respondent_user = User::find($chat->respondent_user_id);
 
         // 回答者のアイコン情報を取得
         $respondent_user_icon = $respondent_user->icon;
@@ -41,7 +39,6 @@ class ChatController extends Controller
                 $chatRecord->date = $chatRecord->updated_at->format('Y/m/d');
             }
         }
-        // dd($chatRecords);
 
 
         return view('chat.main', compact('chatRecords', 'respondent_user', 'client_user', 'isReserved', 'respondent_user_icon', 'chatRoomId'));
@@ -49,13 +46,11 @@ class ChatController extends Controller
 
     public function post(Request $request)
     {
-        // dd($request);
         $newChatRecord = new ChatRecord;
         $newChatRecord->chat_id = $request->chatRoomId;
         $newChatRecord->user_id = $request->user_id;
         $newChatRecord->comment = $request->comment;
         $newChatRecord->save();
-        // $user_data->update(['is_admin' => 1]);
         return redirect('/chat/main');
     }
 }

@@ -26,5 +26,6 @@
     </head>
     <body>
         @yield('content')
+        @stack('scripts_bottom')
     </body>
 </html>
