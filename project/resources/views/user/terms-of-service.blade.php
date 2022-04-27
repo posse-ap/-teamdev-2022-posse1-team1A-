@@ -152,5 +152,3 @@
       </div>
     @include('components.user-footer')
 @endsection
-
-<script src="js/header.js"></script>
