@@ -42,8 +42,3 @@ Route::get('/terms-of-service', function () {
 
 
 
-
-
-// Route::get('/admin/userlist',function () {
-//     return view('admin.user-list');
-// });

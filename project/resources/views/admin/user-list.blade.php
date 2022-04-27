@@ -13,15 +13,15 @@
     @include('components.admin-bar')
 
     <div class="mx-5">
-        <h1 class="text-5xl py-12 text-blue-800">ユーザー一覧</h1>
-        <div class="block relative space-y-3 space-y-0 py-5 flex">
+        <h1 class="text-5xl py-12 ml-5 text-blue-800">ユーザー一覧</h1>
+        <div class=" ml-5 block relative space-y-3 space-y-0 py-5 flex">
             <input type="text"
-                class="w-6/12 pl-10 pr-4 py-2 text-gray-700 bg-white rounded-md focus:border-grey-200 dark:focus:border-grey-200 focus:outline-none focus:ring focus:ring-opacity-40"
+                class="w-6/12 pl-10 pr-4 text-gray-700 bg-white rounded-md focus:border-grey-200 dark:focus:border-grey-200 focus:outline-none focus:ring focus:ring-opacity-40"
                 placeholder="Search for names">
-            <span class="absolute align-center py-2 px-2"><img height="25" width="25" src="{{ asset('img/search-white.png') }}"
-                    alt="検索"></span>
+            <span class="absolute align-center py-2 px-2"><img height="25" width="25"
+                    src="{{ asset('img/search-white.png') }}" alt="検索"></span>
         </div>
-        <div class="justify-center overflow-auto">
+        <div class="ml-5">
             <table class="table pt-5 h-5/6">
                 <thead class="bg-lightblue-200">
                     <tr>
@@ -48,6 +48,9 @@
 
                 </tbody>
             </table>
+            <div class="mb-3">
+                {{ $users->onEachSide(5)->links() }}
+            </div>
         </div>
     </div>
 </body>
