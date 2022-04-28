@@ -35,7 +35,7 @@
                                     placeholder="企業名や部署名などのフリーワード">
 
                                 <button type="submit"
-                                    class="p-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-800 rounded-lg w-auto mx-4 hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
+                                    class="p-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-200 bg-blue-800 rounded-lg w-auto mx-4 hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
                                     <img src="{{ asset('img/search.svg') }}" alt="検索">
                                 </button>
                             </form>
