@@ -49,9 +49,11 @@
                             <div class="w-full flex mt-5 items-center">
                                 <label for="" class="inline-block whitespace-nowrap text-sm md:text-base">数量：</label>
                                 <select
-                                    class="inline-block w-full rounded-md bg-gray-50 font-thin py-2 pl-3 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    class="inline-block w-full rounded-md bg-gray-50 py-2 pl-3 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     <option></option>
-                                    <option>1</option>
+                                    @for ($i = 1; $i < 6; $i++)
+                                        <option>{{ $i }}</option>
+                                    @endfor
                                 </select>
 
                             </div>
