@@ -52,4 +52,10 @@ class UserController extends Controller
 
         return view('user.search', compact('users', 'keyword'));
     }
+
+    public function ticket()
+    {
+
+        return view('user.ticket');
+    }
 }
