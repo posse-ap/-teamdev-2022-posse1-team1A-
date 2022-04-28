@@ -44,13 +44,14 @@
                                 <h2 class="text-base md:text-lg mr-3 md:mr-0 md:mb-1">
                                     チケット
                                 </h2>
-                                <p class="text-gray-500 text-sm md:text-base">¥1,200</p>
+                                <p class="text-gray-500 text-sm md:text-base">¥1,200（1枚あたり）</p>
                             </div>
                             <div class="w-full flex mt-5 items-center">
                                 <label for="" class="inline-block whitespace-nowrap text-sm md:text-base">数量：</label>
                                 <select
                                     class="inline-block w-full rounded-md bg-gray-50 py-2 pl-3 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                     <option></option>
+                                    {{-- チケットは1~5の範囲で選択できます --}}
                                     @for ($i = 1; $i < 6; $i++)
                                         <option>{{ $i }}</option>
                                     @endfor
