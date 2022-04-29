@@ -25,6 +25,8 @@ Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_searc
 
 Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
 
+Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
+
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 });

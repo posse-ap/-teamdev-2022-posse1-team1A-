@@ -36,7 +36,7 @@
                         placeholder="企業名や部署名などのフリーワード">
 
                     <button type="submit"
-                        class="p-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-200 transform bg-blue-800 rounded-lg w-auto mx-4 hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
+                        class="p-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-200 bg-blue-800 rounded-lg w-auto mx-4 hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
                         <img src="{{ asset('img/search.svg') }}" alt="検索">
                     </button>
                 </form>
@@ -72,7 +72,7 @@
                             </div>
                             <div class="md:ml-auto mt-5 md:mt-0">
                                 <button
-                                    class="block mx-auto px-4 py-2 font-xs md:font-medium text-white capitalize transition-colors duration-200 transform bg-blue rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                    class="block mx-auto px-4 py-2 font-xs md:font-medium text-white capitalize transition-colors duration-200 bg-blue rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                                     チャットする
                                 </button>
                             </div>
