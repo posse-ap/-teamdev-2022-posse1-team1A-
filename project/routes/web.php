@@ -17,11 +17,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
-Route::get('/', 'App\Http\Controllers\UserScreenController@index')->name('UserScreen_index');
+Route::get('/', 'App\Http\Controllers\UserController@index')->name('user_index');
 
-Route::get('/search', 'App\Http\Controllers\UserScreenController@search')->name('UserScreen_search');
+Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_search');
+
+Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
+
+Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
 
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
