@@ -35,7 +35,7 @@
                         <span class="count" id="notifications-count">3</span>
                         <span class="fa fa-bell-o"></span>
                     </div>
-                    <a href="">
+                    <a href="{{ route('client_chat_list') }}">
                         依頼者チャット
                     </a>
                 </button>
