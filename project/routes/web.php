@@ -27,6 +27,8 @@ Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->
 
 Route::get('/admin/userlist', 'App\Http\Controllers\AdminController@userlist');
 
+Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
+
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 });
