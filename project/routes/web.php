@@ -32,14 +32,3 @@ Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 });
-
-
-
-
-
-
-
-
-
-
-
