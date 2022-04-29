@@ -24,6 +24,7 @@ Route::get('/', 'App\Http\Controllers\UserController@index')->name('user_index')
 Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_search');
 
 Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
+Route::get('/user_page', 'App\Http\Controllers\UserController@userPage')->name('user.page');
 
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
