@@ -11,28 +11,17 @@
                   href="#">各種指標</a>
           </li>
           <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
-                  href="#">ユーザー一覧</a>
+                  href="/admin/userlist">ユーザー一覧</a>
           </li>
           <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
                   href="#">お問合せ内容</a></li>
           <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
-                  href="#">通報一覧</a>
-          </li>
-          <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
-                  href="#">通話評価</a>
-          </li>
-          <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
-                  href="#">トーク評価</a>
+                  href="#">通話一覧</a>
           </li>
           <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
                   href="#">退会理由一覧</a>
           </li>
-          <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
-                  href="#">管理者ユーザー追加</a>
-          </li>
-          <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
-                  href="#">利用規約・各種フォーム設定</a>
-          </li>
+
       </ul>
   </div>
 
