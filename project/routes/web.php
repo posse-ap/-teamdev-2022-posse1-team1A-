@@ -29,6 +29,8 @@ Route::get('/admin/userlist', 'App\Http\Controllers\AdminController@userlist')->
 
 Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
 
+Route::get('/thanks', 'App\Http\Controllers\UserController@thanks')->name('user_thanks');
+
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 })->name('terms_of_service');
