@@ -4,6 +4,7 @@
     @include('components.user-header')
     @push('styles')
       <link rel="stylesheet" href="{{asset('css/chatMain.css')}}">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     @endpush
     <div class="wrapper container mx-auto pl-4 mb-0 pb-0 bg-white font-normal">
         <div class='flex flex-wrap'>
@@ -33,10 +34,8 @@
                             </span>
                           </button>
                       @endif
-                      <button class="bg-yellow-400 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded ml-2">
-                        <a href="">
-                          日程登録
-                        </a>
+                      <button class="bg-yellow-400 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded ml-2" id="modal-open">
+                        日程登録
                       </button>
                     </div>
                 </div>
@@ -76,7 +75,7 @@
                       @else
                         <div class="card flex items-center h-max">
                           <div class="icon w-14 h-14">
-                            @if ($chatRecord->user_id != $chatRecords[$key + 1]->user_id)
+                            @if ($chatRecord->user_id != $chatRecords[$key - 1]->user_id)
                               <img src="{{ asset('img/menIcon.png') }}" alt="依頼者ユーザーのアイコン">
                             @endif
                             {{-- <img src="{{ asset($respondent_user_icon) }}" alt=""> --}}
@@ -106,6 +105,34 @@
                   </div>
                 </form>
                 <div class="flex items-center ">
+                </div>
+                <div id="faq_csv_modal_window">
+                  {{-- モーダルウィンドウ --}}
+                  @include('components.modal_window')
+                  @section('modal_window')
+                      <div id="modal_open">
+                          {{-- <header id="modal_header">
+                              モーダルヘッダーです。
+                          </header> --}}
+                          <main id="modal_main" class="flex flex-col text-center">
+                            <div>相談日程の登録</div>
+                            <div>
+                              <div class="text-left">相談日程</div>
+                              {{-- <form action="{{route("schedule.post")}}" method="post"></form> --}}
+                              <form action="" method="post"></form>
+                              <input type="date" name="" id="">
+                            </div>
+                            <button>チケットを1枚消費して登録</button>
+                            <p>※日程を登録するとチケットが1枚消費されます。</p>
+                            <p>※ 日程の再調整やキャンセルを繰り返すと、アカウントが停止される可能性があります。</p>
+                            
+                          </main>
+                          {{-- <footer id="modal_footer">
+                              <p><a id="modal-close" class="button-link">閉じる</a></p>
+                          </footer> --}}
+                      </div>
+                  @endsection
+                  @yield('modal_window')
                 </div>
             </div>
             @push('scripts_bottom')
