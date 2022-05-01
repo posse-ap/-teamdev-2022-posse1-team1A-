@@ -76,7 +76,7 @@
                     </div>
                     <div class="mt-10">
                         <button
-                            class="block mx-auto px-20 py-2 font-xs shadow md:font-medium text-white capitalize transition-colors duration-200 bg-blue rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                            class="block mx-auto px-20 py-2 font-xs shadow text-white capitalize transition-colors duration-200 bg-blue rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                             購入手続きへ
                         </button>
                     </div>

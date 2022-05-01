@@ -17,12 +17,12 @@
     @include('components.user-header')
 
     <main>
-        <section class="fv bg-no-repeat overflow-hidden">
+        <section class="fv bg-no-repeat overflow-hidden" id="top">
             <div class="container px-6 mx-auto">
                 <div class="items-center md:flex">
                     <div class="w-full md:w-1/2">
                         <div class="md:max-w-lg">
-                            <h1 class="text-2xl lg:text-6xl font-semibold text-gray-800 dark:text-white lg:text-3xl">
+                            <h1 class="text-2xl lg:text-6xl font-semibold text-gray-800 lg:text-3xl">
                                 転職者と企業を匿名で繋ぐ<br>
                                 マッチングプラットフォーム
                             </h1>
@@ -31,7 +31,7 @@
                                 method="POST">
                                 @csrf
                                 <input type="text" name="keyword" value="{{ $keyword }}"
-                                    class="w-full px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
+                                    class="w-full px-4 py-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
                                     placeholder="企業名や部署名などのフリーワード">
 
                                 <button type="submit"
@@ -127,7 +127,7 @@
                         </div>
                     </div>
 
-                    <div class="relative flex items-center justify-center w-full mt-6 md:mt-0 md:w-1/2">
+                    <div class="about-img relative flex items-center justify-center w-full mt-6 md:mt-0 md:w-1/2">
                         <img class="w-8/12 md:w-10/12 mx-auto" src="{{ asset('/img/team-meeting.png') }}"
                             alt="ミーティングをする人々">
                         <div class="ellipse hidden md:block"></div>
@@ -205,65 +205,84 @@
         <section>
             <div class="container mx-auto px-6">
                 <h2 class="text-center text-lg lg:text-4xl mb-10">
-                    <span class="text-blue text-base lg:text-2xl inline-block md:mb-3">Flow</span><br>
-                    ご利用の流れ
+                    <span class="text-blue text-base lg:text-2xl inline-block md:mb-3">Ticket</span><br>
+                    相談チケットについて
                 </h2>
 
-                <div class="bg-gray-50 p-8 md:px-10 md:py-12 shadow">
-                    <div class="md:flex items-center">
-                        <div class="flex items-end md:items-center md:w-6/12 mb-3 md:mb-0">
-                            <p class="text-blue md:w-4/12 text-3xl lg:text-5xl mr-3 md:mr-0">01</p>
-                            <p class="md:w-8/12 text-base lg:text-base">アカウント新規作成</p>
-                        </div>
-                        <p class="md:w-6/12 font-thin text-sm lg:text-base">
-                            {{-- TODO: 新規登録画面のリンクを貼る --}}
-                            <a href="">新規登録画面</a>よりアカウントを作成してください。
-                        </p>
+                <div class="bg-gray-50 p-8 md:w-3/5 mx-auto md:px-10 md:py-12 shadow rounded-md">
+                    <div class="text-center">
+                        <p class="text-base lg:text-xl mb-3">ご相談1回につき</p>
+                        <p class="text-blue text-2xl lg:text-4xl">1,200 円<span class="text-sm">（税込）</span></p>
                     </div>
                 </div>
-                <div class="triangle mx-auto my-4 md:my-8"></div>
-                <div class="bg-gray-50 p-8 md:px-10 md:py-12 shadow">
-                    <div class="md:flex items-center">
-                        <div class="flex items-end md:items-center md:w-6/12 mb-3 md:mb-0">
-                            <p class="text-blue md:w-4/12 text-3xl lg:text-5xl mr-3 md:mr-0">02</p>
-                            <p class="md:w-8/12 text-base lg:text-base">マッチング</p>
-                        </div>
-                        <p class="md:w-6/12 font-thin text-sm lg:text-base">
-                            検索バーから依頼者様自身の希望にあった回答者を検索し、チャット形式で相談を開始します。
+                <div class="md:flex lg:w-10/12 mx-auto mt-10 items-center">
+                    <div class="mx-auto w-1/2 md:w-2/5 md:flex md:justify-center">
+                        <img src="{{ asset('img/ticket.png') }}" alt="チケット" class="mx-auto">
+                    </div>
+                    <div class="mx-auto">
+                        <p class="mt-10 md:mt-0 mb-10 text-sm lg:text-base text-center md:text-justify">
+                            匿名回答者に相談するためには相談チケットが必要です。<br>
+                            チケット1枚で1回のご相談ができます。
                         </p>
+                        <div class="">
+                            <a href={{ route('user_ticket') }}
+                                class="block md:w-4/5 text-center whitespace-nowrap cursor-pointer mx-auto py-2 font-xs shadow text-white capitalize transition-colors duration-200 bg-orange rounded-md hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                チケットの購入はこちら
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <div class="triangle mx-auto my-4 md:my-8"></div>
-                <div class="bg-gray-50 p-8 md:px-10 md:py-12 shadow">
-                    <div class="md:flex items-center">
-                        <div class="flex items-end md:items-center md:w-6/12 mb-3 md:mb-0">
-                            <p class="text-blue md:w-4/12 text-3xl lg:text-5xl mr-3 md:mr-0">03</p>
-                            <p class="md:w-8/12 text-base lg:text-base">日程調整</p>
+                <h3 class="mt-16 mb-8 text-center text-base lg:text-xl">相談チケットが必要な機能</h3>
+                <div class="md:flex justify-between">
+                    <div class="bg-gray-50 ticket-function rounded-md">
+                        <div class="bg-blue py-5 text-center rounded-t-md">
+                            <p class="text-white">チャット機能</p>
                         </div>
-                        <p class="md:w-6/12 font-thin text-sm lg:text-base">
-                            相談を希望する回答者の方とチャットで日程調整をし、相談をする日時を決定します。
-                        </p>
+                        <div class="px-5 py-8 font-thin text-sm lg:text-base">
+                            <p>相談チケットを1枚以上購入することで、ご希望の会社・部署の方とチャットをすることができます。</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 ticket-function my-10 md:my-0 rounded-md w-">
+                        <div class="bg-blue py-5 text-center rounded-t-md">
+                            <p class="text-white">日程登録</p>
+                        </div>
+                        <div class="px-5 py-8 font-thin text-sm lg:text-base">
+                            <p>日程のご相談が終了し、日程を確定する段階でチケットが消費されます。</p>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 ticket-function rounded-md">
+                        <div class="bg-blue py-5 text-center rounded-t-md">
+                            <p class="text-white">通話機能</p>
+                        </div>
+                        <div class="px-5 py-8 font-thin text-sm lg:text-base">
+                            <p>日程登録が終了次第、通話機能もご利用いただけます。</p>
+                        </div>
                     </div>
                 </div>
-                <div class="triangle mx-auto my-4 md:my-8"></div>
-                <div class="bg-gray-50 p-8 md:px-10 md:py-12 shadow">
-                    <div class="md:flex items-center">
-                        <div class="flex items-end md:items-center md:w-6/12 mb-3 md:mb-0">
-                            <p class="text-blue md:w-4/12 text-3xl lg:text-5xl mr-3 md:mr-0">04</p>
-                            <p class="md:w-8/12 text-base lg:text-base">10分間の相談</p>
-                        </div>
-                        <p class="md:w-6/12 font-thin text-sm lg:text-base">
-                            当日になりましたら、チャット画面の通話ボタンにて相談を開始します。
-                        </p>
+                <div class="note-box relative bg-gray-50 rounded-md pl-6 pt-6 pr-3 pb-3 md:pl-10 md:pt-10 mt-20 mb-10">
+                    <h2 class="notes relative pb-4 text-base md:text-lg text-center">
+                        <span>相談チケットに関する注意事項</span>
+                    </h2>
+                    <ul class="font-thin list-disc px-5 mt-8 text-sm md:text-base">
+                        <li>匿名回答者に相談するためにはチケットが必要です。相談チケット1枚で1回の通話が可能です。</li>
+                        <li>チケットを1枚以上所持していない場合はチャットを開始できません。チャットを開始したい方はチケットをご購入ください。</li>
+                        <li>通話実施前にキャンセルとなった場合、使用したチケットは返却されます。</li>
+                        <li>お支払い方法はpaypayのみとなっております。</li>
+                    </ul>
+                    <div class="w-28 ml-auto">
+                        <img src="{{ asset('/img/paypay2.png') }}" alt="paypay" class="w-full">
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <section class="bg-gray-50">
+        @include('components.flow')
+
+        <section>
             <div class="container mx-auto px-6">
-                <a class="cta block bg-white p-5 md:w-6/12 mx-auto border-double border-4 border-black">
-                    <p class="text-center text-lg lg:text-2xl">依頼者を今すぐ検索</p>
+                <a href="#top" class="cta block bg-white p-5 md:w-6/12 mx-auto border-double border-4 border-black">
+                    <p class="text-center text-lg lg:text-2xl">回答者を今すぐ検索</p>
                 </a>
             </div>
         </section>
