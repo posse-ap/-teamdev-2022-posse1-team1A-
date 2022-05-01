@@ -24,7 +24,7 @@ Route::get('/', 'App\Http\Controllers\UserController@index')->name('user_index')
 Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_search');
 
 Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
-Route::get('/user_page', 'App\Http\Controllers\UserController@userPage')->name('user.page');
+Route::get('/user_page', 'App\Http\Controllers\UserController@userPage')->name('user_page');
 
 Route::get('/admin/userlist', 'App\Http\Controllers\AdminController@userlist')->name('admin_userlist');
 
