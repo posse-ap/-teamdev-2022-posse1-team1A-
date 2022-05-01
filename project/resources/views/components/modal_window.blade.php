@@ -1,5 +1,5 @@
 @section('modal_window')
-<div id="modal-content" class="rounded-lg">
+<div id="modal-content" class="rounded-2xl">
     @parent
 </div>
 
