@@ -3,17 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Chat;
 use App\Models\ChatRecord;
 
 class ChatController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         return view('chat.index');
     }
 
-    public function main(Request $request){
+    public function client_chat_list(Request $request)
+    {
+        $client_chats = Chat::where('client_user_id', Auth::id())->where('is_finished', false)->get();
+        return view('chat.client-chat-list', compact('client_chats'));
+    }
+
+    public function main(Request $request)
+    {
         // チャットルームのidを受け取る
         $chatRoomId      = 1;
 
