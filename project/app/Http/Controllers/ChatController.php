@@ -54,6 +54,10 @@ class ChatController extends Controller
 
     public function post(Request $request)
     {
+        $validated = $request->validate([
+            'comment' => 'required',
+        ]);
+
         ChatRecord::create([
             'chat_id' => $request->chatRoomId,
             'user_id' => Auth::id(),
