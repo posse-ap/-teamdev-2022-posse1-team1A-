@@ -41,12 +41,11 @@
                     href="#">
                     <div class="user flex items-center text-center flex-col sm:flex-row sm:text-left">
                         <div class="avatar-content mb-2.5 sm:mb-0 sm:mr-5">
-                            <img class="avatar w-16 h-16" src="{{ asset($respondent_chat->respondent_user->icon) }}" />
+                            <img class="avatar w-16 h-16" src="{{ asset($respondent_chat->client_user->icon) }}" />
                         </div>
                         <div class="user-body flex flex-col mb-4 sm:mb-0 sm:mr-4 pl-4">
                             <div class="skills flex flex-col">
-                                <span
-                                    class="subtitle mb-3 text-xl">{{ $respondent_chat->respondent_user->nickname }}</span>
+                                <span class="subtitle mb-3 text-xl">{{ $respondent_chat->client_user->nickname }}</span>
                                 <span
                                     class="subtitle text-xs font-normal">{{ $respondent_chat->last_message->comment }}</span>
                             </div>
