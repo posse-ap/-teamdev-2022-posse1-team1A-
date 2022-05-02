@@ -10,35 +10,34 @@ use App\Models\ChatRecord;
 
 class ChatController extends Controller
 {
-    public function client_chat_list(Request $request)
-    {
-        $client_chats = Chat::where('client_user_id', Auth::id())->where('is_finished', false)->get();
-        return view('chat.client-chat-list', compact('client_chats'));
-    }
-
-    public function respondent_chat_list(Request $request)
-    {
-        $respondent_chats = Chat::where('respondent_user_id', Auth::id())->where('is_finished', false)->get();
-        return view('chat.respondent-chat-list', compact('respondent_chats'));
-    }
-
-    public function main(Request $request)
+    public function index(Request $request, $chat_id)
     {
         // チャットルームのidを受け取る
-        $chatRoomId      = 1;
+        $chatRoomId      = $chat_id;
 
         // チャットルームの情報を取得
         $chat            = Chat::find($chatRoomId);
 
         // チャットルームの参加者情報を取得
-        $client_user     = User::find($chat->client_user_id);
-        $respondent_user = User::find($chat->respondent_user_id);
+        $loginUser = User::find(Auth::id());
+        $loginUserId = $loginUser->id;
 
-        // 回答者のアイコン情報を取得
-        $respondent_user_icon = $respondent_user->icon;
+        // 相手の情報を取得
+        $respondentUserId = $chat->respondent_user_id;
+        $clientUserId = $chat->client_user_id;
+        if ($respondentUserId === $loginUser->id) {
+            $partnerUser = User::find($clientUserId);
+            $isClientChat = false;
+        } else {
+            $partnerUser = User::find($respondentUserId);
+            $isClientChat = true;
+        }
+
+        $partnerUserIcon = $partnerUser->icon;
+        $partnerUserName = $partnerUser->nickname;
 
         // 該当チャットの内容をすべて取得
-        $chatRecords     = ChatRecord::where('chat_id', '=', $chatRoomId)->get();
+        $chatRecords     = ChatRecord::where('chat_id', $chatRoomId)->get();
 
         // 日程決定しているか真偽を取得
         $isReserved      = 1;
@@ -50,17 +49,28 @@ class ChatController extends Controller
             }
         }
 
-
-        return view('chat.main', compact('chatRecords', 'respondent_user', 'client_user', 'isReserved', 'respondent_user_icon', 'chatRoomId'));
+        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'partnerUserIcon', 'partnerUserName'));
     }
 
     public function post(Request $request)
     {
-        $newChatRecord = new ChatRecord;
-        $newChatRecord->chat_id = $request->chatRoomId;
-        $newChatRecord->user_id = $request->user_id;
-        $newChatRecord->comment = $request->comment;
-        $newChatRecord->save();
-        return redirect('/chat/main');
+        ChatRecord::create([
+            'chat_id' => $request->chatRoomId,
+            'user_id' => Auth::id(),
+            'comment' => $request->comment,
+        ]);
+        return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
+    }
+
+    public function client_chat_list(Request $request)
+    {
+        $client_chats = Chat::where('client_user_id', Auth::id())->where('is_finished', false)->get();
+        return view('chat.client-chat-list', compact('client_chats'));
+    }
+
+    public function respondent_chat_list(Request $request)
+    {
+        $respondent_chats = Chat::where('respondent_user_id', Auth::id())->where('is_finished', false)->get();
+        return view('chat.respondent-chat-list', compact('respondent_chats'));
     }
 }

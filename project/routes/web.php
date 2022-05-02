@@ -37,6 +37,6 @@ Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
     Route::get('client', 'App\Http\Controllers\ChatController@client_chat_list')->name('client_chat_list');
 
     // chat画面製作中
-    Route::get('main', 'App\Http\Controllers\ChatController@main')->name('main');
+    Route::get('/{chat_id}', 'App\Http\Controllers\ChatController@index')->name('index');
     Route::post('post', 'App\Http\Controllers\ChatController@post')->name('post');
 });
