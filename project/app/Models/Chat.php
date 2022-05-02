@@ -16,6 +16,11 @@ class Chat extends Model
         return $this->hasOne(User::class, 'id', 'respondent_user_id');
     }
 
+    public function client_user()
+    {
+        return $this->hasOne(User::class, 'id', 'client_user_id');
+    }
+
     public function last_message()
     {
         return $this->hasOne(ChatRecord::class)->latestOfMany();

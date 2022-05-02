@@ -24,7 +24,7 @@
                         <span class="count" id="notifications-count">5</span>
                         <span class="fa fa-bell-o"></span>
                     </div>
-                    <a href="">
+                    <a href="{{ route('chat.respondent_chat_list') }}">
                         回答者チャット
                     </a>
                 </button>
@@ -35,7 +35,7 @@
                         <span class="count" id="notifications-count">3</span>
                         <span class="fa fa-bell-o"></span>
                     </div>
-                    <a href="{{ route('client_chat_list') }}">
+                    <a href="{{ route('chat.client_chat_list') }}">
                         依頼者チャット
                     </a>
                 </button>
@@ -125,13 +125,13 @@
             </ul>
             <div class="flex w-screen">
                 <button class="bg-lightblue-500 p-5 hover:bg-gray-800 text-white sm:text-base text-sm font-bold w-6/12">
-                    <a href="">
-                        依頼チャット
+                    <a href="{{ route('chat.client_chat_list') }}">
+                        依頼者チャット
                     </a>
                 </button>
                 <button class="bg-yellow-500 p-5 hover:bg-blue-700 text-white sm:text-base text-sm font-bold w-6/12">
-                    <a href="">
-                        匿名回答チャット
+                    <a href="{{ route('chat.respondent_chat_list') }}">
+                        回答者チャット
                     </a>
                 </button>
             </div>

@@ -32,9 +32,11 @@ Route::get('/terms-of-service', function () {
 });
 
 // chat一覧画面
-Route::get('/chat', 'App\Http\Controllers\ChatController@index')->name('chat_index');
-Route::get('/chat/client', 'App\Http\Controllers\ChatController@client_chat_list')->name('client_chat_list');
+Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
+    Route::get('/respondent', 'App\Http\Controllers\ChatController@respondent_chat_list')->name('respondent_chat_list');
+    Route::get('client', 'App\Http\Controllers\ChatController@client_chat_list')->name('client_chat_list');
 
-// chat画面製作中
-Route::get('/chat/main', 'App\Http\Controllers\ChatController@main')->name('chat.main');
-Route::post('/chat/post', 'App\Http\Controllers\ChatController@post')->name('chat.post');
+    // chat画面製作中
+    Route::get('main', 'App\Http\Controllers\ChatController@main')->name('main');
+    Route::post('post', 'App\Http\Controllers\ChatController@post')->name('post');
+});
