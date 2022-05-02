@@ -27,38 +27,42 @@
                     </svg>
                 </span>
                 <p class="text-gray-600">
-                    依頼者チャット一覧
+                    回答者チャット一覧
                 </p>
             </div>
         </div>
         <div class="title mb-5  font-normal">
-            <h1 class="mb-2 text-xl">依頼者チャット一覧</h1>
-            <p class="text-sm">あなたが回答者に相談を依頼しているページです。</p>
+            <h1 class="mb-2 text-xl">回答者チャット一覧</h1>
+            <p class="text-sm">依頼者からの相談を受けるページです。</p>
         </div>
         <div class="cards mb-5 pb-5">
-            @foreach ($client_chats as $client_chat)
+            @foreach ($respondent_chats as $respondent_chat)
                 <a class="user-row flex flex-col items-center justify-between cursor-pointer mb-3 p-1 duration-300 sm:flex-row sm:py-4 sm:pl-2 sm:pr-4 bg-amber-100"
                     href="#">
                     <div class="user flex items-center text-center flex-col sm:flex-row sm:text-left">
                         <div class="avatar-content mb-2.5 sm:mb-0 sm:mr-5">
-                            <img class="avatar w-16 h-16" src="{{ asset($client_chat->respondent_user->icon) }}" />
+                            <img class="avatar w-16 h-16" src="{{ asset($respondent_chat->respondent_user->icon) }}" />
                         </div>
                         <div class="user-body flex flex-col mb-4 sm:mb-0 sm:mr-4 pl-4">
                             <div class="skills flex flex-col">
-                                <span class="subtitle mb-3 text-xl">{{ $client_chat->respondent_user->nickname }}</span>
                                 <span
-                                    class="subtitle text-xs font-normal">{{ $client_chat->last_message->comment }}</span>
+                                    class="subtitle mb-3 text-xl">{{ $respondent_chat->respondent_user->nickname }}</span>
+                                <span
+                                    class="subtitle text-xs font-normal">{{ $respondent_chat->last_message->comment }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="user-option mx-auto sm:ml-auto sm:mr-0">
                         <span class="text-xs">相談日程
-                            {{ $client_chat->interview_schedule ? "#{$client_chat->interview_schedule->schedule}~" : '' }}</span>
-                        <span class="text-xs">未読件数 {{ $client_chat->number_of_unread_items() }}</span>
+                            {{ $respondent_chat->interview_schedule ? "#{$respondent_chat->interview_schedule->schedule}~" : '' }}</span>
+                        <span class="text-xs">未読件数 {{ $respondent_chat->number_of_unread_items() }}</span>
                     </div>
                 </a>
             @endforeach
         </div>
     </div>
+    <button class="block bg-slate-600 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded mx-auto mt-5">
+        相談を受けつけない
+    </button>
     @include('components.user-footer')
 @endsection
