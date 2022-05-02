@@ -17,7 +17,7 @@
     @include('components.user-header')
 
     <main>
-        <section class="fv bg-no-repeat overflow-hidden" id="top">
+        <section class="fv bg-no-repeat overflow-hidden" id="fv">
             <div class="container px-6 mx-auto">
                 <div class="items-center md:flex">
                     <div class="w-full md:w-1/2">
@@ -112,18 +112,16 @@
                 </h2>
                 <div class="items-center md:flex">
                     <div class="w-full md:w-1/2">
-                        <div class="">
-                            <div class="">
-                                <p class="font-bold mb-5 text-base lg:text-xl text-center md:text-left">
-                                    企業の方と匿名で相談ができる<br>
-                                    転職相談プラットフォームです。
-                                </p>
-                                <p class="font-thin text-sm lg:text-base text-center md:text-left">
-                                    時間もない、相談できる人もいない・・・<br>
-                                    そんな悩みを抱えているあなたにぴったりな、<br>
-                                    匿名で転職先の人に相談できるサービスです。
-                                </p>
-                            </div>
+                        <div>
+                            <p class="font-bold mb-5 text-base lg:text-xl text-center md:text-left">
+                                企業の方と匿名で相談ができる<br>
+                                転職相談プラットフォームです。
+                            </p>
+                            <p class="font-thin text-sm lg:text-base text-center md:text-left">
+                                時間もない、相談できる人もいない・・・<br>
+                                そんな悩みを抱えているあなたにぴったりな、<br>
+                                匿名で転職先の人に相談できるサービスです。
+                            </p>
                         </div>
                     </div>
 
@@ -224,7 +222,7 @@
                             匿名回答者に相談するためには相談チケットが必要です。<br>
                             チケット1枚で1回のご相談ができます。
                         </p>
-                        <div class="">
+                        <div>
                             <a href={{ route('user_ticket') }}
                                 class="block md:w-4/5 text-center whitespace-nowrap cursor-pointer mx-auto py-2 font-xs shadow text-white capitalize transition-colors duration-200 bg-orange rounded-md hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                                 チケットの購入はこちら
@@ -259,20 +257,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="note-box relative bg-gray-50 rounded-md pl-6 pt-6 pr-3 pb-3 md:pl-10 md:pt-10 mt-20 mb-10">
-                    <h2 class="notes relative pb-4 text-base md:text-lg text-center">
-                        <span>相談チケットに関する注意事項</span>
-                    </h2>
-                    <ul class="font-thin list-disc px-5 mt-8 text-sm md:text-base">
-                        <li>匿名回答者に相談するためにはチケットが必要です。相談チケット1枚で1回の通話が可能です。</li>
-                        <li>チケットを1枚以上所持していない場合はチャットを開始できません。チャットを開始したい方はチケットをご購入ください。</li>
-                        <li>通話実施前にキャンセルとなった場合、使用したチケットは返却されます。</li>
-                        <li>お支払い方法はpaypayのみとなっております。</li>
-                    </ul>
-                    <div class="w-28 ml-auto">
-                        <img src="{{ asset('/img/paypay2.png') }}" alt="paypay" class="w-full">
-                    </div>
-                </div>
+
+                @include('components.notes')
 
             </div>
         </section>
@@ -281,7 +267,7 @@
 
         <section>
             <div class="container mx-auto px-6">
-                <a href="#top" class="cta block bg-white p-5 md:w-6/12 mx-auto border-double border-4 border-black">
+                <a href="#fv" class="cta block bg-white p-5 md:w-6/12 mx-auto border-double border-4 border-black">
                     <p class="text-center text-lg lg:text-2xl">回答者を今すぐ検索</p>
                 </a>
             </div>

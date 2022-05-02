@@ -60,20 +60,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-50 rounded-md pl-6 pt-6 pr-3 pb-3 md:pl-10 md:pt-10">
-                        <p class="font-thin text-sm md:text-base">
-                            <注意事項>
-                        </p>
-                        <ul class="font-thin list-disc px-5 text-sm md:text-base">
-                            <li>本サービスはチケット制です。1チケット消費で1回の通話が可能です。</li>
-                            <li>通話実施前にキャンセルとなった場合、チケットは返却されます。</li>
-                            <li>お支払い方法は<span class="font-bold">PayPay</span>のみとなっております。</li>
-                            <li>チケットの返品については管理者にお問い合わせください。</li>
-                        </ul>
-                        <div class="w-28 ml-auto">
-                            <img src="{{ asset('/img/paypay2.png') }}" alt="paypay" class="w-full">
-                        </div>
-                    </div>
+
+                    @include('components.notes')
+                    
                     <div class="mt-10">
                         <button
                             class="block mx-auto px-20 py-2 font-xs shadow text-white capitalize transition-colors duration-200 bg-blue rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
