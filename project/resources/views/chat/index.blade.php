@@ -95,7 +95,7 @@
                         @endforeach
                     </div>
                 </div>
-                <form action="{{ route('chat.post') }}" method="POST" class="flex items-center ">
+                <form action="" method="POST" class="flex items-center ">
                     @csrf
                     <input type="hidden" value="{{ $chatRoomId }}" name="chatRoomId">
                     <input type="text" class="block m-5 bg-slate-100 rounded-full w-full" name="comment">
