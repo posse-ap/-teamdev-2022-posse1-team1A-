@@ -1,9 +1,11 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/modal.js": "/js/modal.js",
     "/css/ticket.css": "/css/ticket.css",
     "/css/search.css": "/css/search.css",
     "/css/top.css": "/css/top.css",
     "/css/footer.css": "/css/footer.css",
     "/css/app.css": "/css/app.css",
+    "/css/modal.css": "/css/modal.css",
     "/css/thanks.css": "/css/thanks.css"
 }

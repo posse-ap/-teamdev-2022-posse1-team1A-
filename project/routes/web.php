@@ -35,11 +35,12 @@ Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 })->name('terms_of_service');
 
-// chat一覧画面製作中
-Route::get('/chat', 'App\Http\Controllers\ChatController@index')->name('chat.index');
+// chat一覧画面
+Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
+    Route::get('/respondent', 'App\Http\Controllers\ChatController@respondent_chat_list')->name('respondent_chat_list');
+    Route::get('client', 'App\Http\Controllers\ChatController@client_chat_list')->name('client_chat_list');
 
-// chat画面製作中
-Route::get('/chat/main', 'App\Http\Controllers\ChatController@main')->name('chat.main');
-Route::post('/chat/post', 'App\Http\Controllers\ChatController@post')->name('chat.post');
-
-
+    // chat画面製作中
+    Route::get('/{chat_id}', 'App\Http\Controllers\ChatController@index')->name('index');
+    Route::post('/{chat_id}', 'App\Http\Controllers\ChatController@post')->name('post');
+});
