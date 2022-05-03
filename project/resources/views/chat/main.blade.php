@@ -22,7 +22,7 @@
                     </div>
                     <div class="">
                       @if ($isReserved)
-                        <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded ml-2">
+                        <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded ml-2" id="call-start-modal">
                           <a href="" class="px-3">
                             通話
                           </a>
@@ -106,38 +106,27 @@
                 </form>
                 <div class="flex items-center ">
                 </div>
-                <div id="faq_csv_modal_window">
-                  {{-- モーダルウィンドウ --}}
+
+                  {{-- 通話開始モーダルウィンドウ --}}
+                  {{-- TODO:別の日程調整モーダルとの出し入れしたい --}}
                   @include('components.modal_window')
                   @section('modal_window')
                       <div id="modal_open">
-                          {{-- <header id="modal_header">
-                              モーダルヘッダーです。
-                          </header> --}}
-                          <main id="modal_main" class="flex flex-col text-center p-8">
-                            <div class="mb-5 font-bold text-lg">相談日程の登録</div>
-                            <div>
-                              <div class="text-left mb-3">相談日程</div>
-                              {{-- <form action="{{route("schedule.post")}}" method="post"></form> --}}
-                              <label for="">
-                                <form action="" method="post" class="bg-gray-100 rounded-md mb-5">
-                                  <input type="date" name="" id="" class="bg-gray-100 text-left">
-                                </form>
-                              </label>
+                          <main id="modal_main" class="flex flex-col text-center py-12">
+                              <div class="text-left text-center pb-3 text-lg">通話を開始します。よろしいですか？</div>
                             </div>
-                            <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 rounded  w-64 mx-auto mb-5">
-                              チケットを1枚消費して登録
+                            <div class="flex mb-12">
+                            <button class=" mr-5 bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 rounded w-64 mx-auto mb-5">
+                              通話
                             </button>
-                            <p class="text-xs">※日程を登録するとチケットが1枚消費されます。</p>
-                            <p class="text-xs">※ 日程の再調整やキャンセルを繰り返すと、アカウントが停止される可能性があります。</p>
-                            
+                            <button class="bg-gray-500 hover:bg-gray-800 text-white font-bold py-2 rounded  w-64 mx-auto mb-5">
+                              キャンセル
+                            </button>
+                          </div>
                           </main>
-                          {{-- <footer id="modal_footer">
-                              <p><a id="modal-close" class="button-link">閉じる</a></p>
-                          </footer> --}}
                       </div>
-                  @endsection
-                  @yield('modal_window')
+                      @endsection
+                      @yield('modal_window')
                 </div>
             </div>
             @push('scripts_bottom')
