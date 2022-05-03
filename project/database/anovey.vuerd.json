@@ -3,8 +3,8 @@
     "version": "2.2.11",
     "width": 2000,
     "height": 2000,
-    "scrollTop": -719,
-    "scrollLeft": -54,
+    "scrollTop": -786,
+    "scrollLeft": -569,
     "zoomLevel": 0.9,
     "show": {
       "tableComment": true,
@@ -419,7 +419,7 @@
           "active": false,
           "left": 149.9999,
           "top": 84.111,
-          "zIndex": 32,
+          "zIndex": 6,
           "widthName": 60,
           "widthComment": 60
         },
@@ -550,7 +550,7 @@
           "active": false,
           "left": 2.2225,
           "top": 654.0001,
-          "zIndex": 50,
+          "zIndex": 12,
           "widthName": 60,
           "widthComment": 60
         },
@@ -727,7 +727,7 @@
           "active": false,
           "left": 815,
           "top": 104,
-          "zIndex": 17,
+          "zIndex": 4,
           "widthName": 60,
           "widthComment": 60
         },
@@ -927,7 +927,7 @@
           "active": false,
           "left": 826,
           "top": 439,
-          "zIndex": 6,
+          "zIndex": 3,
           "widthName": 86.46092224121094,
           "widthComment": 60
         },
@@ -1081,7 +1081,7 @@
           "active": false,
           "left": 1379.333,
           "top": 599.9997,
-          "zIndex": 48,
+          "zIndex": 10,
           "widthName": 60,
           "widthComment": 60
         },
@@ -1258,7 +1258,7 @@
           "active": false,
           "left": 1381,
           "top": 113,
-          "zIndex": 4,
+          "zIndex": 1,
           "widthName": 130.0238800048828,
           "widthComment": 60
         },
@@ -1435,7 +1435,7 @@
           "active": false,
           "left": 1055.3334,
           "top": 808.2224,
-          "zIndex": 47,
+          "zIndex": 9,
           "widthName": 114.05987548828125,
           "widthComment": 60
         },
@@ -1543,7 +1543,7 @@
           "active": false,
           "left": 561.3334,
           "top": 800.8889,
-          "zIndex": 42,
+          "zIndex": 8,
           "widthName": 99.9678955078125,
           "widthComment": 120
         },
@@ -1651,7 +1651,7 @@
           "active": false,
           "left": 1563,
           "top": 406,
-          "zIndex": 5,
+          "zIndex": 2,
           "widthName": 120.05287170410156,
           "widthComment": 60
         },
@@ -1874,7 +1874,7 @@
           "active": false,
           "left": 125.6667,
           "top": 1084,
-          "zIndex": 41,
+          "zIndex": 13,
           "widthName": 77.33493041992188,
           "widthComment": 60
         },
@@ -2028,7 +2028,7 @@
           "active": false,
           "left": 722.8891,
           "top": 1021.3328,
-          "zIndex": 39,
+          "zIndex": 7,
           "widthName": 60.148956298828125,
           "widthComment": 60
         },
@@ -2109,29 +2109,6 @@
             "id": "09db7b93-75df-4275-8b2c-61fce5606394"
           },
           {
-            "name": "settlement_id",
-            "comment": "",
-            "dataType": "INT",
-            "default": "",
-            "option": {
-              "autoIncrement": false,
-              "primaryKey": false,
-              "unique": false,
-              "notNull": true
-            },
-            "ui": {
-              "active": false,
-              "pk": false,
-              "fk": true,
-              "pfk": false,
-              "widthName": 88.35891723632812,
-              "widthComment": 60,
-              "widthDataType": 60,
-              "widthDefault": 60
-            },
-            "id": "94d4fac4-6cb3-44dc-b5a4-b7d7a3eacf04"
-          },
-          {
             "name": "calling_id",
             "comment": "",
             "dataType": "INT",
@@ -2170,7 +2147,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 74.53993225097656,
+              "widthName": 70.44493103027344,
               "widthComment": 60,
               "widthDataType": 70.00294494628906,
               "widthDefault": 60
@@ -2193,19 +2170,19 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 60,
+              "widthName": 74.53993225097656,
               "widthComment": 60,
-              "widthDataType": 60,
+              "widthDataType": 70.00294494628906,
               "widthDefault": 60
             },
             "id": "65c76855-9835-4bcb-a349-56ae4126a56b"
           }
         ],
         "ui": {
-          "active": false,
+          "active": true,
           "left": 1264.5553,
           "top": 1126.3331,
-          "zIndex": 49,
+          "zIndex": 14,
           "widthName": 60,
           "widthComment": 60
         },
@@ -2278,7 +2255,7 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 74.53993225097656,
+              "widthName": 70.44493103027344,
               "widthComment": 60,
               "widthDataType": 70.00294494628906,
               "widthDefault": 60
@@ -2301,9 +2278,9 @@
               "pk": false,
               "fk": false,
               "pfk": false,
-              "widthName": 60,
+              "widthName": 74.53993225097656,
               "widthComment": 60,
-              "widthDataType": 60,
+              "widthDataType": 70.00294494628906,
               "widthDefault": 60
             },
             "id": "d02322cf-0010-46c3-b920-580e394154c8"
@@ -2313,7 +2290,7 @@
           "active": false,
           "left": 1280.5552,
           "top": 1408.8894,
-          "zIndex": 31,
+          "zIndex": 5,
           "widthName": 98.71987915039062,
           "widthComment": 60
         },
@@ -2633,7 +2610,7 @@
             "275634ee-8bbe-4350-b8fd-a279a370b6c4"
           ],
           "x": 597.7055031005859,
-          "y": 1147.375,
+          "y": 1210.75,
           "direction": "right"
         },
         "constraintName": "fk_products_to_settlements",
@@ -2685,7 +2662,7 @@
             "8fd78455-bbaf-468a-9dbb-72ff4c876fd2"
           ],
           "x": 1464.1067068603516,
-          "y": 1338.8331,
+          "y": 1318.3331,
           "direction": "bottom"
         },
         "constraintName": "fk_ticket_statuses_to_tickets",
@@ -2711,38 +2688,12 @@
             "09db7b93-75df-4275-8b2c-61fce5606394"
           ],
           "x": 1264.5553,
-          "y": 1285.7081,
+          "y": 1222.3331,
           "direction": "left"
         },
         "constraintName": "fk_users_to_tickets",
         "visible": true,
         "id": "7a1085cb-7afc-4164-af73-38e382063c08"
-      },
-      {
-        "identification": false,
-        "relationshipType": "ZeroN",
-        "startRelationshipType": "Dash",
-        "start": {
-          "tableId": "df10db53-1233-481b-aafd-617684365149",
-          "columnIds": [
-            "553e09c1-0504-40ea-8d33-f266174f0977"
-          ],
-          "x": 597.7055031005859,
-          "y": 1274.125,
-          "direction": "right"
-        },
-        "end": {
-          "tableId": "96fd67d4-7f39-40eb-a36d-1bce6d42926c",
-          "columnIds": [
-            "94d4fac4-6cb3-44dc-b5a4-b7d7a3eacf04"
-          ],
-          "x": 1264.5553,
-          "y": 1179.4581,
-          "direction": "left"
-        },
-        "constraintName": "fk_settlements_to_tickets",
-        "visible": true,
-        "id": "14dc6931-a92e-40dc-8278-f366735f8bed"
       },
       {
         "identification": false,
