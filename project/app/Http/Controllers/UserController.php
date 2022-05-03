@@ -58,4 +58,10 @@ class UserController extends Controller
 
         return view('user.ticket');
     }
+
+    public function thanks()
+    {
+
+        return view('user.thanks');
+    }
 }
