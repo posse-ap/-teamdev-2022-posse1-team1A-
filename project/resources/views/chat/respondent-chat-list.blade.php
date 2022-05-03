@@ -38,7 +38,7 @@
         <div class="cards mb-5 pb-5">
             @foreach ($respondent_chats as $respondent_chat)
                 <a class="user-row flex flex-col items-center justify-between cursor-pointer mb-3 p-1 duration-300 sm:flex-row sm:py-4 sm:pl-2 sm:pr-4 bg-amber-100"
-                    href="#">
+                    href="{{ route('chat.index', ['chat_id' => $respondent_chat->id]) }}">
                     <div class="user flex items-center text-center flex-col sm:flex-row sm:text-left">
                         <div class="avatar-content mb-2.5 sm:mb-0 sm:mr-5">
                             <img class="avatar w-16 h-16" src="{{ asset($respondent_chat->client_user->icon) }}" />
