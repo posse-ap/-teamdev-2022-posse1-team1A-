@@ -45,12 +45,6 @@
                             id="schedule-registration">
                             日程登録
                         </button>
-                        {{-- TODO:後で削除↓ --}}
-                        <button
-                            class="bg-yellow-400 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded ml-2 modal-open"
-                            id="call-review">
-                            通話アンケート
-                        </button>
                         
                     </div>
                 </div>
