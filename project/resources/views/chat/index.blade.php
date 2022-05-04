@@ -33,6 +33,7 @@
                         @else
                             <button disabled class="bg-gray-400 text-white font-bold py-1 px-5 rounded ml-2">
                                 <span class="px-3">
+                                    {{-- TODO:通話で10min経過してからモーダル表示に切り替える --}}
                                     通話
                                 </span>
                             </button>
@@ -99,7 +100,7 @@
                         @endforeach
                     </div>
                 </div>
-                <form action="" method="POST" class="flex items-center ">
+                <form action="" method="POST" class="flex items-center">
                     @csrf
                     <input type="hidden" value="{{ $chatRoomId }}" name="chatRoomId">
                     <input type="text" class="block m-5 bg-slate-100 rounded-full w-full" name="comment">
@@ -109,12 +110,14 @@
                 </form>
                 <div id="modal-content" class="md:w-2/4 w-4/5 rounded-2xl">
                     {{-- TODO:閉じるボタンをちゃんとデザインする --}}
-                    <button id="modal-close">閉じる</button>
                     <div class="modal-inner" id="schedule-registration-modal">
                         @include('components.modals.schedule_registration')
                     </div>
                     <div class="modal-inner" id="call-start-modal">
                         @include('components.modals.call-start')
+                    </div>
+                    <div class="modal-inner" id="ten-minute-announce-modal">
+                        @include('components.modals.ten-minute-announce')
                     </div>
                 </div>
             </div>
