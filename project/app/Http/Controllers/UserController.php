@@ -53,6 +53,13 @@ class UserController extends Controller
         return view('user.search', compact('users', 'keyword'));
     }
 
+    public function userPage(Request $request)
+    {
+        $userId = 1;
+        $userInfo = User::find($userId);
+        return view('user.info', compact('userInfo'));
+    }
+    
     public function ticket()
     {
 

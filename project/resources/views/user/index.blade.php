@@ -224,7 +224,7 @@
                         </p>
                         <div>
                             <a href={{ route('user_ticket') }}
-                                class="block md:w-4/5 text-center whitespace-nowrap cursor-pointer mx-auto py-2 font-xs shadow text-white capitalize transition-colors duration-200 bg-orange rounded-md hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                class="w-full sm:w-4/5 block md:w-4/5 text-center whitespace-nowrap cursor-pointer mx-auto py-2 font-xs shadow text-white capitalize transition-colors duration-200 bg-orange rounded-md hover:bg-yellow-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                                 チケットの購入はこちら
                             </a>
                         </div>

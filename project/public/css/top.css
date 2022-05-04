@@ -104,7 +104,7 @@ section {
     background-color: #F7931D;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767.98px) {
     section {
         padding: 40px 0;
     }
@@ -133,6 +133,13 @@ section {
         border-top: 15px solid #668bed;
     }
 
+    .ticket-function {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 639.98px) {
     .ticket-function {
         width: 100%;
     }
