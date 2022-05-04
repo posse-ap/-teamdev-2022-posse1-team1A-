@@ -107,7 +107,7 @@
                         <button class="bg-gray-400 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">送信</button>
                     </div>
                 </form>
-                <div id="modal-content" class="rounded-2xl">
+                <div id="modal-content" class="md:w-2/4 w-4/5 rounded-2xl">
                     {{-- TODO:閉じるボタンをちゃんとデザインする --}}
                     <button id="modal-close">閉じる</button>
                     <div class="modal-inner" id="schedule-registration-modal">
@@ -119,18 +119,13 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
         <!-- Using utilities: -->
         <button class="block bg-slate-600 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded mx-auto mt-5">
             相談を受けつけない
         </button>
         {{-- <div class="mx-auto">
         </div> --}}
-=======
->>>>>>> b06ada0323020086317dbee99b6b246a51af7c2c
-=======
->>>>>>> ed8eb7b958c750a856c5e0e782d46dbe36c0f605
     </div>
     @push('scripts_bottom')
         <script>
