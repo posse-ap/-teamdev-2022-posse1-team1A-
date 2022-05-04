@@ -112,6 +112,9 @@
                     <div class="modal-inner" id="schedule-registration-modal">
                         @include('components.modals.schedule_registration')
                     </div>
+                    <div class="modal-inner" id="ticket-consumption-confirmation-modal">
+                        @include('components.modals.ticket_consumption_confirmation')
+                    </div>
                 </div>
             </div>
         </div>

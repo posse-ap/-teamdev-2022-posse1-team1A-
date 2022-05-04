@@ -9,7 +9,8 @@
         </label>
     </div>
     <button
-        class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 rounded  w-64 mx-auto mb-5">
+    id="ticket-consumption-confirmation"
+    class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 rounded  w-64 mx-auto mb-5 modal-open">
         チケットを1枚消費して登録
     </button>
     <p class="text-xs">※日程を登録するとチケットが1枚消費されます。</p>
