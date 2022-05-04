@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Calling extends Model
+class Product extends Model
 {
     use HasFactory;
 
-    public function chat()
+    public static function getTicketId()
     {
-        return Chat::find($this->chat_id);
+        return 1;
     }
 }
