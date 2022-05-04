@@ -17,3 +17,11 @@
     height: 120%;
     background-color: rgba(0, 0, 0, 0.5);
 }
+
+.fill-salmon-400{
+    fill: #DA696A;
+}
+
+.fill-lightblue-300{
+    fill: #7CB3D4;
+}

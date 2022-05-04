@@ -25,7 +25,9 @@
                     </div>
                     <div>
                         @if ($isReserved)
-                            <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded ml-2 modal-open" id="call-start">
+                            <button
+                                class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded ml-2 modal-open"
+                                id="call-start">
                                 <span class="px-3">
                                     通話
                                 </span>
@@ -43,6 +45,13 @@
                             id="schedule-registration">
                             日程登録
                         </button>
+                        {{-- TODO:後で削除↓ --}}
+                        <button
+                            class="bg-yellow-400 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded ml-2 modal-open"
+                            id="call-review">
+                            通話アンケート
+                        </button>
+                        
                     </div>
                 </div>
                 <div class="cards mx-3 overflow-scroll">
@@ -110,6 +119,7 @@
                 </form>
                 <div id="modal-content" class="md:w-2/4 w-4/5 rounded-2xl">
                     {{-- TODO:閉じるボタンをちゃんとデザインする --}}
+                    <button id="modal-close">閉じる</button>
                     <div class="modal-inner" id="schedule-registration-modal">
                         @include('components.modals.schedule_registration')
                     </div>
@@ -118,6 +128,11 @@
                     </div>
                     <div class="modal-inner" id="ten-minute-announce-modal">
                         @include('components.modals.ten-minute-announce')
+                    </div>
+                    {{-- TODO:電話終了ボタンを押したら表示される↓ --}}
+                    {{-- TODO: モーダルの外をクリックしても離脱させない仕組み必要--}}
+                    <div class="modal-inner" id="call-review-modal">
+                        @include('components.modals.call-review')
                     </div>
                 </div>
             </div>
