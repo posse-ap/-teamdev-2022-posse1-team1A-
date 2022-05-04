@@ -1,8 +1,6 @@
-.footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  text-align: center;
+
+body{
+  padding:0; /*　追加*/
+  margin:0; /*　追加*/
+  height: 100%;
 }

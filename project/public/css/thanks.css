@@ -1,0 +1,19 @@
+.text-blue {
+    color: #668bed;
+}
+
+.bg-blue {
+    background-color: #668bed;
+}
+
+.notes:before {
+    position: absolute;
+    bottom: -10px;
+    left: calc(50% - 50px);
+    width: 100px;
+    height: 5px;
+    content: "";
+    border-radius: 3px;
+    background: #668bed;
+}
+
