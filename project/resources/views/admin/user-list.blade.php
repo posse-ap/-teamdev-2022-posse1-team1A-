@@ -37,7 +37,6 @@
                             <th class="w-1/8 px-4 py-2 text-xs">会社名</th>
                             <th class="w-1/8 px-4 py-2 text-xs">部署名</th>
                             <th class="w-1/4 px-4 py-2 text-xs">メールアドレス</th>
-                            <th class="w-1/8 px-4 py-2 text-xs">被通報回数</th>
                             <th class="w-2/8 px-4 py-2 text-xs">マッチ数</th>
                             <th class="w-1/8 px-4 py-2 text-xs"></th>
                         </tr>
@@ -50,7 +49,6 @@
                                 <td class="border-b px-4 py-2 text-sm">{{ $user->company }}</td>
                                 <td class="border-b px-4 py-2 text-sm">{{ $user->department }}</td>
                                 <td class="border-b px-4 py-2 text-sm">{{ $user->email }}</td>
-                                <td class="border-b px-4 py-2 text-sm"></td>
                                 <td class="border-b px-4 py-2 text-sm"></td>
                                 <td class="border-b px-4 py-2 text-sm text-center"><button
                                         class="bg-red-500 px-2 py-1 rounded text-white">アカウント停止</button></td>

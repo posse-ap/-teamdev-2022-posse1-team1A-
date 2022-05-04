@@ -22,14 +22,28 @@ class AdminController extends Controller
         $query = User::query();
 
         if (!empty($keyword)) {
-            $query->where('name', 'LIKE', "%{$keyword}%")
-                ->orWhere('nickname', 'LIKE', "%{$keyword}%")
-                ->orWhere('company', 'LIKE', "%{$keyword}%")
-                ->orWhere('department', 'LIKE', "%{$keyword}%")
-                ->orWhere('email', 'LIKE', "%{$keyword}%");
-        }
 
-        $users = $query->paginate(10);
+            // 全角スペースを半角に変換
+            $spaceConversion = mb_convert_kana($keyword, 's');
+
+            // 単語を半角スペースで区切り、配列にする（例："山田 翔" → ["山田", "翔"]）
+            $wordArraySearched = preg_split('/[\s,]+/', $spaceConversion, -1, PREG_SPLIT_NO_EMPTY);
+
+            // 単語をループで回し、ユーザーネームと部分一致するものがあれば、$queryとして保持される
+            foreach ($wordArraySearched as $value) {
+                $query->where(function ($query) use ($value) {
+                    $query->where('name', 'LIKE', "%{$value}%")
+                        ->orWhere('nickname', 'LIKE', "%{$value}%")
+                        ->orWhere('company', 'LIKE', "%{$value}%")
+                        ->orWhere('department', 'LIKE', "%{$value}%")
+                        ->orWhere('email', 'LIKE', "%{$value}%");
+                });
+            }
+
+            $users = $query->paginate(10);
+        } else {
+            $users = User::paginate(10);
+        }
 
         return view('admin.user-list', compact('users', 'keyword'));
     }
