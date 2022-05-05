@@ -47,7 +47,7 @@
                                     <td class="border-b px-4 py-2 text-sm text-center">
                                         @if ($user->account_status_id === 1)
                                             {{-- アクティブアカウント --}}
-                                            <form action="{{ route('admin.userlist_accountstop') }}" method="post"
+                                            <form action="{{ route('admin.userlist_accountStop') }}" method="post"
                                                 name="accountStop">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $user->id }}">
@@ -56,7 +56,7 @@
                                             </form>
                                         @elseif ($user->account_status_id === 2)
                                             {{-- 停止中アカウント --}}
-                                            <form action="{{ route('admin.userlist_accountactive') }}" method="post"
+                                            <form action="{{ route('admin.userlist_accountActive') }}" method="post"
                                                 name="accountActive">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $user->id }}">

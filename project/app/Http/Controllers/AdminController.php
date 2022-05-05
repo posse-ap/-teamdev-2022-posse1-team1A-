@@ -49,28 +49,20 @@ class AdminController extends Controller
         return view('admin.user-list', compact('users', 'keyword'));
     }
 
-    public function accountstop(Request $request)
+    public function accountStop(Request $request)
     {
-        
-        $id = $request->id;
-
-        $update = [
-            'account_status_id' => AccountStatus::getStoppedId(),
-        ];
-        User::where('id', $id)->update($update);
+        $user = User::find($request->id);
+        $user->account_status_id = AccountStatus::getStoppedId();
+        $user->save();
 
         return redirect()->route('admin.userlist');
     }
 
-    public function accountactive(Request $request)
+    public function accountActive(Request $request)
     {
-        
-        $id = $request->id;
-
-        $update = [
-            'account_status_id' => AccountStatus::getActiveId(),
-        ];
-        User::where('id', $id)->update($update);
+        $user = User::find($request->id);
+        $user->account_status_id = AccountStatus::getActiveId();
+        $user->save();
 
         return redirect()->route('admin.userlist');
     }
