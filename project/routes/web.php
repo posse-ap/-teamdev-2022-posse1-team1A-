@@ -30,6 +30,8 @@ Route::get('/admin/userlist', 'App\Http\Controllers\AdminController@userlist')->
 
 Route::post('/admin/userlist', 'App\Http\Controllers\AdminController@search')->name('admin_search');
 
+Route::get('/admin/index', 'App\Http\Controllers\AdminController@index')->name('admin_index');
+
 Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
 
 Route::get('/thanks', 'App\Http\Controllers\UserController@thanks')->name('user_thanks');
