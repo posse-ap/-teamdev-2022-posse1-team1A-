@@ -28,6 +28,10 @@ Route::get('/user_page', 'App\Http\Controllers\UserController@userPage')->name('
 
 Route::get('/admin/userlist', 'App\Http\Controllers\AdminController@userlist')->name('admin_userlist');
 
+Route::post('/admin/userlist/stop', 'App\Http\Controllers\AdminController@accountstop')->name('admin_accountstop');
+
+Route::post('/admin/userlist/active', 'App\Http\Controllers\AdminController@accountactive')->name('admin_accountactive');
+
 Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
 
 Route::get('/thanks', 'App\Http\Controllers\UserController@thanks')->name('user_thanks');

@@ -1,5 +1,5 @@
 <div class="flex h-screen">
-  <div class="w-1/5 bg-blue-800">
+  <div class="w-1/5 bg-blue-900">
       <ul class="flex-grow">
           <div class="w-15 h-15 mt-3 flex mx-5">
               <img src="{{ asset('img/logo-white.png') }}" alt="logo-black.png">
