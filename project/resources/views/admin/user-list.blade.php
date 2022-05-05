@@ -39,6 +39,7 @@
                                 <td class="border-b px-4 py-2 text-sm"></td>
                                 <td class="border-b px-4 py-2 text-sm text-center">
                                     @if ($user->account_status_id === 1)
+                                        {{-- アクティブアカウント --}}
                                         <form action="{{ route('admin_accountstop') }}" method="post" name="accountStop">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $user->id }}">
@@ -47,6 +48,7 @@
                                                 name="btnStop">アカウント停止</button>
                                         </form>
                                     @elseif ($user->account_status_id === 2)
+                                        {{-- 停止中アカウント --}}
                                         <form action="{{ route('admin_accountactive') }}" method="post"
                                             name="accountActive">
                                             @csrf
@@ -56,6 +58,7 @@
                                                 id="btnActive" name="btnActive">アカウント停止解除</button>
                                         </form>
                                     @else
+                                        {{-- 退会済アカウント --}}
                                         <p>退会済</p>
                                     @endif
                                 </td>
@@ -95,4 +98,3 @@
         </script>
     @endpush
 @endsection
-
