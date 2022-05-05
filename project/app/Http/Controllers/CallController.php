@@ -14,8 +14,4 @@ class CallController extends Controller
     public function show($chat_id){
         return view('chat.call-screen', compact('chat_id'));
     }
-
-    public function end_call($chat_id){
-        return view('chat.index', compact('chat_id', 'partner_name'));
-    }
 }
