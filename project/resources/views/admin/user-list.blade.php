@@ -11,7 +11,7 @@
 
             <div class="w-full mx-5">
                 <h1 class="text-5xl py-12 text-blue-800">ユーザー一覧</h1>
-                <form class="space-y-3 space-y-0 py-5 flex" action="{{ route('admin_search') }}" method="POST">
+                <form class="space-y-3 space-y-0 py-5 flex" action="{{ route('admin.userlist_search') }}" method="POST">
                     @csrf
                     <input type="text" name="keyword" value="{{ $keyword }}"
                         class="w-1/2 border-none px-4 py-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
@@ -47,7 +47,7 @@
                                     <td class="border-b px-4 py-2 text-sm text-center">
                                         @if ($user->account_status_id === 1)
                                             {{-- アクティブアカウント --}}
-                                            <form action="{{ route('admin_accountstop') }}" method="post"
+                                            <form action="{{ route('admin.userlist_accountstop') }}" method="post"
                                                 name="accountStop">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $user->id }}">
@@ -56,7 +56,7 @@
                                             </form>
                                         @elseif ($user->account_status_id === 2)
                                             {{-- 停止中アカウント --}}
-                                            <form action="{{ route('admin_accountactive') }}" method="post"
+                                            <form action="{{ route('admin.userlist_accountactive') }}" method="post"
                                                 name="accountActive">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $user->id }}">

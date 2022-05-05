@@ -35,7 +35,9 @@ Route::get('/terms-of-service', function () {
 })->name('terms_of_service');
 
 // 管理者画面
-Route::get('/admin/userlist', 'App\Http\Controllers\AdminController@userlist')->name('admin_userlist');
-Route::post('/admin/userlist/stop', 'App\Http\Controllers\AdminController@accountstop')->name('admin_accountstop');
-Route::post('/admin/userlist/active', 'App\Http\Controllers\AdminController@accountactive')->name('admin_accountactive');
-Route::post('/admin/userlist', 'App\Http\Controllers\AdminController@search')->name('admin_search');
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('/userlist', 'App\Http\Controllers\AdminController@userlist')->name('userlist');
+    Route::post('/userlist/stop', 'App\Http\Controllers\AdminController@accountstop')->name('userlist_accountstop');
+    Route::post('/userlist/active', 'App\Http\Controllers\AdminController@accountactive')->name('userlist_accountactive');
+    Route::post('/userlist', 'App\Http\Controllers\AdminController@search')->name('userlist_search');
+});

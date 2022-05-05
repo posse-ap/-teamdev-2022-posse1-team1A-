@@ -59,7 +59,7 @@ class AdminController extends Controller
         ];
         User::where('id', $id)->update($update);
 
-        return redirect()->route('admin_userlist');
+        return redirect()->route('admin.userlist');
     }
 
     public function accountactive(Request $request)
@@ -72,6 +72,6 @@ class AdminController extends Controller
         ];
         User::where('id', $id)->update($update);
 
-        return redirect()->route('admin_userlist');
+        return redirect()->route('admin.userlist');
     }
 }
