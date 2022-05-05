@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="mx-5 bg-white block w-1/4 py-5 shadow-2xl rounded-lg mb-5">
-                  <p class="text-blue-800 ml-2 text-2xl">総通話数</h2>
+                    <h2 class="text-blue-800 text-lg ml-5">総通話数</h2>
                     <div class="flex">
                         <nav class="flex px-12 items-end text-center ml-auto mr-auto my-4">
                             <p class="text-blue-800 text-6xl font-bold">19</p>
