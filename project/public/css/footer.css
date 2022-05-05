@@ -1,5 +1,7 @@
-body {
-    padding: 0; /*　追加*/
-    margin: 0; /*　追加*/
-    height: 100%;
+
+body{
+  padding:0; /*　追加*/
+  margin:0; /*　追加*/
+  height: 100%;
 }
+

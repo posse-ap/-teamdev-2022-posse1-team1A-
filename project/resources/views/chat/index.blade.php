@@ -4,6 +4,10 @@
     @include('components.user-header')
     @push('styles')
         <link rel="stylesheet" href="{{ asset('css/chatMain.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/modal.css') }}">
+    @endpush
+    @push('scripts')
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     @endpush
     <div class="wrapper container mx-auto pl-4 mb-0 pb-0 bg-white font-normal">
         <div class='flex flex-wrap'>
@@ -19,7 +23,7 @@
                     <div class="font-bold">
                         {{ $partnerUserName }}
                     </div>
-                    <div class="">
+                    <div>
                         @if ($isReserved)
                             <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded ml-2">
                                 <a href="" class="px-3">
@@ -33,10 +37,9 @@
                                 </span>
                             </button>
                         @endif
-                        <button class="bg-yellow-400 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded ml-2">
-                            <a href="">
-                                日程登録
-                            </a>
+                        <button class="bg-yellow-400 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded ml-2 modal-open"
+                        id="schedule-registration">
+                            日程登録
                         </button>
                     </div>
                 </div>
@@ -103,13 +106,21 @@
                         <button class="bg-gray-400 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">送信</button>
                     </div>
                 </form>
-                <div class="flex items-center ">
+                <div id="modal-content" class="rounded-2xl">
+                    {{-- TODO:閉じるボタンをちゃんとデザインする --}}
+                    <button id="modal-close">閉じる</button>
+                    <div class="modal-inner" id="schedule-registration-modal">
+                        @include('components.modals.schedule_registration')
+                    </div>
                 </div>
             </div>
-            @push('scripts_bottom')
-                <script>
-                    let target = document.getElementById('scroll-inner');
-                    target.scrollIntoView(false);
-                </script>
-            @endpush
-        @endsection
+        </div>
+    </div>
+    @push('scripts_bottom')
+        <script>
+            let target = document.getElementById('scroll-inner');
+            target.scrollIntoView(false);
+        </script>
+        <script src="{{asset('js/modal.js')}}"></script>
+    @endpush
+@endsection
