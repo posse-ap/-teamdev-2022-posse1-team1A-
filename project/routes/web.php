@@ -43,8 +43,4 @@ Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
     // chat画面製作中
     Route::get('/{chat_id}', 'App\Http\Controllers\ChatController@index')->name('index');
     Route::post('/{chat_id}', 'App\Http\Controllers\ChatController@post')->name('post');
-
-    // 通話画面
-    Route::get('/{chat_id}/call', 'App\Http\Controllers\CallController@show')->name('call_screen_show');
-    Route::post('/{chat_id}/call', 'App\Http\Controllers\CallController@index')->name('call_screen');
 });

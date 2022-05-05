@@ -45,7 +45,7 @@
                             id="schedule-registration">
                             日程登録
                         </button>
-                        
+
                     </div>
                 </div>
                 <div class="cards mx-3 overflow-scroll">
@@ -124,7 +124,7 @@
                         @include('components.modals.ten-minute-announce')
                     </div>
                     {{-- TODO:電話終了ボタンを押したら表示される↓ --}}
-                    {{-- TODO: モーダルの外をクリックしても離脱させない仕組み必要--}}
+                    {{-- TODO: モーダルの外をクリックしても離脱させない仕組み必要 --}}
                     <div class="modal-inner" id="call-review-modal">
                         @include('components.modals.call-review')
                     </div>
@@ -139,6 +139,7 @@
         {{-- <div class="mx-auto">
         </div> --}}
     </div>
+    @include('components.modals.call-screen')
     @push('scripts_bottom')
         <script>
             let target = document.getElementById('scroll-inner');
