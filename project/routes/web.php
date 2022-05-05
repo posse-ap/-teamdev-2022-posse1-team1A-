@@ -26,12 +26,6 @@ Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_searc
 Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
 Route::get('/user_page', 'App\Http\Controllers\UserController@userPage')->name('user_page');
 
-Route::get('/admin/userlist', 'App\Http\Controllers\AdminController@userlist')->name('admin_userlist');
-
-Route::post('/admin/userlist/stop', 'App\Http\Controllers\AdminController@accountstop')->name('admin_accountstop');
-
-Route::post('/admin/userlist/active', 'App\Http\Controllers\AdminController@accountactive')->name('admin_accountactive');
-
 Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
 
 Route::get('/thanks', 'App\Http\Controllers\UserController@thanks')->name('user_thanks');
@@ -39,3 +33,9 @@ Route::get('/thanks', 'App\Http\Controllers\UserController@thanks')->name('user_
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 })->name('terms_of_service');
+
+// 管理者画面
+Route::get('/admin/userlist', 'App\Http\Controllers\AdminController@userlist')->name('admin_userlist');
+Route::post('/admin/userlist/stop', 'App\Http\Controllers\AdminController@accountstop')->name('admin_accountstop');
+Route::post('/admin/userlist/active', 'App\Http\Controllers\AdminController@accountactive')->name('admin_accountactive');
+Route::post('/admin/userlist', 'App\Http\Controllers\AdminController@search')->name('admin_search');
