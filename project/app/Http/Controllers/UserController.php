@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -22,7 +21,7 @@ class UserController extends Controller
         return redirect()->route('user_result', ['keyword' => $keyword]);
     }
 
-    public function result($keyword="")
+    public function result($keyword = "")
     {
 
         $query = User::query();
@@ -58,17 +57,5 @@ class UserController extends Controller
         $userId = 1;
         $userInfo = User::find($userId);
         return view('user.info', compact('userInfo'));
-    }
-    
-    public function ticket()
-    {
-
-        return view('user.ticket');
-    }
-
-    public function thanks()
-    {
-
-        return view('user.thanks');
     }
 }

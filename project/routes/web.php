@@ -17,7 +17,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/', 'App\Http\Controllers\UserController@index')->name('user_index');
 
@@ -28,9 +28,10 @@ Route::get('/user_page', 'App\Http\Controllers\UserController@userPage')->name('
 
 Route::get('/admin/userlist', 'App\Http\Controllers\AdminController@userlist')->name('admin_userlist');
 
-Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
+Route::get('/ticket', 'App\Http\Controllers\TicketController@index')->name('user_ticket');
+Route::post('/ticket', 'App\Http\Controllers\TicketController@buy')->name('buy_ticket');
 
-Route::get('/thanks', 'App\Http\Controllers\UserController@thanks')->name('user_thanks');
+Route::get('/thanks', 'App\Http\Controllers\TicketController@thanks')->name('user_thanks');
 
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');

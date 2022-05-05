@@ -23,20 +23,20 @@ class SettlementSeeder extends Seeder
         for ($i = 1; $i <= Calling::count(); $i++) {
             array_push($data, [
                 'paypay_settlement_id' => Str::random(16),
-                'payment_details' => Str::random(16),
                 'user_id' => Calling::find($i)->chat()->client_user_id,
                 'product_id' => Product::getTicketId(),
                 'quantity' => 1,
                 'amount_of_payment' => Product::find(Product::getTicketId())->price * 1,
+                'is_paid' => true,
             ]);
         }
         array_push($data, [
             'paypay_settlement_id' => Str::random(16),
-            'payment_details' => Str::random(16),
             'user_id' => 1,
             'product_id' => Product::getTicketId(),
             'quantity' => 1,
             'amount_of_payment' => Product::find(Product::getTicketId())->price * 1,
+            'is_paid' => false,
         ]);
         DB::table('settlements')->insert($data);
     }
