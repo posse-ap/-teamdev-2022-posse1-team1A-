@@ -112,10 +112,10 @@
                         href="#">アカウント情報</a>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
-                        href="#">利用規約</a>
+                        href="{{ route('terms_of_service') }}">利用規約</a>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
-                        href="#">個人情報保護方針</a></li>
+                        href="{{ route('privacy_policy') }}">個人情報保護方針</a></li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
                         href="#">運営会社</a>
                 </li>
@@ -150,7 +150,7 @@
                         href="#">初めての方へ</a>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
-                        href="#">個人情報保護方針</a></li>
+                        href="{{ route('privacy_policy') }}">個人情報保護方針</a></li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
                         href="#">運営会社</a>
                 </li>
