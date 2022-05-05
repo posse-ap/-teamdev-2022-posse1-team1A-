@@ -6,6 +6,14 @@
     background-color: #668bed;
 }
 
+.notes {
+    z-index: -10;
+}
+
+.note-box {
+    z-index: -20;
+}
+
 .notes:before {
     position: absolute;
     bottom: -10px;
