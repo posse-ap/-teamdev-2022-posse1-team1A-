@@ -43,10 +43,17 @@ $(function () {
     var cw = $("#modal-content").outerWidth();
     var ch = $("#modal-content").outerHeight(); //センタリングを実行する
 
-    $("#modal-content").css({
-      "left": (w - cw) / 2 + "px",
-      "top": (h - ch) / 2 + "px"
-    });
+    if (w >= 768) {
+      $("#modal-content").css({
+        "left": (w - cw) / 2 + "px",
+        "top": (h - ch) / 2 + "px"
+      });
+    } else {
+      $("#modal-content").css({
+        "left": (w - cw) * 5 / 12 + "px",
+        "top": (h - ch) * 3 / 12 + "px"
+      });
+    }
   }
 });
 /******/ })()

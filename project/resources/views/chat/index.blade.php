@@ -106,7 +106,7 @@
                         <button class="bg-gray-400 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">送信</button>
                     </div>
                 </form>
-                <div id="modal-content" class="rounded-2xl">
+                <div id="modal-content" class="rounded-2xl md:w-1/2 w-10/12">
                     {{-- TODO:閉じるボタンをちゃんとデザインする --}}
                     <button id="modal-close">閉じる</button>
                     <div class="modal-inner" id="schedule-registration-modal">
