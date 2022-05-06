@@ -25,20 +25,21 @@
                     </div>
                     <div>
                         @if ($isReserved)
-                            <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded ml-2">
-                                <a href="" class="px-3">
+                            <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded ml-2 modal-open" id="call-start">
+                                <span class="px-3">
                                     通話
-                                </a>
+                                </span>
                             </button>
                         @else
                             <button disabled class="bg-gray-400 text-white font-bold py-1 px-5 rounded ml-2">
-                                <span href="" class="px-3">
+                                <span class="px-3">
                                     通話
                                 </span>
                             </button>
                         @endif
-                        <button class="bg-yellow-400 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded ml-2 modal-open"
-                        id="schedule-registration">
+                        <button
+                            class="bg-yellow-400 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded ml-2 modal-open"
+                            id="schedule-registration">
                             日程登録
                         </button>
                     </div>
@@ -106,21 +107,31 @@
                         <button class="bg-gray-400 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">送信</button>
                     </div>
                 </form>
-                <div id="modal-content" class="rounded-2xl">
+                <div id="modal-content" class="md:w-2/4 w-4/5 rounded-2xl">
                     {{-- TODO:閉じるボタンをちゃんとデザインする --}}
                     <button id="modal-close">閉じる</button>
                     <div class="modal-inner" id="schedule-registration-modal">
                         @include('components.modals.schedule_registration')
                     </div>
+                    <div class="modal-inner" id="call-start-modal">
+                        @include('components.modals.call-start')
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Using utilities: -->
+        <button class="block bg-slate-600 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded mx-auto mt-5">
+            相談を受けつけない
+        </button>
+        {{-- <div class="mx-auto">
+        </div> --}}
     </div>
     @push('scripts_bottom')
         <script>
             let target = document.getElementById('scroll-inner');
             target.scrollIntoView(false);
         </script>
-        <script src="{{asset('js/modal.js')}}"></script>
+        <script src="{{ asset('js/modal.js') }}"></script>
     @endpush
 @endsection

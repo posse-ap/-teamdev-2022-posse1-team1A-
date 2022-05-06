@@ -20,6 +20,7 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
     .postCss('resources/css/top.css', 'public/css')
     .postCss('resources/css/search.css', 'public/css')
     .postCss('resources/css/ticket.css', 'public/css')
+    .postCss('resources/css/thanks.css', 'public/css')
     .postCss('resources/css/modal.css', 'public/css')
     .js('resources/js/modal.js', 'public/js');
 ;

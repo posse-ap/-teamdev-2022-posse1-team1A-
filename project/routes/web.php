@@ -25,11 +25,15 @@ Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_searc
 
 Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
 
+Route::get('/admin/userlist', 'App\Http\Controllers\AdminController@userlist')->name('admin_userlist');
+
 Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
+
+Route::get('/thanks', 'App\Http\Controllers\UserController@thanks')->name('user_thanks');
 
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
-});
+})->name('terms_of_service');
 
 // chat一覧画面
 Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
