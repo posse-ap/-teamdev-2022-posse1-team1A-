@@ -1,11 +1,9 @@
 <div class="flex flex-col text-center md:p-8 p-4">
     <div class="mb-5 font-bold text-lg">相談日程の登録</div>
-    <div>
-        <div class="text-left mb-3">相談日程</div>
-        <label for="">
-            <form action="" method="post" class="bg-gray-100 rounded-md mb-5">
-                <input type="date" name="" id="" class="bg-gray-100 text-left">
-            </form>
+    <div class="text-left mb-3">相談日程</div>
+    <form action="" method="post">
+        <label>
+            <input type="datetime-local" name="" class="w-full rounded-sm bg-gray-100 text-left mb-5">
         </label>
     </div>
     <button
