@@ -71,4 +71,10 @@ class UserController extends Controller
 
         return view('user.thanks');
     }
+
+    public function userEdit()
+    {
+
+        return view('user.edit');
+    }
 }
