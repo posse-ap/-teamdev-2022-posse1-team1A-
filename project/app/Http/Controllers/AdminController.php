@@ -8,6 +8,11 @@ use App\Models\AccountStatus;
 
 class AdminController extends Controller
 {
+    public function index()
+    {
+        return view('admin.index');
+    }
+
     public function userlist()
     {
         $users = User::paginate(10);

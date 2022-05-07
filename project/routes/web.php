@@ -20,10 +20,10 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::get('/', 'App\Http\Controllers\UserController@index')->name('user_index');
-
 Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_search');
 
 Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
+
 Route::get('/user_page', 'App\Http\Controllers\UserController@userPage')->name('user_page');
 
 Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
@@ -40,4 +40,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::post('/userlist/stop', 'App\Http\Controllers\AdminController@accountStop')->name('userlist_accountStop');
     Route::post('/userlist/active', 'App\Http\Controllers\AdminController@accountActive')->name('userlist_accountActive');
     Route::post('/userlist', 'App\Http\Controllers\AdminController@search')->name('userlist_search');
+
+    Route::get('/index', 'App\Http\Controllers\AdminController@index')->name('index');
 });
