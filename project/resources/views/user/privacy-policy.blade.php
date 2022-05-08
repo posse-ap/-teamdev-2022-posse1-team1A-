@@ -1,6 +1,6 @@
 @extends('layouts.anovey')
 @push('styles')
-    <link rel="stylesheet" href="css/footer.css">
+<link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 @endpush
 
 @section('content')
