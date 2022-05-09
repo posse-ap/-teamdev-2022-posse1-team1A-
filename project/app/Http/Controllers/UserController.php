@@ -71,4 +71,10 @@ class UserController extends Controller
 
         return view('user.thanks');
     }
+
+    public function beginner()
+    {
+
+        return view('user.beginner');
+    }
 }

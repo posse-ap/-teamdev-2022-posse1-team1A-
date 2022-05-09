@@ -1,4 +1,4 @@
-<header id="header" class="sticky top-0 w-full bg-white bg-opacity-75 shadow-lg">
+<header id="header" class="sticky top-0 w-full bg-white bg-opacity-75 shadow-lg z-50">
     <div id="base-header" class="px-10 py-3 flex items-center justify-between flex-shrink-0 items-center">
         <div id="header-logo" class="flex w-8 h-8 ml-0 mr-auto">
             <img src="{{ asset('img/logo-black.png') }}" alt="logo-black.png">
@@ -45,7 +45,7 @@
                     </a>
                 </button>
                 <button class="hover:text-grey-800 font-bold py-1 pr-3">
-                    <a class="flex mx-2 text-sm font-semibold m-1 items-center" href="#">
+                    <a class="flex mx-2 text-sm font-semibold m-1 items-center" href="{{ route('user_beginner') }}">
                         初めての方へ
                     </a>
                 </button>
@@ -74,7 +74,7 @@
                     </a>
                 </button>
                 <button class="hover:text-grey-800 font-bold py-1 px-4 ml-2">
-                    <a class="flex mx-2 text-sm font-semibold m-1 items-center" href="#">
+                    <a class="flex mx-2 text-sm font-semibold m-1 items-center" href="{{ route('user_beginner') }}">
                         初めての方へ
                     </a>
                 </button>
@@ -102,7 +102,7 @@
                 </li>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
-                        href="#">初めての方へ</a>
+                        href="{{ route('user_beginner') }}">初めての方へ</a>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
                         href="{{ route('user_ticket') }}">チケット購入</a>
@@ -147,7 +147,7 @@
                 </li>
                 <li class="border-b"><a
                         class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
-                        href="#">初めての方へ</a>
+                        href="{{ route('user_beginner') }}">初めての方へ</a>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
                         href="{{ route('privacy_policy') }}">個人情報保護方針</a></li>
