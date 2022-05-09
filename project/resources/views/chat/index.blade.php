@@ -45,7 +45,6 @@
                             id="schedule-registration">
                             日程登録
                         </button>
-                        
                     </div>
                 </div>
                 <div class="cards mx-3 overflow-scroll">
