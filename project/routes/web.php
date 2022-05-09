@@ -17,7 +17,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/', 'App\Http\Controllers\UserController@index')->name('user_index');
 Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_search');
@@ -33,6 +33,11 @@ Route::get('/thanks', 'App\Http\Controllers\UserController@thanks')->name('user_
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 })->name('terms_of_service');
+
+Route::get('/privacy-policy', function () {
+    return view('user.privacy-policy');
+})->name('privacy_policy');
+
 
 // 管理者画面
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
