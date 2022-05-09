@@ -17,20 +17,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::get('/', 'App\Http\Controllers\UserController@index')->name('user_index');
-
 Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_search');
 
 Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
+
 Route::get('/user_page', 'App\Http\Controllers\UserController@userPage')->name('user_page');
-
-Route::get('/admin/userlist', 'App\Http\Controllers\AdminController@userlist')->name('admin_userlist');
-
-Route::post('/admin/userlist', 'App\Http\Controllers\AdminController@search')->name('admin_search');
-
-Route::get('/admin/index', 'App\Http\Controllers\AdminController@index')->name('admin_index');
 
 Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
 
@@ -43,3 +37,14 @@ Route::get('/terms-of-service', function () {
 Route::get('/privacy-policy', function () {
     return view('user.privacy-policy');
 })->name('privacy_policy');
+
+
+// 管理者画面
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::get('/userlist', 'App\Http\Controllers\AdminController@userlist')->name('userlist');
+    Route::post('/userlist/stop', 'App\Http\Controllers\AdminController@accountStop')->name('userlist_accountStop');
+    Route::post('/userlist/active', 'App\Http\Controllers\AdminController@accountActive')->name('userlist_accountActive');
+    Route::post('/userlist', 'App\Http\Controllers\AdminController@search')->name('userlist_search');
+
+    Route::get('/index', 'App\Http\Controllers\AdminController@index')->name('index');
+});

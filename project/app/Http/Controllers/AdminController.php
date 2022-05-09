@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\AccountStatus;
 
 class AdminController extends Controller
 {
@@ -51,5 +52,23 @@ class AdminController extends Controller
         }
 
         return view('admin.user-list', compact('users', 'keyword'));
+    }
+
+    public function accountStop(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->account_status_id = AccountStatus::getStoppedId();
+        $user->save();
+
+        return redirect()->route('admin.userlist');
+    }
+
+    public function accountActive(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->account_status_id = AccountStatus::getActiveId();
+        $user->save();
+
+        return redirect()->route('admin.userlist');
     }
 }

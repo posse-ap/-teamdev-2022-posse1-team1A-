@@ -1,4 +1,4 @@
-<div class="w-1/5 bg-blue-800 h-screen">
+<div class="w-1/5 bg-blue-900 h-screen">
     <ul class="flex-grow">
         <div class="w-15 h-15 mt-3 flex mx-5">
             <img src="{{ asset('img/logo-white.png') }}" alt="logo-black.png">
@@ -7,10 +7,10 @@
         <li class="mx-5 border-b"><a class="block py-5 pl-2 rounded text-white" href="#">管理者ページ</a>
         </li>
         <li><a class="block mx-5 py-5 pl-2 mt-10 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
-                href="#">各種指標</a>
+                href="{{ route('admin.index') }}">各種指標</a>
         </li>
         <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
-                href="{{ route('admin_userlist') }}">ユーザー一覧</a>
+                href="{{ route('admin.userlist') }}">ユーザー一覧</a>
         </li>
         <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
                 href="#">お問合せ内容</a></li>
