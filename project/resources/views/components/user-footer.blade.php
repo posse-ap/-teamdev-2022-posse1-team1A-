@@ -8,12 +8,12 @@
         </a>
         <div class="md:flex justify-between w-full">
             <div class="flex justify-between md:w-full lg:w-6/12">
-                <a class="w-6/12" href="">
+                <a class="w-6/12" href="{{ route('terms_of_service') }}">
                     <p class=" flex text-white h-8 items-center text-xs hover:text-gray-800 justify-center">
                         利用規約
                     </p>
                 </a>
-                <a class="w-6/12" href="">
+                <a class="w-6/12" href="{{ route('privacy_policy') }}">
                     <p class=" flex text-white h-8 items-center text-xs hover:text-gray-800 justify-center">
                         個人情報保護方針
                     </p>
