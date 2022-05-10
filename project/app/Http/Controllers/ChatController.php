@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -49,7 +51,12 @@ class ChatController extends Controller
             }
         }
 
-        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'partnerUserIcon', 'partnerUserName'));
+        // 通話用のkey取得
+        $skyway_key = config('skyway_key');
+        $loginUserPeerId = $loginUser->peer_id;
+        $partnerUserPeerId = $partnerUser->peer_id;
+
+        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key'));
     }
 
     public function post(Request $request)

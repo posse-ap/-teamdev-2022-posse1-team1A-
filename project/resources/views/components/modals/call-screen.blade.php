@@ -9,7 +9,7 @@
         <p class="text-white text-4xl text-center">10:00</p>
         {{-- TODO:9分過ぎたら文字赤色にする --}}
 
-        <button class="mt-10 md:mt-5 w-1/12 bg-white rounded-full cursor-pointer">
+        <button class="mt-10 md:mt-5 w-1/12 bg-white rounded-full cursor-pointer" id="js-close-trigger">
             <img class="w-full" src="{{ asset('img/end-call.png') }}" alt="end-call-button">
             {{-- TODO:このボタンが押されたとき、チャット画面に戻る&通話アンケート表示したい
         現状：チャット画面に戻るだけ --}}
