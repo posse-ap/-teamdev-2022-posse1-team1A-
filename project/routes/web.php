@@ -22,6 +22,8 @@ require __DIR__ . '/auth.php';
 Route::get('/', 'App\Http\Controllers\UserController@index')->name('user_index');
 Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_search');
 
+Route::get('/beginner', 'App\Http\Controllers\UserController@beginner')->name('user_beginner');
+
 Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
 
 Route::get('/user_page', 'App\Http\Controllers\UserController@userPage')->name('user_page');

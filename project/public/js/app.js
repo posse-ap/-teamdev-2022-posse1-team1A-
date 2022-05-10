@@ -22336,6 +22336,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/css/beginner.css":
+/*!************************************!*\
+  !*** ./resources/css/beginner.css ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/css/app.css":
 /*!*******************************!*\
   !*** ./resources/css/app.css ***!
@@ -22723,6 +22736,7 @@ process.umask = function() { return 0; };
 /******/ 			"css/top": 0,
 /******/ 			"css/footer": 0,
 /******/ 			"css/app": 0,
+/******/ 			"css/beginner": 0,
 /******/ 			"css/thanks": 0
 /******/ 		};
 /******/ 		
@@ -22773,13 +22787,14 @@ process.umask = function() { return 0; };
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/thanks"], () => (__webpack_require__("./resources/js/app.js")))
-/******/ 	__webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/thanks"], () => (__webpack_require__("./resources/css/app.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/thanks"], () => (__webpack_require__("./resources/css/footer.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/thanks"], () => (__webpack_require__("./resources/css/top.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/thanks"], () => (__webpack_require__("./resources/css/search.css")))
-/******/ 	__webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/thanks"], () => (__webpack_require__("./resources/css/ticket.css")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/thanks"], () => (__webpack_require__("./resources/css/thanks.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/beginner","css/thanks"], () => (__webpack_require__("./resources/js/app.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/beginner","css/thanks"], () => (__webpack_require__("./resources/css/app.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/beginner","css/thanks"], () => (__webpack_require__("./resources/css/footer.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/beginner","css/thanks"], () => (__webpack_require__("./resources/css/top.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/beginner","css/thanks"], () => (__webpack_require__("./resources/css/search.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/beginner","css/thanks"], () => (__webpack_require__("./resources/css/ticket.css")))
+/******/ 	__webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/beginner","css/thanks"], () => (__webpack_require__("./resources/css/thanks.css")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/ticket","css/search","css/top","css/footer","css/app","css/beginner","css/thanks"], () => (__webpack_require__("./resources/css/beginner.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
