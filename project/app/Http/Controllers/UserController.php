@@ -53,7 +53,7 @@ class UserController extends Controller
         return view('user.search', compact('users', 'keyword'));
     }
 
-    public function userPage(Request $request)
+    public function userEdit(Request $request)
     {
         $userId = 1;
         $userInfo = User::find($userId);
@@ -72,9 +72,10 @@ class UserController extends Controller
         return view('user.thanks');
     }
 
-    public function userEdit()
+    public function userPage()
     {
-
-        return view('user.edit');
+        $userId = 1;
+        $userInfo = User::find($userId);
+        return view('user.edit', compact('userInfo'));
     }
 }
