@@ -38,7 +38,7 @@
                         class="bg-gray-100 text-left w-full bg-gray-100 rounded-md mb-5 h-12">
                 </label>
                 <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 rounded  md:w-64 w-full mx-auto mb-5">
-                    送信
+                    送信して戻る
                 </button>
             </div>
         </fieldset>
