@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Chat;
 use App\Models\ChatRecord;
+use App\Models\CallingEvaluation;
 
 class ChatController extends Controller
 {
@@ -77,4 +78,17 @@ class ChatController extends Controller
         $respondent_chats = Chat::where('respondent_user_id', Auth::id())->where('is_finished', false)->get();
         return view('chat.respondent-chat-list', compact('respondent_chats'));
     }
+
+    public function post_review(Request $request)
+    {
+        // dd($request->chatRoomId);
+        CallingEvaluation::create([
+            'calling_id' => $request->chatRoomId,
+            'user_id' => $request->loginUserId,
+            'is_satisfied' => $request->boolean('is_satisfied'),
+            'comment' => $request->review_comment,
+        ]);
+        return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
+    }
+
 }

@@ -1,6 +1,9 @@
 <div class="flex flex-col text-center py-12">
     <div class="text-left my-12 text-center pb-3 md:text-xl text-base">{{ $partnerUserName }}さんの評価をお願いします。</div>
-    <form action="" method="post" class="">
+    <form action="{{ route('chat.post_review') }}" method="post" class="">
+        @csrf
+        <input type="hidden" value="{{ $chatRoomId }}" name="chatRoomId">
+        <input type="hidden" value="{{ $loginUserId }}" name="loginUserId">
         <div class="flex mb-5">
                 <div class="w-2/4">
                     <div class="fill-salmon-400 text-center">
@@ -12,7 +15,7 @@
                         </svg>
                     </div>
                     <p class="mt-5">良かった</p>
-                    <input type="radio" class="border-black input-radio bg-gray-100" name="partner-review">
+                    <input type="radio" class="border-black input-radio bg-gray-100" value="true" name="is_satisfied">
                 </div>
                 <div class="w-2/4">
                     <div class="fill-lightblue-300 text-center">
@@ -24,14 +27,14 @@
                         </svg>
                     </div>
                     <p class="mt-5">残念だった</p>
-                    <input type="radio" class="border-black input-radio bg-gray-100" name="partner-review">
+                    <input type="radio" class="border-black input-radio bg-gray-100" value="false" name="is_satisfied">
                 </div>
         </div>
         <fieldset>
             <div class="ml-auto mr-auto w-4/5 h-30">
                 <div class="text-left mb-3">理由</div>
                 <label for="">
-                    <input type="text" name="" id=""
+                    <input type="text" name="review_comment" 
                         class="bg-gray-100 text-left w-full bg-gray-100 rounded-md mb-5 h-12">
                 </label>
                 <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 rounded  md:w-64 w-full mx-auto mb-5">
