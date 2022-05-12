@@ -25,8 +25,7 @@
                     </div>
                     <div>
                         @if ($isReserved)
-                            <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded ml-2 modal-open"
-                            id="ticket-consumption-confirmation">
+                            <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded ml-2 modal-open">
                                 通話
                             </button>
                         @else
