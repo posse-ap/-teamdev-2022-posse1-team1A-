@@ -25,10 +25,9 @@
                     </div>
                     <div>
                         @if ($isReserved)
-                            <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded ml-2">
-                                <a href="" class="px-3">
-                                    通話
-                                </a>
+                            <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-1 px-5 rounded ml-2 modal-open"
+                            id="ticket-consumption-confirmation">
+                                通話
                             </button>
                         @else
                             <button disabled class="bg-gray-400 text-white font-bold py-1 px-5 rounded ml-2">
@@ -109,11 +108,11 @@
                 <div id="modal-content" class="rounded-2xl md:w-1/2 w-10/12">
                     {{-- TODO:閉じるボタンをちゃんとデザインする --}}
                     <button id="modal-close">閉じる</button>
-                    <div class="modal-inner" id="schedule-registration-modal">
-                        @include('components.modals.schedule_registration')
-                    </div>
                     <div class="modal-inner" id="ticket-consumption-confirmation-modal">
                         @include('components.modals.ticket_consumption_confirmation')
+                    </div>
+                    <div class="modal-inner" id="schedule-registration-modal">
+                        @include('components.modals.schedule_registration')
                     </div>
                 </div>
             </div>

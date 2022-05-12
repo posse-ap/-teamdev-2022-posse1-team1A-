@@ -8,9 +8,9 @@
     </div>
     <button
     id="ticket-consumption-confirmation"
-    class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 rounded  w-3/5 mx-auto mb-5 modal-open">
+    class="block bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 rounded  w-3/5 mb-5 modal-open mx-auto">
         チケットを1枚消費して登録
     </button>
-    <p class="text-xs">※日程を登録するとチケットが1枚消費されます。</p>
-    <p class="text-xs">※ 日程の再調整やキャンセルを繰り返すと、アカウントが停止される可能性があります。</p>
+    <p class="text-center text-xs">※日程を登録するとチケットが1枚消費されます。</p>
+    <p class="text-center text-xs">※ 日程の再調整やキャンセルを繰り返すと、アカウントが停止される可能性があります。</p>
 </div>
