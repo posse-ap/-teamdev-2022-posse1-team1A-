@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,10 @@ Route::get('/terms-of-service', function () {
 Route::get('/privacy-policy', function () {
     return view('user.privacy-policy');
 })->name('privacy_policy');
+
+Route::get('/logout', function () {
+    return Auth::logout();;
+});
 
 
 // 管理者画面

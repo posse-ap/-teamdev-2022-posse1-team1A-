@@ -6,13 +6,20 @@ use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function index()
     {
+        if (Auth::user()) {
+            $account_status_id = Auth::user()->account_status_id;
+        } else {
+            $account_status_id = 0;
+        }
+        
         $keyword = null;
-        return view('user.index', compact('keyword'));
+        return view('user.index', compact('keyword', 'account_status_id'));
     }
 
     public function search(Request $request)
@@ -62,19 +69,31 @@ class UserController extends Controller
     
     public function ticket()
     {
-
-        return view('user.ticket');
+        if (Auth::user()) {
+            $account_status_id = Auth::user()->account_status_id;
+        } else {
+            $account_status_id = 0;
+        }
+        return view('user.ticket', compact('account_status_id'));
     }
 
     public function thanks()
     {
-
-        return view('user.thanks');
+        if (Auth::user()) {
+            $account_status_id = Auth::user()->account_status_id;
+        } else {
+            $account_status_id = 0;
+        }
+        return view('user.thanks', compact('account_status_id'));
     }
 
     public function beginner()
     {
-
-        return view('user.beginner');
+        if (Auth::user()) {
+            $account_status_id = Auth::user()->account_status_id;
+        } else {
+            $account_status_id = 0;
+        }
+        return view('user.beginner', compact('account_status_id'));
     }
 }

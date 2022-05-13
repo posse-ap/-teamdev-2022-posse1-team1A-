@@ -7,10 +7,9 @@
 
         {{-- 一旦ログインステータスを1に --}}
         {{-- TODO:ログイン機能実装後、削除↓ --}}
-        <?php $account_status_id = 0; ?>
 
         {{-- PC画面幅のheader --}}
-        @if ($account_status_id == 0)
+        @if ($account_status_id == 1)
             {{-- ログイン後 --}}
             <div class="hidden flex-row-reverse ml-auto mr-0 md:flex items-center justify-between">
                 <button
