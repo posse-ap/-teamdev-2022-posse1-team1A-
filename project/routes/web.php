@@ -33,6 +33,8 @@ Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_
 
 Route::get('/thanks', 'App\Http\Controllers\UserController@thanks')->name('user_thanks');
 
+Route::get('/redirects', 'App\Http\Controllers\LoginController@index')->name('redirects');
+
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 })->name('terms_of_service');
