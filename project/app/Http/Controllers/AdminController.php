@@ -5,18 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\AccountStatus;
+use App\Models\ScheduleStatus;
 use App\Models\Calling;
 use App\Models\InterviewSchedule;
+use App\Models\Chat;
 
 class AdminController extends Controller
 {
     public function index()
     {
         $total_count_users = User::count(); //総会員数
-        $total_count_matched = User::selectRaw('SUM(match_count)/2 as total_count_matched')->first();// 総マッチ数
+        $total_count_matched = Chat::count();// 総マッチ数
         $total_count_call = Calling::count(); // 総通話数
-        $avg_calling_time = Calling::selectRaw('AVG(calling_time) average_calling_time')->first(); // 平均通話時間
-        $total_count_cancelled = InterviewSchedule::where('schedule_status_id',2)->count();// 日程調整失敗数
+        $avg_calling_time = Calling::avg('calling_time'); // 平均通話時間
+        $total_count_cancelled = InterviewSchedule::where('schedule_status_id',ScheduleStatus::getCancelId())->count();// 日程調整失敗数
         return view('admin.index', compact('total_count_users','total_count_matched','total_count_call', 'avg_calling_time','total_count_cancelled'));
     }
 
