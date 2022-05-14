@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\AccountStatus;
+use App\Models\CallingEvaluation;
 
 class AdminController extends Controller
 {
@@ -70,5 +71,19 @@ class AdminController extends Controller
         $user->save();
 
         return redirect()->route('admin.userlist');
+    }
+
+    public function callEvaluation()
+    {
+
+        // 総合満足度表示
+        $all = CallingEvaluation::count();
+        $isSatisfied = CallingEvaluation::where('is_satisfied', true)->count();
+        $comprehensive = round($isSatisfied / $all * 100);
+
+        // 評価詳細表示
+        $evaluations = CallingEvaluation::paginate(5);
+
+        return view('admin.call-evaluation', compact('comprehensive', 'evaluations'));
     }
 }
