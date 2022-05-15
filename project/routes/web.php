@@ -38,6 +38,8 @@ Route::get('/terms-of-service', function () {
 // chat一覧画面
 Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
     Route::get('/respondent', 'App\Http\Controllers\ChatController@respondent_chat_list')->name('respondent_chat_list');
+    Route::post('/respondent/stop', 'App\Http\Controllers\ChatController@reception_stop')->name('reception_stop');
+    Route::post('/respondent/start', 'App\Http\Controllers\ChatController@reception_start')->name('reception_start');
     Route::get('client', 'App\Http\Controllers\ChatController@client_chat_list')->name('client_chat_list');
 
     // chat画面製作中
