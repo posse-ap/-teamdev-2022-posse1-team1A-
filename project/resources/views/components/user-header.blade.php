@@ -13,11 +13,11 @@
         @if ($account_status_id == 0)
             {{-- ログイン後 --}}
             <div class="hidden flex-row-reverse ml-auto mr-0 md:flex items-center justify-between">
-                <button
+                <a href="{{ route('user_page') }}"
                     class="flex items-center justify-center w-8 h-8 ml-5 overflow-hidden rounded-full cursor-pointer">
                     <img src="https://assets.codepen.io/5041378/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1600304177&width=512"
                         alt="">
-                </button>
+                </a>
                 <button
                     class="relative bg-yellow-500 hover:bg-yellow-700 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
                     <div>
@@ -109,7 +109,7 @@
                 </li>
                 <li class="border-b"><a
                         class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800  rounded text-white"
-                        href="#">アカウント情報</a>
+                        href="{{ route('user_page') }}">アカウント情報</a>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
                         href="{{ route('terms_of_service') }}">利用規約</a>
