@@ -30,14 +30,6 @@ class SettlementSeeder extends Seeder
                 'is_paid' => true,
             ]);
         }
-        array_push($data, [
-            'paypay_settlement_id' => Str::random(16),
-            'user_id' => 1,
-            'product_id' => Product::getTicketId(),
-            'quantity' => 1,
-            'amount_of_payment' => Product::find(Product::getTicketId())->price * 1,
-            'is_paid' => false,
-        ]);
         DB::table('settlements')->insert($data);
     }
 }

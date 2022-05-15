@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 // paypay関係
-use PayPay\OpenPaymentAPI\Client;
 use PayPay\OpenPaymentAPI\Models\OrderItem;
 use PayPay\OpenPaymentAPI\Models\CreateQrCodePayload;
 

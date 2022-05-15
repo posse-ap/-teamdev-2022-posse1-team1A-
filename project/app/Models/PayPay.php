@@ -35,9 +35,18 @@ class PayPay extends Model
                 echo ("決済情報取得エラー");
                 return;
             }
-            if($QRCodeDetails['data']['status'] == 'COMPLETED') {
+            if ($QRCodeDetails['data']['status'] == 'COMPLETED') {
                 $settlement->is_paid = true;
                 $settlement->save();
+
+                $tickets = array();
+                for ($i = 1; $i <= $settlement->quantity; $i++) {
+                    array_push($tickets, [
+                        'user_id' => $settlement->user_id,
+                        'ticket_status_id' => TicketStatus::getPendingId(),
+                    ]);
+                }
+                Ticket::insert($tickets);
             }
         }
         return;
