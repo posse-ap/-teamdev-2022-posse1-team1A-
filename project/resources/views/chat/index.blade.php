@@ -46,7 +46,6 @@
                             id="schedule-registration">
                             日程登録
                         </button>
-
                     </div>
                 </div>
                 <div class="cards mx-3 overflow-scroll">
@@ -118,9 +117,9 @@
                     <div class="modal-inner" id="schedule-registration-modal">
                         @include('components.modals.schedule_registration')
                     </div>
-                    {{-- <div class="modal-inner" id="call-start-modal">
+                    <div class="modal-inner" id="call-start-modal">
                         @include('components.modals.call-start')
-                    </div> --}}
+                    </div>
                     <div class="modal-inner" id="ten-minute-announce-modal">
                         @include('components.modals.ten-minute-announce')
                     </div>
@@ -132,15 +131,13 @@
                 </div>
             </div>
         </div>
-
-        <!-- Using utilities: -->
-        <button class="block bg-slate-600 hover:bg-slate-500 text-white font-bold py-2 px-4 rounded mx-auto mt-5">
-            相談を受けつけない
-        </button>
-        {{-- <div class="mx-auto">
-        </div> --}}
     </div>
-    <div class="container">
+    @if (!$isClientChat)
+        <div id="calling-modal">
+            @include('components.modals.call-screen')
+        </div>
+    @endif
+    {{-- <div class="container">
         <h1 class="heading">P2P Media example</h1>
         <p class="note">
             Enter remote peer ID to call.
@@ -157,83 +154,78 @@
                 <button id="js-close-trigger">Close</button>
             </div>
         </div>
-        <p class="meta" id="js-meta"></p>
-    </div>
-    @include('components.modals.call-screen')
+    </div> --}}
     @push('scripts_bottom')
         <script>
             let target = document.getElementById('scroll-inner');
             target.scrollIntoView(false);
         </script>
         <script src="{{ asset('js/modal.js') }}"></script>
-        <script>
-            const Peer = window.Peer;
-            (async function main() {
-                const localVideo = document.getElementById('js-local-stream');
-                const localId = '{{ $loginUserPeerId }}';
-                const callTrigger = document.getElementById('js-call-trigger');
-                const closeTrigger = document.getElementById('js-close-trigger');
-                const remoteVideo = document.getElementById('js-remote-stream');
-                const remoteId = '{{ $partnerUserPeerId }}'
-                const meta = document.getElementById('js-meta');
-                const sdkSrc = document.querySelector('script[src*=skyway]');
-                meta.innerText = `
-                UA: ${navigator.userAgent}
-                SDK: ${sdkSrc ? sdkSrc.src : 'unknown'}
-                `.trim();
-                const localStream = await navigator.mediaDevices
-                    .getUserMedia({
-                        audio: true,
-                        video: false,
-                    })
-                    .catch(console.error);
-                // Render local stream
-                localVideo.muted = true;
-                localVideo.srcObject = localStream;
-                localVideo.playsInline = true;
-                await localVideo.play().catch(console.error);
-                const peer = new Peer('{{ $loginUserPeerId }}', {
-                    key: '{{ $skyway_key }}',
-                    debug: 3,
-                });
-                // Register caller handler
-                callTrigger.addEventListener('click', () => {
-                    // Note that you need to ensure the peer has connected to signaling server
-                    // before using methods of peer instance.
-                    if (!peer.open) {
-                        return;
-                    }
-                    const mediaConnection = peer.call(remoteId, localStream);
-                    mediaConnection.on('stream', async stream => {
-                        // Render remote stream for caller
-                        remoteVideo.srcObject = stream;
-                        remoteVideo.playsInline = true;
-                        await remoteVideo.play().catch(console.error);
+        @if (!$isClientChat)
+            <script>
+                const Peer = window.Peer;
+                (async function main() {
+                    const localVideo = document.getElementById('js-local-stream')
+                    const localId = '{{ $loginUserPeerId }}'
+                    const callTrigger = document.getElementById('js-call-trigger')
+                    const closeTrigger = document.getElementById('js-close-trigger')
+                    const remoteVideo = document.getElementById('js-remote-stream')
+                    const remoteId = '{{ $partnerUserPeerId }}'
+                    const sdkSrc = document.querySelector('script[src*=skyway]')
+                    const localStream = await navigator.mediaDevices
+                        .getUserMedia({
+                            audio: true,
+                            video: false,
+                        })
+                        .catch(console.error);
+                    // Render local stream
+                    localVideo.muted = true;
+                    localVideo.srcObject = localStream;
+                    localVideo.playsInline = true;
+                    await localVideo.play().catch(console.error);
+                    const peer = new Peer('{{ $loginUserPeerId }}', {
+                        key: '{{ $skyway_key }}',
+                        debug: 3,
                     });
-                    mediaConnection.once('close', () => {
-                        remoteVideo.srcObject.getTracks().forEach(track => track.stop());
-                        remoteVideo.srcObject = null;
+                    // Register caller handler
+                    callTrigger.addEventListener('click', () => {
+                        // Note that you need to ensure the peer has connected to signaling server
+                        // before using methods of peer instance.
+                        if (!peer.open) {
+                            return;
+                        }
+                        const mediaConnection = peer.call(remoteId, localStream);
+                        mediaConnection.on('stream', async stream => {
+                            // Render remote stream for caller
+                            remoteVideo.srcObject = stream;
+                            remoteVideo.playsInline = true;
+                            await remoteVideo.play().catch(console.error);
+                        });
+                        mediaConnection.once('close', () => {
+                            remoteVideo.srcObject.getTracks().forEach(track => track.stop());
+                            remoteVideo.srcObject = null;
+                        });
+                        closeTrigger.addEventListener('click', () => mediaConnection.close(true));
                     });
-                    closeTrigger.addEventListener('click', () => mediaConnection.close(true));
-                });
-                peer.once('open', id => localId);
-                // Register callee handler
-                peer.on('call', mediaConnection => {
-                    mediaConnection.answer(localStream);
-                    mediaConnection.on('stream', async stream => {
-                        // Render remote stream for callee
-                        remoteVideo.srcObject = stream;
-                        remoteVideo.playsInline = true;
-                        await remoteVideo.play().catch(console.error);
+                    peer.once('open', id => localId);
+                    // Register callee handler
+                    peer.on('call', mediaConnection => {
+                        mediaConnection.answer(localStream);
+                        mediaConnection.on('stream', async stream => {
+                            // Render remote stream for callee
+                            remoteVideo.srcObject = stream;
+                            remoteVideo.playsInline = true;
+                            await remoteVideo.play().catch(console.error);
+                        });
+                        mediaConnection.once('close', () => {
+                            remoteVideo.srcObject.getTracks().forEach(track => track.stop());
+                            remoteVideo.srcObject = null;
+                        });
+                        closeTrigger.addEventListener('click', () => mediaConnection.close(true));
                     });
-                    mediaConnection.once('close', () => {
-                        remoteVideo.srcObject.getTracks().forEach(track => track.stop());
-                        remoteVideo.srcObject = null;
-                    });
-                    closeTrigger.addEventListener('click', () => mediaConnection.close(true));
-                });
-                peer.on('error', console.error);
-            })();
-        </script>
+                    peer.on('error', console.error);
+                })();
+            </script>
+        @endif
     @endpush
 @endsection

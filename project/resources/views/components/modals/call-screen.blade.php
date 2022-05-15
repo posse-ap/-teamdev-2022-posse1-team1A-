@@ -14,6 +14,8 @@
             {{-- TODO:このボタンが押されたとき、チャット画面に戻る&通話アンケート表示したい
         現状：チャット画面に戻るだけ --}}
         </button>
+        <video id="js-remote-stream"></video>
+        <video id="js-local-stream"></video>
         {{-- TODO: 10分経ったら「10分経ちました」モーダル表示(id="ten-minute-announce") --}}
     </div>
 </div>
