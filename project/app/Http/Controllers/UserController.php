@@ -58,4 +58,9 @@ class UserController extends Controller
         $userInfo = User::find($userId);
         return view('user.info', compact('userInfo'));
     }
+
+    public function beginner()
+    {
+        return view('user.beginner');
+    }
 }

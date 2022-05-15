@@ -31,6 +31,10 @@ section {
     border-top: 70px solid #f9fafb;
 }
 
+.about-img {
+    z-index: -10;
+}
+
 .ellipse {
     position: absolute;
     width: 1200px;
@@ -73,7 +77,34 @@ section {
     border-top: 20px solid #668bed;
 }
 
-@media (max-width: 768px) {
+.notes {
+    z-index: -10;
+}
+
+.note-box {
+    z-index: -20;
+}
+
+.notes:before {
+    position: absolute;
+    bottom: -10px;
+    left: calc(50% - 50px);
+    width: 100px;
+    height: 5px;
+    content: "";
+    border-radius: 3px;
+    background: #668bed;
+}
+
+.ticket-function {
+    width: 30%;
+}
+
+.bg-orange {
+    background-color: #F7931D;
+}
+
+@media (max-width: 767.98px) {
     section {
         padding: 40px 0;
     }
@@ -100,5 +131,16 @@ section {
         border-left: 15px solid transparent;
         border-right: 15px solid transparent;
         border-top: 15px solid #668bed;
+    }
+
+    .ticket-function {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 639.98px) {
+    .ticket-function {
+        width: 100%;
     }
 }
