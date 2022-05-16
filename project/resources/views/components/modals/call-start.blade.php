@@ -11,6 +11,7 @@
                 </button>
             </form>
         @else
+            {{-- TODO: 通話始まってなかったら押せないようにする --}}
             <button class="mr-5 bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 rounded w-64 mx-auto mb-5"
                 id="js-call-trigger" type="button">
                 通話
