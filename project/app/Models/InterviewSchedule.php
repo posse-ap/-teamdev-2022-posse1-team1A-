@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class InterviewSchedule extends Model
 {
     use HasFactory;
+
+    public function chat()
+    {
+        return $this->belongsTo(Chat::class);
+    }
+    
 }
