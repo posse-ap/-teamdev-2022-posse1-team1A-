@@ -66,7 +66,7 @@
         </div>
     </div>
     <div class="fixed bottom-0 md:bottom-10 w-full">
-        @if ($user->is_search_target == true)
+        @if ($user->is_search_target)
             <form action="{{ route('chat.reception_stop') }}" method="POST">
                 @csrf
                 <button type="submit"
