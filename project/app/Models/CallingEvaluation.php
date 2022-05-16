@@ -13,6 +13,11 @@ class CallingEvaluation extends Model
     {
         return $this->belongsTo('App\Models\Calling');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }
 
 
