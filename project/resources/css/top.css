@@ -102,3 +102,7 @@ section {
         border-top: 15px solid #668bed;
     }
 }
+
+.pointer-none {
+    pointer-events: none;
+}

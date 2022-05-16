@@ -103,3 +103,7 @@ section {
     }
 }
 
+.pointer-none {
+    pointer-events: none;
+}
+

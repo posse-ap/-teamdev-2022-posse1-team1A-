@@ -118,7 +118,28 @@ class ChatController extends Controller
 
     public function respondent_chat_list(Request $request)
     {
+        $user = User::find(Auth::id());
         $respondent_chats = Chat::where('respondent_user_id', Auth::id())->where('is_finished', false)->get();
-        return view('chat.respondent-chat-list', compact('respondent_chats'));
+        return view('chat.respondent-chat-list', compact('respondent_chats', 'user'));
+    }
+
+    public function reception_stop(Request $request)
+    {
+        $user = User::find(Auth::id());
+
+        $user->is_search_target = false;
+        $user->save();
+
+        return redirect()->route('chat.respondent_chat_list');
+    }
+
+    public function reception_start(Request $request)
+    {
+        $user = User::find(Auth::id());
+
+        $user->is_search_target = true;
+        $user->save();
+
+        return redirect()->route('chat.respondent_chat_list');
     }
 }
