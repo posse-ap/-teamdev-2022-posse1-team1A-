@@ -33,6 +33,7 @@ class UserFactory extends Factory
             'account_status_id' => AccountStatus::getActiveId(),
             'role_id' => Role::getUserId(),
             'password' => Hash::make('password'),
+            'peer_id' => Str::random(16),
             'remember_token' => Str::random(10),
         ];
     }

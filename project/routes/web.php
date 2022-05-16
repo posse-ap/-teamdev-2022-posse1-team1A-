@@ -42,7 +42,13 @@ Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
     Route::post('/respondent/start', 'App\Http\Controllers\ChatController@reception_start')->name('reception_start');
     Route::get('client', 'App\Http\Controllers\ChatController@client_chat_list')->name('client_chat_list');
 
-    // chat画面製作中
-    Route::get('/{chat_id}', 'App\Http\Controllers\ChatController@index')->name('index');
-    Route::post('/{chat_id}', 'App\Http\Controllers\ChatController@post')->name('post');
+    Route::group(['prefix' => '/{chat_id}'], function () {
+        Route::get('/', 'App\Http\Controllers\ChatController@index')->name('index');
+        Route::post('/', 'App\Http\Controllers\ChatController@post')->name('post');
+
+        Route::post('/call-start', 'App\Http\Controllers\ChatController@call_start')->name('call_start');
+    });
+    Route::group(['prefix' => '/call'], function () {
+        Route::get('/{calling_id}', 'App\Http\Controllers\ChatController@client_call')->name('call');
+    });
 });

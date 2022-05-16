@@ -12,7 +12,7 @@
 }
 .bg-gray-700 {
   --tw-bg-opacity: 1;
-  background-color: rgb(48 56 65 / var(--tw-text-opacity));
+  background-color: rgb(48 56 65 / var(--tw-bg-opacity));
 }
 
 .bg-gray-500 {

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Chat;
 use App\Models\ChatRecord;
+use App\Models\Calling;
 
 class ChatController extends Controller
 {
@@ -49,7 +52,12 @@ class ChatController extends Controller
             }
         }
 
-        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'partnerUserIcon', 'partnerUserName'));
+        // 通話用のkey取得
+        $skyway_key = config('skyway_key');
+        $loginUserPeerId = $loginUser->peer_id;
+        $partnerUserPeerId = $partnerUser->peer_id;
+
+        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key'));
     }
 
     public function post(Request $request)
@@ -64,6 +72,42 @@ class ChatController extends Controller
             'comment' => $request->comment,
         ]);
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
+    }
+
+    public function call_start(Request $request)
+    {
+        $calling = Calling::create([
+            'chat_id' => $request->chat_id,
+        ]);
+        return redirect(route('chat.call', ['calling_id' => $calling->id]));
+    }
+
+    public function client_call(Request $request, $calling_id)
+    {
+        $call = Calling::find($calling_id);
+        $chat = Chat::find($call->chat_id);
+        // チャットルームの参加者情報を取得
+        $loginUser = User::find(Auth::id());
+        $loginUserId = $loginUser->id;
+
+        // 相手の情報を取得
+        $respondentUserId = $chat->respondent_user_id;
+        $clientUserId = $chat->client_user_id;
+
+        // TODO: 回答者ユーザーの値だけを取るよう変更
+        if ($respondentUserId === $loginUser->id) {
+            $partnerUser = User::find($clientUserId);
+        } else {
+            $partnerUser = User::find($respondentUserId);
+        }
+        $partnerUserIcon = $partnerUser->icon;
+        $partnerUserName = $partnerUser->nickname;
+
+        // 通話用のkey取得
+        $skyway_key = config('skyway_key');
+        $loginUserPeerId = $loginUser->peer_id;
+        $partnerUserPeerId = $partnerUser->peer_id;
+        return view('chat.client-calling', compact('skyway_key', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName'));
     }
 
     public function client_chat_list(Request $request)
