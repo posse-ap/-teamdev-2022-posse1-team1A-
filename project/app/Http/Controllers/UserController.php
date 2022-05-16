@@ -4,13 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\PayPay;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function index()
     {
+        if (Auth::check()) {
+            PayPay::polling();
+        }
         $keyword = null;
         return view('user.index', compact('keyword'));
     }
@@ -22,7 +26,7 @@ class UserController extends Controller
         return redirect()->route('user_result', ['keyword' => $keyword]);
     }
 
-    public function result($keyword="")
+    public function result($keyword = "")
     {
 
         $query = User::query();
@@ -59,22 +63,9 @@ class UserController extends Controller
         $userInfo = User::find($userId);
         return view('user.info', compact('userInfo'));
     }
-    
-    public function ticket()
-    {
-
-        return view('user.ticket');
-    }
-
-    public function thanks()
-    {
-
-        return view('user.thanks');
-    }
 
     public function beginner()
     {
-
         return view('user.beginner');
     }
 }

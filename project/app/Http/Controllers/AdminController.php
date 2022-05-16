@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\AccountStatus;
 use App\Models\ScheduleStatus;
-use App\Models\Calling;
 use App\Models\InterviewSchedule;
 use App\Models\Chat;
+use App\Models\CallingEvaluation;
+use App\Models\Calling;
 
 class AdminController extends Controller
 {
@@ -79,5 +80,28 @@ class AdminController extends Controller
         $user->save();
 
         return redirect()->route('admin.userlist');
+    }
+
+    public function callEvaluation()
+    {
+        // 総合満足度表示
+        $all = CallingEvaluation::count();
+        $isSatisfied = CallingEvaluation::where('is_satisfied', true)->count();
+        $comprehensive = round($isSatisfied / $all * 100);
+
+        // 依頼者満足度表示
+        $respondent = CallingEvaluation::where('is_respondent', false)->count();
+        $respondentIsSatisfied = CallingEvaluation::where('is_respondent', false)->where('is_satisfied', true)->count();
+        $respondentComprehensive = round($respondentIsSatisfied / $respondent * 100);
+
+        // 匿名回答者満足度表示
+        $client = CallingEvaluation::where('is_respondent', true)->count();
+        $clientIsSatisfied = CallingEvaluation::where('is_respondent', true)->where('is_satisfied', true)->count();
+        $clientComprehensive = round($clientIsSatisfied / $client * 100);
+
+        // 評価詳細表示
+        $callings = Calling::paginate(5);
+
+        return view('admin.call-evaluation', compact('comprehensive', 'respondentComprehensive', 'clientComprehensive', 'callings'));
     }
 }

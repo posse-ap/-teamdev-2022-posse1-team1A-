@@ -15,8 +15,8 @@ class TicketStatusSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('schedule_statuses')->truncate();
-        DB::table('schedule_statuses')->insert([
+        DB::table('ticket_statuses')->truncate();
+        DB::table('ticket_statuses')->insert([
             [
                 'name' => 'pending'
             ],
