@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\AccountStatus;
 use App\Models\PayPay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +63,24 @@ class UserController extends Controller
         $userId = 1;
         $userInfo = User::find($userId);
         return view('user.info', compact('userInfo'));
+    }
+
+    public function withdrawal()
+    {
+        $user = User::find(Auth::id());
+
+        return view('user.withdrawal', compact('user'));
+    }
+
+    public function withdrawalPost(Request $request)
+    {
+        $user = User::find($request->id);
+
+        $user->account_status_id = AccountStatus::getWithdrawnId();
+        $user->reason = $request->reason;
+        $user->save();
+
+        return redirect()->route('user_index');
     }
 
     public function beginner()

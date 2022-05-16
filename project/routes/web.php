@@ -28,6 +28,9 @@ Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->
 
 Route::get('/user_page', 'App\Http\Controllers\UserController@userPage')->name('user_page');
 
+Route::get('/withdrawal', 'App\Http\Controllers\UserController@withdrawal')->name('user_withdrawal');
+Route::post('/withdrawal', 'App\Http\Controllers\UserController@withdrawalPost')->name('user_withdrawal_post');
+
 Route::get('/ticket', 'App\Http\Controllers\TicketController@index')->name('user_ticket');
 Route::post('/ticket', 'App\Http\Controllers\TicketController@buy')->name('buy_ticket');
 

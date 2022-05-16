@@ -13,7 +13,7 @@
             <div class="container mx-auto px-6">
                 <div>
                     <div class="flex items-center py-4 mx-auto overflow-y-auto whitespace-nowrap font-thin text-sm">
-                        <a href="/" class="text-gray-600 dark:text-gray-200">
+                        <a href="{{ route('user_index') }}" class="text-gray-600 dark:text-gray-200">
                             トップ
                         </a>
                         <span class="mx-5 text-gray-500 dark:text-gray-300">
@@ -63,7 +63,7 @@
                     </div>
 
                     @include('components.notes')
-                    
+
                     <div class="mt-10">
                         <button
                             class="block mx-auto px-20 py-2 font-xs shadow text-white capitalize transition-colors duration-200 bg-blue rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">

@@ -26,7 +26,7 @@
             <div class="container mx-auto px-6 md:px-20">
                 <div>
                     <div class="flex items-center py-4 mx-auto overflow-y-auto whitespace-nowrap font-thin text-sm">
-                        <a href="/" class="text-gray-600 dark:text-gray-200">
+                        <a href="{{ route('user_index') }}" class="text-gray-600 dark:text-gray-200">
                             トップ
                         </a>
                         <span class="mx-5 text-gray-500 dark:text-gray-300">
