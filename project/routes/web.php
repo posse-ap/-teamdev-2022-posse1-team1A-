@@ -28,9 +28,10 @@ Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->
 
 Route::get('/user_page', 'App\Http\Controllers\UserController@userPage')->name('user_page');
 
-Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
+Route::get('/ticket', 'App\Http\Controllers\TicketController@index')->name('user_ticket');
+Route::post('/ticket', 'App\Http\Controllers\TicketController@buy')->name('buy_ticket');
 
-Route::get('/thanks', 'App\Http\Controllers\UserController@thanks')->name('user_thanks');
+Route::get('/thanks', 'App\Http\Controllers\TicketController@thanks')->name('user_thanks');
 
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');

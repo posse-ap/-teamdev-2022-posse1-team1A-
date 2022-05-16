@@ -33,7 +33,7 @@
                     <span class="text-blue text-base lg:text-2xl inline-block md:mb-5">Ticket</span><br>
                     チケット購入
                 </h1>
-                <form action="">
+                <form action="" method="POST">
                     @csrf
                     <div class="md:flex mb-10 items-center justify-between">
                         <div class="bg-gray-50 rounded-md w-40 p-8 mx-auto mb-5 md:mb-0 md:mr-10">
@@ -49,7 +49,8 @@
                             <div class="w-full flex mt-5 items-center">
                                 <label for="" class="inline-block whitespace-nowrap text-sm md:text-base">数量：</label>
                                 <select
-                                    class="inline-block w-full rounded-md bg-gray-50 py-2 pl-3 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    class="inline-block w-full rounded-md bg-gray-50 py-2 pl-3 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    name="quantity">
                                     <option></option>
                                     {{-- チケットは1~5の範囲で選択できます --}}
                                     @for ($i = 1; $i < 6; $i++)
