@@ -17,6 +17,7 @@ class TicketController extends Controller
 {
     public function index()
     {
+        PayPay::polling();
         return view('user.ticket');
     }
 
@@ -62,13 +63,23 @@ class TicketController extends Controller
         //-------------------------------------
         // 決済レコードを生成する
         //-------------------------------------
-        $settlement = Settlement::firstOrNew(['paypay_settlement_id' => $QRCodeResponse['data']['merchantPaymentId']]);
-        $settlement->user_id = Auth::id();
-        $settlement->paypay_settlement_id = $QRCodeResponse['data']['merchantPaymentId'];
-        $settlement->product_id = Product::getTicketId();
-        $settlement->quantity = $request->quantity;
-        $settlement->amount_of_payment = $ticket_price * $request->quantity;
-        $settlement->save();
+        if (Settlement::where('is_paid', false)->where('user_id', Auth::id())->exists()) {
+            $settlement = Settlement::where('is_paid', false)->where('user_id', Auth::id())->first();
+            $settlement->user_id = Auth::id();
+            $settlement->paypay_settlement_id = $QRCodeResponse['data']['merchantPaymentId'];
+            $settlement->product_id = Product::getTicketId();
+            $settlement->quantity = $request->quantity;
+            $settlement->amount_of_payment = $ticket_price * $request->quantity;
+            $settlement->save();
+        } else {
+            $settlement = Settlement::firstOrNew(['paypay_settlement_id' => $QRCodeResponse['data']['merchantPaymentId']]);
+            $settlement->user_id = Auth::id();
+            $settlement->paypay_settlement_id = $QRCodeResponse['data']['merchantPaymentId'];
+            $settlement->product_id = Product::getTicketId();
+            $settlement->quantity = $request->quantity;
+            $settlement->amount_of_payment = $ticket_price * $request->quantity;
+            $settlement->save();
+        }
 
         // paypayの支払いページに行く。支払いが終わったら$payload->setRedirectUrlにリダイレクトされる
         return redirect($QRCodeResponse['data']['url']);
