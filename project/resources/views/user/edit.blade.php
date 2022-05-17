@@ -71,7 +71,7 @@
     @include('components.user-header')
 
     <main class="container mx-auto font-normal mb-12 bg-slate-50">
-        <div class="mt-16 max-w-lg mx-auto">
+        <div class="mt-16 max-w-xl mx-auto">
             <h1 class="text-center text-4xl mb-12">アカウント編集</h1>
             <div class="relative user-icon max-w-xs mx-auto">
                 <img class="h-40 w-auto mx-auto overflow-hidden rounded-full mb-11"
@@ -123,10 +123,10 @@
                     <div class="col-span-1">勤続年数</div>
                     <input class="rounded-md bg-white col-span-3 w-full" type="text" name="length_of_service" id="">
                 </div>
-                <div class="mb-9 px-5">
+                <div class="mb-9 px-5 md:leading-loose leading-10">
                     <span class="md:inline block">匿名回答者としてのサービス利用を行いますか？</span>
-                    <input class="ml-4" type="radio" name="use_service" value="1">はい
-                    <input class="ml-4" type="radio" name="use_service" value="0" checked>いいえ
+                    <label><input class="md:ml-4" type="radio" name="use_service" value="1">はい</label>
+                    <label><input class="ml-4" type="radio" name="use_service" value="0" checked>いいえ</label>
                 </div>
                 <a href="{{ route('user_edit') }}">
                     <button
