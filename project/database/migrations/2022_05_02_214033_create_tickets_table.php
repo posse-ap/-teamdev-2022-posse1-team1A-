@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\TicketStatus;
 
 return new class extends Migration
 {
@@ -13,21 +14,23 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('calling_evaluations', function (Blueprint $table) {
+        Schema::create('tickets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('calling_id')
-                ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
             $table->foreignId('user_id')
-                ->constrained()
+                ->constrained('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->boolean('is_satisfied');
-            $table->boolean('is_respondent');
-            $table->string('comment')->nullable();
+            $table->foreignId('ticket_status_id')
+                ->constrained('ticket_statuses')
+                ->onUpdate('cascade')
+                ->onDelete('cascade')
+                ->default(TicketStatus::getPendingId());
+            $table->foreignId('calling_id')
+                ->nullable()
+                ->constrained('callings')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
-            $table->softDeletes($column = 'deleted_at', $precision = 0);
         });
     }
 
@@ -38,6 +41,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('calling_evaluations');
+        Schema::dropIfExists('tickets');
     }
 };

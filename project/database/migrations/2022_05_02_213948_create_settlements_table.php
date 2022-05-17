@@ -13,21 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('calling_evaluations', function (Blueprint $table) {
+        Schema::create('settlements', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('calling_id')
-                ->constrained()
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->string('paypay_settlement_id');
+            $table->boolean('is_paid')->default(false);
             $table->foreignId('user_id')
-                ->constrained()
+                ->constrained('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->boolean('is_satisfied');
-            $table->boolean('is_respondent');
-            $table->string('comment')->nullable();
+            $table->foreignId('product_id')
+                ->constrained('products')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->integer('quantity');
+            $table->integer('amount_of_payment');
             $table->timestamps();
-            $table->softDeletes($column = 'deleted_at', $precision = 0);
         });
     }
 
@@ -38,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('calling_evaluations');
+        Schema::dropIfExists('settlements');
     }
 };

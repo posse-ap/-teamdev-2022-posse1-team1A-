@@ -36,6 +36,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('password');
             $table->string('peer_id')->unique();
+            $table->string('reason')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
