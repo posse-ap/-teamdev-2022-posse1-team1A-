@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <title>各種指標</title>
 </head>
-
 <body class="bg-grey-100 w-full">
     <div class="flex">
 
@@ -21,7 +20,7 @@
                     <h2 class="text-blue-800 text-lg ml-5">総会員数</h2>
                     <div class="flex">
                         <nav class="flex px-12 items-end text-center ml-auto mr-auto my-4">
-                            <p class="text-blue-800 text-6xl font-bold">89</p>
+                            <p class="text-blue-800 text-6xl font-bold">{{ $total_count_users }}</p>
                             <p class="text-blue-800 ml-2 text-2xl">名</p>
                         </nav>
                     </div>
@@ -30,7 +29,7 @@
                     <h2 class="text-blue-800 text-lg ml-5">総マッチ数</h2>
                     <div class="flex">
                         <nav class="flex px-12 items-end text-center ml-auto mr-auto my-4">
-                            <p class="text-blue-800 text-6xl font-bold">29</p>
+                            <p class="text-blue-800 text-6xl font-bold">{{ round($total_count_matched) }}</p>
                             <p class="text-blue-800 ml-2 text-2xl">回</p>
                         </nav>
                     </div>
@@ -39,7 +38,7 @@
                     <h2 class="text-blue-800 text-lg ml-5">総通話数</h2>
                     <div class="flex">
                         <nav class="flex px-12 items-end text-center ml-auto mr-auto my-4">
-                            <p class="text-blue-800 text-6xl font-bold">19</p>
+                            <p class="text-blue-800 text-6xl font-bold">{{ $total_count_call }}</p>
                             <p class="text-blue-800 ml-2 text-2xl">回</p>
                         </nav>
                     </div>
@@ -48,8 +47,8 @@
                     <h2 class="text-blue-800 text-lg ml-5">平均通話時間</h2>
                     <div class="flex">
                         <nav class="flex px-12 items-end text-center ml-auto mr-auto my-4">
-                            <p class="text-blue-800 text-6xl font-bold">89</p>
-                            <p class="text-blue-800 ml-2 text-2xl">名</p>
+                            <p class="text-blue-800 text-6xl font-bold">{{ round(($avg_calling_time) /60, 1) }}</p>
+                            <p class="text-blue-800 ml-2 text-2xl">分</p>
                         </nav>
                     </div>
                 </div>
@@ -57,8 +56,8 @@
                     <h2 class="text-blue-800 text-lg ml-5">日程調整失敗数</h2>
                     <div class="flex">
                         <nav class="flex px-12 items-end text-center ml-auto mr-auto my-4">
-                            <p class="text-blue-800 text-6xl font-bold">29</p>
-                            <p class="text-blue-800 ml-0 text-2xl">回</p>
+                            <p class="text-blue-800 text-6xl font-bold">{{ $total_count_cancelled }}</p>
+                            <p class="text-blue-800 ml-2 text-2xl">回</p>
                         </nav>
                     </div>
                 </div>

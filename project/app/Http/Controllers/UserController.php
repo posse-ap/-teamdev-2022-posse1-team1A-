@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\AccountStatus;
+use App\Models\PayPay;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function index()
     {
+        if (Auth::check()) {
+            PayPay::polling();
+        }
         $keyword = null;
         return view('user.index', compact('keyword'));
     }
@@ -22,7 +27,7 @@ class UserController extends Controller
         return redirect()->route('user_result', ['keyword' => $keyword]);
     }
 
-    public function result($keyword="")
+    public function result($keyword = "")
     {
 
         $query = User::query();
@@ -59,17 +64,23 @@ class UserController extends Controller
         $userInfo = User::find($userId);
         return view('user.info', compact('userInfo'));
     }
-    
-    public function ticket()
-    {
 
-        return view('user.ticket');
+    public function withdrawal()
+    {
+        $user = User::find(Auth::id());
+
+        return view('user.withdrawal', compact('user'));
     }
 
-    public function thanks()
+    public function withdrawalPost(Request $request)
     {
+        $user = User::find($request->id);
 
-        return view('user.thanks');
+        $user->account_status_id = AccountStatus::getWithdrawnId();
+        $user->reason = $request->reason;
+        $user->save();
+
+        return redirect()->route('user_index');
     }
 
     public function userEdit()
@@ -81,7 +92,6 @@ class UserController extends Controller
     
     public function beginner()
     {
-
         return view('user.beginner');
     }
 }

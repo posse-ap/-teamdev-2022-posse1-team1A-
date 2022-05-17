@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('settlements', function (Blueprint $table) {
             $table->id();
             $table->string('paypay_settlement_id');
-            $table->string('payment_details');
+            $table->boolean('is_paid')->default(false);
             $table->foreignId('user_id')
                 ->constrained('users')
                 ->onUpdate('cascade')

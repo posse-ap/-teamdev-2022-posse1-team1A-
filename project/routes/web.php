@@ -30,8 +30,13 @@ Route::get('/beginner', 'App\Http\Controllers\UserController@beginner')->name('u
 Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
 
 Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
+Route::get('/withdrawal', 'App\Http\Controllers\UserController@withdrawal')->name('user_withdrawal');
+Route::post('/withdrawal', 'App\Http\Controllers\UserController@withdrawalPost')->name('user_withdrawal_post');
 
-Route::get('/thanks', 'App\Http\Controllers\UserController@thanks')->name('user_thanks');
+Route::get('/ticket', 'App\Http\Controllers\TicketController@index')->name('user_ticket');
+Route::post('/ticket', 'App\Http\Controllers\TicketController@buy')->name('buy_ticket');
+
+Route::get('/thanks', 'App\Http\Controllers\TicketController@thanks')->name('user_thanks');
 
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
@@ -50,4 +55,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::post('/userlist', 'App\Http\Controllers\AdminController@search')->name('userlist_search');
 
     Route::get('/index', 'App\Http\Controllers\AdminController@index')->name('index');
+
+    Route::get('/call-evaluation', 'App\Http\Controllers\AdminController@callEvaluation')->name('call_evaluation');
 });
