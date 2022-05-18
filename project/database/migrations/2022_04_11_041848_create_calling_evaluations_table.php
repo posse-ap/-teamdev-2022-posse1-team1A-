@@ -24,6 +24,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->boolean('is_satisfied');
+            $table->boolean('is_respondent');
             $table->string('comment')->nullable();
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);

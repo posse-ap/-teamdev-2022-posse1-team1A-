@@ -23,12 +23,14 @@ class CallingEvaluationSeeder extends Seeder
                 'calling_id' => 1,
                 'user_id' => 1,
                 'is_satisfied' => true,
+                'is_respondent' => true,
                 'comment' => 'ありがとうございました。'
             ],
             [
                 'calling_id' => 1,
                 'user_id' => 4,
                 'is_satisfied' => false,
+                'is_respondent' => false,
                 'comment' => '面白い人材だった。'
             ],
         ]);

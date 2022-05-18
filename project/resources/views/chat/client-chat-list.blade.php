@@ -3,7 +3,7 @@
 @section('content')
     @include('components.user-header')
 
-    <div class="wrapper container mx-auto px-4 mb-5 pb-5">
+    <div class="wrapper container mx-auto px-4 mb-5 pb-5 min-h-screen">
         <div>
             <div class="flex items-center py-4 mx-auto overflow-y-auto whitespace-nowrap font-thin">
                 <a href="{{ route('user_index') }}" class="text-gray-600">
@@ -60,5 +60,4 @@
             @endforeach
         </div>
     </div>
-    @include('components.user-footer')
 @endsection
