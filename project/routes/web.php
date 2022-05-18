@@ -42,6 +42,24 @@ Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 })->name('terms_of_service');
 
+// chat一覧画面
+Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
+    Route::get('/respondent', 'App\Http\Controllers\ChatController@respondent_chat_list')->name('respondent_chat_list');
+    Route::post('/respondent/stop', 'App\Http\Controllers\ChatController@reception_stop')->name('reception_stop');
+    Route::post('/respondent/start', 'App\Http\Controllers\ChatController@reception_start')->name('reception_start');
+    Route::get('client', 'App\Http\Controllers\ChatController@client_chat_list')->name('client_chat_list');
+
+    Route::group(['prefix' => '/{chat_id}'], function () {
+        Route::get('/', 'App\Http\Controllers\ChatController@index')->name('index');
+        Route::post('/', 'App\Http\Controllers\ChatController@post')->name('post');
+
+        Route::post('/call-start', 'App\Http\Controllers\ChatController@call_start')->name('call_start');
+    });
+    Route::group(['prefix' => '/call'], function () {
+        Route::get('/{calling_id}', 'App\Http\Controllers\ChatController@client_call')->name('call');
+    });
+});
+
 Route::get('/privacy-policy', function () {
     return view('user.privacy-policy');
 })->name('privacy_policy');

@@ -9,6 +9,9 @@ class Calling extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'chat_id',
+    ];
     public function chat()
     {
         return Chat::find($this->chat_id);

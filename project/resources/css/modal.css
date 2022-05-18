@@ -1,0 +1,39 @@
+#modal-content {
+    margin: 0;
+    padding: 10px 20px;
+    background: #fff;
+    position: fixed;
+    display: none;
+    z-index: 2;
+}
+
+#modal-overlay {
+    z-index: 1;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.fill-salmon-400 {
+    fill: #da696a;
+}
+
+.fill-lightblue-300 {
+    fill: #7cb3d4;
+}
+
+.input-radio {
+    background: #f8f9fa;
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+input[type="radio"]:checked {
+    color: #668bed;
+    border: 10px solid;
+}
