@@ -9,6 +9,19 @@
     <meta property="og:locale" content="ja_JP" />
 @endsection
 
+@push('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function(){
+            $('input').keypress(function(e){
+                if(e.which == 13) {
+                    return false;
+                }
+            });
+        });
+    </script>
+@endpush
+
 @push('styles')
     <link rel="stylesheet" href="{{ asset('css/top.css') }}">
     <style>
@@ -59,11 +72,11 @@
 
 @push('scripts')
     <script>
-        window.addEventListener('DOMContentLoaded', function(){
+        window.addEventListener('DOMContentLoaded', function() {
             document.getElementById("user-icon-button").addEventListener("click", () => {
                 document.getElementById("user-icon-input").click();
             });
-		});
+        });
     </script>
 @endpush
 
@@ -72,56 +85,64 @@
 
     <main class="container mx-auto font-normal mb-12 bg-slate-50">
         <div class="mt-16 max-w-xl mx-auto">
-            <h1 class="text-center text-4xl mb-12">アカウント編集</h1>
-            <div class="relative user-icon max-w-xs mx-auto">
-                <img class="h-40 w-auto mx-auto overflow-hidden rounded-full mb-11"
-                    src="https://assets.codepen.io/5041378/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1600304177&width=512"
-                    alt="ユーザーアイコン">
-                <button class="pulus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full" id="user-icon-button"></button>
-                <input type="file" name="user-icon" class="hidden" id="user-icon-input">
-            </div>
-            <form action="" method="post">
+            <form action="{{ route('user_edit_post') }}" method="post">
+                @csrf
+                <h1 class="text-center text-4xl mb-12">アカウント編集</h1>
+                <div class="relative user-icon max-w-xs mx-auto">
+                    <img class="h-40 w-auto mx-auto overflow-hidden rounded-full mb-11"
+                        src="https://assets.codepen.io/5041378/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1600304177&width=512"
+                        alt="ユーザーアイコン">
+                    <div class="pulus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full"
+                        id="user-icon-button"></div>
+                    <input type="file" name="user-icon" class="hidden" id="user-icon-input">
+                </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">氏名<span class="text-red-600">*</span></div>
                     <div class="col-span-3">
-                        <input class="mb-2 rounded-md bg-white w-full" type="text" name="name" id="">
+                        <input value="{{ $userInfo->name }}" class="mb-2 rounded-md bg-white w-full" type="text" name="name"
+                            id="">
                         <span>※ サービス上で公開されません。</span>
                     </div>
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">ニックネーム<span class="text-red-600">*</span></div>
                     <div class="col-span-3">
-                        <input class="mb-2 rounded-md bg-white w-full" type="text" name="nickname" id="">
+                        <input value="{{ $userInfo->nickname }}" class="mb-2 rounded-md bg-white w-full" type="text"
+                            name="nickname" id="">
                         <span>※ サービス上で公開されます。</span>
                     </div>
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">電話番号<span class="text-red-600">*</span></div>
                     <div class="col-span-3">
-                        <input class="mb-2 rounded-md bg-white w-full" type="text" name="email" id="">
+                        <input value="{{ $userInfo->email }}" class="mb-2 rounded-md bg-white w-full" type="text"
+                            name="email" id="">
                         <span>※ PayPayで使用している電話番号を入力してください。</span>
                     </div>
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">メールアドレス<span class="text-red-600">*</span></div>
-                    <input class="rounded-md bg-white col-span-3 w-full" type="text" name="email" id="">
+                    <input value="{{ $userInfo->email }}" class="rounded-md bg-white col-span-3 w-full" type="text"
+                        name="email" id="">
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">会社名<span class="text-red-600">*</span></div>
-                    <select  name="company" class="rounded-md bg-white col-span-3 h-10 w-full">
-                        <option value=""></option>
+                    <select name="company" class="rounded-md bg-white col-span-3 h-10 w-full pl-3">
+                        <option value="{{ $userInfo->company }}">{{ $userInfo->company }}</option>
                         <option value="1">11111</option>
                         <option value="2">22222</option>
                     </select>
-                    {{-- <input class="rounded-md bg-white col-span-3" type="text" name="company" id=""> --}}
+                    {{-- <input value="$userInfo->" class="rounded-md bg-white col-span-3" type="text" name="company" id=""> --}}
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">部署名</div>
-                    <input class="rounded-md bg-white col-span-3 w-full" type="text" name="department" id="">
+                    <input value="{{ $userInfo->department }}" class="rounded-md bg-white col-span-3 w-full" type="text"
+                        name="department" id="">
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">勤続年数</div>
-                    <input class="rounded-md bg-white col-span-3 w-full" type="text" name="length_of_service" id="">
+                    <input value="{{ $userInfo->length_of_service }}" class="rounded-md bg-white col-span-3 w-full"
+                        type="text" name="length_of_service" id="">
                 </div>
                 <div class="mb-9 px-5 md:leading-loose leading-10">
                     <span class="md:inline block">匿名回答者としてのサービス利用を行いますか？</span>

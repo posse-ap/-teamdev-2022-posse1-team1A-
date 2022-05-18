@@ -64,14 +64,14 @@ class UserController extends Controller
         $userInfo = User::find($userId);
         return view('user.info', compact('userInfo'));
     }
-
+    
     public function withdrawal()
     {
         $user = User::find(Auth::id());
-
+        
         return view('user.withdrawal', compact('user'));
     }
-
+    
     public function withdrawalPost(Request $request)
     {
         $user = User::find($request->id);
@@ -79,15 +79,34 @@ class UserController extends Controller
         $user->account_status_id = AccountStatus::getWithdrawnId();
         $user->reason = $request->reason;
         $user->save();
-
+        
         return redirect()->route('user_index');
     }
-
+    
     public function userEdit()
     {
         $userId = 1;
         $userInfo = User::find($userId);
         return view('user.edit', compact('userInfo'));
+    }
+    
+    public function userEditPost(Request $request)
+    {
+        $userId = Auth::user();
+        $userInfo = User::find($userId)->first();
+        // dd($userInfo);
+        $userInfo->name = $request->name;
+        $userInfo->nickname = $request->nickname;
+        $userInfo->email = $request->email;
+        $userInfo->telephone_number = $request->telephone_number;
+        $userInfo->company = $request->company;
+        $userInfo->department = $request->department;
+        $userInfo->length_of_service = $request->length_of_service;
+
+        $userInfo->save();
+        // $userInfo->fill($request->all())->save();
+
+        return view('user.info', compact('userInfo'));
     }
     
     public function beginner()

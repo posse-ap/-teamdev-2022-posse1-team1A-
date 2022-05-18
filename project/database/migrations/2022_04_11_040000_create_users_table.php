@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('icon');
             $table->string('email')->unique()->fullText();
             $table->timestamp('email_verified_at')->nullable();
+            $table->integer('telephone_number')->nullable();
             $table->string('company')->fullText();
             $table->string('department')->fullText();
             $table->string('length_of_service')->fullText();

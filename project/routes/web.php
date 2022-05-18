@@ -24,6 +24,7 @@ Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_searc
 
 Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
 Route::get('/user/edit', 'App\Http\Controllers\UserController@userEdit')->name('user_edit');
+Route::post('/user/edit', 'App\Http\Controllers\UserController@userEditPost')->name('user_edit_post');
 Route::get('/user', 'App\Http\Controllers\UserController@userPage')->name('user_page');
 Route::get('/beginner', 'App\Http\Controllers\UserController@beginner')->name('user_beginner');
 
