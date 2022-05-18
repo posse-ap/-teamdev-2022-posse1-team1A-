@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Chat;
 use App\Models\ChatRecord;
 use App\Models\Calling;
+use App\Models\InterviewSchedule;
 
 class ChatController extends Controller
 {
@@ -141,5 +142,16 @@ class ChatController extends Controller
         $user->save();
 
         return redirect()->route('chat.respondent_chat_list');
+    }
+
+    public function schedule(Request $request)
+    {
+        $schedule = new InterviewSchedule;
+        $schedule->schedule_status_id = 1;
+        $schedule->schedule = $request->schedule;
+        $schedule->chat_id = $request->chatRoomId;
+        $schedule->save();
+        
+        return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
 }
