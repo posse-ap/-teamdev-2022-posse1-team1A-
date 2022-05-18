@@ -22,12 +22,14 @@ require __DIR__ . '/auth.php';
 Route::get('/', 'App\Http\Controllers\UserController@index')->name('user_index');
 Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_search');
 
+Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
+Route::get('/user/edit', 'App\Http\Controllers\UserController@userEdit')->name('user_edit');
+Route::get('/user', 'App\Http\Controllers\UserController@userPage')->name('user_page');
 Route::get('/beginner', 'App\Http\Controllers\UserController@beginner')->name('user_beginner');
 
 Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
 
-Route::get('/user_page', 'App\Http\Controllers\UserController@userPage')->name('user_page');
-
+Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
 Route::get('/withdrawal', 'App\Http\Controllers\UserController@withdrawal')->name('user_withdrawal');
 Route::post('/withdrawal', 'App\Http\Controllers\UserController@withdrawalPost')->name('user_withdrawal_post');
 
