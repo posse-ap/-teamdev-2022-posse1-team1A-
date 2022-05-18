@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Chat;
 use App\Models\ChatRecord;
 use App\Models\Calling;
+use App\Models\InterviewSchedule;
 
 class ChatController extends Controller
 {
@@ -43,7 +44,7 @@ class ChatController extends Controller
         $chatRecords     = ChatRecord::where('chat_id', $chatRoomId)->get();
 
         // 日程決定しているか真偽を取得
-        $isReserved      = 1;
+        $isReserved = InterviewSchedule::where('chat_id', $chatRoomId)->exists();
 
         // 日付をフォーマット
         foreach ($chatRecords as $chatRecord) {
@@ -56,6 +57,7 @@ class ChatController extends Controller
         $skyway_key = config('skyway_key');
         $loginUserPeerId = $loginUser->peer_id;
         $partnerUserPeerId = $partnerUser->peer_id;
+
 
         return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key'));
     }
