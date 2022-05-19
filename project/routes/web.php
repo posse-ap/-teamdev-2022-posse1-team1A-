@@ -50,7 +50,7 @@ Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
     Route::get('client', 'App\Http\Controllers\ChatController@client_chat_list')->name('client_chat_list');
 
     Route::group(['prefix' => '/{chat_id}'], function () {
-        Route::get('/', 'App\Http\Controllers\ChatController@index')->name('index');
+        Route::get('/', 'App\Http\Controllers\ChatController@index')->name('index')->middleware('chat');
         Route::post('/', 'App\Http\Controllers\ChatController@post')->name('post');
 
         Route::post('/call-start', 'App\Http\Controllers\ChatController@call_start')->name('call_start');

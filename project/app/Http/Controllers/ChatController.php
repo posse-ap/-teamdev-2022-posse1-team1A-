@@ -15,6 +15,9 @@ class ChatController extends Controller
 {
     public function index(Request $request, $chat_id)
     {
+        // チケットカウント
+        $is_ticket = $request->is_ticket;
+
         // チャットルームのidを受け取る
         $chatRoomId      = $chat_id;
 
@@ -57,7 +60,7 @@ class ChatController extends Controller
         $loginUserPeerId = $loginUser->peer_id;
         $partnerUserPeerId = $partnerUser->peer_id;
 
-        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key'));
+        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key', 'is_ticket'));
     }
 
     public function post(Request $request)
