@@ -81,6 +81,12 @@ class ChatController extends Controller
 
     public function post_review(Request $request)
     {
+        $validated = $request->validate([
+            'calling_id' => 'required',
+            'user_id' => 'required',
+            'is_satisfied' => 'required',
+            'comment' => 'required',
+        ]);
         CallingEvaluation::create([
             'calling_id' => $request->chatRoomId,
             'user_id' => $request->loginUserId,
@@ -89,5 +95,4 @@ class ChatController extends Controller
         ]);
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
-
 }

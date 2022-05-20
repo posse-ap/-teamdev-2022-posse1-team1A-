@@ -1,6 +1,6 @@
 <div class="flex flex-col text-center py-12">
     <div class="text-left my-12 text-center pb-3 md:text-xl text-base">{{ $partnerUserName }}さんの評価をお願いします。</div>
-    <form action="{{ route('chat.post_review') }}" method="post" class="">
+    <form action="{{ route('chat.post_review', ['chat_id' => $chatRoomId]) }}" method="post" class="">
         @csrf
         <input type="hidden" value="{{ $chatRoomId }}" name="chatRoomId">
         <input type="hidden" value="{{ $loginUserId }}" name="loginUserId">
@@ -34,7 +34,7 @@
             <div class="ml-auto mr-auto w-4/5 h-30">
                 <div class="text-left mb-3">理由</div>
                 <label for="">
-                    <input type="text" name="review_comment" 
+                    <input type="text" name="review_comment"
                         class="bg-gray-100 text-left w-full bg-gray-100 rounded-md mb-5 h-12">
                 </label>
                 <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 rounded  md:w-64 w-full mx-auto mb-5">
