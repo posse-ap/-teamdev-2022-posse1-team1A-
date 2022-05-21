@@ -1,4 +1,4 @@
-<header id="header" class="sticky top-0 w-full bg-white bg-opacity-75 shadow-lg">
+<header id="header" class="sticky top-0 w-full bg-white bg-opacity-75 shadow-lg z-50">
     <div id="base-header" class="px-10 py-3 flex items-center justify-between flex-shrink-0 items-center">
         <div id="header-logo" class="flex w-8 h-8 ml-0 mr-auto">
             <img src="{{ asset('img/logo-black.png') }}" alt="logo-black.png">
@@ -13,11 +13,11 @@
         @if ($account_status_id == 0)
             {{-- ログイン後 --}}
             <div class="hidden flex-row-reverse ml-auto mr-0 md:flex items-center justify-between">
-                <button
+                <a href="{{ route('user_page') }}"
                     class="flex items-center justify-center w-8 h-8 ml-5 overflow-hidden rounded-full cursor-pointer">
                     <img src="https://assets.codepen.io/5041378/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1600304177&width=512"
                         alt="">
-                </button>
+                </a>
                 <button
                     class="relative bg-yellow-500 hover:bg-yellow-700 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
                     <div>
@@ -45,7 +45,7 @@
                     </a>
                 </button>
                 <button class="hover:text-grey-800 font-bold py-1 pr-3">
-                    <a class="flex mx-2 text-sm font-semibold m-1 items-center" href="#">
+                    <a class="flex mx-2 text-sm font-semibold m-1 items-center" href="{{ route('user_beginner') }}">
                         初めての方へ
                     </a>
                 </button>
@@ -74,7 +74,7 @@
                     </a>
                 </button>
                 <button class="hover:text-grey-800 font-bold py-1 px-4 ml-2">
-                    <a class="flex mx-2 text-sm font-semibold m-1 items-center" href="#">
+                    <a class="flex mx-2 text-sm font-semibold m-1 items-center" href="{{ route('user_beginner') }}">
                         初めての方へ
                     </a>
                 </button>
@@ -102,20 +102,20 @@
                 </li>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
-                        href="#">初めての方へ</a>
+                        href="{{ route('user_beginner') }}">初めての方へ</a>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
                         href="{{ route('user_ticket') }}">チケット購入</a>
                 </li>
                 <li class="border-b"><a
                         class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800  rounded text-white"
-                        href="#">アカウント情報</a>
+                        href="{{ route('user_page') }}">アカウント情報</a>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
-                        href="#">利用規約</a>
+                        href="{{ route('terms_of_service') }}">利用規約</a>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
-                        href="#">個人情報保護方針</a></li>
+                        href="{{ route('privacy_policy') }}">個人情報保護方針</a></li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
                         href="#">運営会社</a>
                 </li>
@@ -147,10 +147,10 @@
                 </li>
                 <li class="border-b"><a
                         class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
-                        href="#">初めての方へ</a>
+                        href="{{ route('user_beginner') }}">初めての方へ</a>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
-                        href="#">個人情報保護方針</a></li>
+                        href="{{ route('privacy_policy') }}">個人情報保護方針</a></li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
                         href="#">運営会社</a>
                 </li>

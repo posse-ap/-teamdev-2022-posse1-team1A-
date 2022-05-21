@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Chat;
 use App\Models\ChatRecord;
 use App\Models\CallingEvaluation;
+use App\Models\Calling;
 
 class ChatController extends Controller
 {
@@ -50,7 +53,12 @@ class ChatController extends Controller
             }
         }
 
-        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'partnerUserIcon', 'partnerUserName'));
+        // 通話用のkey取得
+        $skyway_key = config('skyway_key');
+        $loginUserPeerId = $loginUser->peer_id;
+        $partnerUserPeerId = $partnerUser->peer_id;
+
+        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key'));
     }
 
     public function post(Request $request)
@@ -67,6 +75,43 @@ class ChatController extends Controller
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
 
+    public function call_start(Request $request)
+    {
+        $calling = Calling::create([
+            'chat_id' => $request->chat_id,
+        ]);
+        return redirect(route('chat.call', ['calling_id' => $calling->id]));
+    }
+
+    public function client_call(Request $request, $calling_id)
+    {
+        $call = Calling::find($calling_id);
+        $chat = Chat::find($call->chat_id);
+        $chatRoomId = $chat->id;
+        // チャットルームの参加者情報を取得
+        $loginUser = User::find(Auth::id());
+        $loginUserId = $loginUser->id;
+
+        // 相手の情報を取得
+        $respondentUserId = $chat->respondent_user_id;
+        $clientUserId = $chat->client_user_id;
+
+        // TODO: 回答者ユーザーの値だけを取るよう変更
+        if ($respondentUserId === $loginUser->id) {
+            $partnerUser = User::find($clientUserId);
+        } else {
+            $partnerUser = User::find($respondentUserId);
+        }
+        $partnerUserIcon = $partnerUser->icon;
+        $partnerUserName = $partnerUser->nickname;
+
+        // 通話用のkey取得
+        $skyway_key = config('skyway_key');
+        $loginUserPeerId = $loginUser->peer_id;
+        $partnerUserPeerId = $partnerUser->peer_id;
+        return view('chat.client-calling', compact('skyway_key', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'chatRoomId', 'loginUserId'));
+    }
+
     public function client_chat_list(Request $request)
     {
         $client_chats = Chat::where('client_user_id', Auth::id())->where('is_finished', false)->get();
@@ -75,8 +120,29 @@ class ChatController extends Controller
 
     public function respondent_chat_list(Request $request)
     {
+        $user = User::find(Auth::id());
         $respondent_chats = Chat::where('respondent_user_id', Auth::id())->where('is_finished', false)->get();
-        return view('chat.respondent-chat-list', compact('respondent_chats'));
+        return view('chat.respondent-chat-list', compact('respondent_chats', 'user'));
+    }
+
+    public function reception_stop(Request $request)
+    {
+        $user = User::find(Auth::id());
+
+        $user->is_search_target = false;
+        $user->save();
+
+        return redirect()->route('chat.respondent_chat_list');
+    }
+
+    public function reception_start(Request $request)
+    {
+        $user = User::find(Auth::id());
+
+        $user->is_search_target = true;
+        $user->save();
+
+        return redirect()->route('chat.respondent_chat_list');
     }
 
     public function post_review(Request $request)
@@ -85,7 +151,6 @@ class ChatController extends Controller
             'calling_id' => 'required',
             'user_id' => 'required',
             'is_satisfied' => 'required',
-            'comment' => 'required',
         ]);
         CallingEvaluation::create([
             'calling_id' => $request->chatRoomId,

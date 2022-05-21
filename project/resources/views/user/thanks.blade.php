@@ -26,7 +26,7 @@
                         トップページに戻る
                     </a>
                 </div>
-                <div class="bg-gray-50 rounded-md p-6 md:p-10">
+                <div class="note-box relative bg-gray-50 rounded-md p-6 md:p-10">
                     <h2 class="notes relative pb-4 text-base md:text-lg text-center">
                         <span>相談チケット使用に関する注意事項</span>
                     </h2>
