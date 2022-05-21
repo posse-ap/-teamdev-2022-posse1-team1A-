@@ -53,19 +53,17 @@ class SendReminderMailCommand extends Command
             $interview_date = $interview_schedule->schedule;
             $client_user_id = $interview_schedule->chat->client_user_id;
             $client_user = User::find($client_user_id);
-            // dd($client_user_name);
             $respondent_user_id = $interview_schedule->chat->respondent_user_id;
             $respondent_user = User::find($respondent_user_id);
             Mail::to(User::find($client_user_id)->email)->send(new Send3DayReminderClientMail($client_user, $respondent_user, $interview_date));
             Mail::to(User::find($respondent_user_id)->email)->send(new Send3DayReminderRespondentMail($client_user, $respondent_user, $interview_date));
         }
 
-        $interview_schedules_1_day = InterviewSchedule::where('schedule_status_id', ScheduleStatus::getPendingId())->whereDate('schedule', date("Y-m-d",strtotime("+3 day")))->get();
+        $interview_schedules_1_day = InterviewSchedule::where('schedule_status_id', ScheduleStatus::getPendingId())->whereDate('schedule', date("Y-m-d",strtotime("+1 day")))->get();
         foreach ($interview_schedules_1_day as $interview_schedule) {
             $interview_date = $interview_schedule->schedule;
             $client_user_id = $interview_schedule->chat->client_user_id;
             $client_user = User::find($client_user_id);
-            // dd($client_user_name);
             $respondent_user_id = $interview_schedule->chat->respondent_user_id;
             $respondent_user = User::find($respondent_user_id);
             Mail::to(User::find($client_user_id)->email)->send(new Send1DayReminderClientMail($client_user, $respondent_user, $interview_date));
