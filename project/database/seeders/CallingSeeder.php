@@ -21,10 +21,11 @@ class CallingSeeder extends Seeder
             [
                 'chat_id' => 1,
                 'calling_time' => 4000,
+                'is_finished' => true,
             ],
         ]);
         $calling = Calling::factory()
-                ->count(30)
-                ->create();
+            ->count(30)
+            ->create();
     }
 }
