@@ -7,10 +7,16 @@
 
         {{-- 一旦ログインステータスを1に --}}
         {{-- TODO:ログイン機能実装後、削除↓ --}}
-        <?php $account_status_id = 0; ?>
+        <?php
+        if (Auth::check()) {
+            $account_status_id = 1;
+        }else{
+            $account_status_id = 0;
+        }
+        ?>
 
         {{-- PC画面幅のheader --}}
-        @if ($account_status_id == 0)
+        @if ($account_status_id == 1)
             {{-- ログイン後 --}}
             <div class="hidden flex-row-reverse ml-auto mr-0 md:flex items-center justify-between">
                 <a href="{{ route('user_page') }}"
@@ -49,6 +55,7 @@
                         初めての方へ
                     </a>
                 </button>
+                
             </div>
 
             <div onclick="afterLoginHamburgerClick()">
@@ -63,13 +70,13 @@
             <div class="hidden md:flex flex-row-reverse ml-auto mr-0 items-center justify-between">
                 <button
                     class="bg-blue-800 hover:bg-blue-700 text-white sm:text-base text-xs font-bold py-1 px-4 rounded ml-2">
-                    <a href="">
+                    <a href="{{ route('register') }}">
                         新規登録
                     </a>
                 </button>
                 <button
                     class="bg-gray-500 hover:bg-gray-800 text-white sm:text-base text-xs font-bold py-1 px-4 rounded ml-2">
-                    <a href="">
+                    <a href="{{ route('login') }}">
                         ログイン
                     </a>
                 </button>
@@ -90,7 +97,7 @@
     </div>
 
     {{-- スマホページ用のHeader --}}
-    @if ($account_status_id == 0)
+    @if ($account_status_id == 1)
         {{-- ログイン後 --}}
 
         <div id="afterlogin-hamburger-index" class="hidden fixed bg-gray-700">

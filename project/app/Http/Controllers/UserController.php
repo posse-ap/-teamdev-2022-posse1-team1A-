@@ -15,9 +15,11 @@ class UserController extends Controller
     {
         if (Auth::check()) {
             PayPay::polling();
+            $account_status_id = 1;
         }
         $keyword = null;
-        return view('user.index', compact('keyword'));
+        $account_status_id = 0;
+        return view('user.index', compact('keyword', 'account_status_id'));
     }
 
     public function search(Request $request)
