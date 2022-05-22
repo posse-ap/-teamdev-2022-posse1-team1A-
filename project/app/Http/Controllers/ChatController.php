@@ -11,6 +11,7 @@ use App\Models\Chat;
 use App\Models\ChatRecord;
 use App\Models\Calling;
 use App\Models\InterviewSchedule;
+use App\Models\ScheduleStatus;
 
 class ChatController extends Controller
 {
@@ -147,7 +148,7 @@ class ChatController extends Controller
     public function schedule(Request $request)
     {
         $schedule = new InterviewSchedule;
-        $schedule->schedule_status_id = 1;
+        $schedule->schedule_status_id = ScheduleStatus::getPendingId();
         $schedule->schedule = $request->schedule;
         $schedule->chat_id = $request->chatRoomId;
         $schedule->save();
