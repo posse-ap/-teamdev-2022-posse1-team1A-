@@ -43,45 +43,51 @@
                     <p class="text-sm font-thin">依頼者からの相談を受けるページです。</p>
                 </div>
                 <div class="cards mb-5 pb-5">
-                    @foreach ($respondent_chats as $respondent_chat)
-                        <a class="block cursor-pointer mb-3 p-2 duration-300 @if ($user->is_search_target == true) bg-blue-50 @else bg-gray-50 text-gray-400 pointer-events-none @endif"
-                            href="{{ route('chat.index', ['chat_id' => $respondent_chat->id]) }}">
-                            <div class="flex justify-between items-center">
-                                <div
-                                    class="lg:flex items-center justify-between sm:py-4 sm:pl-2 sm:pr-4 w-full flex-grow-0">
-                                    <div class="flex items-center mb-3 lg:mb-0">
-                                        <div
-                                            class="w-11 h-11 md:w-16 md:h-16 flex-shrink-0 rounded-full overflow-hidden object-cover mr-3">
-                                            @if ($user->is_search_target == true)
-                                                <img class="w-full h-full object-cover"
-                                                    src="{{ asset($respondent_chat->client_user->icon) }}" />
-                                            @else
-                                                <img class="w-full h-full object-cover opacity-50"
-                                                    src="{{ asset($respondent_chat->client_user->icon) }}" />
-                                            @endif
-                                        </div>
-                                        <div class="flex align-center">
-                                            <div>
-                                                <p class="lg:mb-3 text-base lg:text-xl">
-                                                    {{ $respondent_chat->client_user->nickname }}</p>
-                                                <p class="text-xs font-normal">{{ $respondent_chat->last_message->comment }}
-                                                </p>
+                    @if (count($respondent_chats) === 0)
+                        <p class="text-base">進行中のチャットはありません。</p>
+                    @else
+                        @foreach ($respondent_chats as $respondent_chat)
+                            <a class="block cursor-pointer mb-3 p-2 duration-300 @if ($user->is_search_target == true) bg-blue-50 @else bg-gray-50 text-gray-400 pointer-events-none @endif"
+                                href="{{ route('chat.index', ['chat_id' => $respondent_chat->id]) }}">
+                                <div class="flex justify-between items-center">
+                                    <div
+                                        class="lg:flex items-center justify-between sm:py-4 sm:pl-2 sm:pr-4 w-full flex-grow-0">
+                                        <div class="flex items-center mb-3 lg:mb-0">
+                                            <div
+                                                class="w-11 h-11 md:w-16 md:h-16 flex-shrink-0 rounded-full overflow-hidden object-cover mr-3">
+                                                @if ($user->is_search_target == true)
+                                                    <img class="w-full h-full object-cover"
+                                                        src="{{ asset($respondent_chat->client_user->icon) }}" />
+                                                @else
+                                                    <img class="w-full h-full object-cover opacity-50"
+                                                        src="{{ asset($respondent_chat->client_user->icon) }}" />
+                                                @endif
+                                            </div>
+                                            <div class="flex align-center">
+                                                <div>
+                                                    <p class="lg:mb-3 text-base lg:text-xl">
+                                                        {{ $respondent_chat->client_user->nickname }}</p>
+                                                    <p class="text-xs font-normal">
+                                                        {{ $respondent_chat->last_message->comment }}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="ml-auto">
+                                            <p class="text-xs">相談日程
+                                                {{ $respondent_chat->interview_schedule ? "#{$respondent_chat->interview_schedule->schedule}~" : '' }}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="ml-auto">
-                                        <p class="text-xs">相談日程
-                                            {{ $respondent_chat->interview_schedule ? "#{$respondent_chat->interview_schedule->schedule}~" : '' }}
-                                        </p>
+                                    <div
+                                        class="w-6 h-6 rounded-full flex-shrink-0 @if ($user->is_search_target == true) bg-blue-600 @else bg-gray-400 text-gray-400 pointer-events-none @endif">
+                                        <p class="w-full h-auto text-white font-normal text-center">
+                                            {{ $respondent_chat->number_of_unread_items() }}</p>
                                     </div>
                                 </div>
-                                <div class="w-6 h-6 rounded-full flex-shrink-0 @if ($user->is_search_target == true) bg-blue-600 @else bg-gray-400 text-gray-400 pointer-events-none @endif">
-                                    <p class="w-full h-auto text-white font-normal text-center">
-                                        {{ $respondent_chat->number_of_unread_items() }}</p>
-                                </div>
-                            </div>
-                        </a>
-                    @endforeach
+                            </a>
+                        @endforeach
+                    @endif
                 </div>
             </div>
             <div class="fixed bottom-0 md:bottom-10 w-full">

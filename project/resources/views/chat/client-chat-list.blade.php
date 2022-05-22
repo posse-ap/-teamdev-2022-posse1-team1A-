@@ -43,38 +43,45 @@
                     <p class="text-sm font-thin">あなたが回答者に相談を依頼しているページです。</p>
                 </div>
                 <div class="cards mb-5 pb-5">
-                    @foreach ($client_chats as $client_chat)
-                        <a class="block cursor-pointer mb-3 p-2 duration-300 bg-blue-50"
-                            href="{{ route('chat.index', ['chat_id' => $client_chat->id]) }}">
-                            <div class="flex justify-between items-center">
-                                <div class="lg:flex items-center justify-between sm:py-4 sm:pl-2 sm:pr-4 w-full flex-grow-0">
-                                    <div class="flex items-center mb-3 lg:mb-0">
-                                        <div
-                                            class="w-11 h-11 md:w-16 md:h-16 flex-shrink-0 rounded-full overflow-hidden object-cover mr-3">
-                                            <img class="w-full h-full object-cover"
-                                                src="{{ asset($client_chat->respondent_user->icon) }}" />
-                                        </div>
-                                        <div class="flex align-center">
-                                            <div>
-                                                <p class="lg:mb-3 text-base lg:text-xl">
-                                                    {{ $client_chat->respondent_user->nickname }}</p>
-                                                <p class="text-xs font-normal">{{ $client_chat->last_message->comment }}
-                                                </p>
+                    @if (count($client_chats) === 0)
+                        <p class="text-base">進行中のチャットはありません。</p>
+                    @else
+                        @foreach ($client_chats as $client_chat)
+                            <a class="block cursor-pointer mb-3 p-2 duration-300 bg-blue-50"
+                                href="{{ route('chat.index', ['chat_id' => $client_chat->id]) }}">
+                                <div class="flex justify-between items-center">
+                                    <div
+                                        class="lg:flex items-center justify-between sm:py-4 sm:pl-2 sm:pr-4 w-full flex-grow-0">
+                                        <div class="flex items-center mb-3 lg:mb-0">
+                                            <div
+                                                class="w-11 h-11 md:w-16 md:h-16 flex-shrink-0 rounded-full overflow-hidden object-cover mr-3">
+                                                <img class="w-full h-full object-cover"
+                                                    src="{{ asset($client_chat->respondent_user->icon) }}" />
+                                            </div>
+                                            <div class="flex align-center">
+                                                <div>
+                                                    <p class="lg:mb-3 text-base lg:text-xl">
+                                                        {{ $client_chat->respondent_user->nickname }}</p>
+                                                    <p class="text-xs font-normal">
+                                                        {{ $client_chat->last_message->comment }}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
+                                        <div class="ml-auto">
+                                            <p class="text-xs">相談日程
+                                                {{ $client_chat->interview_schedule ? "#{$client_chat->interview_schedule->schedule}~" : '' }}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="ml-auto">
-                                        <p class="text-xs">相談日程
-                                            {{ $client_chat->interview_schedule ? "#{$client_chat->interview_schedule->schedule}~" : '' }}
-                                        </p>
+                                    <div class="w-6 h-6 rounded-full bg-blue-600 flex-shrink-0">
+                                        <p class="w-full h-auto text-white font-normal text-center">
+                                            {{ $client_chat->number_of_unread_items() }}</p>
                                     </div>
                                 </div>
-                                <div class="w-6 h-6 rounded-full bg-blue-600 flex-shrink-0">
-                                    <p class="w-full h-auto text-white font-normal text-center">{{ $client_chat->number_of_unread_items() }}</p>
-                                </div>
-                            </div>
-                        </a>
-                    @endforeach
+                            </a>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </section>
