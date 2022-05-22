@@ -12,22 +12,6 @@ section {
     margin-right: calc(50% - 100vw);
 }
 
-.bg-blue {
-    background-color: #668bed;
-}
-
-.text-blue {
-    color: #668bed;
-}
-
-.text-navy {
-    color: #061663;
-}
-
-.bg-navy {
-    background-color: #061663;
-}
-
 .about-img {
     z-index: 0;
 }
