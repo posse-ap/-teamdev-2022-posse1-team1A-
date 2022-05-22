@@ -94,8 +94,14 @@ class UserController extends Controller
     {
         $userId = Auth::user();
         $userInfo = User::find($userId)->first();
-        // dd($userInfo);
-        $userInfo->name = $request->name;
+
+        $file_name = $request->file('user_icon')->getClientOriginalName();
+        $request->file('user_icon')->store('');
+        dd($request);
+
+        // TODO: fillがうまく使えなかったので一旦ゴリ押ししています
+        // dd($request->file('user_icon'));
+        $userInfo->icon = $request->user_icon;
         $userInfo->nickname = $request->nickname;
         $userInfo->email = $request->email;
         $userInfo->telephone_number = $request->telephone_number;

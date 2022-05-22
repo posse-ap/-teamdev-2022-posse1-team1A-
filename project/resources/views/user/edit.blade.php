@@ -85,7 +85,7 @@
 
     <main class="container mx-auto font-normal mb-12 bg-slate-50">
         <div class="mt-16 max-w-xl mx-auto">
-            <form action="{{ route('user_edit_post') }}" method="post">
+            <form action="{{ route('user_edit_post') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <h1 class="text-center text-4xl mb-12">アカウント編集</h1>
                 <div class="relative user-icon max-w-xs mx-auto">
@@ -94,7 +94,7 @@
                         alt="ユーザーアイコン">
                     <div class="pulus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full"
                         id="user-icon-button"></div>
-                    <input type="file" name="user-icon" class="hidden" id="user-icon-input">
+                    <input type="file" name="user_icon" class="hidden" id="user-icon-input">
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">氏名<span class="text-red-600">*</span></div>
