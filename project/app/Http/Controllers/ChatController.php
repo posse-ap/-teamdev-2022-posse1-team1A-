@@ -11,6 +11,7 @@ use App\Models\Chat;
 use App\Models\ChatRecord;
 use App\Models\Calling;
 use App\Models\InterviewSchedule;
+use App\Models\ScheduleStatus;
 
 class ChatController extends Controller
 {
@@ -45,9 +46,8 @@ class ChatController extends Controller
 
         // 日程決定しているか真偽を取得
         $isReserved = InterviewSchedule::where('chat_id', $chatRoomId)
-                                        ->where('schedule_status_id', 1)
+                                        ->where('schedule_status_id', ScheduleStatus::getPendingId())
                                         ->exists();
-                                        // 'schedule_statuses' = 1は日程決定済で面談待ちの状態
 
         // 日付をフォーマット
         foreach ($chatRecords as $chatRecord) {
