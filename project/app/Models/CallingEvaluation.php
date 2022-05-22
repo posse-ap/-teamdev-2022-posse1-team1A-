@@ -9,6 +9,17 @@ class CallingEvaluation extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'calling_id',
+        'user_id',
+        'is_satisfied',
+        'comment'
+    ];
     public function calling()
     {
         return $this->belongsTo('App\Models\Calling');
@@ -19,5 +30,3 @@ class CallingEvaluation extends Model
         return $this->belongsTo('App\Models\User');
     }
 }
-
-

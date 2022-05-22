@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Chat;
 use App\Models\ChatRecord;
+use App\Models\CallingEvaluation;
 use App\Models\Calling;
 use App\Models\InterviewSchedule;
 use App\Models\ScheduleStatus;
@@ -102,6 +103,7 @@ class ChatController extends Controller
     {
         $call = Calling::find($calling_id);
         $chat = Chat::find($call->chat_id);
+        $chatRoomId = $chat->id;
         // チャットルームの参加者情報を取得
         $loginUser = User::find(Auth::id());
         $loginUserId = $loginUser->id;
@@ -123,7 +125,7 @@ class ChatController extends Controller
         $skyway_key = config('skyway_key');
         $loginUserPeerId = $loginUser->peer_id;
         $partnerUserPeerId = $partnerUser->peer_id;
-        return view('chat.client-calling', compact('skyway_key', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName'));
+        return view('chat.client-calling', compact('skyway_key', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'chatRoomId', 'loginUserId'));
     }
 
     public function client_chat_list(Request $request)
@@ -157,5 +159,21 @@ class ChatController extends Controller
         $user->save();
 
         return redirect()->route('chat.respondent_chat_list');
+    }
+
+    public function post_review(Request $request)
+    {
+        $validated = $request->validate([
+            'calling_id' => 'required',
+            'user_id' => 'required',
+            'is_satisfied' => 'required',
+        ]);
+        CallingEvaluation::create([
+            'calling_id' => $request->chatRoomId,
+            'user_id' => $request->loginUserId,
+            'is_satisfied' => $request->boolean('is_satisfied'),
+            'comment' => $request->review_comment,
+        ]);
+        return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
 }
