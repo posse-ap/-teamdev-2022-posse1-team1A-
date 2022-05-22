@@ -1,6 +1,11 @@
 <div class="flex flex-col text-center py-12">
     <p class="text-left my-6 text-center pb-3 md:text-xl text-base">{{ $partnerUserName }}さんの評価をお願いします。</p>
-    <fieldset>
+    <form action="{{ route('chat.post_review', ['chat_id' => $chatRoomId]) }}" method="post" class="">
+        @csrf
+        <input type="hidden" value="{{ $call->id }}" name="calling_id">
+        <input type="hidden" value="{{ $chatRoomId }}" name="chat_id">
+        <input type="hidden" value="{{ $loginUserId }}" name="user_id">
+        <input type="hidden" value="{{ $isRespondent }}" name="is_respondent">
         <div class="flex mb-5">
             <div class="w-2/4">
                 <div class="fill-salmon-400 text-center">
@@ -12,7 +17,7 @@
                     </svg>
                 </div>
                 <p class="mt-5">良かった</p>
-                <input type="radio" class="border-black input-radio bg-gray-100" name="partner-review">
+                <input type="radio" class="border-black input-radio bg-gray-100" value="true" name="is_satisfied">
             </div>
             <div class="w-2/4">
                 <div class="fill-lightblue-300 text-center">
@@ -24,19 +29,21 @@
                     </svg>
                 </div>
                 <p class="mt-5">残念だった</p>
-                <input type="radio" class="border-black input-radio bg-gray-100" name="partner-review">
+                <input type="radio" class="border-black input-radio bg-gray-100" value="false" name="is_satisfied">
             </div>
         </div>
-    </fieldset>
-    <div class="ml-auto mr-auto w-4/5 h-30">
-        <div class="text-left mb-3">理由</div>
-        <label for="">
-            <form action="" method="post" class="bg-gray-100 rounded-md mb-5 h-12">
-                <input type="text" name="" id="" class="bg-gray-100 text-left w-full">
-            </form>
-        </label>
-    </div>
-    <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 rounded  w-64 mx-auto mb-5">
-        送信
-    </button>
+        <fieldset>
+            <div class="ml-auto mr-auto w-4/5 h-30">
+                <div class="text-left mb-3">理由</div>
+                <label for="">
+                    <input type="text" name="review_comment"
+                        class="bg-gray-100 text-left w-full bg-gray-100 rounded-md mb-5 h-12">
+                </label>
+                <button
+                    class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 rounded  md:w-64 w-full mx-auto mb-5">
+                    送信して戻る
+                </button>
+            </div>
+        </fieldset>
+    </form>
 </div>
