@@ -1,6 +1,6 @@
 <div class="flex flex-col text-center p-8">
     <div class="mb-5 font-bold text-lg">相談日程の変更</div>
-    {{-- <div class="mb-8">変更前相談日程 : {{ $respondent_chat->schedule ? "{$respondent_chat->schedule}~" : '' }}</div> --}}
+    <div class="mb-8">変更前相談日程 : {{ $respondent_chat->schedule ? "{$respondent_chat->schedule}~" : '' }}</div>
     {{-- TODO: feature/118マージ後コメントアウトを解除 --}}
     {{-- <form action="{{ route('chat.schedule', $chatRoomId) }}" method="POST"> --}}
     <form action="" method="POST">
