@@ -18,7 +18,8 @@ class CallingEvaluation extends Model
         'calling_id',
         'user_id',
         'is_satisfied',
-        'comment'
+        'comment',
+        'is_respondent'
     ];
     public function calling()
     {
