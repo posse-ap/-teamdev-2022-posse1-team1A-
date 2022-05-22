@@ -62,7 +62,7 @@
                         @if ($isReserved)
                             <button
                                 class="bg-yellow-400 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded ml-2 modal-open"
-                                id="schedule-change">
+                                id="schedule-change-or-cancel">
                                 日程変更
                             </button>
                         @else
@@ -153,6 +153,9 @@
                     </div>
                     <div class="modal-inner" id="schedule-change-modal">
                         @include('components.modals.schedule_change')
+                    </div>
+                    <div class="modal-inner" id="schedule-change-or-cancel-modal">
+                        @include('components.modals.schedule_change_or_cancel')
                     </div>
                     <div class="modal-inner" id="call-start-modal">
                         @include('components.modals.call-start')
