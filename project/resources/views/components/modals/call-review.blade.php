@@ -1,5 +1,5 @@
 <div class="flex flex-col text-center py-12">
-    <div class="text-left my-12 text-center pb-3 md:text-xl text-base">{{ $partnerUserName }}さんの評価をお願いします。</div>
+    <p class="text-left my-6 text-center pb-3 md:text-xl text-base">{{ $partnerUserName }}さんの評価をお願いします。</p>
     <fieldset>
         <div class="flex mb-5">
             <div class="w-2/4">
