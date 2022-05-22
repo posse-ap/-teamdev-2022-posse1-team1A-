@@ -4,7 +4,7 @@
         依頼者チャット機能をご利用いただけません。<br>
         チケットを購入してください。
     </p>
-    <p>現在のチケット数：{{ $is_ticket }}</p>
+    <p>現在のチケット数：{{ $ticket_counts }}</p>
     <div class="mt-10">
         <a
             href="{{ route('user_ticket') }}"

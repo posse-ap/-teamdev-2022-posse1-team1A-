@@ -19,8 +19,8 @@ class TicketCheck
     public function handle(Request $request, Closure $next)
     {
         $user = User::find(Auth::id());
-        $request->merge(['is_ticket' => $user->tickets()]);
-
+        $request->merge(['have_tickets' => $user->haveTickets()]);
+    
         return $next($request);
     }
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MessageSent;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,9 +17,6 @@ class ChatController extends Controller
 {
     public function index(Request $request, $chat_id)
     {
-        // チケットカウント
-        $is_ticket = $request->is_ticket;
-
         // チャットルームのidを受け取る
         $chatRoomId      = $chat_id;
 
@@ -60,7 +59,11 @@ class ChatController extends Controller
         $loginUserPeerId = $loginUser->peer_id;
         $partnerUserPeerId = $partnerUser->peer_id;
 
-        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key', 'is_ticket'));
+        // チケット存在確認
+        $have_tickets = $request->have_tickets;
+        $ticket_counts = $loginUser->countTickets();
+
+        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key', 'have_tickets', 'ticket_counts'));
     }
 
     public function post(Request $request)
@@ -74,6 +77,16 @@ class ChatController extends Controller
             'user_id' => Auth::id(),
             'comment' => $request->comment,
         ]);
+
+        $sender = User::find(Auth::id());
+        // 相手のデータ取得
+        if (Auth::id() === Chat::find($request->chatRoomId)->client_user_id) {
+            $receiver_id = Chat::find($request->chatRoomId)->respondent_user_id;
+        } else {
+            $receiver_id = Chat::find($request->chatRoomId)->client_user_id;
+        }
+        $receiver = User::find($receiver_id);
+        Mail::to($receiver->email)->send(new MessageSent($sender, $receiver));
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
 

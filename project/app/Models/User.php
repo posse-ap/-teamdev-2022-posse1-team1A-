@@ -42,7 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function tickets()
+    public function haveTickets()
+    {
+        return $this->hasMany('App\Models\Ticket')->where('ticket_status_id', TicketStatus::getPendingId())->exists();
+    }
+
+    public function countTickets()
     {
         return $this->hasMany('App\Models\Ticket')->where('ticket_status_id', TicketStatus::getPendingId())->count();
     }
