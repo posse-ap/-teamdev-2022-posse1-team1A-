@@ -2,6 +2,7 @@
     <div class="mb-5 font-bold text-lg">相談日程の登録</div>
     <div class="text-left mb-3">相談日程</div>
     <form action="" method="post">
+        @csrf
         <label>
             <input type="datetime-local" name="" class="w-full rounded-sm bg-gray-100 text-left mb-5">
         </label>

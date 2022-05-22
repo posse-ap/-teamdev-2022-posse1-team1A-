@@ -52,6 +52,12 @@ class ChatController extends Controller
                                         ->where('schedule_status_id', ScheduleStatus::getPendingId())
                                         ->exists();
 
+        // $respondent_chat = Chat::where('respondent_user_id', Auth::id())->where('is_finished', false)->where('id', $chatRoomId)->get();
+        $respondent_chat = InterviewSchedule::where('chat_id', $chat_id)
+        ->where('schedule_status_id', ScheduleStatus::getPendingId())
+        ->latest()
+        ->first();
+
         // 日付をフォーマット
         foreach ($chatRecords as $chatRecord) {
             if ($chatRecord->updated_at) {
@@ -68,7 +74,7 @@ class ChatController extends Controller
         $have_tickets = $request->have_tickets;
         $ticket_counts = $loginUser->countTickets();
 
-        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key', 'have_tickets', 'ticket_counts'));
+        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key', 'have_tickets', 'ticket_counts', 'respondent_chat'));
     }
 
     public function post(Request $request)
