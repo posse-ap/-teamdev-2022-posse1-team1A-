@@ -13,6 +13,15 @@
                 z-index: 2;
             }
 
+            .modal-load {
+                margin: 0;
+                padding: 20px;
+                background: #fff;
+                position: fixed;
+                display: none;
+                z-index: 2;
+            }
+
         </style>
     @endpush
     @push('scripts')
@@ -129,8 +138,16 @@
                     </div>
                 </form>
                 <div id="modal-content" class="md:w-2/4 w-4/5 rounded-2xl">
-                    {{-- TODO:閉じるボタンをちゃんとデザインする --}}
-                    <button id="modal-close">閉じる</button>
+                    <button id="modal-close"
+                        class="ml-auto block text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <span class="sr-only">Close menu</span>
+                        <!-- Heroicon name: outline/x -->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                     <div class="modal-inner" id="schedule-registration-modal">
                         @include('components.modals.schedule_registration')
                     </div>
@@ -149,6 +166,14 @@
                         @include('components.modals.call-review')
                     </div>
                 </div>
+                {{-- 依頼者かつチケットがない時モーダル表示 --}}
+                @if ($isClientChat && !$have_tickets)
+                    <div id="modal-load" class="md:w-2/4 w-4/5 rounded-2xl block modal-load">
+                        <div class="modal-inner" id="buy-ticket-modal">
+                            @include('components.modals.buy-ticket')
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
@@ -265,6 +290,51 @@
                     })
                     peer.on('error', console.error)
                 })()
+            </script>
+        @endif
+        @if ($isClientChat && !$have_tickets)
+            <script>
+                $(function() {
+                    //ロード時処理
+                    $(window).on('load', function() {
+                        //キーボード操作などにより、オーバーレイが多重起動するのを防止する
+                        $(this).blur(); //ボタンからフォーカスを外す
+                        if ($("#modal-overlay")[0]) return false; //新しくモーダルウィンドウを起動しない (防止策1)
+
+                        //オーバーレイを出現させる
+                        $("body").append('<div id="modal-overlay"></div>');
+                        $("#modal-overlay").fadeIn("slow");
+
+                        //コンテンツをセンタリングする
+                        centeringModalSyncer();
+
+                        //コンテンツをフェードインする
+                        $("#modal-load").fadeIn("slow");
+
+                    });
+
+                    //リサイズされたら、センタリングをする関数[centeringModalSyncer()]を実行する
+                    $(window).resize(centeringModalSyncer);
+
+                    //センタリングを実行する関数
+                    function centeringModalSyncer() {
+
+                        //画面(ウィンドウ)の幅、高さを取得
+                        var w = $(window).width();
+                        var h = $(window).height();
+
+                        // コンテンツ(#modal-load)の幅、高さを取得
+                        // jQueryのバージョンによっては、引数[{margin:true}]を指定した時、不具合を起こします。
+                        var cw = $("#modal-load").outerWidth();
+                        var ch = $("#modal-load").outerHeight();
+
+                        //センタリングを実行する
+                        $("#modal-load").css({
+                            "left": ((w - cw) / 2) + "px",
+                            "top": ((h - ch) / 2) + "px"
+                        });
+                    }
+                });
             </script>
         @endif
     @endpush

@@ -51,7 +51,7 @@ Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
 
 
     Route::group(['prefix' => '/{chat_id}'], function () {
-        Route::get('/', 'App\Http\Controllers\ChatController@index')->name('index');
+        Route::get('/', 'App\Http\Controllers\ChatController@index')->name('index')->middleware('chat');
         Route::post('/', 'App\Http\Controllers\ChatController@post')->name('post');
 
         Route::post('/review', 'App\Http\Controllers\ChatController@post_review')->name('post_review');
