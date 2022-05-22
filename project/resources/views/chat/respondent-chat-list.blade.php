@@ -41,7 +41,7 @@
                                 <div class="flex justify-between items-center">
                                     <div
                                         class="lg:flex items-center justify-between sm:py-4 sm:pl-2 sm:pr-4 w-full flex-grow-0">
-                                        <div class="flex items-center mb-3 lg:mb-0">
+                                        <div class="flex items-center">
                                             <div
                                                 class="w-11 h-11 md:w-16 md:h-16 flex-shrink-0 rounded-full overflow-hidden object-cover mr-3">
                                                 @if ($user->is_search_target == true)
@@ -62,11 +62,13 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="ml-auto">
-                                            <p class="text-xs">相談日程
-                                                {{ $respondent_chat->interview_schedule ? "#{$respondent_chat->interview_schedule->schedule}~" : '' }}
-                                            </p>
-                                        </div>
+                                        @isset($respondent_chat->interview_schedule)
+                                            <div class="ml-auto mt-3">
+                                                <p class="text-xs">相談日程
+                                                    {{ $respondent_chat->interview_schedule ? "#{$respondent_chat->interview_schedule->schedule}~" : '' }}
+                                                </p>
+                                            </div>
+                                        @endisset
                                     </div>
                                     <div
                                         class="w-6 h-6 rounded-full flex-shrink-0 @if ($user->is_search_target == true) bg-blue-600 @else bg-gray-400 text-gray-400 pointer-events-none @endif">
