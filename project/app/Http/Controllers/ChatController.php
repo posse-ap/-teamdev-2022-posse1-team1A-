@@ -171,6 +171,16 @@ class ChatController extends Controller
         return redirect()->route('chat.respondent_chat_list');
     }
 
+    public function schedule(Request $request)
+    {
+        $schedule = new InterviewSchedule;
+        $schedule->schedule_status_id = ScheduleStatus::getPendingId();
+        $schedule->schedule = $request->schedule;
+        $schedule->chat_id = $request->chatRoomId;
+        $schedule->save();
+        
+        return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
+    }
     public function post_review(Request $request)
     {
         $validated = $request->validate([
@@ -184,6 +194,5 @@ class ChatController extends Controller
             'is_satisfied' => $request->boolean('is_satisfied'),
             'comment' => $request->review_comment,
         ]);
-        return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
 }
