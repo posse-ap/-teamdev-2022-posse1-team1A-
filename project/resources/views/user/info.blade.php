@@ -65,12 +65,12 @@
                     <div class="col-span-1 text-right">勤続年数</div>
                     <div class="col-span-1">{{ $userInfo->length_of_service }}</div>
                 </div>
-                <button
-                    class="block bg-lightblue-500 hover:bg-blue-300 text-white sm:text-base text-xs py-1 px-4 rounded mx-auto mb-5 w-60">
-                    <a href="">
+                <a href="{{ route('user_edit') }}"
+                    class="block bg-lightblue-500 hover:bg-blue-300 text-white sm:text-base text-xs py-1 px-4 rounded mx-auto mb-5 w-60 text-center">
+                    <p>
                         プロフィールを編集する
-                    </a>
-                </button>
+                    </p>
+                </a>
                 <a href="{{ route('user_withdrawal') }}"
                     class="block bg-red-400 hover:bg-red-500 text-white sm:text-base text-xs py-1 px-4 rounded mx-auto w-60 text-center">
                     <p class="text-center">

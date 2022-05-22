@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TicketPurchased;
 use PayPay\OpenPaymentAPI\Client;
 
 class PayPay extends Model
@@ -30,7 +33,7 @@ class PayPay extends Model
         if (Settlement::where('user_id', Auth::id())->where('is_paid', false)->exists()) {
             $settlement = Settlement::where('user_id', Auth::id())->where('is_paid', false)->first();
             $merchantPaymentId = $settlement->paypay_settlement_id;
-            $QRCodeDetails = $client->payment->getPaymentDetails($merchantPaymentId);
+            $QRCodeDetails = $client->code->getPaymentDetails($merchantPaymentId);
             if ($QRCodeDetails['resultInfo']['code'] !== 'SUCCESS') {
                 echo ("決済情報取得エラー");
                 return;
@@ -47,6 +50,10 @@ class PayPay extends Model
                     ]);
                 }
                 Ticket::insert($tickets);
+                $client = User::find($settlement->user_id);
+                $quantity = $settlement->quantity;
+                $payment = $settlement->amount_of_payment;
+                Mail::to($client->email)->send(new TicketPurchased($client, $quantity, $payment));
             }
         }
         return;

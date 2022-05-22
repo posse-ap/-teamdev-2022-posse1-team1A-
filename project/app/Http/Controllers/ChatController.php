@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\MessageSent;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,7 +47,9 @@ class ChatController extends Controller
         $chatRecords     = ChatRecord::where('chat_id', $chatRoomId)->get();
 
         // 日程決定しているか真偽を取得
-        $isReserved      = 1;
+        $isReserved = InterviewSchedule::where('chat_id', $chatRoomId)
+                                        ->where('schedule_status_id', ScheduleStatus::getPendingId())
+                                        ->exists();
 
         // 日付をフォーマット
         foreach ($chatRecords as $chatRecord) {
@@ -73,6 +77,16 @@ class ChatController extends Controller
             'user_id' => Auth::id(),
             'comment' => $request->comment,
         ]);
+
+        $sender = User::find(Auth::id());
+        // 相手のデータ取得
+        if (Auth::id() === Chat::find($request->chatRoomId)->client_user_id) {
+            $receiver_id = Chat::find($request->chatRoomId)->respondent_user_id;
+        } else {
+            $receiver_id = Chat::find($request->chatRoomId)->client_user_id;
+        }
+        $receiver = User::find($receiver_id);
+        Mail::to($receiver->email)->send(new MessageSent($sender, $receiver));
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
 

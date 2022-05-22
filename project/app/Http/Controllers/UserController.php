@@ -83,6 +83,13 @@ class UserController extends Controller
         return redirect()->route('user_index');
     }
 
+    public function userEdit()
+    {
+        $userId = 1;
+        $userInfo = User::find($userId);
+        return view('user.edit', compact('userInfo'));
+    }
+    
     public function beginner()
     {
         return view('user.beginner');

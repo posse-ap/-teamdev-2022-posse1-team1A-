@@ -31,7 +31,7 @@ class InterviewScheduleFactory extends Factory
         return [
             'chat_id' => Chat::find($this->faker->numberBetween(1, Chat::count()))->id,
             'schedule' => $schedule,
-            'schedule_status_id' => $schedule_status_id,
+            'schedule_statuses' => $schedule_status_id,
         ];
     }
 }

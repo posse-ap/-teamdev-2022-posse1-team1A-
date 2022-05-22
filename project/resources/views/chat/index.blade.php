@@ -50,11 +50,19 @@
                                 </span>
                             </button>
                         @endif
-                        <button
-                            class="bg-yellow-400 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded ml-2 modal-open"
-                            id="schedule-registration">
-                            日程登録
-                        </button>
+                        @if ($isReserved)
+                            <button
+                                class="bg-yellow-400 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded ml-2 modal-open"
+                                id="schedule-change">
+                                日程変更
+                            </button>
+                        @else
+                            <button
+                                class="bg-yellow-400 hover:bg-gray-800 text-white font-bold py-1 px-4 rounded ml-2 modal-open"
+                                id="schedule-registration">
+                                日程登録
+                            </button>
+                        @endif
                     </div>
                 </div>
                 <div class="cards mx-3 overflow-scroll">
@@ -125,6 +133,9 @@
                     <button id="modal-close">閉じる</button>
                     <div class="modal-inner" id="schedule-registration-modal">
                         @include('components.modals.schedule_registration')
+                    </div>
+                    <div class="modal-inner" id="schedule-change-modal">
+                        @include('components.modals.schedule_change')
                     </div>
                     <div class="modal-inner" id="call-start-modal">
                         @include('components.modals.call-start')
