@@ -213,7 +213,7 @@
                 </div>
                 {{-- 依頼者かつチケットがない時モーダル表示 --}}
                 @if ($isClientChat && !$have_tickets)
-                    <div id="modal-load" class="md:w-2/4 w-4/5 rounded-2xl block modal-load">
+                    <div id="modal-load" class="md:w-2/4 w-11/12 rounded-2xl block modal-load">
                         <div class="modal-inner" id="buy-ticket-modal">
                             @include('components.modals.buy-ticket')
                         </div>
