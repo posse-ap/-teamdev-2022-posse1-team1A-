@@ -80,12 +80,11 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
 
-                    <button href="route('logout')" onclick="event.preventDefault();
+                    <button href="{{ route('logout') }}" class="block mt-5 text-gray-500 sm:text-base text-xs py-1 px-4 rounded mx-auto mb-5 w-60 text-center" onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                        ログアウト
                     </button>
                 </form>
-
             </div>
         </section>
     </main>

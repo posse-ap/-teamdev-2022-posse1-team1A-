@@ -1,8 +1,10 @@
 <header id="header" class="sticky top-0 w-full bg-white bg-opacity-75 shadow-lg z-50">
     <div id="base-header" class="px-10 py-3 flex items-center justify-between flex-shrink-0 items-center">
-        <div id="header-logo" class="flex w-8 h-8 ml-0 mr-auto">
+        <div  id="header-logo" class="w-8 h-8 ml-0 mr-auto">
+            <a href="{{ route('user_index') }}" class="flex">
             <img src="{{ asset('img/logo-black.png') }}" alt="logo-black.png">
             <p class="flex ml-2 text-xl items-center"><b>Anovey<b></p>
+            </a>
         </div>
 
         {{-- 一旦ログインステータスを1に --}}
