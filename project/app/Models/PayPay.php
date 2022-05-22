@@ -30,7 +30,7 @@ class PayPay extends Model
         if (Settlement::where('user_id', Auth::id())->where('is_paid', false)->exists()) {
             $settlement = Settlement::where('user_id', Auth::id())->where('is_paid', false)->first();
             $merchantPaymentId = $settlement->paypay_settlement_id;
-            $QRCodeDetails = $client->payment->getPaymentDetails($merchantPaymentId);
+            $QRCodeDetails = $client->code->getPaymentDetails($merchantPaymentId);
             if ($QRCodeDetails['resultInfo']['code'] !== 'SUCCESS') {
                 echo ("決済情報取得エラー");
                 return;
