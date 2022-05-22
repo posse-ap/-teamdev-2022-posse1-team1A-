@@ -154,6 +154,9 @@
                     <div class="modal-inner" id="schedule-change-modal">
                         @include('components.modals.schedule_change')
                     </div>
+                    <div class="modal-inner" id="schedule-cancel-modal">
+                        @include('components.modals.schedule_cancel')
+                    </div>
                     <div class="modal-inner" id="schedule-change-or-cancel-modal">
                         @include('components.modals.schedule_change_or_cancel')
                     </div>
