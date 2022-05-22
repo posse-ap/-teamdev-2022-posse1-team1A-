@@ -50,7 +50,7 @@ class PayPay extends Model
                     ]);
                 }
                 Ticket::insert($tickets);
-                $client = User::find(Auth::id());
+                $client = User::find($settlement->user_id);
                 $quantity = $settlement->quantity;
                 $payment = $settlement->amount_of_payment;
                 Mail::to($client->email)->send(new TicketPurchased($client, $quantity, $payment));
