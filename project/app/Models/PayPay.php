@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Artisan;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TicketPurchased;
 use PayPay\OpenPaymentAPI\Client;
 
 class PayPay extends Model
@@ -47,6 +50,10 @@ class PayPay extends Model
                     ]);
                 }
                 Ticket::insert($tickets);
+                $client = User::find($settlement->user_id);
+                $quantity = $settlement->quantity;
+                $payment = $settlement->amount_of_payment;
+                Mail::to($client->email)->send(new TicketPurchased($client, $quantity, $payment));
             }
         }
         return;
