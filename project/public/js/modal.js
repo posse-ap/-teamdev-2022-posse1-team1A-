@@ -17,11 +17,11 @@ $(function () {
     //オーバーレイを出現させる
 
     $("body").append('<div id="modal-overlay"></div>');
-    $("#modal-overlay").fadeIn("slow"); //コンテンツをセンタリングする
+    $("#modal-overlay").fadeIn("slow"); //コンテンツをフェードインする
 
-    centeringModalSyncer(); //コンテンツをフェードインする
+    $("#modal-content").fadeIn("slow"); //コンテンツをセンタリングする
 
-    $("#modal-content").fadeIn("slow"); //[#modal-overlay]、または[#modal-close]をクリックしたら…
+    centeringModalSyncer(); //[#modal-overlay]、または[#modal-close]をクリックしたら…
 
     $("#modal-overlay,#modal-close").unbind().click(function () {
       //[#modal-content]と[#modal-overlay]をフェードアウトした後に…
