@@ -111,6 +111,23 @@
                         remoteVideo.srcObject.getTracks().forEach(track => track.stop())
                         remoteVideo.srcObject = null
                         clearInterval(timer)
+
+                        const finishCall = function() {
+                            $.ajax({
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                        'content'),
+                                },
+                                url: `/chat/call/{{ $call->id }}/finish`,
+                                type: 'POST',
+                                data: {
+                                    call_id: {{ $call->id }},
+                                },
+                            })
+                            return false;
+                        }
+                        finishCall()
+
                         $(".modal-inner").hide()
                         $("#call-review-modal").show()
                         $("body").append('<div id="modal-overlay"></div>')
