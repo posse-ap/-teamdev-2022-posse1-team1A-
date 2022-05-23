@@ -65,7 +65,7 @@
                                         @isset($respondent_chat->interview_schedule)
                                             <div class="ml-auto mt-3">
                                                 <p class="text-xs">相談日程
-                                                    {{ $respondent_chat->interview_schedule ? "#{$respondent_chat->interview_schedule->schedule}~" : '' }}
+                                                    {{ $respondent_chat->interview_schedule ? "：{$respondent_chat->interview_schedule->schedule->format('Y/m/d H:i')}" : '' }}
                                                 </p>
                                             </div>
                                         @endisset
