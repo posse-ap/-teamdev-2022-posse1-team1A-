@@ -39,10 +39,8 @@ class ChatController extends Controller
         if ($respondentUserId === $loginUser->id) {
             $partnerUser = User::find($clientUserId);
             $isClientChat = false;
-            $isClientChat = false;
             $isRespondent = true;
         } else {
-            $partnerUser = User::find($respondentUserId);
             $partnerUser = User::find($respondentUserId);
             $isClientChat = true;
             $isRespondent = false;
