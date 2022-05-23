@@ -98,7 +98,7 @@
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">電話番号<span class="text-red-600">*</span></div>
                     <div class="col-span-3">
-                        <input class="mb-2 rounded-md bg-white w-full" type="text" name="email" id="">
+                        <input class="mb-2 rounded-md bg-white w-full" type="tel" name="tel" id="">
                         <span>※ PayPayで使用している電話番号を入力してください。</span>
                     </div>
                 </div>
