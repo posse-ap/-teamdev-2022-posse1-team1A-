@@ -20,6 +20,7 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->integer('calling_time')->default(0);
+            $table->boolean('is_finished')->default(false);
             $table->timestamps();
             $table->softDeletes($column = 'deleted_at', $precision = 0);
         });

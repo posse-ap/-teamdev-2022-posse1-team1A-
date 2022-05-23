@@ -26,7 +26,7 @@
                         alt="">
                 </a>
                 <button
-                    class="relative bg-yellow-500 hover:bg-yellow-700 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
+                    class="relative bg-yellow-500 hover:bg-yellow-600 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
                     <div>
                         <span class="count" id="notifications-count">5</span>
                         <span class="fa fa-bell-o"></span>
@@ -37,7 +37,7 @@
                 </button>
 
                 <button
-                    class="relative bg-lightblue-500 hover:bg-blue-700 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
+                    class="relative bg-lightblue-500 hover:bg-blue-600 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
                     <div>
                         <span class="count" id="notifications-count">3</span>
                         <span class="fa fa-bell-o"></span>

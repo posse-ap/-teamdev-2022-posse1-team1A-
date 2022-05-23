@@ -108,3 +108,19 @@
 .shadow-2xl {
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
 }
+
+.bg-blue {
+    background-color: #668bed;
+}
+
+.text-blue {
+    color: #668bed;
+}
+
+.text-navy {
+    color: #061663;
+}
+
+.bg-navy {
+    background-color: #061663;
+}

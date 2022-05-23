@@ -15,11 +15,12 @@ $(function() {
         $("body").append('<div id="modal-overlay"></div>');
         $("#modal-overlay").fadeIn("slow");
 
-        //コンテンツをセンタリングする
-        centeringModalSyncer();
-
+        
         //コンテンツをフェードインする
         $("#modal-content").fadeIn("slow");
+        
+        //コンテンツをセンタリングする
+        centeringModalSyncer();
 
         //[#modal-overlay]、または[#modal-close]をクリックしたら…
         $("#modal-overlay,#modal-close").unbind().click(function() {
