@@ -108,12 +108,7 @@
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">会社名<span class="text-red-600">*</span></div>
-                    <select  name="company" class="rounded-md bg-white col-span-3 h-10 w-full">
-                        <option value=""></option>
-                        <option value="1">11111</option>
-                        <option value="2">22222</option>
-                    </select>
-                    {{-- <input class="rounded-md bg-white col-span-3" type="text" name="company" id=""> --}}
+                    <input class="rounded-md bg-white col-span-3" type="text" name="company" id="">
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">部署名</div>

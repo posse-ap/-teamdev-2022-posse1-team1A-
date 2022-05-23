@@ -43,11 +43,7 @@
             {{-- company --}}
             <div class="md:grid md:grid-cols-4 md:gap-2 px-5 mb-9">
                 <div class="col-span-4">会社名<span class="text-red-600">*</span></div>
-                <select name="company" class="rounded-md bg-lightgray-200 col-span-4 h-10 w-full">
-                    <option value=""></option>
-                    <option value="1">11111</option>
-                    <option value="2">22222</option>
-                </select>
+                <input name="company" class="rounded-md bg-lightgray-200 col-span-4 h-10 w-full">
             </div>
             {{-- department --}}
             <div class="md:grid md:grid-cols-4 md:gap-2 px-5 mb-9">
