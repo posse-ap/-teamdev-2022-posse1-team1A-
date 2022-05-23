@@ -27,7 +27,7 @@ class ChatController extends Controller
         // チャットルームの情報を取得
         $chat            = Chat::find($chatRoomId);
 
-        $call = Calling::where('chat_id', $chatRoomId)->where('is_finished', false)->first();
+        $call = Calling::where('chat_id', $chatRoomId)->where('is_finished', false)->orderBy('created_at', 'desc')->first();
 
         // チャットルームの参加者情報を取得
         $loginUser = User::find(Auth::id());
@@ -39,10 +39,8 @@ class ChatController extends Controller
         if ($respondentUserId === $loginUser->id) {
             $partnerUser = User::find($clientUserId);
             $isClientChat = false;
-            $isClientChat = false;
             $isRespondent = true;
         } else {
-            $partnerUser = User::find($respondentUserId);
             $partnerUser = User::find($respondentUserId);
             $isClientChat = true;
             $isRespondent = false;
