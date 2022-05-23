@@ -145,10 +145,26 @@ class ChatController extends Controller
         return view('chat.client-calling', compact('skyway_key', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'chatRoomId', 'loginUserId', 'call', 'isRespondent'));
     }
 
+    public function calling_time(Request $request, $calling_id)
+    {
+        $call = Calling::find($calling_id);
+        $call->calling_time = $request->calling_time;
+        $call->save();
+        return redirect(route('chat.call', ['calling_id' => $calling_id]));
+    }
+
+    public function finish_call(Request $request, $calling_id)
+    {
+        $call = Calling::find($calling_id);
+        $call->is_finished = true;
+        $call->save();
+        return redirect(route('chat.call', ['calling_id' => $calling_id]));
+    }
+
     public function client_chat_list(Request $request)
     {
         $client_chats = Chat::where('client_user_id', Auth::id())->where('is_finished', false)->get();
-        
+
         // チケット枚数
         $loginUser = User::find(Auth::id());
         $ticket_counts = $loginUser->countTickets();
