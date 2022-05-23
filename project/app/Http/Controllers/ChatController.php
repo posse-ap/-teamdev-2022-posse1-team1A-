@@ -144,7 +144,12 @@ class ChatController extends Controller
     public function client_chat_list(Request $request)
     {
         $client_chats = Chat::where('client_user_id', Auth::id())->where('is_finished', false)->get();
-        return view('chat.client-chat-list', compact('client_chats'));
+        
+        // チケット枚数
+        $loginUser = User::find(Auth::id());
+        $ticket_counts = $loginUser->countTickets();
+
+        return view('chat.client-chat-list', compact('client_chats', 'ticket_counts'));
     }
 
     public function respondent_chat_list(Request $request)

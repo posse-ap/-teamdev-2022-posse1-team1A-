@@ -13,10 +13,10 @@
             <div class="container mx-auto px-6">
                 <div>
                     <div class="flex items-center py-4 mx-auto overflow-y-auto whitespace-nowrap font-thin text-sm">
-                        <a href="{{ route('user_index') }}" class="text-gray-600 dark:text-gray-200">
+                        <a href="{{ route('user_index') }}" class="text-gray-600">
                             トップ
                         </a>
-                        <span class="mx-5 text-gray-500 dark:text-gray-300">
+                        <span class="mx-5 text-gray-500">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                 fill="currentColor">
                                 <path fill-rule="evenodd"
@@ -24,7 +24,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </span>
-                        <p class="text-gray-600 dark:text-gray-200">
+                        <p class="text-gray-600">
                             チケット購入
                         </p>
                     </div>
