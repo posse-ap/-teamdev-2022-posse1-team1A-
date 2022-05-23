@@ -13,5 +13,8 @@ class InterviewSchedule extends Model
     {
         return $this->belongsTo(Chat::class);
     }
-    
+
+    protected $dates = [
+        'schedule'
+    ];
 }

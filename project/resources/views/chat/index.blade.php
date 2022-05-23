@@ -74,7 +74,7 @@
                                     通話
                                 </button>
                             @else
-                                <button disabled class="bg-gray-400 text-white font-bold py-1 px-8 rounded ml-2">
+                                <button disabled class="bg-gray-300 text-white font-bold py-1 px-8 rounded ml-2">
                                     {{-- TODO:通話で10min経過してからモーダル表示に切り替える --}}
                                     通話
                                 </button>
@@ -119,10 +119,27 @@
                         <div id="scroll-inner">
                             @if ($isClientChat)
                                 <div
-                                    class="fixed absolute right-0 card sm:m-5 sm:mr-8 p-3 bg-gray-50 w-full sm:w-72 sm:rounded-md drop-shadow-md ml-auto text-xs md:text-sm">
-                                    日程が決まりましたら<br class="hidden sm:block">日程登録ボタンを押してください。<br>
-                                    リマインドメールが送信されます。
+                                    class="fixed absolute right-0 card sm:m-5 sm:mr-8 p-3 bg-gray-50 w-full sm:w-min sm:rounded-md drop-shadow-md ml-auto text-xs md:text-sm">
+                                    @if (!$isReserved)
+                                        <p class="whitespace-nowrap">
+                                            日程が決まりましたら<br class="hidden sm:block">日程登録ボタンを押してください。<br>
+                                            リマインドメールが送信されます。
+                                        </p>
+                                    @else
+                                        <p class="md:text-center whitespace-nowrap">
+                                            相談日程：{{ $interview_schedule->schedule->format('Y/m/d H:i') }}
+                                        </p>
+                                    @endif
                                 </div>
+                            @else
+                                @if ($isReserved)
+                                    <div
+                                        class="fixed absolute right-0 card sm:m-5 sm:mr-8 p-3 bg-gray-50 w-full sm:w-min sm:rounded-md drop-shadow-md ml-auto text-xs md:text-sm">
+                                        <p class="md:text-center whitespace-nowrap">
+                                            相談日程：{{ $interview_schedule->schedule->format('Y/m/d H:i') }}
+                                        </p>
+                                    </div>
+                                @endif
                             @endif
                             <div class="spacer h-28"></div>
                             @foreach ($chatRecords as $key => $chatRecord)

@@ -74,9 +74,9 @@
                                             </div>
                                         </div>
                                         @isset($client_chat->interview_schedule)
-                                            <div class="ml-auto mt-3">
-                                                <p class="text-xs">相談日程
-                                                    {{ $client_chat->interview_schedule ? "#{$client_chat->interview_schedule->schedule}~" : '' }}
+                                            <div class="ml-auto mt-3 lg:mt-0">
+                                                <p class="text-xs">相談日程：
+                                                    {{ $client_chat->interview_schedule ? "{$client_chat->interview_schedule->schedule->format('Y/m/d H:i')}" : '' }}
                                                 </p>
                                             </div>
                                         @endisset

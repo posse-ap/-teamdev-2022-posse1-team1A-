@@ -15,6 +15,7 @@ use App\Models\CallingEvaluation;
 use App\Models\Calling;
 use App\Models\InterviewSchedule;
 use App\Models\ScheduleStatus;
+use App\Models\Role;
 
 class ChatController extends Controller
 {
@@ -74,7 +75,10 @@ class ChatController extends Controller
         $have_tickets = $request->have_tickets;
         $ticket_counts = $loginUser->countTickets();
 
-        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isRespondent', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key', 'have_tickets', 'ticket_counts', 'call'));
+        // 相談日程取得
+        $interview_schedule = InterviewSchedule::where('chat_id', $chat_id)->orderBy('created_at', 'desc')->first();
+
+        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isRespondent', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key', 'have_tickets', 'ticket_counts', 'call', 'interview_schedule'));
     }
 
     public function post(Request $request)
@@ -186,6 +190,15 @@ class ChatController extends Controller
         $schedule->schedule = $request->schedule;
         $schedule->chat_id = $request->chatRoomId;
         $schedule->save();
+
+        // 日程予約・変更時anoveybot送信
+        $interview_schedule = InterviewSchedule::where('chat_id', $request->chatRoomId)->orderBy('created_at', 'desc')->first();
+
+        $chat_record = new ChatRecord;
+        $chat_record->chat_id = $request->chatRoomId;
+        $chat_record->user_id = Role::getBotId();
+        $chat_record->comment = "相談日程は " . $interview_schedule->schedule->format('Y/m/d H:i') . " に予約されました。";
+        $chat_record->save();
 
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
