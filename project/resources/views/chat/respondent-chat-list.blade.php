@@ -57,24 +57,28 @@
                                                     <p class="lg:mb-3 text-base lg:text-xl">
                                                         {{ $respondent_chat->client_user->nickname }}</p>
                                                     <p class="text-xs font-normal">
-                                                        {{ $respondent_chat->last_message->comment }}
+                                                        @isset($respondent_chat->last_message->comment)
+                                                            {{ $respondent_chat->last_message->comment }}
+                                                        @endisset
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
                                         @isset($respondent_chat->interview_schedule)
-                                            <div class="ml-auto mt-3">
+                                            <div class="ml-auto mt-3 lg:mt-0">
                                                 <p class="text-xs">相談日程
                                                     {{ $respondent_chat->interview_schedule ? "：{$respondent_chat->interview_schedule->schedule->format('Y/m/d H:i')}" : '' }}
                                                 </p>
                                             </div>
                                         @endisset
                                     </div>
-                                    <div
-                                        class="w-6 h-6 rounded-full flex-shrink-0 @if ($user->is_search_target == true) bg-blue-600 @else bg-gray-400 text-gray-400 pointer-events-none @endif">
-                                        <p class="w-full h-auto text-white font-normal text-center">
-                                            {{ $respondent_chat->number_of_unread_items() }}</p>
-                                    </div>
+                                    @if ($respondent_chat->number_of_unread_items() !== 0)
+                                        <div
+                                            class="w-6 h-6 rounded-full flex-shrink-0 @if ($user->is_search_target == true) bg-blue-600 @else bg-gray-400 text-gray-400 pointer-events-none @endif">
+                                            <p class="w-full h-auto text-white font-normal text-center">
+                                                {{ $respondent_chat->number_of_unread_items() }}</p>
+                                        </div>
+                                    @endif
                                 </div>
                             </a>
                         @endforeach

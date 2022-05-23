@@ -124,15 +124,25 @@
                 </li>
             </ul>
             <div class="flex w-screen">
-                <button class="bg-lightblue-500 p-5 hover:bg-gray-800 text-white sm:text-base text-sm font-bold w-6/12">
-                    <a href="{{ route('chat.client_chat_list') }}">
-                        依頼者チャット
-                    </a>
+                <button class="bg-lightblue-500 p-5 hover:bg-blue-600 text-white sm:text-base text-sm font-bold w-6/12">
+                    <div class="flex mx-auto w-min items-center">
+                        <a href="{{ route('chat.client_chat_list') }}" class="whitespace-nowrap">
+                            依頼者チャット
+                        </a>
+                        <div class="bg-red-600 rounded-full w-5 h-5 ml-1">
+                            <p class="text-white w-full h-full sm:leading-tight">3</p>
+                        </div>
+                    </div>
                 </button>
-                <button class="bg-yellow-500 p-5 hover:bg-blue-700 text-white sm:text-base text-sm font-bold w-6/12">
-                    <a href="{{ route('chat.respondent_chat_list') }}">
-                        回答者チャット
-                    </a>
+                <button class="bg-yellow-500 p-5 hover:bg-yellow-600 text-white sm:text-base text-sm font-bold w-6/12">
+                    <div class="flex mx-auto w-min items-center">
+                        <a href="{{ route('chat.respondent_chat_list') }}" class="whitespace-nowrap">
+                            回答者チャット
+                        </a>
+                        <div class="bg-red-600 rounded-full w-5 h-5 ml-1">
+                            <p class="text-white w-full h-full sm:leading-tight">5</p>
+                        </div>
+                    </div>
                 </button>
             </div>
         </div>
