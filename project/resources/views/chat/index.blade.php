@@ -162,7 +162,10 @@
                                     <div class="card flex items-center justify-end">
                                         <div class="icon w-12 h-12 rounded-full overflow-hidden">
                                         </div>
-                                        <div class="time mt-auto mb-5">
+                                        <div class="time mt-auto mb-5 text-xs">
+                                            @if ($chatRecord->is_read)
+                                                <span class="text-slate-400 block text-right">既読</span>
+                                            @endif
                                             <span class="text-slate-400 block">{{ $chatRecord->date }}</span>
                                         </div>
                                         <div class="m-5 p-3 max-w-max bg-slate-100 rounded-3xl">
@@ -178,7 +181,7 @@
                                         <div class="m-5 p-3 max-w-max border-2 rounded-3xl mr-1 bg-sky-100">
                                             {{ $chatRecord->comment }}
                                         </div>
-                                        <div class="time mt-auto mb-5">
+                                        <div class="time mt-auto mb-5 text-xs">
                                             <span class="text-slate-400">{{ $chatRecord->date }}</span>
                                         </div>
                                     </div>
@@ -191,10 +194,7 @@
                                         <div class="m-5 p-3 max-w-max border-2 rounded-3xl mr-1">
                                             {{ $chatRecord->comment }}
                                         </div>
-                                        <div class="time mt-auto mb-5">
-                                            @if ($chatRecord->is_read)
-                                                <span class="text-slate-400 block text-right">既読</span>
-                                            @endif
+                                        <div class="time mt-auto mb-5 text-xs">
                                             <span class="text-slate-400">{{ $chatRecord->date }}</span>
                                         </div>
                                     </div>

@@ -76,6 +76,12 @@ class ChatController extends Controller
         // 相談日程取得
         $interview_schedule = InterviewSchedule::where('chat_id', $chat_id)->orderBy('created_at', 'desc')->first();
 
+        // 既読機能
+        $update_column = [
+            'is_read' => true,
+        ];
+        ChatRecord::where('chat_id', $chatRoomId)->where('user_id', '<>', Auth::id())->where('is_read', false)->update($update_column);
+
         return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isRespondent', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key', 'have_tickets', 'ticket_counts', 'call', 'interview_schedule'));
     }
 

@@ -68,7 +68,9 @@
                                                     <p class="lg:mb-3 text-base lg:text-xl">
                                                         {{ $client_chat->respondent_user->nickname }}</p>
                                                     <p class="text-xs font-normal">
-                                                        {{ $client_chat->last_message->comment }}
+                                                        @isset($client_chat->last_message->comment)
+                                                            {{ $client_chat->last_message->comment }}
+                                                        @endisset
                                                     </p>
                                                 </div>
                                             </div>
@@ -81,10 +83,12 @@
                                             </div>
                                         @endisset
                                     </div>
-                                    <div class="w-6 h-6 rounded-full bg-blue-600 flex-shrink-0">
-                                        <p class="w-full h-auto text-white font-normal text-center">
-                                            {{ $client_chat->number_of_unread_items() }}</p>
-                                    </div>
+                                    @if ($client_chat->number_of_unread_items() !== 0)
+                                        <div class="w-6 h-6 rounded-full bg-blue-600 flex-shrink-0">
+                                            <p class="w-full h-auto text-white font-normal text-center">
+                                                {{ $client_chat->number_of_unread_items() }}</p>
+                                        </div>
+                                    @endif
                                 </div>
                             </a>
                         @endforeach
