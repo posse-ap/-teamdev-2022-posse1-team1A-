@@ -7,8 +7,7 @@
             </a>
         </div>
 
-        {{-- 一旦ログインステータスを1に --}}
-        {{-- TODO:ログイン機能実装後、削除↓ --}}
+        {{-- ログイン状態識別 --}}
         <?php
         if (Auth::check()) {
             $account_status_id = 1;
@@ -18,8 +17,8 @@
         ?>
 
         {{-- PC画面幅のheader --}}
-        @if ($account_status_id == 1)
-            {{-- ログイン後 --}}
+        @if ($account_status_id == 1) {{-- ScheduleStatus::getActiveId() = 1 --}}
+        {{-- ログイン後 --}}
             <div class="hidden flex-row-reverse ml-auto mr-0 md:flex items-center justify-between">
                 <a href="{{ route('user_page') }}"
                     class="flex items-center justify-center w-8 h-8 ml-5 overflow-hidden rounded-full cursor-pointer">
@@ -99,9 +98,8 @@
     </div>
 
     {{-- スマホページ用のHeader --}}
-    @if ($account_status_id == 1)
+    @if ($account_status_id == 1) {{-- ScheduleStatus::getActiveId() = 1 --}}
         {{-- ログイン後 --}}
-
         <div id="afterlogin-hamburger-index" class="hidden fixed bg-gray-700">
             <ul class="flex-grow mx-10">
                 <li onclick="afterLoginHamburgerClick()" class="mt-10">

@@ -10,16 +10,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
-{
+{    
     public function index()
     {
         if (Auth::check()) {
             PayPay::polling();
-            $account_status_id = 1;
         }
         $keyword = null;
-        $account_status_id = 0;
-        return view('user.index', compact('keyword', 'account_status_id'));
+        return view('user.index', compact('keyword'));
     }
 
     public function search(Request $request)
