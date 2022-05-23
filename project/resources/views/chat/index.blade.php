@@ -67,30 +67,45 @@
                             {{ $partnerUserName }}
                         </p>
                         <div class="text-base flex">
-                            @if ($isReserved)
-                                <button
-                                    class="bg-lightblue-500 hover:bg-blue-600 text-white font-bold py-1 px-8 rounded ml-2 modal-open"
-                                    id="call-start">
-                                    通話
-                                </button>
+                            @if ($isRespondent)
+                                @if ($call)
+                                    <button
+                                        class="bg-lightblue-500 hover:bg-blue-600 text-white font-bold py-1 px-8 rounded ml-2 modal-open"
+                                        id="call-start">
+                                        通話
+                                    </button>
+                                @else
+                                    <button disabled class="bg-gray-300 text-white font-bold py-1 px-8 rounded ml-2">
+                                        通話
+                                    </button>
+                                @endif
                             @else
-                                <button disabled class="bg-gray-300 text-white font-bold py-1 px-8 rounded ml-2">
-                                    {{-- TODO:通話で10min経過してからモーダル表示に切り替える --}}
-                                    通話
-                                </button>
+                                @if ($isReserved)
+                                    <button
+                                        class="bg-lightblue-500 hover:bg-blue-600 text-white font-bold py-1 px-8 rounded ml-2 modal-open"
+                                        id="call-start">
+                                        通話
+                                    </button>
+                                @else
+                                    <button disabled class="bg-gray-300 text-white font-bold py-1 px-8 rounded ml-2">
+                                        通話
+                                    </button>
+                                @endif
                             @endif
-                            @if ($isReserved)
-                                <button
-                                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded ml-2 modal-open"
-                                    id="schedule-change-or-cancel">
-                                    日程変更
-                                </button>
-                            @else
-                                <button
-                                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded ml-2 modal-open"
-                                    id="schedule-registration">
-                                    日程登録
-                                </button>
+                            @if ($isClientChat)
+                                @if ($isReserved)
+                                    <button
+                                        class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded ml-2 modal-open"
+                                        id="schedule-change-or-cancel">
+                                        日程変更
+                                    </button>
+                                @else
+                                    <button
+                                        class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-4 rounded ml-2 modal-open"
+                                        id="schedule-registration">
+                                        日程登録
+                                    </button>
+                                @endif
                             @endif
                             <button onclick="dropdownOpen()"
                                 class="block relative p-2 text-gray-700 bg-white border border-transparent rounded-md focus:border-blue-500 focus:ring-opacity-40 focus:ring-blue-300 focus:ring focus:outline-none ml-2 lg:hidden">
