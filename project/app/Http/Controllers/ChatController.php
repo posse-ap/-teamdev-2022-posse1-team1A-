@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MessageSent;
+use App\Mail\DateScheduled;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -219,6 +220,15 @@ class ChatController extends Controller
         $chat_record->user_id = Role::getBotId();
         $chat_record->comment = "相談日程は " . $interview_schedule->schedule->format('Y/m/d H:i') . " に予約されました。";
         $chat_record->save();
+
+        // 両者にメール
+        $scheduled_date = $interview_schedule->schedule->format('Y/m/d H:i');
+        $client_id = Chat::find($request->chatRoomId)->client_user_id;
+        $client = User::find($client_id);
+        $respondent_id = Chat::find($request->chatRoomId)->respondent_user_id;
+        $respondent = User::find($respondent_id);
+        Mail::to($client->email)->send(new DateScheduled($client, $respondent, $scheduled_date));
+        Mail::to($respondent->email)->send(new DateScheduled($respondent, $client, $scheduled_date));
 
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
