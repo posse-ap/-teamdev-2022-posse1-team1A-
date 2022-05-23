@@ -77,7 +77,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::post('/userlist/active', 'App\Http\Controllers\AdminController@accountActive')->name('userlist_accountActive');
     Route::post('/userlist', 'App\Http\Controllers\AdminController@search')->name('userlist_search');
 
-    Route::get('/index', 'App\Http\Controllers\AdminController@index')->name('index');
+    Route::get('/   ', 'App\Http\Controllers\AdminController@index')->name('index');
 
     Route::get('/call-evaluation', 'App\Http\Controllers\AdminController@callEvaluation')->name('call_evaluation');
 });
