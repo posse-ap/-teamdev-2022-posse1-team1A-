@@ -1,8 +1,8 @@
-<div class="flex flex-col text-center p-8">
+<div class="flex flex-col text-center py-8">
     <div class="mb-5 font-bold text-lg">相談日程の登録</div>
     <div class="text-left mb-3">相談日程</div>
     <form action="{{ route('chat.schedule', $chatRoomId) }}" method="POST">
-    @csrf
+        @csrf
         <input type="hidden" name="chatRoomId" value="{{ $chatRoomId }}">
         <label>
             <input type="datetime-local" name="schedule" class="w-full rounded-sm bg-gray-100 text-left mb-5">

@@ -20,6 +20,7 @@ class CallingFactory extends Factory
         return [
             'chat_id' => Chat::find($this->faker->numberBetween(1, Chat::count()))->id,
             'calling_time' => $this->faker->numberBetween(1, 6000),
+            'is_finished' => true,
         ];
     }
 }

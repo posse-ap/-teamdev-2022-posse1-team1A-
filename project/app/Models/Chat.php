@@ -33,6 +33,6 @@ class Chat extends Model
 
     public function number_of_unread_items()
     {
-        return $this->hasMany(ChatRecord::class)->where('user_id', '<>', Auth::id())->where('is_read', false)->count();
+        return $this->hasMany(ChatRecord::class)->where('user_id', '<>', Auth::id())->where('user_id', '<>', Role::getBotId())->where('is_read', false)->count();
     }
 }

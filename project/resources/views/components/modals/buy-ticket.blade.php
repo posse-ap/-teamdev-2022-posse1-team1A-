@@ -2,7 +2,7 @@
     <p class="text-left my-10 text-center lg:text-xl text-base">
         チケット未所持のため、<br>
         依頼者チャット機能をご利用いただけません。<br>
-        チケットを購入してください。
+        チケットをご購入ください。
     </p>
     <p>現在のチケット数：{{ $ticket_counts }}</p>
     <div class="mt-10">
