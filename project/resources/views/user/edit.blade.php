@@ -12,9 +12,9 @@
 @push('scripts')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
-        $(function(){
-            $('input').keypress(function(e){
-                if(e.which == 13) {
+        $(function() {
+            $('input').keypress(function(e) {
+                if (e.which == 13) {
                     return false;
                 }
             });
@@ -92,15 +92,15 @@
                     <img class="h-40 w-auto mx-auto overflow-hidden rounded-full mb-11"
                         src="https://assets.codepen.io/5041378/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1600304177&width=512"
                         alt="ユーザーアイコン">
-                    <div class="pulus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full"
-                        id="user-icon-button"></div>
+                    <div class="pulus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full" id="user-icon-button">
+                    </div>
                     <input type="file" name="user_icon" class="hidden" id="user-icon-input">
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">氏名<span class="text-red-600">*</span></div>
                     <div class="col-span-3">
-                        <input value="{{ $userInfo->name }}" class="mb-2 rounded-md bg-white w-full" type="text" name="name"
-                            id="">
+                        <input value="{{ $userInfo->name }}" class="mb-2 rounded-md bg-white w-full" type="text"
+                            name="name" id="">
                         <span>※ サービス上で公開されません。</span>
                     </div>
                 </div>
@@ -115,9 +115,12 @@
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">電話番号<span class="text-red-600">*</span></div>
                     <div class="col-span-3">
-                        <input value="{{ $userInfo->email }}" class="mb-2 rounded-md bg-white w-full" type="text"
-                            name="email" id="">
-                        <span>※ PayPayで使用している電話番号を入力してください。</span>
+                        <<<<<<< HEAD <input value="{{ $userInfo->email }}" class="mb-2 rounded-md bg-white w-full"
+                            type="text" name="email" id="">
+                            =======
+                            <input class="mb-2 rounded-md bg-white w-full" type="tel" name="tel" id="">
+                            >>>>>>> 4ffede2a2689ece001fe3a410622e4799a3bee3b
+                            <span>※ PayPayで使用している電話番号を入力してください。</span>
                     </div>
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
@@ -127,12 +130,7 @@
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">会社名<span class="text-red-600">*</span></div>
-                    <select name="company" class="rounded-md bg-white col-span-3 h-10 w-full pl-3">
-                        <option value="{{ $userInfo->company }}">{{ $userInfo->company }}</option>
-                        <option value="1">11111</option>
-                        <option value="2">22222</option>
-                    </select>
-                    {{-- <input value="$userInfo->" class="rounded-md bg-white col-span-3" type="text" name="company" id=""> --}}
+                    <input class="rounded-md bg-white col-span-3" type="text" name="company" id="">
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">部署名</div>

@@ -10,9 +10,9 @@
     --tw-text-opacity: 1;
     color: rgb(31 41 55 / var(--tw-text-opacity));
 }
-.bg-gray-700 {
+.bg-gray-700 {      
     --tw-bg-opacity: 1;
-    background-color: rgb(48 56 65 / var(--tw-text-opacity));
+    background-color: rgb(48 56 65 / var(--tw-bg-opacity));
 }
 
 .bg-gray-500 {
@@ -105,6 +105,26 @@
     font-size: 4rem;
 }
 
-.shadow-2xl	{
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+.shadow-2xl {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+
+.bg-blue {
+    background-color: #668bed;
+}
+
+.text-blue {
+    color: #668bed;
+}
+
+.text-navy {
+    color: #061663;
+}
+
+.bg-navy {
+    background-color: #061663;
+}
+
+.bg-lightgray-200{
+    background-color: #E7F1FE;
 }

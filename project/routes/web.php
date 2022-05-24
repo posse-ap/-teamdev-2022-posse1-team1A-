@@ -43,6 +43,30 @@ Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
 })->name('terms_of_service');
 
+// chat一覧画面
+Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
+    Route::get('/respondent', 'App\Http\Controllers\ChatController@respondent_chat_list')->name('respondent_chat_list');
+    Route::post('/respondent/stop', 'App\Http\Controllers\ChatController@reception_stop')->name('reception_stop');
+    Route::post('/respondent/start', 'App\Http\Controllers\ChatController@reception_start')->name('reception_start');
+    Route::get('client', 'App\Http\Controllers\ChatController@client_chat_list')->name('client_chat_list');
+
+
+    Route::group(['prefix' => '/{chat_id}'], function () {
+        Route::get('/', 'App\Http\Controllers\ChatController@index')->name('index')->middleware('chat');
+        Route::post('/', 'App\Http\Controllers\ChatController@post')->name('post');
+        Route::post('/schedule', 'App\Http\Controllers\ChatController@schedule')->name('schedule');
+        Route::post('/schedule-cancel', 'App\Http\Controllers\ChatController@schedule_cancel')->name('schedule_cancel');
+
+        Route::post('/review', 'App\Http\Controllers\ChatController@post_review')->name('post_review');
+        Route::post('/call-start', 'App\Http\Controllers\ChatController@call_start')->name('call_start');
+    });
+    Route::group(['prefix' => '/call/{calling_id}'], function () {
+        Route::get('/', 'App\Http\Controllers\ChatController@client_call')->name('call')->middleware('calling_is_finished');
+        Route::post('/finish', 'App\Http\Controllers\ChatController@finish_call')->name('finish_call');
+        Route::post('/calling-time', 'App\Http\Controllers\ChatController@calling_time')->name('calling_time');
+    });
+});
+
 Route::get('/privacy-policy', function () {
     return view('user.privacy-policy');
 })->name('privacy_policy');

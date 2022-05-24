@@ -1,17 +1,24 @@
 <header id="header" class="sticky top-0 w-full bg-white bg-opacity-75 shadow-lg z-50">
     <div id="base-header" class="px-10 py-3 flex items-center justify-between flex-shrink-0 items-center">
-        <div id="header-logo" class="flex w-8 h-8 ml-0 mr-auto">
+        <div  id="header-logo" class="w-8 h-8 ml-0 mr-auto">
+            <a href="{{ route('user_index') }}" class="flex">
             <img src="{{ asset('img/logo-black.png') }}" alt="logo-black.png">
             <p class="flex ml-2 text-xl items-center"><b>Anovey<b></p>
+            </a>
         </div>
 
-        {{-- 一旦ログインステータスを1に --}}
-        {{-- TODO:ログイン機能実装後、削除↓ --}}
-        <?php $account_status_id = 0; ?>
+        {{-- ログイン状態識別 --}}
+        <?php
+        if (Auth::check()) {
+            $account_status_id = 1;
+        }else{
+            $account_status_id = 0;
+        }
+        ?>
 
         {{-- PC画面幅のheader --}}
-        @if ($account_status_id == 0)
-            {{-- ログイン後 --}}
+        @if ($account_status_id == 1) {{-- ScheduleStatus::getActiveId() = 1 --}}
+        {{-- ログイン後 --}}
             <div class="hidden flex-row-reverse ml-auto mr-0 md:flex items-center justify-between">
                 <a href="{{ route('user_page') }}"
                     class="flex items-center justify-center w-8 h-8 ml-5 overflow-hidden rounded-full cursor-pointer">
@@ -19,23 +26,23 @@
                         alt="">
                 </a>
                 <button
-                    class="relative bg-yellow-500 hover:bg-yellow-700 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
+                    class="relative bg-yellow-500 hover:bg-yellow-600 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
                     <div>
                         <span class="count" id="notifications-count">5</span>
                         <span class="fa fa-bell-o"></span>
                     </div>
-                    <a href="">
+                    <a href="{{ route('chat.respondent_chat_list') }}">
                         回答者チャット
                     </a>
                 </button>
 
                 <button
-                    class="relative bg-lightblue-500 hover:bg-blue-700 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
+                    class="relative bg-lightblue-500 hover:bg-blue-600 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
                     <div>
                         <span class="count" id="notifications-count">3</span>
                         <span class="fa fa-bell-o"></span>
                     </div>
-                    <a href="">
+                    <a href="{{ route('chat.client_chat_list') }}">
                         依頼者チャット
                     </a>
                 </button>
@@ -49,6 +56,7 @@
                         初めての方へ
                     </a>
                 </button>
+                
             </div>
 
             <div onclick="afterLoginHamburgerClick()">
@@ -63,13 +71,13 @@
             <div class="hidden md:flex flex-row-reverse ml-auto mr-0 items-center justify-between">
                 <button
                     class="bg-blue-800 hover:bg-blue-700 text-white sm:text-base text-xs font-bold py-1 px-4 rounded ml-2">
-                    <a href="">
+                    <a href="{{ route('register') }}">
                         新規登録
                     </a>
                 </button>
                 <button
                     class="bg-gray-500 hover:bg-gray-800 text-white sm:text-base text-xs font-bold py-1 px-4 rounded ml-2">
-                    <a href="">
+                    <a href="{{ route('login') }}">
                         ログイン
                     </a>
                 </button>
@@ -90,9 +98,8 @@
     </div>
 
     {{-- スマホページ用のHeader --}}
-    @if ($account_status_id == 0)
+    @if ($account_status_id == 1) {{-- ScheduleStatus::getActiveId() = 1 --}}
         {{-- ログイン後 --}}
-
         <div id="afterlogin-hamburger-index" class="hidden fixed bg-gray-700">
             <ul class="flex-grow mx-10">
                 <li onclick="afterLoginHamburgerClick()" class="mt-10">
@@ -124,15 +131,25 @@
                 </li>
             </ul>
             <div class="flex w-screen">
-                <button class="bg-lightblue-500 p-5 hover:bg-gray-800 text-white sm:text-base text-sm font-bold w-6/12">
-                    <a href="">
-                        依頼チャット
-                    </a>
+                <button class="bg-lightblue-500 p-5 hover:bg-blue-600 text-white sm:text-base text-sm font-bold w-6/12">
+                    <div class="flex mx-auto w-min items-center">
+                        <a href="{{ route('chat.client_chat_list') }}" class="whitespace-nowrap">
+                            依頼者チャット
+                        </a>
+                        <div class="bg-red-600 rounded-full w-5 h-5 ml-1">
+                            <p class="text-white w-full h-full sm:leading-tight">3</p>
+                        </div>
+                    </div>
                 </button>
-                <button class="bg-yellow-500 p-5 hover:bg-blue-700 text-white sm:text-base text-sm font-bold w-6/12">
-                    <a href="">
-                        匿名回答チャット
-                    </a>
+                <button class="bg-yellow-500 p-5 hover:bg-yellow-600 text-white sm:text-base text-sm font-bold w-6/12">
+                    <div class="flex mx-auto w-min items-center">
+                        <a href="{{ route('chat.respondent_chat_list') }}" class="whitespace-nowrap">
+                            回答者チャット
+                        </a>
+                        <div class="bg-red-600 rounded-full w-5 h-5 ml-1">
+                            <p class="text-white w-full h-full sm:leading-tight">5</p>
+                        </div>
+                    </div>
                 </button>
             </div>
         </div>
