@@ -75,7 +75,7 @@ class ChatController extends Controller
         $ticket_counts = $loginUser->countTickets();
 
         // 相談日程取得
-        $interview_schedule = InterviewSchedule::where('chat_id', $chat_id)->orderBy('created_at', 'desc')->first();
+        $interview_schedule = InterviewSchedule::where('chat_id', $chat_id)->where('schedule_status_id', ScheduleStatus::getPendingId())->latest()->first();
 
         // 既読機能
         $update_column = [
@@ -232,6 +232,15 @@ class ChatController extends Controller
 
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
+
+    public function schedule_cancel(Request $request, $chat_id)
+    {
+        $interviewSchedule = InterviewSchedule::find($request->interview_schedule_id);
+        $interviewSchedule->schedule_status_id = ScheduleStatus::getCancelId();
+        $interviewSchedule->save();
+        return redirect(route('chat.index', ['chat_id' => $chat_id]));
+    }
+
     public function post_review(Request $request)
     {
         $validated = $request->validate([

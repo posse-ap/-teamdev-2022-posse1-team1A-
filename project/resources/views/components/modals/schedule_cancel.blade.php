@@ -1,10 +1,11 @@
 <div class="flex flex-col text-center py-8">
     <div class="mb-5 font-bold text-lg">相談日程をキャンセルしますか？</div>
-    <div class="mb-8">変更前相談日程 : 2022-05-22 16:30〜</div>
-    {{-- TODO: feature/118マージ後コメントアウトを解除 --}}
-    {{-- <form action="{{ route('chat.schedule', $chatRoomId) }}" method="POST"> --}}
-    <form action="" method="POST">
-    @csrf
+    <div class="mb-8">変更前相談日程 : {{ $interview_schedule ? "{$interview_schedule->schedule}~" : '' }}
+    </div>
+    <form action="{{ route('chat.schedule_cancel', ['chat_id' => $chatRoomId]) }}" method="POST">
+        @csrf
+        <input type="hidden" value="{{ $interview_schedule ? $interview_schedule->id : '' }}"
+            name="interview_schedule_id">
         <div class="flex flex-wrap mb-5 max-w-sm mx-auto">
             <button class="bg-red-400 hover:bg-red-700 text-white font-bold py-2 rounded w-36 mx-auto mb-5">
                 日程をキャンセル
