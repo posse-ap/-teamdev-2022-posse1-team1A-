@@ -49,14 +49,13 @@ class ChatController extends Controller
 
         // 日程決定しているか真偽を取得
         $isReserved = InterviewSchedule::where('chat_id', $chatRoomId)
-                                        ->where('schedule_status_id', ScheduleStatus::getPendingId())
-                                        ->exists();
+            ->where('schedule_status_id', ScheduleStatus::getPendingId())
+            ->exists();
 
-        // $respondent_chat = Chat::where('respondent_user_id', Auth::id())->where('is_finished', false)->where('id', $chatRoomId)->get();
-        $respondent_chat = InterviewSchedule::where('chat_id', $chat_id)
-        ->where('schedule_status_id', ScheduleStatus::getPendingId())
-        ->latest()
-        ->first();
+        $interviewSchedule = InterviewSchedule::where('chat_id', $chat_id)
+            ->where('schedule_status_id', ScheduleStatus::getPendingId())
+            ->latest()
+            ->first();
 
         // 日付をフォーマット
         foreach ($chatRecords as $chatRecord) {
@@ -74,7 +73,7 @@ class ChatController extends Controller
         $have_tickets = $request->have_tickets;
         $ticket_counts = $loginUser->countTickets();
 
-        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key', 'have_tickets', 'ticket_counts', 'respondent_chat'));
+        return view('chat.index', compact('chatRecords', 'chatRoomId', 'isClientChat', 'isReserved', 'loginUserId', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'skyway_key', 'have_tickets', 'ticket_counts', 'interviewSchedule'));
     }
 
     public function post(Request $request)
@@ -178,9 +177,17 @@ class ChatController extends Controller
         $schedule->schedule = $request->schedule;
         $schedule->chat_id = $request->chatRoomId;
         $schedule->save();
-        
+
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
+    public function schedule_cancel(Request $request, $chat_id)
+    {
+        $interviewSchedule = InterviewSchedule::find($request->interview_schedule_id);
+        $interviewSchedule->schedule_status_id = ScheduleStatus::getCancelId();
+        $interviewSchedule->save();
+        return redirect(route('chat.index', ['chat_id' => $chat_id]));
+    }
+
     public function post_review(Request $request)
     {
         $validated = $request->validate([
