@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MessageSent;
+use App\Mail\DateScheduled;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -74,7 +75,7 @@ class ChatController extends Controller
         $ticket_counts = $loginUser->countTickets();
 
         // 相談日程取得
-        $interview_schedule = InterviewSchedule::where('chat_id', $chat_id)->orderBy('created_at', 'desc')->first();
+        $interview_schedule = InterviewSchedule::where('chat_id', $chat_id)->where('schedule_status_id', ScheduleStatus::getPendingId())->latest()->first();
 
         // 既読機能
         $update_column = [
@@ -220,8 +221,26 @@ class ChatController extends Controller
         $chat_record->comment = "相談日程は " . $interview_schedule->schedule->format('Y/m/d H:i') . " に予約されました。";
         $chat_record->save();
 
+        // 両者にメール
+        $scheduled_date = $interview_schedule->schedule->format('Y/m/d H:i');
+        $client_id = Chat::find($request->chatRoomId)->client_user_id;
+        $client = User::find($client_id);
+        $respondent_id = Chat::find($request->chatRoomId)->respondent_user_id;
+        $respondent = User::find($respondent_id);
+        Mail::to($client->email)->send(new DateScheduled($client, $respondent, $scheduled_date));
+        Mail::to($respondent->email)->send(new DateScheduled($respondent, $client, $scheduled_date));
+
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
+
+    public function schedule_cancel(Request $request, $chat_id)
+    {
+        $interviewSchedule = InterviewSchedule::find($request->interview_schedule_id);
+        $interviewSchedule->schedule_status_id = ScheduleStatus::getCancelId();
+        $interviewSchedule->save();
+        return redirect(route('chat.index', ['chat_id' => $chat_id]));
+    }
+
     public function post_review(Request $request)
     {
         $validated = $request->validate([

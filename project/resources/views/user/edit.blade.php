@@ -98,7 +98,7 @@
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">電話番号<span class="text-red-600">*</span></div>
                     <div class="col-span-3">
-                        <input class="mb-2 rounded-md bg-white w-full" type="text" name="email" id="">
+                        <input class="mb-2 rounded-md bg-white w-full" type="tel" name="tel" id="">
                         <span>※ PayPayで使用している電話番号を入力してください。</span>
                     </div>
                 </div>
@@ -108,12 +108,7 @@
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">会社名<span class="text-red-600">*</span></div>
-                    <select  name="company" class="rounded-md bg-white col-span-3 h-10 w-full">
-                        <option value=""></option>
-                        <option value="1">11111</option>
-                        <option value="2">22222</option>
-                    </select>
-                    {{-- <input class="rounded-md bg-white col-span-3" type="text" name="company" id=""> --}}
+                    <input class="rounded-md bg-white col-span-3" type="text" name="company" id="">
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">部署名</div>
