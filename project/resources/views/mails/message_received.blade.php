@@ -1,4 +1,4 @@
-{{$receiver->name}} 様<br>
+{{$receiver->nickname}} 様<br>
 <br>
 Anovey (アノベイ) をご利用いただき誠にありがとうございます。<br>
 当サービスにて、相談中の {{$sender->nickname}} 様よりチャットの返信がありました。<br>
