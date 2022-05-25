@@ -57,8 +57,14 @@
                             <a href="{{ $isClientChat ? route('chat.client_chat_list') : route('chat.respondent_chat_list') }}"
                                 class="block py-5">チャット一覧に戻る</a>
                         </li>
-                        {{-- TODO:トーク退出機能 --}}
-                        {{-- <li class="mt-3">トークを退出する</li> --}}
+                        <form action="{{ route('chat.exit_chat', ["chat_id",$chatRoomId]) }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="chat_id" value="{{ $chatRoomId }}">
+                            <input type="hidden" name="isClientChat" value="{{ $isClientChat }}">
+                                <button class="mt-3" type="submit">
+                                    トークを退出する
+                                </button>
+                        </form>
                     </ul>
                 </div>
                 <div class="w-full lg:w-3/4 box-content relative">
