@@ -25,6 +25,7 @@ class UserFactory extends Factory
             'nickname' => $this->faker->firstKanaName(),
             'icon' => 'img/user-icon.jpeg',
             'email' => $this->faker->unique()->safeEmail(),
+            'telephone_number' => $this->faker->unique()->phoneNumber(),
             'email_verified_at' => now(),
             'company' => $this->faker->company(),
             'department' => '経理部',

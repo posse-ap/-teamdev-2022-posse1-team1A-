@@ -6,6 +6,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MessageSent;
 use App\Mail\DateScheduled;
+use App\Mail\ExitedChat;
+use App\Mail\PartnerExitedChat;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +19,7 @@ use App\Models\Calling;
 use App\Models\InterviewSchedule;
 use App\Models\ScheduleStatus;
 use App\Models\Role;
+use App\Models\ChatStatus;
 
 class ChatController extends Controller
 {
@@ -257,5 +260,28 @@ class ChatController extends Controller
             'is_respondent' => $request->is_respondent,
         ]);
         return redirect(route('chat.index', ['chat_id' => $request->chat_id]));
+    }
+
+    public function exit_chat(Request $request)
+    {
+        $chat = Chat::find($request->chat_id);
+        $chat->is_finished       = ChatStatus::getIsFinishedId();
+        $chat->save();
+
+        $sender = User::find(Auth::id());
+        if (Auth::id() === $chat->client_user_id) {
+            $receiver_id = $chat->respondent_user_id;
+        } else {
+            $receiver_id = $chat->client_user_id;
+        }
+        $receiver = User::find($receiver_id);
+        Mail::to($sender->email)->send(new ExitedChat($sender, $receiver));
+        Mail::to($receiver->email)->send(new PartnerExitedChat($receiver, $sender));
+
+        if ($request->isClientChat) {
+            return redirect()->route('chat.client_chat_list');
+        } else {
+            return redirect()->route('chat.respondent_chat_list');
+        }
     }
 }
