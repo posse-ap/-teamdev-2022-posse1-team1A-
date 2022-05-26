@@ -55,6 +55,7 @@ Route::group(['prefix' => 'chat', 'as' => 'chat.'], function () {
         Route::get('/', 'App\Http\Controllers\ChatController@index')->name('index')->middleware('chat');
         Route::post('/', 'App\Http\Controllers\ChatController@post')->name('post');
         Route::post('/schedule', 'App\Http\Controllers\ChatController@schedule')->name('schedule');
+        Route::post('/schedule-change', 'App\Http\Controllers\ChatController@schedule_change')->name('schedule_change');
         Route::post('/schedule-cancel', 'App\Http\Controllers\ChatController@schedule_cancel')->name('schedule_cancel');
 
         Route::post('/review', 'App\Http\Controllers\ChatController@post_review')->name('post_review');
