@@ -24,6 +24,7 @@ Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_searc
 
 Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
 Route::get('/user/edit', 'App\Http\Controllers\UserController@userEdit')->name('user_edit');
+Route::post('/user/edit', 'App\Http\Controllers\UserController@userUpdate')->name('user_update');
 Route::get('/user', 'App\Http\Controllers\UserController@userPage')->name('user_page');
 Route::get('/beginner', 'App\Http\Controllers\UserController@beginner')->name('user_beginner');
 
@@ -78,7 +79,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::post('/userlist/active', 'App\Http\Controllers\AdminController@accountActive')->name('userlist_accountActive');
     Route::post('/userlist', 'App\Http\Controllers\AdminController@search')->name('userlist_search');
 
-    Route::get('/index', 'App\Http\Controllers\AdminController@index')->name('index');
+    Route::get('/   ', 'App\Http\Controllers\AdminController@index')->name('index');
 
     Route::get('/call-evaluation', 'App\Http\Controllers\AdminController@callEvaluation')->name('call_evaluation');
 });
