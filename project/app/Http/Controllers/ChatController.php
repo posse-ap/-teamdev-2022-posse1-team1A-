@@ -17,6 +17,7 @@ use App\Models\Calling;
 use App\Models\InterviewSchedule;
 use App\Models\ScheduleStatus;
 use App\Models\Role;
+use App\Models\ChatStatus;
 
 class ChatController extends Controller
 {
@@ -257,5 +258,18 @@ class ChatController extends Controller
             'is_respondent' => $request->is_respondent,
         ]);
         return redirect(route('chat.index', ['chat_id' => $request->chat_id]));
+    }
+
+    public function exit_chat(Request $request)
+    {
+        $chat_status = Chat::find($request->chat_id);
+        $chat_status->is_finished       = ChatStatus::getIsFinishedId();
+        $chat_status->save();
+
+        if($request->isClientChat){
+            return redirect()->route('chat.client_chat_list');
+        }else{
+            return redirect()->route('chat.respondent_chat_list');
+        }
     }
 }
