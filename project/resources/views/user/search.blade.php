@@ -69,12 +69,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="md:ml-auto mt-5 md:mt-0">
-                                <button
-                                    class="block mx-auto px-4 py-2 font-xs text-white capitalize transition-colors duration-200 bg-blue rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                            <form action="{{ route('start_chat') }}" class="md:ml-auto mt-5 md:mt-0" method="POST">
+                                @csrf
+                                <input type="hidden" value="{{ Auth::id() }}" name="client_user_id">
+                                <input type="hidden" value="{{ $user->id }}" name="respondent_user_id">
+                                <button type="submit"
+                                    class="block mx-auto px-4 py-2 font-xs text-white capitalize transition-colors duration-200 bg-blue rounded-md bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                                     チャットする
                                 </button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 @endforeach

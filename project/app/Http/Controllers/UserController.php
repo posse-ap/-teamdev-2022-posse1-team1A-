@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Chat;
 use App\Models\AccountStatus;
 use App\Models\PayPay;
+use App\Models\ChatStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
-{    
+{
     public function index()
     {
         if (Auth::check()) {
@@ -58,6 +60,25 @@ class UserController extends Controller
         return view('user.search', compact('users', 'keyword'));
     }
 
+    public function start_chat(Request $request)
+    {
+        // 既存のチャット
+        $chat_id = Chat::select('id')->where('client_user_id', '=', $request->client_user_id)->where('respondent_user_id', $request->respondent_user_id)->where('is_finished', ChatStatus::getIsChattingId())->first();
+        // 新しいチャット
+        if ($chat_id == null) {
+            $insert_data = [
+                'is_finished' => ChatStatus::getIsChattingId(),
+                'client_user_id' => Auth::id(),
+                'respondent_user_id' => $request->respondent_user_id,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+            Chat::insert($insert_data);
+            $chat_id = Chat::insertGetId($insert_data);
+        }
+        return redirect()->route('chat.index', compact('chat_id'));
+    }
+
     public function userPage(Request $request)
     {
         $userId = 1;
@@ -89,7 +110,7 @@ class UserController extends Controller
         $userInfo = User::find($userId);
         return view('user.edit', compact('userInfo'));
     }
-    
+
     public function beginner()
     {
         return view('user.beginner');

@@ -23,6 +23,7 @@ Route::get('/', 'App\Http\Controllers\UserController@index')->name('user_index')
 Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_search');
 
 Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
+Route::post('/start_chat', 'App\Http\Controllers\UserController@start_chat')->middleware(['auth'])->name('start_chat');
 Route::get('/user/edit', 'App\Http\Controllers\UserController@userEdit')->name('user_edit');
 Route::get('/user', 'App\Http\Controllers\UserController@userPage')->name('user_page');
 Route::get('/beginner', 'App\Http\Controllers\UserController@beginner')->name('user_beginner');
