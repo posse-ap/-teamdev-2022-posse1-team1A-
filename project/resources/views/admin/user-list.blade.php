@@ -32,7 +32,6 @@
                                 <th class="w-1/8 px-4 py-2 text-xs">部署名</th>
                                 <th class="w-1/4 px-4 py-2 text-xs">メールアドレス</th>
                                 <th class="w-2/8 px-4 py-2 text-xs">マッチ数</th>
-                                <th class="w-1/8 px-4 py-2 text-xs"></th>
                             </tr>
                         </thead>
                         <tbody class="w-full">
@@ -43,7 +42,7 @@
                                     <td class="border-b px-4 py-2 text-sm">{{ $user->company }}</td>
                                     <td class="border-b px-4 py-2 text-sm">{{ $user->department }}</td>
                                     <td class="border-b px-4 py-2 text-sm">{{ $user->email }}</td>
-                                    <td class="border-b px-4 py-2 text-sm"></td>
+                                    <td class="border-b px-4 py-2 text-sm">{{ $user->matched_count }}</td>
                                     <td class="border-b px-4 py-2 text-sm text-center">
                                         @if ($user->account_status_id === 1)
                                             {{-- アクティブアカウント --}}
