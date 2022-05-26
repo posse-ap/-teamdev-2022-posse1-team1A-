@@ -6,6 +6,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\MessageSent;
 use App\Mail\DateScheduled;
+use App\Mail\ExitedChat;
+use App\Mail\PartnerExitedChat;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -262,13 +264,23 @@ class ChatController extends Controller
 
     public function exit_chat(Request $request)
     {
-        $chat_status = Chat::find($request->chat_id);
-        $chat_status->is_finished       = ChatStatus::getIsFinishedId();
-        $chat_status->save();
+        $chat = Chat::find($request->chat_id);
+        $chat->is_finished       = ChatStatus::getIsFinishedId();
+        $chat->save();
 
-        if($request->isClientChat){
+        $sender = User::find(Auth::id());
+        if (Auth::id() === $chat->client_user_id) {
+            $receiver_id = $chat->respondent_user_id;
+        } else {
+            $receiver_id = $chat->client_user_id;
+        }
+        $receiver = User::find($receiver_id);
+        Mail::to($sender->email)->send(new ExitedChat($sender, $receiver));
+        Mail::to($receiver->email)->send(new PartnerExitedChat($receiver, $sender));
+
+        if ($request->isClientChat) {
             return redirect()->route('chat.client_chat_list');
-        }else{
+        } else {
             return redirect()->route('chat.respondent_chat_list');
         }
     }
