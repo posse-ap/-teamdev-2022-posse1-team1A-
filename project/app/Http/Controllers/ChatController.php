@@ -261,6 +261,13 @@ class ChatController extends Controller
         $interviewSchedule = InterviewSchedule::find($request->interview_schedule_id);
         $interviewSchedule->schedule_status_id = ScheduleStatus::getCancelId();
         $interviewSchedule->save();
+
+        $chat_record = new ChatRecord;
+        $chat_record->chat_id = $request->chatRoomId;
+        $chat_record->user_id = Role::getBotId();
+        $chat_record->comment = "相談日程はキャンセルされました。";
+        $chat_record->save();
+
         return redirect(route('chat.index', ['chat_id' => $chat_id]));
     }
 

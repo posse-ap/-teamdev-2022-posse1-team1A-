@@ -4,6 +4,7 @@
     </div>
     <form action="{{ route('chat.schedule_cancel', ['chat_id' => $chatRoomId]) }}" method="POST">
         @csrf
+        <input type="hidden" name="chatRoomId" value="{{ $chatRoomId }}">
         <input type="hidden" value="{{ $interview_schedule ? $interview_schedule->id : '' }}"
             name="interview_schedule_id">
         <div class="flex flex-wrap mb-5 max-w-sm mx-auto">
