@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\AccountStatus;
@@ -26,9 +25,9 @@ class AdminController extends Controller
 
     public function userlist()
     {
-        $users = User::leftJoin('chats', 'users.id', '=', 'chats.respondent_user_id')->select('users.*',DB::raw('count(chats.respondent_user_id) as matched_count'))->groupBy('users.id')->paginate(10);
+        $users = User::paginate(10);
         $keyword = null;
-        
+
         return view('admin.user-list', compact('users', 'keyword'));
     }
 
