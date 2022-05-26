@@ -215,23 +215,43 @@ class ChatController extends Controller
         $schedule->chat_id = $request->chatRoomId;
         $schedule->save();
 
-        // 日程予約・変更時anoveybot送信
-        $interview_schedule = InterviewSchedule::where('chat_id', $request->chatRoomId)->orderBy('created_at', 'desc')->first();
-
         $chat_record = new ChatRecord;
         $chat_record->chat_id = $request->chatRoomId;
         $chat_record->user_id = Role::getBotId();
-        $chat_record->comment = "相談日程は " . $interview_schedule->schedule->format('Y/m/d H:i') . " に予約されました。";
+        $chat_record->comment = "相談日程は " . $schedule->schedule->format('Y/m/d H:i') . " に予約されました。";
         $chat_record->save();
 
         // 両者にメール
-        $scheduled_date = $interview_schedule->schedule->format('Y/m/d H:i');
+        $scheduled_date = $schedule->schedule->format('Y/m/d H:i');
         $client_id = Chat::find($request->chatRoomId)->client_user_id;
         $client = User::find($client_id);
         $respondent_id = Chat::find($request->chatRoomId)->respondent_user_id;
         $respondent = User::find($respondent_id);
         Mail::to($client->email)->send(new DateScheduled($client, $respondent, $scheduled_date));
         Mail::to($respondent->email)->send(new DateScheduled($respondent, $client, $scheduled_date));
+
+        return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
+    }
+
+    public function schedule_change(Request $request)
+    {
+        $canceled_schedule = InterviewSchedule::find($request->schedule_id);
+        $canceled_schedule->schedule_status_id = ScheduleStatus::getCancelId();
+        $canceled_schedule->save();
+
+        $schedule = new InterviewSchedule;
+        $schedule->schedule_status_id = ScheduleStatus::getPendingId();
+        $schedule->schedule = $request->schedule;
+        $schedule->chat_id = $request->chatRoomId;
+        $schedule->save();
+
+        $chat_record = new ChatRecord;
+        $chat_record->chat_id = $request->chatRoomId;
+        $chat_record->user_id = Role::getBotId();
+        $chat_record->comment = "相談日程は " . $schedule->schedule->format('Y/m/d H:i') . " に変更されました。";
+        $chat_record->save();
+
+        // 両者にメール
 
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
