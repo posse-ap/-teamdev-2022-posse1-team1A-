@@ -20,9 +20,6 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         @stack('styles')
         
-        <!-- Favicon -->
-        <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}">
-        
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
         @stack('scripts')
