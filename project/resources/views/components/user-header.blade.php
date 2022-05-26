@@ -177,12 +177,12 @@
             </ul>
             <div class="flex w-screen">
                 <button class="bg-gray-500 p-5 hover:bg-gray-800 text-white sm:text-base text-sm font-bold w-6/12">
-                    <a href="">
+                    <a href="{{ route('login') }}">
                         ログイン
                     </a>
                 </button>
                 <button class="bg-blue-800 p-5 hover:bg-blue-700 text-white sm:text-base text-sm font-bold w-6/12">
-                    <a href="">
+                    <a href="{{ route('register') }}">
                         新規登録
                     </a>
                 </button>
