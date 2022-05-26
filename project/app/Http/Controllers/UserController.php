@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
-{    
+{
     public function index()
     {
         if (Auth::check()) {
@@ -64,14 +64,14 @@ class UserController extends Controller
         $userInfo = User::find($userId);
         return view('user.info', compact('userInfo'));
     }
-    
+
     public function withdrawal()
     {
         $user = User::find(Auth::id());
-        
+
         return view('user.withdrawal', compact('user'));
     }
-    
+
     public function withdrawalPost(Request $request)
     {
         $user = User::find($request->id);
@@ -79,42 +79,42 @@ class UserController extends Controller
         $user->account_status_id = AccountStatus::getWithdrawnId();
         $user->reason = $request->reason;
         $user->save();
-        
+
         return redirect()->route('user_index');
     }
-    
+
     public function userEdit()
     {
         $userId = 1;
         $userInfo = User::find($userId);
         return view('user.edit', compact('userInfo'));
     }
-    
-    public function userEditPost(Request $request)
+
+    public function userUpdate(Request $request)
     {
-        $userId = Auth::user();
-        $userInfo = User::find($userId)->first();
+        $user = User::find($request->id);
+        if ($request->icon) {
+            $icon = $request->file('icon');
+            $icon->storeAs('', $icon->getClientOriginalName(), 'public');
+            $iconPath = 'storage/' . $icon->getClientOriginalName();
+        } else {
+            $iconPath = User::getDefaultIcon();
+        }
+        $user->update([
+            'name' => $request->name,
+            'nickname' => $request->nickname,
+            'email' => $request->email,
+            'icon' => $iconPath,
+            'telephone_number' => $request->telephone_number,
+            'company' => $request->company,
+            'department' => $request->department,
+            'length_of_service' => $request->length_of_service,
+            'is_search_target' => $request->is_search_target,
+        ]);
 
-        $file_name = $request->file('user_icon')->getClientOriginalName();
-        $request->file('user_icon')->store('');
-        dd($request);
-
-        // TODO: fillがうまく使えなかったので一旦ゴリ押ししています
-        // dd($request->file('user_icon'));
-        $userInfo->icon = $request->user_icon;
-        $userInfo->nickname = $request->nickname;
-        $userInfo->email = $request->email;
-        $userInfo->telephone_number = $request->telephone_number;
-        $userInfo->company = $request->company;
-        $userInfo->department = $request->department;
-        $userInfo->length_of_service = $request->length_of_service;
-
-        $userInfo->save();
-        // $userInfo->fill($request->all())->save();
-
-        return view('user.info', compact('userInfo'));
+        return redirect(route('user_page'));
     }
-    
+
     public function beginner()
     {
         return view('user.beginner');

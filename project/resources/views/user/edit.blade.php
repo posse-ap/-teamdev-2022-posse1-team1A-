@@ -11,12 +11,24 @@
 
 @push('scripts')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    {{-- エンターキーを無効化 --}}
     <script>
         $(function() {
             $('input').keypress(function(e) {
                 if (e.which == 13) {
                     return false;
                 }
+            });
+        });
+    </script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            document.getElementById("user-icon-button").addEventListener("click", () => {
+                document.getElementById("user-icon-input").click()
+                setTimeout(() => {
+                    const figureImage = document.getElementById('figure-image')
+                    figureImage.setAttribute('src', '/img/user-icon.jpeg')
+                }, 500);
             });
         });
     </script>
@@ -70,31 +82,22 @@
     </style>
 @endpush
 
-@push('scripts')
-    <script>
-        window.addEventListener('DOMContentLoaded', function() {
-            document.getElementById("user-icon-button").addEventListener("click", () => {
-                document.getElementById("user-icon-input").click();
-            });
-        });
-    </script>
-@endpush
-
 @section('content')
     @include('components.user-header')
 
     <main class="container mx-auto font-normal mb-12 bg-slate-50">
         <div class="mt-16 max-w-xl mx-auto">
-            <form action="{{ route('user_edit_post') }}" method="post" enctype="multipart/form-data">
+            <form action="" method="post" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="id" value="{{ $userInfo->id }}">
                 <h1 class="text-center text-4xl mb-12">アカウント編集</h1>
                 <div class="relative user-icon max-w-xs mx-auto">
-                    <img class="h-40 w-auto mx-auto overflow-hidden rounded-full mb-11"
-                        src="https://assets.codepen.io/5041378/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1600304177&width=512"
-                        alt="ユーザーアイコン">
+                    <img class="h-40 w-auto mx-auto overflow-hidden rounded-full mb-11" src={{ asset($userInfo->icon) }}
+                        alt="ユーザーアイコン" id="figure-image">
                     <div class="pulus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full" id="user-icon-button">
                     </div>
-                    <input type="file" name="user_icon" class="hidden" id="user-icon-input">
+                    <input value="{{ $userInfo->icon }}" type="file" name="icon" class="hidden"
+                        id="user-icon-input" accept="image/*">
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">氏名<span class="text-red-600">*</span></div>
@@ -115,12 +118,9 @@
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">電話番号<span class="text-red-600">*</span></div>
                     <div class="col-span-3">
-                        <<<<<<< HEAD <input value="{{ $userInfo->email }}" class="mb-2 rounded-md bg-white w-full"
-                            type="text" name="email" id="">
-                            =======
-                            <input class="mb-2 rounded-md bg-white w-full" type="tel" name="tel" id="">
-                            >>>>>>> 4ffede2a2689ece001fe3a410622e4799a3bee3b
-                            <span>※ PayPayで使用している電話番号を入力してください。</span>
+                        <input value="{{ $userInfo->telephone_number }}" class="mb-2 rounded-md bg-white w-full"
+                            type="tel" name="telephone_number" id="">
+                        <span>※ PayPayで使用している電話番号を入力してください。</span>
                     </div>
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
@@ -130,7 +130,8 @@
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">会社名<span class="text-red-600">*</span></div>
-                    <input class="rounded-md bg-white col-span-3" type="text" name="company" id="">
+                    <input value="{{ $userInfo->company }}" class="rounded-md bg-white col-span-3" type="text"
+                        name="company" id="">
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">部署名</div>
@@ -139,13 +140,26 @@
                 </div>
                 <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
                     <div class="col-span-1">勤続年数</div>
-                    <input value="{{ $userInfo->length_of_service }}" class="rounded-md bg-white col-span-3 w-full"
-                        type="text" name="length_of_service" id="">
+                    <select name="length_of_service" class="rounded-md bg-white col-span-3 h-10 w-full">
+                        <option value="1年未満" @selected($userInfo->length_of_service === '1年未満')>1年未満</option>
+                        <option value="1年" @selected($userInfo->length_of_service === '1年')>1年</option>
+                        <option value="2年" @selected($userInfo->length_of_service === '2年')>2年</option>
+                        <option value="3年" @selected($userInfo->length_of_service === '3年')>3年</option>
+                        <option value="4年" @selected($userInfo->length_of_service === '4年')>4年</option>
+                        <option value="5年" @selected($userInfo->length_of_service === '5年')>5年</option>
+                        <option value="6年" @selected($userInfo->length_of_service === '6年')>6年</option>
+                        <option value="7年" @selected($userInfo->length_of_service === '7年')>7年</option>
+                        <option value="8年" @selected($userInfo->length_of_service === '8年')>8年</option>
+                        <option value="9年" @selected($userInfo->length_of_service === '9年')>9年</option>
+                        <option value="10年以上" @selected($userInfo->length_of_service === '10年以上')>10年以上</option>
+                    </select>
                 </div>
                 <div class="mb-9 px-5 md:leading-loose leading-10">
                     <span class="md:inline block">匿名回答者としてのサービス利用を行いますか？</span>
-                    <label><input class="md:ml-4" type="radio" name="use_service" value="1">はい</label>
-                    <label><input class="ml-4" type="radio" name="use_service" value="0" checked>いいえ</label>
+                    <label><input class="md:ml-4" type="radio" name="is_search_target" value="1"
+                            @checked($userInfo->is_search_target == 1)>はい</label>
+                    <label><input class="ml-4" type="radio" name="is_search_target" value="0"
+                            @checked($userInfo->is_search_target == 0)>いいえ</label>
                 </div>
                 <a href="{{ route('user_edit') }}">
                     <button
@@ -158,4 +172,26 @@
     </main>
 
     @include('components.user-footer')
+    @push('scripts_bottom')
+        <script>
+            function file_preview() {
+                const input = document.getElementById('user-icon-input')
+                const figureImage = document.getElementById('figure-image')
+
+                input.addEventListener('input', (event) => {
+                    if (event.target.files.length === 0) {
+                        figureImage.setAttribute('src', '/img/user-icon.jpeg')
+                    } else {
+                        let [file] = event.target.files
+
+                        if (file) {
+                            figureImage.setAttribute('src', URL.createObjectURL(file))
+                        }
+                    }
+                })
+            }
+
+            file_preview()
+        </script>
+    @endpush
 @endsection
