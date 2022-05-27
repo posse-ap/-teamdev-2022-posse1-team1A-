@@ -6,6 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Ticket;
+use App\Models\TicketStatus;
 
 class TicketCheck
 {
@@ -19,9 +21,14 @@ class TicketCheck
     public function handle(Request $request, Closure $next)
     {
         $user = User::find(Auth::id());
-        $request->merge(['have_tickets' => $user->haveTickets()]);
-    
+        $chatId = $request->route()->parameter('chat_id');
+        $haveUsingTicket = Ticket::where('user_id', $user->id)->where('chat_id', $chatId)->where('ticket_status_id', TicketStatus::getUsingId())->exists();
+        if ($user->havePendingTickets() || $haveUsingTicket) {
+            $request->merge(['have_tickets' => true]);
+        } else {
+            $request->merge(['have_tickets' => false]);
+        }
+
         return $next($request);
     }
-
 }
