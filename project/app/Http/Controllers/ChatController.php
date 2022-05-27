@@ -255,27 +255,28 @@ class ChatController extends Controller
         $canceled_schedule = InterviewSchedule::find($request->schedule_id);
         $canceled_schedule->schedule_status_id = ScheduleStatus::getCancelId();
         $canceled_schedule->save();
-
+        
         $schedule = new InterviewSchedule;
         $schedule->schedule_status_id = ScheduleStatus::getPendingId();
         $schedule->schedule = $request->schedule;
         $schedule->chat_id = $request->chatRoomId;
         $schedule->save();
-
+        
         $chat_record = new ChatRecord;
         $chat_record->chat_id = $request->chatRoomId;
         $chat_record->user_id = Role::getBotId();
         $chat_record->comment = "相談日程は " . $schedule->schedule->format('Y/m/d H:i') . " に変更されました。";
         $chat_record->save();
-
+        
         // 両者にメール
         $scheduled_date = $schedule->schedule->format('Y/m/d H:i');
+        $old_schedule_date = $canceled_schedule->schedule->format('Y/m/d H:i');
         $client_id = Chat::find($request->chatRoomId)->client_user_id;
         $client = User::find($client_id);
         $respondent_id = Chat::find($request->chatRoomId)->respondent_user_id;
         $respondent = User::find($respondent_id);
-        Mail::to($client->email)->send(new ChangedSchedule($client, $respondent, $scheduled_date));
-        Mail::to($respondent->email)->send(new DateScheduled($respondent, $client, $scheduled_date));
+        Mail::to($client->email)->send(new ChangedSchedule($client, $respondent, $scheduled_date, $old_schedule_date));
+        Mail::to($respondent->email)->send(new ChangedSchedule($respondent, $client, $scheduled_date, $old_schedule_date));
 
 
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));

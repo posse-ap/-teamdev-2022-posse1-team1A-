@@ -16,11 +16,12 @@ class ChangedSchedule extends Mailable
      *
      * @return void
      */
-    public function __construct($receiver, $partner, $scheduled_date)
+    public function __construct($receiver, $partner, $scheduled_date, $old_schedule_date)
     {
         $this->receiver = $receiver;
         $this->partner = $partner;
         $this->scheduled_date = $scheduled_date;
+        $this->old_schedule_date = $old_schedule_date;
     }
 
     /**
@@ -34,6 +35,7 @@ class ChangedSchedule extends Mailable
                 ->subject($this->partner->nickname . 'さんとの相談日時が変更されました【Anovey】')
                 ->with(['receiver' => $this->receiver])
                 ->with(['partner' => $this->partner])
-                ->with(['scheduled_date' => $this->scheduled_date]);
+                ->with(['scheduled_date' => $this->scheduled_date])
+                ->with(['old_schedule_date' => $this->old_schedule_date]);
     }
 }

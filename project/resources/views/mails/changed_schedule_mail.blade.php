@@ -10,7 +10,8 @@ Anovey (アノベイ) をご利用いただき誠にありがとうございま�
 　{{$partner->nickname}}様<br>
 <br>
 ■通話日時<br>
-変更後：{{ $scheduled_date }}<br>
+　 変更前：{{$old_schedule_date}} <br>
+→ 変更後：{{ $scheduled_date }}<br>
 <br>
 ■Anoveyチャットページ<br>
 {{route('chat.respondent_chat_list')}}<br>
