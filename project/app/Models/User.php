@@ -19,7 +19,16 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'nickname',
         'email',
+        'icon',
+        'telephone_number',
+        'company',
+        'department',
+        'length_of_service',
+        'is_search_target',
+        'account_status_id',
+        'role_id',
         'password',
     ];
 
@@ -42,7 +51,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function haveTickets()
+    public function havePendingTickets()
     {
         return $this->hasMany('App\Models\Ticket')->where('ticket_status_id', TicketStatus::getPendingId())->exists();
     }
@@ -55,5 +64,10 @@ class User extends Authenticatable
     public function countMatches()
     {
         return $this->hasMany('App\Models\Chat', 'respondent_user_id')->count();
+    }
+    
+    public static function getDefaultIcon()
+    {
+        return 'img/user-icon.jpeg';
     }
 }

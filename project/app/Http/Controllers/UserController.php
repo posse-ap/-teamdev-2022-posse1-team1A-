@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Chat;
 use App\Models\AccountStatus;
 use App\Models\PayPay;
+use App\Models\ChatStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
-{    
+{
     public function index()
     {
         if (Auth::check()) {
@@ -46,13 +48,14 @@ class UserController extends Controller
                 $query->where('is_search_target', true);
                 $query->where(function ($query) use ($value) {
                     $query->where('company', 'LIKE', "%{$value}%")
-                        ->orWhere('department', 'LIKE', "%{$value}%");
+                        ->orWhere('department', 'LIKE', "%{$value}%")
+                        ->orWhere('nickname', 'LIKE', "%{$value}%");
                 });
             }
 
-            $users = $query->paginate(20);
+            $users = $query->whereNotIn('id', [Auth::id()])->paginate(20);
         } else {
-            $users = User::where('role_id', Role::getUserId())->where('is_search_target', true)->paginate(20);
+            $users = User::where('role_id', Role::getUserId())->where('is_search_target', true)->whereNotIn('id', [Auth::id()])->paginate(20);
         }
 
         return view('user.search', compact('users', 'keyword'));
@@ -89,7 +92,44 @@ class UserController extends Controller
         $userInfo = User::find($userId);
         return view('user.edit', compact('userInfo'));
     }
-    
+
+    public function userUpdate(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'nickname' => 'required',
+            'email' => 'required|email',
+            'icon' => 'required',
+            'telephone_number' => 'required|numeric',
+            'company' => 'required',
+            'department' => 'required',
+            'length_of_service' => 'required',
+            'is_search_target' => 'required',
+        ]);
+
+        $user = User::find($request->id);
+        if ($request->icon) {
+            $icon = $request->file('icon');
+            $icon->storeAs('', $icon->getClientOriginalName(), 'public');
+            $iconPath = 'storage/' . $icon->getClientOriginalName();
+        } else {
+            $iconPath = User::getDefaultIcon();
+        }
+        $user->update([
+            'name' => $request->name,
+            'nickname' => $request->nickname,
+            'email' => $request->email,
+            'icon' => $iconPath,
+            'telephone_number' => $request->telephone_number,
+            'company' => $request->company,
+            'department' => $request->department,
+            'length_of_service' => $request->length_of_service,
+            'is_search_target' => $request->is_search_target,
+        ]);
+
+        return redirect(route('user_page'));
+    }
+
     public function beginner()
     {
         return view('user.beginner');
