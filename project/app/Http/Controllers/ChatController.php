@@ -278,6 +278,12 @@ class ChatController extends Controller
         $interviewSchedule->schedule_status_id = ScheduleStatus::getCancelId();
         $interviewSchedule->save();
 
+        $chat_record = new ChatRecord;
+        $chat_record->chat_id = $request->chatRoomId;
+        $chat_record->user_id = Role::getBotId();
+        $chat_record->comment = "相談日程はキャンセルされました。";
+        $chat_record->save();
+
         $ticket = Ticket::where('user_id', Auth::id())->where('chat_id', $chat_id)->where('ticket_status_id', TicketStatus::getUsingId())->first();
         $ticket->chat_id = null;
         $ticket->ticket_status_id = TicketStatus::getPendingId();

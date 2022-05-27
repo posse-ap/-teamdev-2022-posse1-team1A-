@@ -4,10 +4,11 @@
     <form action="{{ route('chat.schedule_change', $chatRoomId) }}" method="POST">
         @csrf
         <input type="hidden" name="chatRoomId" value="{{ $chatRoomId }}">
-        <input type="hidden" name="schedule_id" value="{{ $interview_schedule->id }}">
+        <input type="hidden" name="schedule_id"
+            @if ($isReserved) value="{{ $interview_schedule->id }}" @endif>
         <label>
             <input type="datetime-local" name="schedule" class="w-full rounded-sm bg-gray-100 text-left mb-5"
-                value="@if ($isReserved) {{ $interview_schedule->schedule->format('Y-m-d') . 'T' . $interview_schedule->schedule->format('H:i') }} @endif">
+                @if ($isReserved) value="{{ $interview_schedule->schedule->format('Y-m-d') . 'T' . $interview_schedule->schedule->format('H:i') }}" @endif>
         </label>
         <button class="bg-indigo-400 hover:bg-blue-700 text-white font-bold py-2 rounded w-64 mx-auto mb-5">
             変更
