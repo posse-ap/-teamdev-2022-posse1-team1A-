@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use App\Rules\ActiveAccount;
 
 class LoginRequest extends FormRequest
 {
@@ -29,7 +30,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required', 'string', 'email'],
+            'email' => ['required', 'string', 'email', new ActiveAccount],
             'password' => ['required', 'string'],
         ];
     }
@@ -45,7 +46,7 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (!Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -65,7 +66,7 @@ class LoginRequest extends FormRequest
      */
     public function ensureIsNotRateLimited()
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 
@@ -88,6 +89,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey()
     {
-        return Str::lower($this->input('email')).'|'.$this->ip();
+        return Str::lower($this->input('email')) . '|' . $this->ip();
     }
 }
