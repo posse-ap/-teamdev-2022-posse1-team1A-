@@ -92,6 +92,18 @@ class UserController extends Controller
 
     public function userUpdate(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'nickname' => 'required',
+            'email' => 'email',
+            'icon' => 'required',
+            'telephone_number' => 'numeric',
+            'company' => 'required',
+            'department' => 'required',
+            'length_of_service' => 'required',
+            'is_search_target' => 'required',
+        ]);
+
         $user = User::find($request->id);
         if ($request->icon) {
             $icon = $request->file('icon');
