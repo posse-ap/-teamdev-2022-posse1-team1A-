@@ -46,7 +46,8 @@ class UserController extends Controller
                 $query->where('is_search_target', true);
                 $query->where(function ($query) use ($value) {
                     $query->where('company', 'LIKE', "%{$value}%")
-                        ->orWhere('department', 'LIKE', "%{$value}%");
+                        ->orWhere('department', 'LIKE', "%{$value}%")
+                        ->orWhere('nickname', 'LIKE', "%{$value}%");
                 });
             }
 
