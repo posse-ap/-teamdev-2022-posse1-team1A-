@@ -20,6 +20,8 @@ use App\Models\InterviewSchedule;
 use App\Models\ScheduleStatus;
 use App\Models\Role;
 use App\Models\ChatStatus;
+use App\Models\Ticket;
+use App\Models\TicketStatus;
 
 class ChatController extends Controller
 {
@@ -166,6 +168,15 @@ class ChatController extends Controller
         $call = Calling::find($calling_id);
         $call->is_finished = true;
         $call->save();
+
+        $interviewSchedule = InterviewSchedule::where('chat_id', $call->chat_id)->where('schedule_status_id', ScheduleStatus::getPendingId())->first();
+        $interviewSchedule->schedule_status_id = ScheduleStatus::getFinishedId();
+        $interviewSchedule->save();
+
+        $ticket = Ticket::where('user_id', Auth::id())->where('chat_id', $call->chat_id)->where('ticket_status_id', TicketStatus::getUsingId())->first();
+        $ticket->calling_id = $call->id;
+        $ticket->ticket_status_id = TicketStatus::getUsedId();
+        $ticket->save();
         return redirect(route('chat.call', ['calling_id' => $calling_id]));
     }
 
@@ -214,6 +225,11 @@ class ChatController extends Controller
         $schedule->schedule = $request->schedule;
         $schedule->chat_id = $request->chatRoomId;
         $schedule->save();
+
+        $ticket = Ticket::where('user_id', Auth::id())->where('ticket_status_id', TicketStatus::getPendingId())->first();
+        $ticket->chat_id = $request->chatRoomId;
+        $ticket->ticket_status_id = TicketStatus::getUsingId();
+        $ticket->save();
 
         $chat_record = new ChatRecord;
         $chat_record->chat_id = $request->chatRoomId;
@@ -268,6 +284,11 @@ class ChatController extends Controller
         $chat_record->comment = "相談日程はキャンセルされました。";
         $chat_record->save();
 
+        $ticket = Ticket::where('user_id', Auth::id())->where('chat_id', $chat_id)->where('ticket_status_id', TicketStatus::getUsingId())->first();
+        $ticket->chat_id = null;
+        $ticket->ticket_status_id = TicketStatus::getPendingId();
+        $ticket->save();
+
         return redirect(route('chat.index', ['chat_id' => $chat_id]));
     }
 
@@ -291,6 +312,13 @@ class ChatController extends Controller
 
     public function exit_chat(Request $request)
     {
+        $ticket = Ticket::where('user_id', Auth::id())->where('chat_id', $request->chat_id)->where('ticket_status_id', TicketStatus::getUsingId())->first();
+        if ($ticket) {
+            $ticket->chat_id = null;
+            $ticket->ticket_status_id = TicketStatus::getPendingId();
+            $ticket->save();
+        }
+
         $chat = Chat::find($request->chat_id);
         $chat->is_finished       = ChatStatus::getIsFinishedId();
         $chat->save();

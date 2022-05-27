@@ -51,7 +51,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function haveTickets()
+    public function havePendingTickets()
     {
         return $this->hasMany('App\Models\Ticket')->where('ticket_status_id', TicketStatus::getPendingId())->exists();
     }
