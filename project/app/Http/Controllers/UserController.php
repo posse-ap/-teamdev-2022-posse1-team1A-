@@ -95,9 +95,9 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'nickname' => 'required',
-            'email' => 'email',
+            'email' => 'required|email',
             'icon' => 'required',
-            'telephone_number' => 'numeric',
+            'telephone_number' => 'required|numeric',
             'company' => 'required',
             'department' => 'required',
             'length_of_service' => 'required',
