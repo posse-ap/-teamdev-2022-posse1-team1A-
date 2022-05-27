@@ -1,29 +1,19 @@
 <header id="header" class="sticky top-0 w-full bg-white bg-opacity-75 shadow-lg z-50">
     <div id="base-header" class="px-10 py-3 flex items-center justify-between flex-shrink-0 items-center">
-        <div  id="header-logo" class="w-8 h-8 ml-0 mr-auto">
+        <div id="header-logo" class="w-8 h-8 ml-0 mr-auto">
             <a href="{{ route('user_index') }}" class="flex">
-            <img src="{{ asset('img/logo-black.png') }}" alt="logo-black.png">
-            <p class="flex ml-2 text-xl items-center"><b>Anovey<b></p>
+                <img src="{{ asset('img/logo-black.png') }}" alt="logo-black.png">
+                <p class="flex ml-2 text-xl items-center"><b>Anovey<b></p>
             </a>
         </div>
 
-        {{-- ログイン状態識別 --}}
-        <?php
-        if (Auth::check()) {
-            $account_status_id = 1;
-        }else{
-            $account_status_id = 0;
-        }
-        ?>
-
         {{-- PC画面幅のheader --}}
-        @if ($account_status_id == 1) {{-- ScheduleStatus::getActiveId() = 1 --}}
-        {{-- ログイン後 --}}
+        @if (Auth::check())
+            {{-- ログイン後 --}}
             <div class="hidden flex-row-reverse ml-auto mr-0 md:flex items-center justify-between">
                 <a href="{{ route('user_page') }}"
                     class="flex items-center justify-center w-8 h-8 ml-5 overflow-hidden rounded-full cursor-pointer">
-                    <img src="https://assets.codepen.io/5041378/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1600304177&width=512"
-                        alt="">
+                    <img src="{{ asset(App\Models\User::find(Auth::id())->icon) }}" alt="ユーザーのアイコン">
                 </a>
                 <button
                     class="relative bg-yellow-500 hover:bg-yellow-600 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
@@ -56,7 +46,7 @@
                         初めての方へ
                     </a>
                 </button>
-                
+
             </div>
 
             <div onclick="afterLoginHamburgerClick()">
@@ -98,7 +88,7 @@
     </div>
 
     {{-- スマホページ用のHeader --}}
-    @if ($account_status_id == 1) {{-- ScheduleStatus::getActiveId() = 1 --}}
+    @if (Auth::check())
         {{-- ログイン後 --}}
         <div id="afterlogin-hamburger-index" class="hidden fixed bg-gray-700">
             <ul class="flex-grow mx-10">

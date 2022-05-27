@@ -4,12 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Chat;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Ticket;
-use App\Models\TicketStatus;
 
-class TicketCheck
+class MyChatCheck
 {
     /**
      * Handle an incoming request.
@@ -20,15 +18,10 @@ class TicketCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        $user = User::find(Auth::id());
         $chatId = $request->route()->parameter('chat_id');
-        $haveUsingTicket = Ticket::where('user_id', $user->id)->where('chat_id', $chatId)->where('ticket_status_id', TicketStatus::getUsingId())->exists();
-        if ($user->havePendingTickets() || $haveUsingTicket) {
-            $request->merge(['have_tickets' => true]);
-        } else {
-            $request->merge(['have_tickets' => false]);
+        if (Chat::find($chatId)->respondent_user_id === Auth::id() || Chat::find($chatId)->client_user_id === Auth::id()) {
+            return $next($request);
         }
-
-        return $next($request);
+        return redirect(route('user_index'));
     }
 }

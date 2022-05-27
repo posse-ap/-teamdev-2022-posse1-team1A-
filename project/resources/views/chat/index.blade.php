@@ -53,18 +53,20 @@
                         </div>
                     @endif
                     <ul class="p-5 @if ($isClientChat) mt-5 @else mt-16 @endif">
-                        <li class="border-b border-t">
+                        <li class="border-b border-t py-5">
                             <a href="{{ $isClientChat ? route('chat.client_chat_list') : route('chat.respondent_chat_list') }}"
-                                class="block py-5">チャット一覧に戻る</a>
+                                class="block">チャット一覧に戻る</a>
                         </li>
-                        <form action="{{ route('chat.exit_chat', ["chat_id",$chatRoomId]) }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="chat_id" value="{{ $chatRoomId }}">
-                            <input type="hidden" name="isClientChat" value="{{ $isClientChat }}">
-                                <button class="mt-3" type="submit">
+                        <li class="py-5">
+                            <form action="{{ route('chat.exit_chat', ['chat_id', $chatRoomId]) }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="chat_id" value="{{ $chatRoomId }}">
+                                <input type="hidden" name="isClientChat" value="{{ $isClientChat }}">
+                                <button type="submit">
                                     トークを退出する
                                 </button>
-                        </form>
+                            </form>
+                        </li>
                     </ul>
                 </div>
                 <div class="w-full lg:w-3/4 box-content relative">
@@ -231,15 +233,17 @@
                     <div class="modal-inner" id="schedule-registration-modal">
                         @include('components.modals.schedule_registration')
                     </div>
-                    <div class="modal-inner" id="schedule-change-modal">
-                        @include('components.modals.schedule_change')
-                    </div>
-                    <div class="modal-inner" id="schedule-cancel-modal">
-                        @include('components.modals.schedule_cancel')
-                    </div>
-                    <div class="modal-inner" id="schedule-change-or-cancel-modal">
-                        @include('components.modals.schedule_change_or_cancel')
-                    </div>
+                    @if ($interview_schedule)
+                        <div class="modal-inner" id="schedule-change-modal">
+                            @include('components.modals.schedule_change')
+                        </div>
+                        <div class="modal-inner" id="schedule-cancel-modal">
+                            @include('components.modals.schedule_cancel')
+                        </div>
+                        <div class="modal-inner" id="schedule-change-or-cancel-modal">
+                            @include('components.modals.schedule_change_or_cancel')
+                        </div>
+                    @endif
                     <div class="modal-inner" id="call-start-modal">
                         @include('components.modals.call-start')
                     </div>

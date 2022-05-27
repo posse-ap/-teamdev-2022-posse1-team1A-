@@ -48,7 +48,8 @@ class UserController extends Controller
                 $query->where('is_search_target', true);
                 $query->where(function ($query) use ($value) {
                     $query->where('company', 'LIKE', "%{$value}%")
-                        ->orWhere('department', 'LIKE', "%{$value}%");
+                        ->orWhere('department', 'LIKE', "%{$value}%")
+                        ->orWhere('nickname', 'LIKE', "%{$value}%");
                 });
             }
 
@@ -94,6 +95,18 @@ class UserController extends Controller
 
     public function userUpdate(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'nickname' => 'required',
+            'email' => 'required|email',
+            'icon' => 'required',
+            'telephone_number' => 'required|numeric',
+            'company' => 'required',
+            'department' => 'required',
+            'length_of_service' => 'required',
+            'is_search_target' => 'required',
+        ]);
+
         $user = User::find($request->id);
         if ($request->icon) {
             $icon = $request->file('icon');

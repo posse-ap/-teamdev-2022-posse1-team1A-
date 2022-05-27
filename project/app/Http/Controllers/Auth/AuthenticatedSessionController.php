@@ -7,6 +7,8 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Role;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -31,6 +33,11 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        $user = User::find(Auth::id());
+        if ($user->role_id === Role::getAdminId()) {
+            return redirect(route('admin.index'));
+        }
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

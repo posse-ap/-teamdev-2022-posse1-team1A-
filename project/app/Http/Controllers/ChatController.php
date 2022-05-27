@@ -8,6 +8,7 @@ use App\Mail\MessageSent;
 use App\Mail\DateScheduled;
 use App\Mail\ExitedChat;
 use App\Mail\PartnerExitedChat;
+use App\Mail\ChangedSchedule;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,6 +21,8 @@ use App\Models\InterviewSchedule;
 use App\Models\ScheduleStatus;
 use App\Models\Role;
 use App\Models\ChatStatus;
+use App\Models\Ticket;
+use App\Models\TicketStatus;
 
 class ChatController extends Controller
 {
@@ -137,6 +140,13 @@ class ChatController extends Controller
         $calling = Calling::create([
             'chat_id' => $request->chat_id,
         ]);
+
+        $chat_record = new ChatRecord;
+        $chat_record->chat_id = $request->chat_id;
+        $chat_record->user_id = Role::getBotId();
+        $chat_record->comment = "通話が開始されました。";
+        $chat_record->save();
+
         return redirect(route('chat.call', ['calling_id' => $calling->id]));
     }
 
@@ -185,6 +195,15 @@ class ChatController extends Controller
         $call = Calling::find($calling_id);
         $call->is_finished = true;
         $call->save();
+
+        $interviewSchedule = InterviewSchedule::where('chat_id', $call->chat_id)->where('schedule_status_id', ScheduleStatus::getPendingId())->first();
+        $interviewSchedule->schedule_status_id = ScheduleStatus::getFinishedId();
+        $interviewSchedule->save();
+
+        $ticket = Ticket::where('user_id', Auth::id())->where('chat_id', $call->chat_id)->where('ticket_status_id', TicketStatus::getUsingId())->first();
+        $ticket->calling_id = $call->id;
+        $ticket->ticket_status_id = TicketStatus::getUsedId();
+        $ticket->save();
         return redirect(route('chat.call', ['calling_id' => $calling_id]));
     }
 
@@ -234,17 +253,19 @@ class ChatController extends Controller
         $schedule->chat_id = $request->chatRoomId;
         $schedule->save();
 
-        // 日程予約・変更時anoveybot送信
-        $interview_schedule = InterviewSchedule::where('chat_id', $request->chatRoomId)->orderBy('created_at', 'desc')->first();
+        $ticket = Ticket::where('user_id', Auth::id())->where('ticket_status_id', TicketStatus::getPendingId())->first();
+        $ticket->chat_id = $request->chatRoomId;
+        $ticket->ticket_status_id = TicketStatus::getUsingId();
+        $ticket->save();
 
         $chat_record = new ChatRecord;
         $chat_record->chat_id = $request->chatRoomId;
         $chat_record->user_id = Role::getBotId();
-        $chat_record->comment = "相談日程は " . $interview_schedule->schedule->format('Y/m/d H:i') . " に予約されました。";
+        $chat_record->comment = "相談日程は " . $schedule->schedule->format('Y/m/d H:i') . " に予約されました。";
         $chat_record->save();
 
         // 両者にメール
-        $scheduled_date = $interview_schedule->schedule->format('Y/m/d H:i');
+        $scheduled_date = $schedule->schedule->format('Y/m/d H:i');
         $client_id = Chat::find($request->chatRoomId)->client_user_id;
         $client = User::find($client_id);
         $respondent_id = Chat::find($request->chatRoomId)->respondent_user_id;
@@ -255,11 +276,55 @@ class ChatController extends Controller
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
 
+    public function schedule_change(Request $request)
+    {
+        $canceled_schedule = InterviewSchedule::find($request->schedule_id);
+        $canceled_schedule->schedule_status_id = ScheduleStatus::getCancelId();
+        $canceled_schedule->save();
+        
+        $schedule = new InterviewSchedule;
+        $schedule->schedule_status_id = ScheduleStatus::getPendingId();
+        $schedule->schedule = $request->schedule;
+        $schedule->chat_id = $request->chatRoomId;
+        $schedule->save();
+        
+        $chat_record = new ChatRecord;
+        $chat_record->chat_id = $request->chatRoomId;
+        $chat_record->user_id = Role::getBotId();
+        $chat_record->comment = "相談日程は " . $schedule->schedule->format('Y/m/d H:i') . " に変更されました。";
+        $chat_record->save();
+        
+        // 両者にメール
+        $scheduled_date = $schedule->schedule->format('Y/m/d H:i');
+        $old_schedule_date = $canceled_schedule->schedule->format('Y/m/d H:i');
+        $client_id = Chat::find($request->chatRoomId)->client_user_id;
+        $client = User::find($client_id);
+        $respondent_id = Chat::find($request->chatRoomId)->respondent_user_id;
+        $respondent = User::find($respondent_id);
+        Mail::to($client->email)->send(new ChangedSchedule($client, $respondent, $scheduled_date, $old_schedule_date));
+        Mail::to($respondent->email)->send(new ChangedSchedule($respondent, $client, $scheduled_date, $old_schedule_date));
+
+
+        return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
+    }
+
     public function schedule_cancel(Request $request, $chat_id)
     {
         $interviewSchedule = InterviewSchedule::find($request->interview_schedule_id);
         $interviewSchedule->schedule_status_id = ScheduleStatus::getCancelId();
         $interviewSchedule->save();
+
+        $chat_record = new ChatRecord;
+        $chat_record->chat_id = $request->chatRoomId;
+        $chat_record->user_id = Role::getBotId();
+        $chat_record->comment = "相談日程はキャンセルされました。";
+        $chat_record->save();
+
+        $ticket = Ticket::where('user_id', Auth::id())->where('chat_id', $chat_id)->where('ticket_status_id', TicketStatus::getUsingId())->first();
+        $ticket->chat_id = null;
+        $ticket->ticket_status_id = TicketStatus::getPendingId();
+        $ticket->save();
+
         return redirect(route('chat.index', ['chat_id' => $chat_id]));
     }
 
@@ -283,6 +348,13 @@ class ChatController extends Controller
 
     public function exit_chat(Request $request)
     {
+        $ticket = Ticket::where('user_id', Auth::id())->where('chat_id', $request->chat_id)->where('ticket_status_id', TicketStatus::getUsingId())->first();
+        if ($ticket) {
+            $ticket->chat_id = null;
+            $ticket->ticket_status_id = TicketStatus::getPendingId();
+            $ticket->save();
+        }
+
         $chat = Chat::find($request->chat_id);
         $chat->is_finished       = ChatStatus::getIsFinishedId();
         $chat->save();
