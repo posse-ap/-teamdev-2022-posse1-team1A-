@@ -8,6 +8,7 @@ use App\Mail\MessageSent;
 use App\Mail\DateScheduled;
 use App\Mail\ExitedChat;
 use App\Mail\PartnerExitedChat;
+use App\Mail\ChangedSchedule;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -268,6 +269,14 @@ class ChatController extends Controller
         $chat_record->save();
 
         // 両者にメール
+        $scheduled_date = $schedule->schedule->format('Y/m/d H:i');
+        $client_id = Chat::find($request->chatRoomId)->client_user_id;
+        $client = User::find($client_id);
+        $respondent_id = Chat::find($request->chatRoomId)->respondent_user_id;
+        $respondent = User::find($respondent_id);
+        Mail::to($client->email)->send(new ChangedSchedule($client, $respondent, $scheduled_date));
+        Mail::to($respondent->email)->send(new DateScheduled($respondent, $client, $scheduled_date));
+
 
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
