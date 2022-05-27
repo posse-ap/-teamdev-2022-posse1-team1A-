@@ -120,6 +120,13 @@ class ChatController extends Controller
         $calling = Calling::create([
             'chat_id' => $request->chat_id,
         ]);
+
+        $chat_record = new ChatRecord;
+        $chat_record->chat_id = $request->chat_id;
+        $chat_record->user_id = Role::getBotId();
+        $chat_record->comment = "通話が開始されました。";
+        $chat_record->save();
+
         return redirect(route('chat.call', ['calling_id' => $calling->id]));
     }
 
