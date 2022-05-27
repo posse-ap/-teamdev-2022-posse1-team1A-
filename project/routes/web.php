@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/exit_chat', 'App\Http\Controllers\ChatController@exit_chat')->name('exit_chat');
 
         Route::group(['prefix' => '/{chat_id}'], function () {
-            Route::get('/', 'App\Http\Controllers\ChatController@index')->name('index')->middleware(['have_ticket', 'chat_finish_check']);
+            Route::get('/', 'App\Http\Controllers\ChatController@index')->name('index')->middleware(['have_ticket', 'is_my_chat', 'chat_finish_check']);
             Route::post('/', 'App\Http\Controllers\ChatController@post')->name('post');
             Route::post('/schedule', 'App\Http\Controllers\ChatController@schedule')->name('schedule');
             Route::post('/schedule-change', 'App\Http\Controllers\ChatController@schedule_change')->name('schedule_change');
