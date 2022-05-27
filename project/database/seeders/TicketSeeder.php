@@ -22,14 +22,22 @@ class TicketSeeder extends Seeder
         for ($i = 1; $i <= Calling::count(); $i++) {
             array_push($data, [
                 'user_id' => Calling::find($i)->chat()->client_user_id,
+                'chat_id' => Calling::find($i)->chat()->id,
                 'ticket_status_id' => TicketStatus::getUsedId(),
                 'calling_id' => $i,
             ]);
         }
         array_push($data, [
             'user_id' => 1,
+            'ticket_status_id' => TicketStatus::getUsingId(),
+            'calling_id' => null,
+            'chat_id' => 1,
+        ]);
+        array_push($data, [
+            'user_id' => 1,
             'ticket_status_id' => TicketStatus::getPendingId(),
             'calling_id' => null,
+            'chat_id' => null,
         ]);
         DB::table('tickets')->insert($data);
     }

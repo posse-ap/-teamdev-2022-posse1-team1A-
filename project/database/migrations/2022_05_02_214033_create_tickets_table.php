@@ -30,6 +30,11 @@ return new class extends Migration
                 ->constrained('callings')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->foreignId('chat_id')
+                ->nullable()
+                ->constrained('chats')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
