@@ -71,7 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     // 管理者画面
-    Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'admin_check'], function () {
         Route::get('/', 'App\Http\Controllers\AdminController@index')->name('index');
 
         Route::get('/userlist', 'App\Http\Controllers\AdminController@userlist')->name('userlist');
