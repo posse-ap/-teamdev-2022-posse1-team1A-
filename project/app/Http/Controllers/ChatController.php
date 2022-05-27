@@ -29,7 +29,7 @@ class ChatController extends Controller
     public function start_chat(Request $request)
     {
         // 既存のチャット
-        $chat_id = Chat::select('id')->where('client_user_id', '=', $request->client_user_id)->where('respondent_user_id', $request->respondent_user_id)->where('is_finished', ChatStatus::getIsChattingId())->first();
+        $chat_id = Chat::select('id')->where('client_user_id', $request->client_user_id)->where('respondent_user_id', $request->respondent_user_id)->where('is_finished', ChatStatus::getIsChattingId())->first();
         // 新しいチャット
         if ($chat_id == null) {
             $insert_data = [
