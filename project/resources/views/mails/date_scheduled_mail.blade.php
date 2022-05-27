@@ -5,7 +5,7 @@ Anovey (アノベイ) をご利用いただき誠にありがとうございま�
 {{$partner->nickname}}様との通話日時が【予約】されました。<br>
 以下をご確認の上、リンクよりチャット画面の内容をご確認ください。<br>
 <br>
-■通話参加者
+■通話参加者<br>
 　{{$receiver->nickname}}様<br>
 　{{$partner->nickname}}様<br>
 <br>
