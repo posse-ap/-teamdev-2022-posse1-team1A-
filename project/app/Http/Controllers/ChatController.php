@@ -26,6 +26,25 @@ use App\Models\TicketStatus;
 
 class ChatController extends Controller
 {
+    public function start_chat(Request $request)
+    {
+        // 既存のチャット
+        $chat_id = Chat::select('id')->where('client_user_id', $request->client_user_id)->where('respondent_user_id', $request->respondent_user_id)->where('is_finished', ChatStatus::getIsChattingId())->first();
+        // 新しいチャット
+        if ($chat_id == null) {
+            $insert_data = [
+                'is_finished' => ChatStatus::getIsChattingId(),
+                'client_user_id' => Auth::id(),
+                'respondent_user_id' => $request->respondent_user_id,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+            Chat::insert($insert_data);
+            $chat_id = Chat::insertGetId($insert_data);
+        }
+        return redirect()->route('chat.index', compact('chat_id'));
+    }
+    
     public function index(Request $request, $chat_id)
     {
         // チャットルームのidを受け取る
