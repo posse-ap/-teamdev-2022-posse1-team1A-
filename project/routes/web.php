@@ -32,6 +32,10 @@ Route::get('/privacy-policy', function () {
     return view('user.privacy-policy');
 })->name('privacy_policy');
 
+Route::get('/contact-us', function () {
+    return view('user.contact-us');
+})->name('contact-us');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/edit', 'App\Http\Controllers\UserController@userEdit')->name('user_edit');
     Route::post('/user/edit', 'App\Http\Controllers\UserController@userUpdate')->name('user_update');
@@ -81,5 +85,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/userlist/active', 'App\Http\Controllers\AdminController@accountActive')->name('userlist_accountActive');
 
         Route::get('/call-evaluation', 'App\Http\Controllers\AdminController@callEvaluation')->name('call_evaluation');
+        Route::get('/contact-us', function () {
+            return view('admin.contact-us');
+        })->name('contact-us');
     });
 });

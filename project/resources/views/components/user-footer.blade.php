@@ -25,7 +25,7 @@
                         運営会社
                     </p>
                 </a>
-                <a class="w-6/12" href="">
+                <a class="w-6/12" href="{{ route('contact-us') }}">
                     <p class=" flex text-white h-8 items-center text-xs hover:text-gray-800 justify-center">
                         お問い合わせ
                     </p>
