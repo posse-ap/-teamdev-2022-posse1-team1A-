@@ -87,6 +87,10 @@ class UserController extends Controller
         // メール
         Mail::to($user->email)->send(new WithDrawn($user));
 
+        // ログアウト処理
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return redirect()->route('user_index');
     }
