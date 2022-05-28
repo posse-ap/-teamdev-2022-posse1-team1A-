@@ -61,6 +61,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Ticket')->where('ticket_status_id', TicketStatus::getPendingId())->count();
     }
 
+    public function countMatches()
+    {
+        return $this->hasMany('App\Models\Chat', 'respondent_user_id')->count();
+    }
+    
     public static function getDefaultIcon()
     {
         return 'img/user-icon.jpeg';
