@@ -1,4 +1,4 @@
-<footer class="footer px-10 bg-gray-500 w-full px-10 py-5">
+<footer class="footer px-10 bg-gray-500 w-full px-3 md:px-10 py-5">
     <div class="flex items-center justify-between flex-shrink-0">
         <a href="{{ route('user_index') }}">
             <div class=" w-8 h-8 ml-0 mr-1 w-3/12 flex">
@@ -20,9 +20,9 @@
                 </a>
             </div>
             <div class="flex justify-between md:w-full lg:w-6/12">
-                <a class="w-6/12" href="">
+                <a class="w-6/12" href="{{ route('user_beginner') }}">
                     <p class=" flex text-white h-8 items-center text-xs hover:text-gray-300 justify-center">
-                        運営会社
+                        初めての方へ
                     </p>
                 </a>
                 <a class="w-6/12" href="{{ route('contact-us') }}">
