@@ -9,6 +9,7 @@ use App\Mail\DateScheduled;
 use App\Mail\ExitedChat;
 use App\Mail\PartnerExitedChat;
 use App\Mail\ChangedSchedule;
+use App\Mail\PartnerEnteredCall;
 use App\Mail\CancelledSchedule;
 
 use Illuminate\Http\Request;
@@ -147,6 +148,14 @@ class ChatController extends Controller
         $chat_record->user_id = Role::getBotId();
         $chat_record->comment = "通話が開始されました。";
         $chat_record->save();
+
+        if (Auth::id() === Chat::find($request->chat_id)->client_user_id) {
+            $caller = User::find(Auth::id());
+            $receiver_id = Chat::find($request->chat_id)->respondent_user_id;
+            $receiver = User::find($receiver_id);
+            $chat_id = $request->chat_id;
+            Mail::to($receiver->email)->send(new PartnerEnteredCall($caller, $receiver, $chat_id));
+        };
 
         return redirect(route('chat.call', ['calling_id' => $calling->id]));
     }
