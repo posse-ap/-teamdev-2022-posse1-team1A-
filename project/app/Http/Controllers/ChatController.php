@@ -10,6 +10,7 @@ use App\Mail\ExitedChat;
 use App\Mail\PartnerExitedChat;
 use App\Mail\ChangedSchedule;
 use App\Mail\PartnerEnteredCall;
+use App\Mail\CancelledSchedule;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -333,6 +334,16 @@ class ChatController extends Controller
         $ticket->chat_id = null;
         $ticket->ticket_status_id = TicketStatus::getPendingId();
         $ticket->save();
+
+        // メール
+        $date = $interviewSchedule->schedule->format('Y/m/d H:i');
+        $client_id = Chat::find($request->chatRoomId)->client_user_id;
+        $client = User::find($client_id);
+        $respondent_id = Chat::find($request->chatRoomId)->respondent_user_id;
+        $respondent = User::find($respondent_id);
+        Mail::to($client->email)->send(new CancelledSchedule($client, $respondent, $date));
+        Mail::to($client->email)->send(new CancelledSchedule($respondent, $client, $date));
+
 
         return redirect(route('chat.index', ['chat_id' => $chat_id]));
     }
