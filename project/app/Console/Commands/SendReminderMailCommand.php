@@ -63,7 +63,7 @@ class SendReminderMailCommand extends Command
             $chat_record = new ChatRecord;
             $chat_record->chat_id = $interview_schedule->chat_id;
             $chat_record->user_id = Role::getBotId();
-            $chat_record->comment = "相談日程の【3日前】となりました。相談日時は " . $interview_date . " です。";
+            $chat_record->comment = "相談日程の【3日前】となりました。相談日時は " . $interview_date->format('Y/m/d H:i') . " です。";
             $chat_record->save();
         }
 
@@ -80,7 +80,7 @@ class SendReminderMailCommand extends Command
             $chat_record = new ChatRecord;
             $chat_record->chat_id = $interview_schedule->chat_id;
             $chat_record->user_id = Role::getBotId();
-            $chat_record->comment = "相談日程の【前日】となりました。相談日時は " . $interview_date . " です。";
+            $chat_record->comment = "相談日程の【前日】となりました。相談日時は " . $interview_date->format('Y/m/d H:i') . " です。";
             $chat_record->save();
         }
     }
