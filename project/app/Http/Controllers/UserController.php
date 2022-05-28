@@ -10,6 +10,8 @@ use App\Models\PayPay;
 use App\Models\ChatStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\WithDrawn;
 
 class UserController extends Controller
 {
@@ -82,6 +84,10 @@ class UserController extends Controller
         $user->account_status_id = AccountStatus::getWithdrawnId();
         $user->reason = $request->reason;
         $user->save();
+
+        // メール
+        Mail::to($user->email)->send(new WithDrawn($user));
+
 
         return redirect()->route('user_index');
     }
