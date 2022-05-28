@@ -43,23 +43,27 @@
 
                 <div class="pt-16">
                     <h1 class="text-center text-2xl lg:text-4xl mb-12">退会フォーム</h1>
-                    <form action="{{ route('user_withdrawal_post') }}" method="POST" class="mt-28 w-full md:w-4/5 mx-auto">
+                    <form action="{{ route('user_withdrawal_post') }}" method="POST"
+                        class="mt-28 w-full md:w-4/5 mx-auto">
                         @csrf
                         <div class="md:flex items-center justify-between">
-                            <label for="reason" class="block mb-5 md:mb-0">退会理由</label>
-                            <textarea name="reason" id="reason" class="bg-gray-50 w-full md:w-4/5 h-40"></textarea>
+                            <label for="reason" class="block mb-5 md:mb-0">退会理由<span class="text-red-600">*</span></label>
+                            <div class="w-full md:w-4/5 h-40">
+                                <textarea name="reason" id="reason"
+                                    class="bg-gray-50 w-full h-full @error('reason') border border-solid border-red-500 @enderror"></textarea>
+                                @error('reason')
+                                    <p class="text-red-500 text-xs mt-1 font-normal">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                         <input type="hidden" name="id" value="{{ $user->id }}">
                         <div class="mt-24">
-                            <button
-                                type="submit"
-                                value="退会"
+                            <button type="submit" value="退会"
                                 class="block mx-auto px-20 py-2 font-xs shadow text-white capitalize transition-colors duration-200 bg-red-400 rounded-md hover:bg-red-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
                                 退会する
                             </button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </section>
