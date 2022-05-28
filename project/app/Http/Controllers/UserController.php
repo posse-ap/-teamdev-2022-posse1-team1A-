@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Chat;
 use App\Models\AccountStatus;
 use App\Models\PayPay;
+use App\Models\ChatStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -93,6 +95,18 @@ class UserController extends Controller
 
     public function userUpdate(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'nickname' => 'required',
+            'email' => 'required|email',
+            'icon' => 'required',
+            'telephone_number' => 'required|numeric',
+            'company' => 'required',
+            'department' => 'required',
+            'length_of_service' => 'required',
+            'is_search_target' => 'required',
+        ]);
+
         $user = User::find($request->id);
         if ($request->icon) {
             $icon = $request->file('icon');

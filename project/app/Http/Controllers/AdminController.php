@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\AccountStatus;
@@ -109,6 +110,26 @@ class AdminController extends Controller
     public function rewardList()
     {
         $rewards = Reward::paginate(10);
+
+        // $reward = Reward::first();
+
+        // dd($reward->users);
         return view('admin.reward-list', compact('rewards'));
+    }
+
+    public function rewardListPaid(Request $request)
+    {
+        $reward = Reward::find($request->id);
+        $reward->is_paid = true;
+        $reward->save();
+
+        return redirect()->route('admin.reward_list');
+    }
+
+    public function withdrawalList()
+    {
+        $users = User::where('account_status_id', AccountStatus::getWithdrawnId())->paginate(10);
+
+        return view('admin.withdrawal-list', compact('users'));
     }
 }

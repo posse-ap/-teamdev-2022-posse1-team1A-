@@ -2,15 +2,15 @@
 <br>
 Anovey (アノベイ) をご利用いただき誠にありがとうございます。<br>
 <br>
-{{$partner->nickname}}様との通話日時が【予約】されました。<br>
+{{$partner->nickname}} 様との通話日時が【キャンセル】されました。<br>
 以下をご確認の上、リンクよりチャット画面の内容をご確認ください。<br>
 <br>
 ■通話参加者<br>
-　{{$receiver->nickname}}様<br>
-　{{$partner->nickname}}様<br>
+　{{$receiver->nickname}} 様<br>
+　{{$partner->nickname}} 様<br>
 <br>
-■通話日時<br>
-　{{ $scheduled_date }}<br>
+■キャンセルされた通話日時<br>
+　{{$scheduled_date}} <br>
 <br>
 ■Anoveyチャットページ<br>
-{{route('chat.respondent_chat_list')}}
+　{{ route('user_index') }}<br>

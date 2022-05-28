@@ -35,6 +35,7 @@ Route::get('/privacy-policy', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/edit', 'App\Http\Controllers\UserController@userEdit')->name('user_edit');
     Route::post('/user/edit', 'App\Http\Controllers\UserController@userUpdate')->name('user_update');
+    Route::post('/start_chat', 'App\Http\Controllers\ChatController@start_chat')->name('start_chat');
     Route::get('/user', 'App\Http\Controllers\UserController@userPage')->name('user_page');
     Route::get('/ticket', 'App\Http\Controllers\UserController@ticket')->name('user_ticket');
     Route::get('/withdrawal', 'App\Http\Controllers\UserController@withdrawal')->name('user_withdrawal');
@@ -82,5 +83,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/call-evaluation', 'App\Http\Controllers\AdminController@callEvaluation')->name('call_evaluation');
 
         Route::get('/reward-list', 'App\Http\Controllers\AdminController@rewardList')->name('reward_list');
+        Route::post('/reward-list', 'App\Http\Controllers\AdminController@rewardListPaid')->name('reward_list_paid');
+
+        Route::get('/withdrawal-list', 'App\Http\Controllers\AdminController@withdrawalList')->name('withdrawal_list');
     });
 });

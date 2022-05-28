@@ -8,6 +8,9 @@ use App\Mail\MessageSent;
 use App\Mail\DateScheduled;
 use App\Mail\ExitedChat;
 use App\Mail\PartnerExitedChat;
+use App\Mail\ChangedSchedule;
+use App\Mail\PartnerEnteredCall;
+use App\Mail\CancelledSchedule;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +31,25 @@ use Carbon\Carbon;
 
 class ChatController extends Controller
 {
+    public function start_chat(Request $request)
+    {
+        // 既存のチャット
+        $chat_id = Chat::select('id')->where('client_user_id', $request->client_user_id)->where('respondent_user_id', $request->respondent_user_id)->where('is_finished', ChatStatus::getIsChattingId())->first();
+        // 新しいチャット
+        if ($chat_id == null) {
+            $insert_data = [
+                'is_finished' => ChatStatus::getIsChattingId(),
+                'client_user_id' => Auth::id(),
+                'respondent_user_id' => $request->respondent_user_id,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+            Chat::insert($insert_data);
+            $chat_id = Chat::insertGetId($insert_data);
+        }
+        return redirect()->route('chat.index', compact('chat_id'));
+    }
+    
     public function index(Request $request, $chat_id)
     {
         // チャットルームのidを受け取る
@@ -123,6 +145,21 @@ class ChatController extends Controller
         $calling = Calling::create([
             'chat_id' => $request->chat_id,
         ]);
+
+        $chat_record = new ChatRecord;
+        $chat_record->chat_id = $request->chat_id;
+        $chat_record->user_id = Role::getBotId();
+        $chat_record->comment = "通話が開始されました。";
+        $chat_record->save();
+
+        if (Auth::id() === Chat::find($request->chat_id)->client_user_id) {
+            $caller = User::find(Auth::id());
+            $receiver_id = Chat::find($request->chat_id)->respondent_user_id;
+            $receiver = User::find($receiver_id);
+            $chat_id = $request->chat_id;
+            Mail::to($receiver->email)->send(new PartnerEnteredCall($caller, $receiver, $chat_id));
+        };
+
         return redirect(route('chat.call', ['calling_id' => $calling->id]));
     }
 
@@ -270,20 +307,29 @@ class ChatController extends Controller
         $canceled_schedule = InterviewSchedule::find($request->schedule_id);
         $canceled_schedule->schedule_status_id = ScheduleStatus::getCancelId();
         $canceled_schedule->save();
-
+        
         $schedule = new InterviewSchedule;
         $schedule->schedule_status_id = ScheduleStatus::getPendingId();
         $schedule->schedule = $request->schedule;
         $schedule->chat_id = $request->chatRoomId;
         $schedule->save();
-
+        
         $chat_record = new ChatRecord;
         $chat_record->chat_id = $request->chatRoomId;
         $chat_record->user_id = Role::getBotId();
         $chat_record->comment = "相談日程は " . $schedule->schedule->format('Y/m/d H:i') . " に変更されました。";
         $chat_record->save();
-
+        
         // 両者にメール
+        $scheduled_date = $schedule->schedule->format('Y/m/d H:i');
+        $old_schedule_date = $canceled_schedule->schedule->format('Y/m/d H:i');
+        $client_id = Chat::find($request->chatRoomId)->client_user_id;
+        $client = User::find($client_id);
+        $respondent_id = Chat::find($request->chatRoomId)->respondent_user_id;
+        $respondent = User::find($respondent_id);
+        Mail::to($client->email)->send(new ChangedSchedule($client, $respondent, $scheduled_date, $old_schedule_date));
+        Mail::to($respondent->email)->send(new ChangedSchedule($respondent, $client, $scheduled_date, $old_schedule_date));
+
 
         return redirect(route('chat.index', ['chat_id' => $request->chatRoomId]));
     }
@@ -304,6 +350,16 @@ class ChatController extends Controller
         $ticket->chat_id = null;
         $ticket->ticket_status_id = TicketStatus::getPendingId();
         $ticket->save();
+
+        // メール
+        $date = $interviewSchedule->schedule->format('Y/m/d H:i');
+        $client_id = Chat::find($request->chatRoomId)->client_user_id;
+        $client = User::find($client_id);
+        $respondent_id = Chat::find($request->chatRoomId)->respondent_user_id;
+        $respondent = User::find($respondent_id);
+        Mail::to($client->email)->send(new CancelledSchedule($client, $respondent, $date));
+        Mail::to($client->email)->send(new CancelledSchedule($respondent, $client, $date));
+
 
         return redirect(route('chat.index', ['chat_id' => $chat_id]));
     }

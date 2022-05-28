@@ -86,80 +86,168 @@
     @include('components.user-header')
 
     <main class="container mx-auto font-normal mb-12 bg-slate-50">
-        <div class="mt-16 max-w-xl mx-auto">
-            <form action="" method="post" enctype="multipart/form-data">
+        <div class="mt-16 max-w-2xl mx-auto">
+            <form action="" method="post" enctype="multipart/form-data" class="text-sm md:text-base">
                 @csrf
                 <input type="hidden" name="id" value="{{ $userInfo->id }}">
                 <h1 class="text-center text-4xl mb-12">アカウント編集</h1>
-                <div class="relative user-icon max-w-xs mx-auto">
-                    <img class="h-40 w-auto mx-auto overflow-hidden rounded-full mb-11" src={{ asset($userInfo->icon) }}
+                <div class="relative user-icon max-w-xs mx-auto mb-10">
+                    <img class="h-40 w-auto mx-auto overflow-hidden rounded-full" src={{ asset($userInfo->icon) }}
                         alt="ユーザーアイコン" id="figure-image">
                     <div class="pulus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full" id="user-icon-button">
                     </div>
                     <input value="{{ $userInfo->icon }}" type="file" name="icon" class="hidden"
                         id="user-icon-input" accept="image/*">
+                    @error('icon')
+                        <p class="text-red-500 text-xs">{{ $message }}</p>
+                    @enderror
                 </div>
-                <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
-                    <div class="col-span-1">氏名<span class="text-red-600">*</span></div>
+                <div class="md:grid md:grid-cols-4 md:gap-x-8 md:gap-y-2 px-5 mb-9 items-center">
+                    <div class="col-span-1 h-min">
+                        <label for="name" class="block h-min mb-2 md:mb-0">
+                            氏名<span class="text-red-600">*</span>
+                    </div>
+                    </label>
                     <div class="col-span-3">
-                        <input value="{{ $userInfo->name }}" class="mb-2 rounded-md bg-white w-full" type="text"
-                            name="name" id="">
-                        <span>※ サービス上で公開されません。</span>
+                        <input value="{{ $userInfo->name }}"
+                            class="rounded-md bg-white w-full @error('name') border border-solid border-red-500 @enderror"
+                            type="text" name="name" id="name">
+                    </div>
+                    <div class="col-start-2 col-span-3">
+                        <p class="text-xs mt-2 md:mt-0">※ サービス上で公開されません。</p>
+                        @error('name')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
-                <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
-                    <div class="col-span-1">ニックネーム<span class="text-red-600">*</span></div>
+                <div class="md:grid md:grid-cols-4 md:gap-x-8 md:gap-y-2 px-5 mb-9 items-center">
+                    <div class="col-span-1 h-min">
+                        <label for="nickname" class="block h-min mb-2 md:mb-0">
+                            ニックネーム<span class="text-red-600">*</span>
+                    </div>
+                    </label>
                     <div class="col-span-3">
-                        <input value="{{ $userInfo->nickname }}" class="mb-2 rounded-md bg-white w-full" type="text"
-                            name="nickname" id="">
-                        <span>※ サービス上で公開されます。</span>
+                        <input value="{{ $userInfo->nickname }}"
+                            class="rounded-md bg-white w-full @error('nickname') border border-solid border-red-500 @enderror"
+                            type="text" name="nickname" id="nickname">
+                    </div>
+                    <div class="col-start-2 col-span-3">
+                        <p class="text-xs mt-2 md:mt-0">※ サービス上で公開されます。</p>
+                        @error('nickname')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
-                <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
-                    <div class="col-span-1">電話番号<span class="text-red-600">*</span></div>
+                <div class="md:grid md:grid-cols-4 md:gap-x-8 md:gap-y-2 px-5 mb-9 items-center">
+                    <div class="col-span-1 h-min">
+                        <label for="telephone_number" class="block h-min mb-2 md:mb-0">
+                            電話番号<span class="text-red-600">*</span>
+                    </div>
+                    </label>
                     <div class="col-span-3">
-                        <input value="{{ $userInfo->telephone_number }}" class="mb-2 rounded-md bg-white w-full"
-                            type="tel" name="telephone_number" id="">
-                        <span>※ PayPayで使用している電話番号を入力してください。</span>
+                        <input value="{{ $userInfo->telephone_number }}"
+                            class="rounded-md bg-white w-full @error('telephone_number') border border-solid border-red-500 @enderror"
+                            type="text" name="telephone_number" id="telephone_number">
+                    </div>
+                    <div class="col-start-2 col-span-3">
+                        <p class="text-xs mb-1 mt-2 md:mt-0">※ PayPayで使用している電話番号を入力してください。</p>
+                        <p class="text-xs">※ ハイフンなしで入力してください。（例）08012345678</p>
+                        @error('telephone_number')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
-                <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
-                    <div class="col-span-1">メールアドレス<span class="text-red-600">*</span></div>
-                    <input value="{{ $userInfo->email }}" class="rounded-md bg-white col-span-3 w-full" type="text"
-                        name="email" id="">
+                <div class="md:grid md:grid-cols-4 md:gap-x-8 md:gap-y-2 px-5 mb-9 items-center">
+                    <div class="col-span-1 h-min">
+                        <label for="email" class="block h-min mb-2 md:mb-0">
+                            メールアドレス<span class="text-red-600">*</span>
+                    </div>
+                    </label>
+                    <div class="col-span-3">
+                        <input value="{{ $userInfo->email }}"
+                            class="rounded-md bg-white w-full @error('email') border border-solid border-red-500 @enderror"
+                            type="text" name="email" id="email">
+                    </div>
+                    <div class="col-start-2 col-span-3">
+                        @error('email')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
-                <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
-                    <div class="col-span-1">会社名<span class="text-red-600">*</span></div>
-                    <input value="{{ $userInfo->company }}" class="rounded-md bg-white col-span-3" type="text"
-                        name="company" id="">
+                <div class="md:grid md:grid-cols-4 md:gap-x-8 md:gap-y-2 px-5 mb-9 items-center">
+                    <div class="col-span-1 h-min">
+                        <label for="company" class="block h-min mb-2 md:mb-0">
+                            会社名<span class="text-red-600">*</span>
+                    </div>
+                    </label>
+                    <div class="col-span-3">
+                        <input value="{{ $userInfo->company }}"
+                            class="rounded-md bg-white w-full @error('company') border border-solid border-red-500 @enderror"
+                            type="text" name="company" id="company">
+                    </div>
+                    <div class="col-start-2 col-span-3">
+                        @error('company')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
-                <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
-                    <div class="col-span-1">部署名</div>
-                    <input value="{{ $userInfo->department }}" class="rounded-md bg-white col-span-3 w-full" type="text"
-                        name="department" id="">
+                <div class="md:grid md:grid-cols-4 md:gap-x-8 md:gap-y-2 px-5 mb-9 items-center">
+                    <div class="col-span-1 h-min">
+                        <label for="department" class="block h-min mb-2 md:mb-0">
+                            部署名<span class="text-red-600">*</span>
+                    </div>
+                    </label>
+                    <div class="col-span-3">
+                        <input value="{{ $userInfo->department }}"
+                            class="rounded-md bg-white w-full @error('department') border border-solid border-red-500 @enderror"
+                            type="text" name="department" id="department">
+                    </div>
+                    <div class="col-start-2 col-span-3">
+                        @error('department')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
-                <div class="md:grid md:grid-cols-4 md:gap-8 px-5 mb-9">
-                    <div class="col-span-1">勤続年数</div>
-                    <select name="length_of_service" class="rounded-md bg-white col-span-3 h-10 w-full">
-                        <option value="1年未満" @selected($userInfo->length_of_service === '1年未満')>1年未満</option>
-                        <option value="1年" @selected($userInfo->length_of_service === '1年')>1年</option>
-                        <option value="2年" @selected($userInfo->length_of_service === '2年')>2年</option>
-                        <option value="3年" @selected($userInfo->length_of_service === '3年')>3年</option>
-                        <option value="4年" @selected($userInfo->length_of_service === '4年')>4年</option>
-                        <option value="5年" @selected($userInfo->length_of_service === '5年')>5年</option>
-                        <option value="6年" @selected($userInfo->length_of_service === '6年')>6年</option>
-                        <option value="7年" @selected($userInfo->length_of_service === '7年')>7年</option>
-                        <option value="8年" @selected($userInfo->length_of_service === '8年')>8年</option>
-                        <option value="9年" @selected($userInfo->length_of_service === '9年')>9年</option>
-                        <option value="10年以上" @selected($userInfo->length_of_service === '10年以上')>10年以上</option>
-                    </select>
+                <div class="md:grid md:grid-cols-4 md:gap-x-8 md:gap-y-2 px-5 mb-9 items-center">
+                    <div class="col-span-1 h-min">
+                        <label for="length_of_service" class="block h-min mb-2 md:mb-0">
+                            勤続年数<span class="text-red-600">*</span>
+                    </div>
+                    <div class="col-span-3">
+                        <select name="length_of_service"
+                            class="rounded-md bg-white col-span-3 h-10 w-full px-3 @error('length_of_service') border border-solid border-red-500 @enderror">
+                            <option value="1年未満" @selected($userInfo->length_of_service === '1年未満')>1年未満</option>
+                            <option value="1年" @selected($userInfo->length_of_service === '1年')>1年</option>
+                            <option value="2年" @selected($userInfo->length_of_service === '2年')>2年</option>
+                            <option value="3年" @selected($userInfo->length_of_service === '3年')>3年</option>
+                            <option value="4年" @selected($userInfo->length_of_service === '4年')>4年</option>
+                            <option value="5年" @selected($userInfo->length_of_service === '5年')>5年</option>
+                            <option value="6年" @selected($userInfo->length_of_service === '6年')>6年</option>
+                            <option value="7年" @selected($userInfo->length_of_service === '7年')>7年</option>
+                            <option value="8年" @selected($userInfo->length_of_service === '8年')>8年</option>
+                            <option value="9年" @selected($userInfo->length_of_service === '9年')>9年</option>
+                            <option value="10年以上" @selected($userInfo->length_of_service === '10年以上')>10年以上</option>
+                        </select>
+                        <div class="col-start-2 col-span-3">
+                            @error('length_of_service')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
                 <div class="mb-9 px-5 md:leading-loose leading-10">
-                    <span class="md:inline block">匿名回答者としてのサービス利用を行いますか？</span>
-                    <label><input class="md:ml-4" type="radio" name="is_search_target" value="1"
-                            @checked($userInfo->is_search_target == 1)>はい</label>
-                    <label><input class="ml-4" type="radio" name="is_search_target" value="0"
-                            @checked($userInfo->is_search_target == 0)>いいえ</label>
+                    <div class="md:flex md:items-center">
+                        <p class="mb-1 md:mb-0">匿名回答者としてのサービス利用を行いますか？</p>
+                        <div class="flex">
+                            <label class="flex items-center"><input class="md:ml-4 mr-1" type="radio" name="is_search_target" value="1"
+                                    @checked($userInfo->is_search_target == 1)>はい</label>
+                            <label class="flex items-center"><input class="ml-4 mr-1" type="radio" name="is_search_target" value="0"
+                                    @checked($userInfo->is_search_target == 0)>いいえ</label>
+                        </div>
+                    </div>
+                    @error('is_search_target')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
                 <a href="{{ route('user_edit') }}">
                     <button
