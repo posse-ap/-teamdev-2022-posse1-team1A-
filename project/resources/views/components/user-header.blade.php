@@ -117,7 +117,7 @@
                         href="#">運営会社</a>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
-                        href="#">お問い合わせ</a>
+                        href="{{ route('contact-us') }}">お問い合わせ</a>
                 </li>
             </ul>
             <div class="flex w-screen">
@@ -162,7 +162,7 @@
                         href="#">運営会社</a>
                 </li>
                 <li><a class="block py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white"
-                        href="#">お問い合わせ</a>
+                        href="{{ route('contact-us') }}">お問い合わせ</a>
                 </li>
             </ul>
             <div class="flex w-screen">
