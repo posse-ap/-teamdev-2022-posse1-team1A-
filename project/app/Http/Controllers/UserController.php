@@ -65,8 +65,7 @@ class UserController extends Controller
 
     public function userPage(Request $request)
     {
-        $userId = 1;
-        $userInfo = User::find($userId);
+        $userInfo = User::find(Auth::id());
         return view('user.info', compact('userInfo'));
     }
 
