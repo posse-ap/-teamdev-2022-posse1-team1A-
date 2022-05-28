@@ -11,6 +11,7 @@ use App\Mail\PartnerExitedChat;
 use App\Mail\ChangedSchedule;
 use App\Mail\PartnerEnteredCall;
 use App\Mail\CancelledSchedule;
+use App\Mail\StoppedReception;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -241,6 +242,13 @@ class ChatController extends Controller
 
         $user->is_search_target = false;
         $user->save();
+
+        // メール
+        $clients =$user->current_client_users()->get();
+        foreach( $clients as $client){
+            $client =  User::find($client->client_user_id);
+            Mail::to($client->email)->send(new StoppedReception($client, $user));
+        }
 
         return redirect()->route('chat.respondent_chat_list');
     }
