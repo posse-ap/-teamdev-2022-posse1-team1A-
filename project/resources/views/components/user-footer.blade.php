@@ -1,6 +1,6 @@
 <footer class="footer px-10 bg-gray-500 w-full px-10 py-5">
     <div class="flex items-center justify-between flex-shrink-0">
-        <a class="" href="">
+        <a href="{{ route('user_index') }}">
             <div class=" w-8 h-8 ml-0 mr-1 w-3/12 flex">
                 <img src="{{ asset('img/logo-black.png') }}" alt="logo-black.png">
                 <p class="flex ml-2 text-white items-center border-r pr-4 footer-logo">Anovey</p>
