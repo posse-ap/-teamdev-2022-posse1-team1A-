@@ -1,6 +1,6 @@
 <div class="flex flex-col text-center py-8">
     <div class="mb-5 font-bold text-lg">相談日程をキャンセルしますか？</div>
-    <div class="mb-8">変更前相談日程 : {{ $interview_schedule ? "{$interview_schedule->schedule}~" : '' }}
+    <div class="mb-8">変更前相談日程 : {{ $interview_schedule ? "{$interview_schedule->schedule->format('Y/m/d H:i')}" : '' }}
     </div>
     <form action="{{ route('chat.schedule_cancel', ['chat_id' => $chatRoomId]) }}" method="POST">
         @csrf

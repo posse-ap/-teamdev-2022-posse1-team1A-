@@ -76,4 +76,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Chat::class,'respondent_user_id')->where('is_finished', ChatStatus::getIsChattingId());
     }
+
+    public function client_chats()
+    {
+        return $this->hasMany(Chat::class, 'client_user_id');
+    }
+    
+    public function respondent_chats()
+    {
+        return $this->hasMany(Chat::class, 'respondent_user_id');
+    }
 }
