@@ -13,6 +13,7 @@ use App\Models\CallingEvaluation;
 use App\Models\Calling;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AccountStopped;
+use App\Mail\UnfrozedAccount;
 
 class AdminController extends Controller
 {
@@ -84,6 +85,9 @@ class AdminController extends Controller
         $user = User::find($request->id);
         $user->account_status_id = AccountStatus::getActiveId();
         $user->save();
+        
+        // メール
+        Mail::to($user->email)->send(new UnfrozedAccount($user));
 
         return redirect()->route('admin.userlist');
     }
