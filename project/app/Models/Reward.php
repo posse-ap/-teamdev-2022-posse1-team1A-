@@ -9,8 +9,8 @@ class Reward extends Model
 {
     use HasFactory;
 
-    public function users()
+    public function user()
     {
-        return $this->hasMany('App\Models\User', 'id');
+        return $this->belongsTo('App\Models\User');
     }
 }

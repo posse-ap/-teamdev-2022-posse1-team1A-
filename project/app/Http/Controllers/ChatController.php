@@ -221,8 +221,8 @@ class ChatController extends Controller
 
         $respondentUserId = Chat::find($call->chat_id)->respondent_user_id;
         $today = new Carbon();
-        if (Reward::where('user_id', $respondentUserId)->whereYear('created_at', $today->year)->whereMonth('created_at', $today->year)->exists()) {
-            $reward = Reward::where('user_id', $respondentUserId)->whereYear('created_at', $today->year)->whereMonth('created_at', $today->year)->first();
+        if (Reward::where('user_id', $respondentUserId)->whereYear('created_at', $today->year)->whereMonth('created_at', $today->month)->exists()) {
+            $reward = Reward::where('user_id', $respondentUserId)->whereYear('created_at', $today->year)->whereMonth('created_at', $today->month)->first();
             $reward->amount_of_payment = $reward->amount_of_payment + Ticket::getPrice();
             $reward->save();
         } else {
