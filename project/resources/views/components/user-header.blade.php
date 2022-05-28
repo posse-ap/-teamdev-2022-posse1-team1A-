@@ -18,8 +18,16 @@
                 <button
                     class="relative bg-yellow-500 hover:bg-yellow-600 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
                     <div>
-                        <span class="count" id="notifications-count">5</span>
-                        <span class="fa fa-bell-o"></span>
+                        <?php $respondent_sum = 0; ?>
+                        @foreach (App\Models\User::find(Auth::id())->respondent_chats as $respondent_chat)
+                            <?php $respondent_sum += $respondent_chat->number_of_unread_items(); ?>
+                        @endforeach
+                        @if ($respondent_sum !== 0)
+                            <span class="count" id="notifications-count">
+                                {{ $respondent_sum }}
+                            </span>
+                            <span class="fa fa-bell-o"></span>
+                        @endif
                     </div>
                     <a href="{{ route('chat.respondent_chat_list') }}">
                         回答者チャット
@@ -29,8 +37,16 @@
                 <button
                     class="relative bg-lightblue-500 hover:bg-blue-600 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
                     <div>
-                        <span class="count" id="notifications-count">3</span>
-                        <span class="fa fa-bell-o"></span>
+                        <?php $client_sum = 0; ?>
+                        @foreach (App\Models\User::find(Auth::id())->client_chats as $client_chat)
+                            <?php $client_sum += $client_chat->number_of_unread_items(); ?>
+                        @endforeach
+                        @if ($client_sum !== 0)
+                            <span class="count" id="notifications-count">
+                                {{ $client_sum }}
+                            </span>
+                            <span class="fa fa-bell-o"></span>
+                        @endif
                     </div>
                     <a href="{{ route('chat.client_chat_list') }}">
                         依頼者チャット
@@ -126,9 +142,15 @@
                         <a href="{{ route('chat.client_chat_list') }}" class="whitespace-nowrap">
                             依頼者チャット
                         </a>
-                        <div class="bg-red-600 rounded-full w-5 h-5 ml-1">
-                            <p class="text-white w-full h-full sm:leading-tight">3</p>
-                        </div>
+                        <?php $client_sum = 0; ?>
+                        @foreach (App\Models\User::find(Auth::id())->client_chats as $client_chat)
+                            <?php $client_sum += $client_chat->number_of_unread_items(); ?>
+                        @endforeach
+                        @if ($client_sum !== 0)
+                            <div class="bg-red-600 rounded-full w-5 h-5 ml-1">
+                                <p class="text-white w-full h-full sm:leading-tight">{{ $client_sum }}</p>
+                            </div>
+                        @endif
                     </div>
                 </button>
                 <button class="bg-yellow-500 p-5 hover:bg-yellow-600 text-white sm:text-base text-sm font-bold w-6/12">
@@ -136,9 +158,15 @@
                         <a href="{{ route('chat.respondent_chat_list') }}" class="whitespace-nowrap">
                             回答者チャット
                         </a>
-                        <div class="bg-red-600 rounded-full w-5 h-5 ml-1">
-                            <p class="text-white w-full h-full sm:leading-tight">5</p>
-                        </div>
+                        <?php $respondent_sum = 0; ?>
+                        @foreach (App\Models\User::find(Auth::id())->respondent_chats as $respondent_chat)
+                            <?php $respondent_sum += $respondent_chat->number_of_unread_items(); ?>
+                        @endforeach
+                        @if ($respondent_sum !== 0)
+                            <div class="bg-red-600 rounded-full w-5 h-5 ml-1">
+                                <p class="text-white w-full h-full sm:leading-tight">{{ $respondent_sum }}</p>
+                            </div>
+                        @endif
                     </div>
                 </button>
             </div>
