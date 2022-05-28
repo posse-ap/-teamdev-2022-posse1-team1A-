@@ -10,17 +10,18 @@ use App\Models\InterviewSchedule;
 use App\Models\Chat;
 use App\Models\CallingEvaluation;
 use App\Models\Calling;
+use App\Models\Reward;
 
 class AdminController extends Controller
 {
     public function index()
     {
         $total_count_users = User::count(); //総会員数
-        $total_count_matched = Chat::count();// 総マッチ数
+        $total_count_matched = Chat::count(); // 総マッチ数
         $total_count_call = Calling::count(); // 総通話数
         $avg_calling_time = Calling::avg('calling_time'); // 平均通話時間
-        $total_count_cancelled = InterviewSchedule::where('schedule_status_id',ScheduleStatus::getCancelId())->count();// 日程調整失敗数
-        return view('admin.index', compact('total_count_users','total_count_matched','total_count_call', 'avg_calling_time','total_count_cancelled'));
+        $total_count_cancelled = InterviewSchedule::where('schedule_status_id', ScheduleStatus::getCancelId())->count(); // 日程調整失敗数
+        return view('admin.index', compact('total_count_users', 'total_count_matched', 'total_count_call', 'avg_calling_time', 'total_count_cancelled'));
     }
 
     public function userlist()
@@ -103,5 +104,11 @@ class AdminController extends Controller
         $callings = Calling::paginate(5);
 
         return view('admin.call-evaluation', compact('comprehensive', 'respondentComprehensive', 'clientComprehensive', 'callings'));
+    }
+
+    public function rewardList()
+    {
+        $rewards = Reward::paginate(10);
+        return view('admin.reward-list', compact('rewards'));
     }
 }

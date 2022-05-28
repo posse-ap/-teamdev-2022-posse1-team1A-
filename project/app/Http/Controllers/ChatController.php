@@ -22,6 +22,9 @@ use App\Models\Role;
 use App\Models\ChatStatus;
 use App\Models\Ticket;
 use App\Models\TicketStatus;
+use App\Models\Reward;
+
+use Carbon\Carbon;
 
 class ChatController extends Controller
 {
@@ -177,6 +180,19 @@ class ChatController extends Controller
         $ticket->calling_id = $call->id;
         $ticket->ticket_status_id = TicketStatus::getUsedId();
         $ticket->save();
+
+        $respondentUserId = Chat::find($call->chat_id)->respondent_user_id;
+        $today = new Carbon();
+        if (Reward::where('user_id', $respondentUserId)->whereYear('created_at', $today->year)->whereMonth('created_at', $today->year)->exists()) {
+            $reward = Reward::where('user_id', $respondentUserId)->whereYear('created_at', $today->year)->whereMonth('created_at', $today->year)->first();
+            $reward->amount_of_payment = $reward->amount_of_payment + Ticket::getPrice();
+            $reward->save();
+        } else {
+            $reward = new Reward;
+            $reward->user_id = $respondentUserId;
+            $reward->amount_of_payment = Ticket::getPrice();
+            $reward->save();
+        }
         return redirect(route('chat.call', ['calling_id' => $calling_id]));
     }
 
