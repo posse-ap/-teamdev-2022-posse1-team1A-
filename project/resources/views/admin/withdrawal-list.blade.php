@@ -19,7 +19,7 @@
                                 <th class="w-2/12 p-2 text-xs">登録名</th>
                                 <th class="w-2/12 p-2 text-xs">会社名（部署名）</th>
                                 <th class="w-2/12 p-2 text-xs">メールアドレス</th>
-                                <th class="w-4/12 p-2 text-xs">理由</th>
+                                <th class="w-4/12 p-2 text-xs">退会理由</th>
                             </tr>
                         </thead>
                         <tbody class="w-full">
