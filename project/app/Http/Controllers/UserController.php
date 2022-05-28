@@ -55,7 +55,11 @@ class UserController extends Controller
                 });
             }
 
-            $users = $query->whereNotIn('id', [Auth::id()])->paginate(20);
+            if (Auth::check()) {
+                $users = $query->whereNotIn('id', [Auth::id()])->paginate(20);
+            } else {
+                $users = $query->paginate(20);
+            }
         } else {
             $users = User::where('role_id', Role::getUserId())->where('is_search_target', true)->whereNotIn('id', [Auth::id()])->paginate(20);
         }
