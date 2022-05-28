@@ -88,5 +88,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/contact-us', function () {
             return view('admin.contact-us');
         })->name('contact-us');
+        Route::get('/withdrawal-list', 'App\Http\Controllers\AdminController@withdrawalList')->name('withdrawal_list');
     });
 });
