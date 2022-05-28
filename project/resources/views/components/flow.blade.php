@@ -11,8 +11,12 @@
                     <p class="md:w-8/12 text-base lg:text-base">アカウント新規作成</p>
                 </div>
                 <p class="md:w-6/12 font-thin text-sm lg:text-base">
-                    {{-- TODO: 新規登録画面のリンクを貼る --}}
-                    <a href="" class="text-navy font-bold underline">新規登録画面</a>よりアカウントを作成してください。
+                    @if (Auth::check())
+                        <span>新規登録画面よりアカウントを作成してください。</span>
+                    @else
+                        <a href="{{ route('register') }}"
+                            class="text-navy font-bold underline">新規登録画面</a>よりアカウントを作成してください。
+                    @endif
                 </p>
             </div>
         </div>
