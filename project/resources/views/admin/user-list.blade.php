@@ -25,25 +25,26 @@
                 <div class="w-full">
                     <table class="table pt-5 h-5/6 w-full">
                         <thead class="bg-lightblue-200">
-                            <tr>
-                                <th class="w-1/8 px-4 py-2 text-xs">本名</th>
-                                <th class="w-1/8 px-4 py-2 text-xs">登録名</th>
-                                <th class="w-1/8 px-4 py-2 text-xs">会社名</th>
-                                <th class="w-1/8 px-4 py-2 text-xs">部署名</th>
-                                <th class="w-1/4 px-4 py-2 text-xs">メールアドレス</th>
-                                <th class="w-2/8 px-4 py-2 text-xs">マッチ数</th>
+                            <tr class="text-left">
+                                <th class="w-1/8 p-2 text-xs">本名</th>
+                                <th class="w-1/8 p-2 text-xs">登録名</th>
+                                <th class="w-1/8 p-2 text-xs">会社名</th>
+                                <th class="w-1/8 p-2 text-xs">部署名</th>
+                                <th class="w-1/8 p-2 text-xs">メールアドレス</th>
+                                <th class="w-1/8 p-2 text-xs">マッチ数</th>
+                                <th class="w-2/8 p-2 text-xs"></th>
                             </tr>
                         </thead>
                         <tbody class="w-full">
                             @foreach ($users as $user)
                                 <tr class="bg-white w-full">
-                                    <td class="border-b px-4 py-2 text-sm">{{ $user->name }}</td>
-                                    <td class="border-b px-4 py-2 text-sm">{{ $user->nickname }}</td>
-                                    <td class="border-b px-4 py-2 text-sm">{{ $user->company }}</td>
-                                    <td class="border-b px-4 py-2 text-sm">{{ $user->department }}</td>
-                                    <td class="border-b px-4 py-2 text-sm">{{ $user->email }}</td>
-                                    <td class="border-b px-4 py-2 text-sm">{{ $user->countMatches() }}</td>
-                                    <td class="border-b px-4 py-2 text-sm text-center">
+                                    <td class="border-b p-2 text-sm">{{ $user->name }}</td>
+                                    <td class="border-b p-2 text-sm">{{ $user->nickname }}</td>
+                                    <td class="border-b p-2 text-sm">{{ $user->company }}</td>
+                                    <td class="border-b p-2 text-sm">{{ $user->department }}</td>
+                                    <td class="border-b p-2 text-sm">{{ $user->email }}</td>
+                                    <td class="border-b p-2 text-sm">{{ $user->countMatches() }}</td>
+                                    <td class="border-b p-2 text-sm text-center">
                                         @if ($user->account_status_id === 1)
                                             {{-- アクティブアカウント --}}
                                             <form action="{{ route('admin.userlist_accountStop') }}" method="post"
