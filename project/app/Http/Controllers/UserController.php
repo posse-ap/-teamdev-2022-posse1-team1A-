@@ -78,6 +78,11 @@ class UserController extends Controller
 
     public function withdrawalPost(Request $request)
     {
+        $request->validate([
+            'reason' => 'required',
+            'id' => 'required',
+        ]);
+
         $user = User::find($request->id);
 
         $user->account_status_id = AccountStatus::getWithdrawnId();
