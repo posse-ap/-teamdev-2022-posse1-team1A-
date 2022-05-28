@@ -76,13 +76,13 @@
             {{-- ログイン前 --}}
             <div class="hidden md:flex flex-row-reverse ml-auto mr-0 items-center justify-between">
                 <button
-                    class="bg-blue-800 hover:bg-blue-700 text-white sm:text-base text-xs font-bold py-1 px-4 rounded ml-2">
+                    class="bg-blue-800 hover:bg-blue-900 text-white sm:text-base text-xs font-bold py-1 px-4 rounded ml-2">
                     <a href="{{ route('register') }}">
                         新規登録
                     </a>
                 </button>
                 <button
-                    class="bg-gray-500 hover:bg-gray-800 text-white sm:text-base text-xs font-bold py-1 px-4 rounded ml-2">
+                    class="bg-gray-500 hover:bg-gray-600 text-white sm:text-base text-xs font-bold py-1 px-4 rounded ml-2">
                     <a href="{{ route('login') }}">
                         ログイン
                     </a>
@@ -137,38 +137,38 @@
                 </li>
             </ul>
             <div class="flex w-screen">
-                <button class="bg-lightblue-500 p-5 hover:bg-blue-600 text-white sm:text-base text-sm font-bold w-6/12">
+                <a href="{{ route('chat.client_chat_list') }}" class="block bg-lightblue-500 p-5 hover:bg-blue-600 text-white sm:text-base text-sm font-bold w-6/12">
                     <div class="flex mx-auto w-min items-center">
-                        <a href="{{ route('chat.client_chat_list') }}" class="whitespace-nowrap">
+                        <span class="whitespace-nowrap">
                             依頼者チャット
-                        </a>
+                        </span>
                         <?php $client_sum = 0; ?>
                         @foreach (App\Models\User::find(Auth::id())->client_chats as $client_chat)
                             <?php $client_sum += $client_chat->number_of_unread_items(); ?>
                         @endforeach
                         @if ($client_sum !== 0)
                             <div class="bg-red-600 rounded-full w-5 h-5 ml-1">
-                                <p class="text-white w-full h-full sm:leading-tight">{{ $client_sum }}</p>
+                                <span class="block text-white w-full h-full sm:leading-tight text-center">{{ $client_sum }}</span>
                             </div>
                         @endif
                     </div>
-                </button>
-                <button class="bg-yellow-500 p-5 hover:bg-yellow-600 text-white sm:text-base text-sm font-bold w-6/12">
+                </a>
+                <a href="{{ route('chat.respondent_chat_list') }}" class="bg-yellow-500 p-5 hover:bg-yellow-600 text-white sm:text-base text-sm font-bold w-6/12">
                     <div class="flex mx-auto w-min items-center">
-                        <a href="{{ route('chat.respondent_chat_list') }}" class="whitespace-nowrap">
+                        <span class="whitespace-nowrap">
                             回答者チャット
-                        </a>
+                        </span>
                         <?php $respondent_sum = 0; ?>
                         @foreach (App\Models\User::find(Auth::id())->respondent_chats as $respondent_chat)
                             <?php $respondent_sum += $respondent_chat->number_of_unread_items(); ?>
                         @endforeach
                         @if ($respondent_sum !== 0)
                             <div class="bg-red-600 rounded-full w-5 h-5 ml-1">
-                                <p class="text-white w-full h-full sm:leading-tight">{{ $respondent_sum }}</p>
+                                <span class="block text-white w-full h-full sm:leading-tight text-center">{{ $respondent_sum }}</span>
                             </div>
                         @endif
                     </div>
-                </button>
+                </a>
             </div>
         </div>
     @else
@@ -194,16 +194,14 @@
                 </li>
             </ul>
             <div class="flex w-screen">
-                <button class="bg-gray-500 p-5 hover:bg-gray-800 text-white sm:text-base text-sm font-bold w-6/12">
-                    <a href="{{ route('login') }}">
-                        ログイン
-                    </a>
-                </button>
-                <button class="bg-blue-800 p-5 hover:bg-blue-700 text-white sm:text-base text-sm font-bold w-6/12">
-                    <a href="{{ route('register') }}">
-                        新規登録
-                    </a>
-                </button>
+                <a href="{{ route('login') }}"
+                    class="bg-gray-500 p-5 hover:bg-gray-600 text-white sm:text-base text-sm font-bold w-6/12 text-center">
+                    ログイン
+                </a>
+                <a href="{{ route('register') }}"
+                    class="bg-blue-800 p-5 hover:bg-blue-900 text-white sm:text-base text-sm font-bold w-6/12 text-center">
+                    新規登録
+                </a>
             </div>
         </div>
     @endif
