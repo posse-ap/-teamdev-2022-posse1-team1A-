@@ -20,10 +20,23 @@
                 position: fixed;
                 display: none;
                 z-index: 2;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
             }
 
             .cards {
                 height: calc(100vh - 215px);
+            }
+
+            .overlay {
+                z-index: 1;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 120%;
+                background-color: rgba(0, 0, 0, 0.5);
             }
 
             @media screen and (max-width: 1023.5px) {
@@ -260,6 +273,8 @@
                             @include('components.modals.buy-ticket')
                         </div>
                     </div>
+                    <div class="overlay">
+                    </div>
                 @endif
             </div>
         </div>
@@ -398,51 +413,6 @@
                     peer.once('open', id => localId)
                     peer.on('error', console.error)
                 })()
-            </script>
-        @endif
-        @if ($isClientChat && !$have_tickets)
-            <script>
-                $(function() {
-                    //ロード時処理
-                    $(window).on('load', function() {
-                        //キーボード操作などにより、オーバーレイが多重起動するのを防止する
-                        $(this).blur(); //ボタンからフォーカスを外す
-                        if ($("#modal-overlay")[0]) return false; //新しくモーダルウィンドウを起動しない (防止策1)
-
-                        //オーバーレイを出現させる
-                        $("body").append('<div id="modal-overlay"></div>');
-                        $("#modal-overlay").fadeIn("slow");
-
-                        //コンテンツをセンタリングする
-                        centeringModalSyncer();
-
-                        //コンテンツをフェードインする
-                        $("#modal-load").fadeIn("slow");
-
-                    });
-
-                    //リサイズされたら、センタリングをする関数[centeringModalSyncer()]を実行する
-                    $(window).resize(centeringModalSyncer);
-
-                    //センタリングを実行する関数
-                    function centeringModalSyncer() {
-
-                        //画面(ウィンドウ)の幅、高さを取得
-                        var w = $(window).width();
-                        var h = $(window).height();
-
-                        // コンテンツ(#modal-load)の幅、高さを取得
-                        // jQueryのバージョンによっては、引数[{margin:true}]を指定した時、不具合を起こします。
-                        var cw = $("#modal-load").outerWidth();
-                        var ch = $("#modal-load").outerHeight();
-
-                        //センタリングを実行する
-                        $("#modal-load").css({
-                            "left": ((w - cw) / 2) + "px",
-                            "top": ((h - ch) / 2) + "px"
-                        });
-                    }
-                });
             </script>
         @endif
     @endpush

@@ -11,6 +11,7 @@ use App\Mail\PartnerExitedChat;
 use App\Mail\ChangedSchedule;
 use App\Mail\PartnerEnteredCall;
 use App\Mail\CancelledSchedule;
+use App\Mail\StoppedReception;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -49,7 +50,7 @@ class ChatController extends Controller
         }
         return redirect()->route('chat.index', compact('chat_id'));
     }
-    
+
     public function index(Request $request, $chat_id)
     {
         // チャットルームのidを受け取る
@@ -258,6 +259,13 @@ class ChatController extends Controller
         $user->is_search_target = false;
         $user->save();
 
+        // メール
+        $clients = $user->current_client_users()->get();
+        foreach ($clients as $client) {
+            $client =  User::find($client->client_user_id);
+            Mail::to($client->email)->send(new StoppedReception($client, $user));
+        }
+
         return redirect()->route('chat.respondent_chat_list');
     }
 
@@ -273,6 +281,11 @@ class ChatController extends Controller
 
     public function schedule(Request $request)
     {
+        $request->validate([
+            'chatRoomId' => 'required',
+            'schedule' => 'required',
+        ]);
+
         $schedule = new InterviewSchedule;
         $schedule->schedule_status_id = ScheduleStatus::getPendingId();
         $schedule->schedule = $request->schedule;
@@ -304,22 +317,27 @@ class ChatController extends Controller
 
     public function schedule_change(Request $request)
     {
+        $request->validate([
+            'chatRoomId' => 'required',
+            'schedule' => 'required',
+        ]);
+
         $canceled_schedule = InterviewSchedule::find($request->schedule_id);
         $canceled_schedule->schedule_status_id = ScheduleStatus::getCancelId();
         $canceled_schedule->save();
-        
+
         $schedule = new InterviewSchedule;
         $schedule->schedule_status_id = ScheduleStatus::getPendingId();
         $schedule->schedule = $request->schedule;
         $schedule->chat_id = $request->chatRoomId;
         $schedule->save();
-        
+
         $chat_record = new ChatRecord;
         $chat_record->chat_id = $request->chatRoomId;
         $chat_record->user_id = Role::getBotId();
         $chat_record->comment = "相談日程は " . $schedule->schedule->format('Y/m/d H:i') . " に変更されました。";
         $chat_record->save();
-        
+
         // 両者にメール
         $scheduled_date = $schedule->schedule->format('Y/m/d H:i');
         $old_schedule_date = $canceled_schedule->schedule->format('Y/m/d H:i');

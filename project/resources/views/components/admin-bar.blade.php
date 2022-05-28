@@ -13,7 +13,7 @@
                 href="{{ route('admin.userlist') }}">ユーザー一覧</a>
         </li>
         <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
-                href="#">お問合せ内容</a>
+                href="{{ route('admin.contact-us') }}">お問合せ内容</a>
         </li>
         <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
                 href="{{ route('admin.call_evaluation') }}">通話評価</a>

@@ -12,6 +12,8 @@ use App\Models\Chat;
 use App\Models\CallingEvaluation;
 use App\Models\Calling;
 use App\Models\Reward;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AccountStopped;
 
 class AdminController extends Controller
 {
@@ -72,6 +74,9 @@ class AdminController extends Controller
         $user->account_status_id = AccountStatus::getStoppedId();
         $user->save();
 
+        // メール
+        Mail::to($user->email)->send(new AccountStopped($user));
+
         return redirect()->route('admin.userlist');
     }
 
@@ -111,9 +116,6 @@ class AdminController extends Controller
     {
         $rewards = Reward::paginate(10);
 
-        // $reward = Reward::first();
-
-        // dd($reward->users);
         return view('admin.reward-list', compact('rewards'));
     }
 
