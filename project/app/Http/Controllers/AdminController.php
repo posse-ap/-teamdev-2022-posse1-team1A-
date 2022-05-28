@@ -11,6 +11,8 @@ use App\Models\InterviewSchedule;
 use App\Models\Chat;
 use App\Models\CallingEvaluation;
 use App\Models\Calling;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AccountStopped;
 
 class AdminController extends Controller
 {
@@ -70,6 +72,9 @@ class AdminController extends Controller
         $user = User::find($request->id);
         $user->account_status_id = AccountStatus::getStoppedId();
         $user->save();
+
+        // メール
+        Mail::to($user->email)->send(new AccountStopped($user));
 
         return redirect()->route('admin.userlist');
     }
