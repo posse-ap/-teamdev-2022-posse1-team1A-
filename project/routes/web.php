@@ -81,5 +81,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/userlist/active', 'App\Http\Controllers\AdminController@accountActive')->name('userlist_accountActive');
 
         Route::get('/call-evaluation', 'App\Http\Controllers\AdminController@callEvaluation')->name('call_evaluation');
+        Route::get('/withdrawal-list', 'App\Http\Controllers\AdminController@withdrawalList')->name('withdrawal_list');
     });
 });

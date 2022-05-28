@@ -105,4 +105,11 @@ class AdminController extends Controller
 
         return view('admin.call-evaluation', compact('comprehensive', 'respondentComprehensive', 'clientComprehensive', 'callings'));
     }
+
+    public function withdrawalList()
+    {
+        $users = User::where('account_status_id', AccountStatus::getWithdrawnId())->paginate(10);
+
+        return view('admin.withdrawal-list', compact('users'));
+    }
 }
