@@ -13,6 +13,8 @@ use App\Mail\Send3DayReminderRespondentMail;
 use App\Mail\Send1DayReminderClientMail;
 use App\Mail\Send1DayReminderRespondentMail;
 use App\Models\InterviewSchedule;
+use App\Models\ChatRecord;
+use App\Models\Role;
 
 class SendReminderMailCommand extends Command
 {
@@ -57,6 +59,12 @@ class SendReminderMailCommand extends Command
             $respondent_user = User::find($respondent_user_id);
             Mail::to(User::find($client_user_id)->email)->send(new Send3DayReminderClientMail($client_user, $respondent_user, $interview_date));
             Mail::to(User::find($respondent_user_id)->email)->send(new Send3DayReminderRespondentMail($client_user, $respondent_user, $interview_date));
+
+            $chat_record = new ChatRecord;
+            $chat_record->chat_id = $interview_schedule->chat_id;
+            $chat_record->user_id = Role::getBotId();
+            $chat_record->comment = "相談日程の【3日前】となりました。相談日時は " . $interview_date . " です。";
+            $chat_record->save();
         }
 
         $interview_schedules_1_day = InterviewSchedule::where('schedule_status_id', ScheduleStatus::getPendingId())->whereDate('schedule', date("Y-m-d",strtotime("+1 day")))->get();
@@ -68,6 +76,12 @@ class SendReminderMailCommand extends Command
             $respondent_user = User::find($respondent_user_id);
             Mail::to(User::find($client_user_id)->email)->send(new Send1DayReminderClientMail($client_user, $respondent_user, $interview_date));
             Mail::to(User::find($respondent_user_id)->email)->send(new Send1DayReminderRespondentMail($client_user, $respondent_user, $interview_date));
+
+            $chat_record = new ChatRecord;
+            $chat_record->chat_id = $interview_schedule->chat_id;
+            $chat_record->user_id = Role::getBotId();
+            $chat_record->comment = "相談日程の【前日】となりました。相談日時は " . $interview_date . " です。";
+            $chat_record->save();
         }
     }
 }
