@@ -1,5 +1,9 @@
 @extends('layouts.anovey')
 
+@push('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+@endpush
+
 @section('content')
     @include('components.user-header')
 
@@ -36,7 +40,7 @@
                         <p class="text-base">進行中のチャットはありません。</p>
                     @else
                         @foreach ($respondent_chats as $respondent_chat)
-                            <a class="block cursor-pointer mb-3 p-2 duration-300 @if ($user->is_search_target == true) bg-blue-50 @else bg-gray-50 text-gray-400 pointer-events-none @endif"
+                            <a class="block cursor-pointer mb-3 p-2 duration-300 @if ($user->is_search_target == true) bg-yellow-50 @else bg-gray-50 text-gray-400 pointer-events-none @endif"
                                 href="{{ route('chat.index', ['chat_id' => $respondent_chat->id]) }}">
                                 <div class="flex justify-between items-center">
                                     <div
@@ -74,7 +78,7 @@
                                     </div>
                                     @if ($respondent_chat->number_of_unread_items() !== 0)
                                         <div
-                                            class="w-6 h-6 rounded-full flex-shrink-0 @if ($user->is_search_target == true) bg-blue-600 @else bg-gray-400 text-gray-400 pointer-events-none @endif">
+                                            class="w-6 h-6 mr-5 rounded-full flex-shrink-0 @if ($user->is_search_target == true) bg-red-600 @else bg-gray-400 text-gray-400 pointer-events-none @endif">
                                             <p class="w-full h-auto text-white font-normal text-center">
                                                 {{ $respondent_chat->number_of_unread_items() }}</p>
                                         </div>
@@ -90,7 +94,7 @@
                     <form action="{{ route('chat.reception_stop') }}" method="POST">
                         @csrf
                         <button type="submit"
-                            class="w-full md:w-min block bg-slate-500 hover:bg-slate-600 text-white whitespace-nowrap font-bold py-4 md:py-2 px-28 rounded mx-auto">
+                            class="w-full md:w-min block bg-slate-500 hover:bg-slate-600 text-white whitespace-nowrap font-bold py-4 md:py-2 px-28 rounded mx-auto btn-reception-stop">
                             相談を受けつけない
                         </button>
                     </form>
@@ -99,7 +103,7 @@
                     <form action="{{ route('chat.reception_start') }}" method="POST">
                         @csrf
                         <button type="submit"
-                            class="w-full md:w-min block bg-slate-500 hover:bg-slate-600 text-white whitespace-nowrap font-bold py-4 md:py-2 px-28 md:rounded mx-auto">
+                            class="w-full md:w-min block bg-slate-500 hover:bg-slate-600 text-white whitespace-nowrap font-bold py-4 md:py-2 px-28 md:rounded mx-auto btn-reception-start">
                             相談を受けつける
                         </button>
                     </form>
@@ -107,4 +111,24 @@
             </div>
         </section>
     </main>
+    @push('scripts_bottom')
+        <script>
+            $(function() {
+                $(".btn-reception-stop").click(function() {
+                    if (confirm("相談受付を停止しますか？(現在進行中の相談は全て中断されます)")) {
+                    } else {
+                        return false;
+                    }
+                });
+            });
+            $(function() {
+                $(".btn-reception-start").click(function() {
+                    if (confirm("相談受付停止を解除しますか？")) {
+                    } else {
+                        return false;
+                    }
+                });
+            });
+        </script>
+    @endpush
 @endsection
