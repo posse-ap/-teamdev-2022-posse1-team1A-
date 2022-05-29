@@ -1,7 +1,4 @@
-<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 bg-gray-100">
-    {{-- <div>
-        {{ $logo }}
-    </div> --}}
+<div class="flex flex-col sm:justify-center items-center pt-20 bg-gray-100">
     <div class="flex ml-auto mr-auto">
         <img src="{{ asset('img/logo-black.png') }}" alt="logo-black.png">
         <p class="flex ml-2 text-xl items-center"><b>Anovey<b></p>

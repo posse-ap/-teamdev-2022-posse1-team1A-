@@ -1,10 +1,11 @@
+@extends('layouts.anovey')
 <x-guest-layout>
-    @extends('layouts.anovey')
 
-    @section('content')
-        @include('components.user-header')
+@section('content')
+    @include('components.user-header')
+    <body class="bg-gray-100">
 
-        <x-auth-card>
+        <x-auth-card class="mt-0">
             <x-slot name="logo">
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
@@ -60,4 +61,5 @@
                 </div>
             </form>
         </x-auth-card>
+    </body>
     </x-guest-layout>
