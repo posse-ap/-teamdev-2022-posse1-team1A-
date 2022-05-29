@@ -69,7 +69,7 @@
                                                         {{ $client_chat->respondent_user->nickname }}</p>
                                                     <p class="text-xs font-normal">
                                                         @isset($client_chat->last_message->comment)
-                                                            {{ $client_chat->last_message->comment }}
+                                                            {{ Str::limit($client_chat->last_message->comment, 30) }}
                                                         @endisset
                                                     </p>
                                                 </div>
@@ -97,5 +97,5 @@
             </div>
         </section>
     </main>
-@include('components.user-footer')
+    @include('components.user-footer')
 @endsection
