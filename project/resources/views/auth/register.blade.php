@@ -85,7 +85,7 @@
                 {{-- name --}}
                 <div class="relative user-icon max-w-xs mx-auto mb-10">
                     <div class="h-40 w-40 mx-auto overflow-hidden rounded-full">
-                        <img class="w-auto h-auto" src={{ asset('img/user-icon.jpeg') }}
+                        <img class="w-full h-full object-cover" src={{ asset('img/user-icon.jpeg') }}
                             alt="ユーザーアイコン" id="figure-image">
                     </div>
                     <div class="plus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full" id="user-icon-button">

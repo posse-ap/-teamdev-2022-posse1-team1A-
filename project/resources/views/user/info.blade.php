@@ -39,7 +39,7 @@
             <div class="pt-16">
                 <h1 class="text-center text-2xl lg:text-4xl mb-12">アカウント情報</h1>
                 <div class="h-40 w-40 mx-auto overflow-hidden rounded-full mb-10">
-                    <img class="w-auto h-auto" src="{{ $userInfo->icon }}" alt="ユーザーアイコン">
+                    <img class="w-full h-full object-cover" src="{{ $userInfo->icon }}" alt="ユーザーアイコン">
                 </div>
                 <div class="grid grid-cols-2 md:gap-28 gap-8 mb-9">
                     <div class="col-span-1 text-right">氏名</div>

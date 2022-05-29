@@ -89,7 +89,7 @@
                 <h1 class="text-center text-4xl mb-12">アカウント編集</h1>
                 <div class="relative user-icon max-w-xs mx-auto mb-10">
                     <div class="h-40 w-40 mx-auto overflow-hidden rounded-full">
-                        <img class="w-auto h-auto" src={{ asset($userInfo->icon) }} alt="ユーザーアイコン" id="figure-image">
+                        <img class="w-full h-full object-cover" src={{ asset($userInfo->icon) }} alt="ユーザーアイコン" id="figure-image">
                     </div>
                     <div class="pulus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full" id="user-icon-button">
                     </div>

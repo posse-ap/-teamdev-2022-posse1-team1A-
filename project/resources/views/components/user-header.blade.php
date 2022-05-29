@@ -13,7 +13,7 @@
             <div class="hidden flex-row-reverse ml-auto mr-0 md:flex items-center justify-between">
                 <a href="{{ route('user_page') }}"
                     class="flex items-center justify-center w-8 h-8 ml-5 overflow-hidden rounded-full cursor-pointer">
-                    <img src="{{ asset(App\Models\User::find(Auth::id())->icon) }}" alt="ユーザーのアイコン">
+                    <img src="{{ asset(App\Models\User::find(Auth::id())->icon) }}" alt="ユーザーのアイコン" class="h-full w-full">
                 </a>
                 <button
                     class="relative bg-yellow-500 hover:bg-yellow-600 text-white sm:text-base text-xs py-1 px-4 rounded ml-2">
