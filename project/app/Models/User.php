@@ -87,4 +87,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Chat::class, 'respondent_user_id');
     }
+
+    // public function active_users()
+    // {
+    //     return $this->where('account_status_id', AccountStatus::getActiveId());
+    // }
 }
