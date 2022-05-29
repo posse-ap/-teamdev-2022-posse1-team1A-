@@ -228,7 +228,7 @@
                         <input type="hidden" value="{{ $chatRoomId }}" name="chatRoomId">
                         <input type="text" class="block m-5 bg-slate-100 rounded-full w-full" name="comment">
                         <div class="icon w-28">
-                            <button class="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-3 rounded">送信</button>
+                            <button class=" hover:bg-blue-800 bg-blue-900 text-white font-bold py-2 px-3 rounded">送信</button>
                         </div>
                     </form>
                 </div>
