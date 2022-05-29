@@ -12,6 +12,8 @@ use App\Models\Chat;
 use App\Models\CallingEvaluation;
 use App\Models\Calling;
 use App\Models\Reward;
+use App\Models\ChatRecord;
+use App\Models\Role;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AccountStopped;
 use App\Mail\UnfrozedAccount;
@@ -76,6 +78,26 @@ class AdminController extends Controller
         $user->account_status_id = AccountStatus::getStoppedId();
         $user->save();
 
+        // anoveybot送信（ユーザーが依頼者だったルームに送信）
+        $chats = User::find($request->id)->client_chats;
+        foreach ($chats as $chat) {
+            $chat_record = new ChatRecord;
+            $chat_record->chat_id = $chat->id;
+            $chat_record->user_id = Role::getBotId();
+            $chat_record->comment = $user->nickname . "さんのアカウントが停止されました。恐れ入りますが、他の方をお探しください。";
+            $chat_record->save();
+        }
+
+        // anoveybot送信（ユーザーが回答者だったルームに送信）
+        $chats = User::find($request->id)->respondent_chats;
+        foreach ($chats as $chat) {
+            $chat_record = new ChatRecord;
+            $chat_record->chat_id = $chat->id;
+            $chat_record->user_id = Role::getBotId();
+            $chat_record->comment = $user->nickname . "さんのアカウントが停止されました。恐れ入りますが、他の方をお探しください。";
+            $chat_record->save();
+        }
+
         // メール
         Mail::to($user->email)->send(new AccountStopped($user));
 
@@ -87,7 +109,7 @@ class AdminController extends Controller
         $user = User::find($request->id);
         $user->account_status_id = AccountStatus::getActiveId();
         $user->save();
-        
+
         // メール
         Mail::to($user->email)->send(new UnfrozedAccount($user));
 
