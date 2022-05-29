@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ticket extends Model
+class Reward extends Model
 {
     use HasFactory;
 
-    public static function getPrice()
+    public function user()
     {
-        return 1200;
+        return $this->belongsTo('App\Models\User');
     }
 }

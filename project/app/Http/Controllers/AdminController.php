@@ -11,19 +11,21 @@ use App\Models\InterviewSchedule;
 use App\Models\Chat;
 use App\Models\CallingEvaluation;
 use App\Models\Calling;
+use App\Models\Reward;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AccountStopped;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
     public function index()
     {
         $total_count_users = User::count(); //総会員数
-        $total_count_matched = Chat::count();// 総マッチ数
+        $total_count_matched = Chat::count(); // 総マッチ数
         $total_count_call = Calling::count(); // 総通話数
         $avg_calling_time = Calling::avg('calling_time'); // 平均通話時間
-        $total_count_cancelled = InterviewSchedule::where('schedule_status_id',ScheduleStatus::getCancelId())->count();// 日程調整失敗数
-        return view('admin.index', compact('total_count_users','total_count_matched','total_count_call', 'avg_calling_time','total_count_cancelled'));
+        $total_count_cancelled = InterviewSchedule::where('schedule_status_id', ScheduleStatus::getCancelId())->count(); // 日程調整失敗数
+        return view('admin.index', compact('total_count_users', 'total_count_matched', 'total_count_call', 'avg_calling_time', 'total_count_cancelled'));
     }
 
     public function userlist()
@@ -109,6 +111,30 @@ class AdminController extends Controller
         $callings = Calling::paginate(5);
 
         return view('admin.call-evaluation', compact('comprehensive', 'respondentComprehensive', 'clientComprehensive', 'callings'));
+    }
+
+    public function rewardList(Request $request)
+    {
+        if ($request->search_key === 'unpaid') {
+            $rewards = Reward::where('is_paid', false)->latest()->paginate(10);
+        } else if ($request->search_key === 'last_month') {
+            $today = new Carbon();
+            $last_month = $today->subMonth();
+            $rewards = Reward::whereYear('created_at', $last_month->year)->whereMonth('created_at', $last_month->month)->latest()->paginate(10);
+        } else {
+            $rewards = Reward::latest()->paginate(10);
+        }
+
+        return view('admin.reward-list', compact('rewards'));
+    }
+
+    public function rewardListPaid(Request $request)
+    {
+        $reward = Reward::find($request->id);
+        $reward->is_paid = true;
+        $reward->save();
+
+        return redirect()->route('admin.reward_list');
     }
 
     public function withdrawalList()

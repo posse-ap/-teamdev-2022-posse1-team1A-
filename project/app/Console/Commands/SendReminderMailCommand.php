@@ -50,7 +50,7 @@ class SendReminderMailCommand extends Command
      */
     public function handle()
     {
-        $interview_schedules_3_day = InterviewSchedule::where('schedule_status_id', ScheduleStatus::getPendingId())->whereDate('schedule', date("Y-m-d",strtotime("+3 day")))->get();
+        $interview_schedules_3_day = InterviewSchedule::where('schedule_status_id', ScheduleStatus::getPendingId())->whereDate('schedule', date("Y-m-d", strtotime("+3 day")))->get();
         foreach ($interview_schedules_3_day as $interview_schedule) {
             $interview_date = $interview_schedule->schedule;
             $client_user_id = $interview_schedule->chat->client_user_id;
@@ -67,7 +67,7 @@ class SendReminderMailCommand extends Command
             $chat_record->save();
         }
 
-        $interview_schedules_1_day = InterviewSchedule::where('schedule_status_id', ScheduleStatus::getPendingId())->whereDate('schedule', date("Y-m-d",strtotime("+1 day")))->get();
+        $interview_schedules_1_day = InterviewSchedule::where('schedule_status_id', ScheduleStatus::getPendingId())->whereDate('schedule', date("Y-m-d", strtotime("+1 day")))->get();
         foreach ($interview_schedules_1_day as $interview_schedule) {
             $interview_date = $interview_schedule->schedule;
             $client_user_id = $interview_schedule->chat->client_user_id;

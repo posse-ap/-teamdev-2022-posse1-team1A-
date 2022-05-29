@@ -19,7 +19,7 @@
                 href="{{ route('admin.call_evaluation') }}">通話評価</a>
         </li>
         <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
-                href="#">通話一覧</a>
+                href="{{ route('admin.reward_list') }}">報酬支払い</a>
         </li>
         <li><a class="block mx-5 py-5 pl-2 hover:bg-gray-300 hover:text-gray-800 rounded text-white text-xs"
                 href="{{ route('admin.withdrawal_list') }}">退会理由一覧</a>
