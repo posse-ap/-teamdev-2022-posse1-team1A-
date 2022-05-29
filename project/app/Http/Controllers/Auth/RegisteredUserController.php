@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewAccount;
 
 class RegisteredUserController extends Controller
 {
@@ -73,8 +75,11 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-
         Auth::login($user);
+
+        // メール
+        $user = User::find(Auth::id());
+        Mail::to($user->email)->send(new NewAccount($user));
 
         return redirect(RouteServiceProvider::HOME);
     }
