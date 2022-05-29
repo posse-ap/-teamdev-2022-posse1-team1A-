@@ -1,5 +1,9 @@
 @extends('layouts.anovey')
 
+@push('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+@endpush
+
 @section('content')
     @include('components.user-header')
 
@@ -90,7 +94,7 @@
                     <form action="{{ route('chat.reception_stop') }}" method="POST">
                         @csrf
                         <button type="submit"
-                            class="w-full md:w-min block bg-slate-500 hover:bg-slate-600 text-white whitespace-nowrap font-bold py-4 md:py-2 px-28 rounded mx-auto">
+                            class="w-full md:w-min block bg-slate-500 hover:bg-slate-600 text-white whitespace-nowrap font-bold py-4 md:py-2 px-28 rounded mx-auto btn-reception-stop">
                             相談を受けつけない
                         </button>
                     </form>
@@ -99,7 +103,7 @@
                     <form action="{{ route('chat.reception_start') }}" method="POST">
                         @csrf
                         <button type="submit"
-                            class="w-full md:w-min block bg-slate-500 hover:bg-slate-600 text-white whitespace-nowrap font-bold py-4 md:py-2 px-28 md:rounded mx-auto">
+                            class="w-full md:w-min block bg-slate-500 hover:bg-slate-600 text-white whitespace-nowrap font-bold py-4 md:py-2 px-28 md:rounded mx-auto btn-reception-start">
                             相談を受けつける
                         </button>
                     </form>
@@ -107,4 +111,24 @@
             </div>
         </section>
     </main>
+    @push('scripts_bottom')
+        <script>
+            $(function() {
+                $(".btn-reception-stop").click(function() {
+                    if (confirm("相談受付を停止しますか？(現在進行中の相談は全て中断されます)")) {
+                    } else {
+                        return false;
+                    }
+                });
+            });
+            $(function() {
+                $(".btn-reception-start").click(function() {
+                    if (confirm("相談受付停止を解除しますか？")) {
+                    } else {
+                        return false;
+                    }
+                });
+            });
+        </script>
+    @endpush
 @endsection
