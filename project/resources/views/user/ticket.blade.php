@@ -8,7 +8,7 @@
 @section('content')
     @include('components.user-header')
 
-    <main>
+    <main class="min-h-screen">
         <section class="pt-5 mb-20">
             <div class="container mx-auto px-6">
                 <div>
@@ -44,7 +44,7 @@
                                 <h2 class="text-base md:text-lg mr-3 md:mr-0 md:mb-1">
                                     チケット
                                 </h2>
-                                <p class="text-gray-500 text-sm md:text-base">¥1,200（1枚あたり）</p>
+                                <p class="text-gray-500 text-sm md:text-base font-normal">1枚：<span class="font-bold">¥1,200</span>（税込）</p>
                             </div>
                             <div class="w-full flex mt-5 items-center">
                                 <label for="" class="inline-block whitespace-nowrap text-sm md:text-base">数量：</label>
