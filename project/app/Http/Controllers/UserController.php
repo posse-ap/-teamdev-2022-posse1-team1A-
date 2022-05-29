@@ -123,24 +123,6 @@ class UserController extends Controller
             $chat_record->user_id = Role::getBotId();
             $chat_record->comment = $user->nickname . "さんがサービスを退会しました。恐れ入りますが、他の方をお探しください。";
             $chat_record->save();
-
-            // 日程登録がされていた場合キャンセル・チケット返還処理
-            if (InterviewSchedule::find($chat->id)->schedule_status_id === ScheduleStatus::getPendingId()) {
-                $interviewSchedule = InterviewSchedule::find($chat->id);
-                $interviewSchedule->schedule_status_id = ScheduleStatus::getCancelId();
-                $interviewSchedule->save();
-        
-                $chat_record_cancel = new ChatRecord;
-                $chat_record_cancel->chat_id = $chat->id;
-                $chat_record_cancel->user_id = Role::getBotId();
-                $chat_record_cancel->comment = "相談日程はキャンセルされました。";
-                $chat_record_cancel->save();
-        
-                $ticket = Ticket::where('user_id', $chat->respondent_user_id)->where('chat_id', $chat->id)->where('ticket_status_id', TicketStatus::getUsingId())->first();
-                $ticket->chat_id = null;
-                $ticket->ticket_status_id = TicketStatus::getPendingId();
-                $ticket->save();
-            }
         }
         
         return redirect()->route('user_index');
