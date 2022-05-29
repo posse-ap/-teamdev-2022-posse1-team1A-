@@ -12,6 +12,7 @@ use App\Mail\ChangedSchedule;
 use App\Mail\PartnerEnteredCall;
 use App\Mail\CancelledSchedule;
 use App\Mail\StoppedReception;
+use App\Mail\NewChat;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,9 @@ use App\Models\Role;
 use App\Models\ChatStatus;
 use App\Models\Ticket;
 use App\Models\TicketStatus;
+use App\Models\Reward;
+
+use Carbon\Carbon;
 
 class ChatController extends Controller
 {
@@ -45,6 +49,12 @@ class ChatController extends Controller
             Chat::insert($insert_data);
             $chat_id = Chat::insertGetId($insert_data);
         }
+
+        // メール
+        $client = User::find(Auth::id());
+        $respondent = User::find($request->respondent_user_id);
+        Mail::to($respondent->email)->send(new NewChat($respondent, $client));
+
         return redirect()->route('chat.index', compact('chat_id'));
     }
 
@@ -215,6 +225,19 @@ class ChatController extends Controller
         $ticket->calling_id = $call->id;
         $ticket->ticket_status_id = TicketStatus::getUsedId();
         $ticket->save();
+
+        $respondentUserId = Chat::find($call->chat_id)->respondent_user_id;
+        $today = new Carbon();
+        if (Reward::where('user_id', $respondentUserId)->whereYear('created_at', $today->year)->whereMonth('created_at', $today->month)->exists()) {
+            $reward = Reward::where('user_id', $respondentUserId)->whereYear('created_at', $today->year)->whereMonth('created_at', $today->month)->first();
+            $reward->amount_of_payment = $reward->amount_of_payment + Ticket::getPrice();
+            $reward->save();
+        } else {
+            $reward = new Reward;
+            $reward->user_id = $respondentUserId;
+            $reward->amount_of_payment = Ticket::getPrice();
+            $reward->save();
+        }
         return redirect(route('chat.call', ['calling_id' => $calling_id]));
     }
 
