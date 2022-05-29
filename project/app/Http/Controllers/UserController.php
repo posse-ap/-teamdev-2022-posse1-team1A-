@@ -35,8 +35,6 @@ class UserController extends Controller
     {
 
         $query = User::query()->where('account_status_id', AccountStatus::getActiveId());
-        // dd($query);
-
         if (!empty($keyword)) {
 
             // 全角スペースを半角に変換
