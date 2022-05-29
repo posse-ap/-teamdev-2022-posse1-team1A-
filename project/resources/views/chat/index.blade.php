@@ -3,7 +3,6 @@
 @section('content')
     @include('components.user-header')
     @push('styles')
-        <link rel="stylesheet" href="{{ asset('css/chatMain.css') }}">
         <link rel="stylesheet" href="{{ asset('css/modal.css') }}">
         <style>
             .calling-modal {
@@ -228,7 +227,8 @@
                         <input type="hidden" value="{{ $chatRoomId }}" name="chatRoomId">
                         <input type="text" class="block m-5 bg-slate-100 rounded-full w-full" name="comment">
                         <div class="icon w-28">
-                            <button class=" hover:bg-blue-800 bg-blue-900 text-white font-bold py-2 px-3 rounded">送信</button>
+                            <button
+                                class=" hover:bg-blue-800 bg-blue-900 text-white font-bold py-2 px-3 rounded">送信</button>
                         </div>
                     </form>
                 </div>
