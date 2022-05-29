@@ -203,6 +203,14 @@ class ChatController extends Controller
         return view('chat.client-calling', compact('skyway_key', 'loginUserPeerId', 'partnerUserPeerId', 'partnerUserIcon', 'partnerUserName', 'chatRoomId', 'loginUserId', 'call', 'isRespondent'));
     }
 
+    public function call_cancel(Request $request, $calling_id)
+    {
+        $call = Calling::find($calling_id);
+        $chat_id = $call->chat_id;
+        $call->delete();
+        return redirect(route('chat.index', ['chat_id' => $chat_id]));
+    }
+
     public function calling_time(Request $request, $calling_id)
     {
         $call = Calling::find($calling_id);

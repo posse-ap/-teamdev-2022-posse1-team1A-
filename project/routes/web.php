@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
         });
         Route::group(['prefix' => '/call/{calling_id}'], function () {
             Route::get('/', 'App\Http\Controllers\ChatController@client_call')->name('call')->middleware('calling_finish_check');
+            Route::post('/cancel', 'App\Http\Controllers\ChatController@call_cancel')->name('call_cancel');
             Route::post('/finish', 'App\Http\Controllers\ChatController@finish_call')->name('finish_call');
             Route::post('/calling-time', 'App\Http\Controllers\ChatController@calling_time')->name('calling_time');
         });

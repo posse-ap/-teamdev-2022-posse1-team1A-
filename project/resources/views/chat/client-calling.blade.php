@@ -73,6 +73,7 @@
                 peer.once('open', id => localId)
                 // Register callee handler
                 peer.on('call', mediaConnection => {
+                    closeTrigger.type = 'button'
                     let timer
                     const startTime = new Date()
                     // タイマー開始
