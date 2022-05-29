@@ -8,7 +8,7 @@
 @section('content')
     @include('components.user-header')
 
-    <main>
+    <main class="min-h-screen">
         <section class="pt-5 mb-20">
             <div class="container mx-auto px-6">
                 <div>
@@ -50,7 +50,7 @@
                             <label for="reason" class="block mb-5 md:mb-0">退会理由<span class="text-red-600">*</span></label>
                             <div class="w-full md:w-4/5 h-40">
                                 <textarea name="reason" id="reason"
-                                    class="bg-gray-50 w-full h-full @error('reason') border border-solid border-red-500 @enderror"></textarea>
+                                    class="bg-gray-50 w-full h-full font-normal @error('reason') border border-solid border-red-500 @enderror"></textarea>
                                 @error('reason')
                                     <p class="text-red-500 text-xs mt-1 font-normal">{{ $message }}</p>
                                 @enderror

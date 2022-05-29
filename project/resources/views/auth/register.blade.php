@@ -88,7 +88,7 @@
                         <img class="w-full h-full object-cover" src={{ asset('img/user-icon.jpeg') }}
                             alt="ユーザーアイコン" id="figure-image">
                     </div>
-                    <div class="plus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full" id="user-icon-button">
+                    <div class="plus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full cursor-pointer" id="user-icon-button">
                     </div>
                     <input type="file" name="icon" class="hidden" id="user-icon-input" accept="image/*">
                     @error('icon')
