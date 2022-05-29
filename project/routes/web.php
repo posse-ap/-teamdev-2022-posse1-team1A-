@@ -36,7 +36,7 @@ Route::get('/contact-us', function () {
     return view('user.contact-us');
 })->name('contact-us');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'active_user_check'], function () {
     Route::get('/user/edit', 'App\Http\Controllers\UserController@userEdit')->name('user_edit');
     Route::post('/user/edit', 'App\Http\Controllers\UserController@userUpdate')->name('user_update');
     Route::post('/start_chat', 'App\Http\Controllers\ChatController@start_chat')->name('start_chat');
