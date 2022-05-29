@@ -20,7 +20,7 @@ class ChatSeeder extends Seeder
         DB::table('chats')->insert([
             [
                 'client_user_id' => 1,
-                'respondent_user_id' => 4,
+                'respondent_user_id' => 5,
             ],
         ]);
         $chats = Chat::factory()
