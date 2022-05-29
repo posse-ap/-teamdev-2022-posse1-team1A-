@@ -27,8 +27,11 @@ class ActiveAccount implements Rule
      */
     public function passes($attribute, $value)
     {
-        $userAccountStatus = User::where('email', $value)->first()->account_status_id;
-        return $userAccountStatus === AccountStatus::getActiveId();
+        if (User::where('email', $value)->first()) {
+            $userAccountStatus = User::where('email', $value)->first()->account_status_id;
+            return $userAccountStatus === AccountStatus::getActiveId();
+        }
+        return true;
     }
 
     /**
