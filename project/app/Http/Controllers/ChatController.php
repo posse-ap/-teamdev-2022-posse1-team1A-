@@ -46,7 +46,6 @@ class ChatController extends Controller
                 'created_at' => now(),
                 'updated_at' => now()
             ];
-            Chat::insert($insert_data);
             $chat_id = Chat::insertGetId($insert_data);
         }
 
