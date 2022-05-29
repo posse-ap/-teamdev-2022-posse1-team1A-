@@ -58,11 +58,17 @@
                                             </div>
                                             <div class="flex align-center">
                                                 <div>
-                                                    <p class="lg:mb-3 text-base lg:text-xl">
-                                                        {{ $respondent_chat->client_user->nickname }}</p>
+                                                    <p class="lg:mb-3">
+                                                        <span
+                                                            class="text-base lg:text-xl mr-1">{{ $respondent_chat->client_user->nickname }}</span>
+                                                        <span
+                                                            class="font-thin text-sm">{{ $respondent_chat->client_user->company }}</span>
+                                                        <span
+                                                            class="font-thin text-sm">{{ $respondent_chat->client_user->department }}</span>
+                                                    </p>
                                                     <p class="text-xs font-normal">
                                                         @isset($respondent_chat->last_message->comment)
-                                                            {{ $respondent_chat->last_message->comment }}
+                                                            {{ Str::limit($respondent_chat->last_message->comment, 30) }}
                                                         @endisset
                                                     </p>
                                                 </div>
@@ -115,16 +121,14 @@
         <script>
             $(function() {
                 $(".btn-reception-stop").click(function() {
-                    if (confirm("相談受付を停止しますか？(現在進行中の相談は全て中断されます)")) {
-                    } else {
+                    if (confirm("相談受付を停止しますか？(現在進行中の相談は全て中断されます)")) {} else {
                         return false;
                     }
                 });
             });
             $(function() {
                 $(".btn-reception-start").click(function() {
-                    if (confirm("相談受付停止を解除しますか？")) {
-                    } else {
+                    if (confirm("相談受付停止を解除しますか？")) {} else {
                         return false;
                     }
                 });

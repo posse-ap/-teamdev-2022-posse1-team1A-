@@ -65,11 +65,18 @@
                                             </div>
                                             <div class="flex align-center">
                                                 <div>
-                                                    <p class="lg:mb-3 text-base lg:text-xl">
-                                                        {{ $client_chat->respondent_user->nickname }}</p>
+                                                    <p class="lg:mb-3">
+                                                        <span
+                                                            class="text-base lg:text-xl mr-1">{{ $client_chat->respondent_user->nickname }}
+                                                        </span>
+                                                        <span class="font-thin text-sm">
+                                                            {{ $client_chat->respondent_user->company }}</span>
+                                                        <span class="font-thin text-sm">
+                                                            {{ $client_chat->respondent_user->department }}</span>
+                                                    </p>
                                                     <p class="text-xs font-normal">
                                                         @isset($client_chat->last_message->comment)
-                                                            {{ $client_chat->last_message->comment }}
+                                                            {{ Str::limit($client_chat->last_message->comment, 30) }}
                                                         @endisset
                                                     </p>
                                                 </div>
@@ -97,5 +104,5 @@
             </div>
         </section>
     </main>
-@include('components.user-footer')
+    @include('components.user-footer')
 @endsection
