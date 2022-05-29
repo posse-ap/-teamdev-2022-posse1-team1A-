@@ -73,6 +73,11 @@ class User extends Authenticatable
         return 'img/user-icon.jpeg';
     }
 
+    public function rewards()
+    {
+        return $this->belongsTo('App\Models\Reward', 'user_id');
+    }
+
     public function current_client_users()
     {
         return $this->hasMany(Chat::class, 'respondent_user_id')->where('is_finished', ChatStatus::getIsChattingId());

@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             InterviewScheduleSeeder::class,
             TicketSeeder::class,
             SettlementSeeder::class,
+            RewardSeeder::class,
         ]);
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

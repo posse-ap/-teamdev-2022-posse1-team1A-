@@ -9,7 +9,7 @@
 
     <main>
         <section class="bg-gray-50 pt-5">
-            <div class="container mx-auto px-6 md:px-20">
+            <div class="container mx-auto px-6">
                 <div>
                     <div class="flex items-center py-4 mx-auto overflow-y-auto whitespace-nowrap font-thin text-sm">
                         <a href="{{ route('user_index') }}" class="text-gray-600">
@@ -28,14 +28,14 @@
                         </p>
                     </div>
                 </div>
-                <form class="flex mt-8 space-y-3 space-y-0 flex-row" action="{{ route('user_search') }}" method="POST">
+                <form class="flex mt-8 space-y-3 space-y-0 flex-row max-w-2xl" action="{{ route('user_search') }}" method="POST">
                     @csrf
                     <input type="text" name="keyword" value="{{ $keyword }}"
                         class="w-full px-4 py-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
                         placeholder="企業名や部署名などのフリーワード">
 
                     <button type="submit"
-                        class="p-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-200 bg-blue-800 rounded-lg w-auto mx-4 hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
+                        class="p-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-200 bg-blue-800 rounded-lg w-auto ml-4 mr-0 hover:bg-blue-400 focus:outline-none focus:bg-blue-400">
                         <img src="{{ asset('img/search.svg') }}" alt="検索">
                     </button>
                 </form>
@@ -43,7 +43,7 @@
         </section>
 
         <section>
-            <div class="container mx-auto px-6 md:px-20">
+            <div class="container mx-auto px-6">
                 <p class="font-thin mb-5">検索結果 {{ $users->total() }}件</p>
 
                 @foreach ($users as $user)
