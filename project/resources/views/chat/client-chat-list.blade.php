@@ -97,4 +97,5 @@
             </div>
         </section>
     </main>
+@include('components.user-footer')
 @endsection

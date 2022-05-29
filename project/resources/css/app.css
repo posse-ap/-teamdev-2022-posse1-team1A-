@@ -128,3 +128,8 @@
 .bg-lightgray-200{
     background-color: #E7F1FE;
 }
+
+.bg-yellow-50{
+    --tw-bg-opacity: 1;
+    background-color: rgb(254 237 182 / var(--tw-bg-opacity));
+}
