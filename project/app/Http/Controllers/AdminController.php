@@ -14,6 +14,7 @@ use App\Models\Calling;
 use App\Models\Reward;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AccountStopped;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -112,9 +113,17 @@ class AdminController extends Controller
         return view('admin.call-evaluation', compact('comprehensive', 'respondentComprehensive', 'clientComprehensive', 'callings'));
     }
 
-    public function rewardList()
+    public function rewardList(Request $request)
     {
-        $rewards = Reward::paginate(10);
+        if ($request->search_key === 'unpaid') {
+            $rewards = Reward::where('is_paid', false)->latest()->paginate(10);
+        } else if ($request->search_key === 'last_month') {
+            $today = new Carbon();
+            $last_month = $today->subMonth();
+            $rewards = Reward::whereYear('created_at', $last_month->year)->whereMonth('created_at', $last_month->month)->latest()->paginate(10);
+        } else {
+            $rewards = Reward::latest()->paginate(10);
+        }
 
         return view('admin.reward-list', compact('rewards'));
     }

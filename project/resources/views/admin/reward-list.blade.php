@@ -11,7 +11,24 @@
 
             <div class="w-full mx-5">
                 <h1 class="text-5xl py-12 text-blue-800">報酬支払いページ</h1>
-                <div class="w-full">
+                <div class="inline-flex">
+                    <a href="{{ route('admin.reward_list') }}">
+                        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+                            全て
+                        </button>
+                    </a>
+                    <a href="{{ route('admin.reward_list', ['search_key' => 'unpaid']) }}">
+                        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4">
+                            未支払い一覧
+                        </button>
+                    </a>
+                    <a href="{{ route('admin.reward_list', ['search_key' => 'last_month']) }}">
+                        <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r">
+                            先月の報酬一覧
+                        </button>
+                    </a>
+                </div>
+                <div class="mt-5 w-full">
                     <table class="table pt-5 h-5/6 w-full">
                         <thead class="bg-lightblue-200">
                             <tr class="text-left">
