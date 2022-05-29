@@ -69,7 +69,7 @@ class UserController extends Controller
                 $users = $query->paginate(20);
             }
         }
-        $can_start_chat = $request->can_start_chat;
+        $can_start_chat = true;
         $ticket_counts = $request->ticket_counts;
 
         return view('user.search', compact('users', 'keyword', 'can_start_chat', 'ticket_counts'));
@@ -128,7 +128,7 @@ class UserController extends Controller
             $chat_record->comment = $user->nickname . "さんがサービスを退会しました。恐れ入りますが、他の方をお探しください。";
             $chat_record->save();
         }
-        
+
         return redirect()->route('user_index');
     }
 
