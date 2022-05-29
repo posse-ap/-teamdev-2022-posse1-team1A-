@@ -7,6 +7,11 @@ use App\Models\Role;
 use App\Models\Chat;
 use App\Models\AccountStatus;
 use App\Models\PayPay;
+use App\Models\ChatRecord;
+use App\Models\InterviewSchedule;
+use App\Models\ScheduleStatus;
+use App\Models\Ticket;
+use App\Models\TicketStatus;
 use App\Models\ChatStatus;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -100,6 +105,44 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
+        // anoveybot送信（ユーザーが依頼者だったルームに送信）
+        $chats = User::find($request->id)->client_chats;
+        foreach ($chats as $chat) {
+            $chat_record = new ChatRecord;
+            $chat_record->chat_id = $chat->id;
+            $chat_record->user_id = Role::getBotId();
+            $chat_record->comment = $user->nickname . "さんがサービスを退会しました。恐れ入りますが、他の方をお探しください。";
+            $chat_record->save();
+        }
+
+        // anoveybot送信（ユーザーが回答者だったルームに送信）
+        $chats = User::find($request->id)->respondent_chats;
+        foreach ($chats as $chat) {
+            $chat_record = new ChatRecord;
+            $chat_record->chat_id = $chat->id;
+            $chat_record->user_id = Role::getBotId();
+            $chat_record->comment = $user->nickname . "さんがサービスを退会しました。恐れ入りますが、他の方をお探しください。";
+            $chat_record->save();
+
+            // 日程登録がされていた場合キャンセル・チケット返還処理
+            if (InterviewSchedule::find($chat->id)->schedule_status_id === ScheduleStatus::getPendingId()) {
+                $interviewSchedule = InterviewSchedule::find($chat->id);
+                $interviewSchedule->schedule_status_id = ScheduleStatus::getCancelId();
+                $interviewSchedule->save();
+        
+                $chat_record_cancel = new ChatRecord;
+                $chat_record_cancel->chat_id = $chat->id;
+                $chat_record_cancel->user_id = Role::getBotId();
+                $chat_record_cancel->comment = "相談日程はキャンセルされました。";
+                $chat_record_cancel->save();
+        
+                $ticket = Ticket::where('user_id', $chat->respondent_user_id)->where('chat_id', $chat->id)->where('ticket_status_id', TicketStatus::getUsingId())->first();
+                $ticket->chat_id = null;
+                $ticket->ticket_status_id = TicketStatus::getPendingId();
+                $ticket->save();
+            }
+        }
+        
         return redirect()->route('user_index');
     }
 
