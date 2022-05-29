@@ -55,7 +55,11 @@ class UserController extends Controller
                 });
             }
 
-            $users = $query->whereNotIn('id', [Auth::id()])->paginate(20);
+            if (Auth::check()) {
+                $users = $query->whereNotIn('id', [Auth::id()])->paginate(20);
+            } else {
+                $users = $query->paginate(20);
+            }
         } else {
             $users = User::where('role_id', Role::getUserId())->where('is_search_target', true)->whereNotIn('id', [Auth::id()])->paginate(20);
         }
@@ -102,7 +106,7 @@ class UserController extends Controller
 
     public function userEdit()
     {
-        $userId = 1;
+        $userId = Auth::id();
         $userInfo = User::find($userId);
         return view('user.edit', compact('userInfo'));
     }
@@ -113,7 +117,6 @@ class UserController extends Controller
             'name' => 'required',
             'nickname' => 'required',
             'email' => 'required|email',
-            'icon' => 'required',
             'telephone_number' => 'required|numeric',
             'company' => 'required',
             'department' => 'required',
@@ -127,7 +130,7 @@ class UserController extends Controller
             $icon->storeAs('', $icon->getClientOriginalName(), 'public');
             $iconPath = 'storage/' . $icon->getClientOriginalName();
         } else {
-            $iconPath = User::getDefaultIcon();
+            $iconPath = $user->icon;
         }
         $user->update([
             'name' => $request->name,
