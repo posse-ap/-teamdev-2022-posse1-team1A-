@@ -34,8 +34,7 @@ class UserController extends Controller
     public function result($keyword = "")
     {
 
-        $query = User::query();
-
+        $query = User::query()->where('account_status_id', AccountStatus::getActiveId());
         if (!empty($keyword)) {
 
             // 全角スペースを半角に変換
@@ -61,7 +60,7 @@ class UserController extends Controller
                 $users = $query->paginate(20);
             }
         } else {
-            $users = User::where('role_id', Role::getUserId())->where('is_search_target', true)->whereNotIn('id', [Auth::id()])->paginate(20);
+            $users = $query->where('role_id', Role::getUserId())->where('is_search_target', true)->whereNotIn('id', [Auth::id()])->paginate(20);
         }
 
         return view('user.search', compact('users', 'keyword'));
