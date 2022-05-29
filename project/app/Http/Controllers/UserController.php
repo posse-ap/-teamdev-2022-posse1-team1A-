@@ -34,8 +34,13 @@ class UserController extends Controller
     public function result($keyword = "", Request $request)
     {
         $query = User::query()->where('account_status_id', AccountStatus::getActiveId());
-        if (!empty($keyword)) {
-
+        if (empty($keyword)) {
+            if (Auth::check()) {
+                $users = $query->where('role_id', Role::getUserId())->where('is_search_target', true)->whereNotIn('id', [Auth::id()])->paginate(20);
+            } else {
+                $users = $query->where('role_id', Role::getUserId())->where('is_search_target', true)->paginate(20);
+            }
+        } else {
             // 全角スペースを半角に変換
             $spaceConversion = mb_convert_kana($keyword, 's');
 
@@ -58,8 +63,6 @@ class UserController extends Controller
             } else {
                 $users = $query->paginate(20);
             }
-        } else {
-            $users = $query->where('role_id', Role::getUserId())->where('is_search_target', true)->whereNotIn('id', [Auth::id()])->paginate(20);
         }
         $can_start_chat = $request->can_start_chat;
         $ticket_counts = $request->ticket_counts;
