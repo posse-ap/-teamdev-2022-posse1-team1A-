@@ -1,7 +1,11 @@
 @extends('layouts.anovey')
 
 @push('styles')
+    <link rel="stylesheet" href="{{ asset('css/modal.css') }}">
     <link rel="stylesheet" href="{{ asset('css/search.css') }}">
+@endpush
+@push('scripts')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 @endpush
 
 @section('content')
@@ -28,7 +32,8 @@
                         </p>
                     </div>
                 </div>
-                <form class="flex mt-8 space-y-3 space-y-0 flex-row max-w-2xl" action="{{ route('user_search') }}" method="POST">
+                <form class="flex mt-8 space-y-3 space-y-0 flex-row max-w-2xl" action="{{ route('user_search') }}"
+                    method="POST">
                     @csrf
                     <input type="text" name="keyword" value="{{ $keyword }}"
                         class="w-full px-4 py-2 text-gray-700 bg-white border rounded-md focus:border-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300"
@@ -69,15 +74,25 @@
                                     </div>
                                 </div>
                             </div>
-                            <form action="{{ route('start_chat') }}" class="md:ml-auto mt-5 md:mt-0" method="POST">
-                                @csrf
-                                <input type="hidden" value="{{ Auth::id() }}" name="client_user_id">
-                                <input type="hidden" value="{{ $user->id }}" name="respondent_user_id">
-                                <button type="submit"
-                                    class="block mx-auto px-4 py-2 font-xs text-white capitalize transition-colors duration-200 bg-blue rounded-md bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-                                    チャットする
-                                </button>
-                            </form>
+                            @if ($can_start_chat)
+                                <form action="{{ route('start_chat') }}" class="md:ml-auto mt-5 md:mt-0" method="POST">
+                                    @csrf
+                                    <input type="hidden" value="{{ Auth::id() }}" name="client_user_id">
+                                    <input type="hidden" value="{{ $user->id }}" name="respondent_user_id">
+                                    <button type="submit"
+                                        class="block mx-auto px-4 py-2 font-xs text-white capitalize transition-colors duration-200 bg-blue rounded-md bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+                                        チャットする
+                                    </button>
+                                </form>
+                            @else
+                                <div class="md:ml-auto mt-5 md:mt-0">
+                                    <button type="submit"
+                                        class="block mx-auto px-4 py-2 font-xs text-white capitalize transition-colors duration-200 bg-blue rounded-md bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 modal-open"
+                                        id="buy-ticket">
+                                        チャットする
+                                    </button>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 @endforeach
@@ -87,6 +102,44 @@
 
         @include('components.flow')
     </main>
+    <div id="modal-content" class="md:w-2/4 w-11/12 rounded-2xl">
+        <button id="modal-close"
+            class="ml-auto block text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+            <span class="sr-only">Close menu</span>
+            <!-- Heroicon name: outline/x -->
+            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <div class="modal-inner" id="buy-ticket-modal">
+            @include('components.modals.buy-ticket')
+        </div>
+    </div>
 
     @include('components.user-footer')
+
+    @push('scripts_bottom')
+        <script src="{{ asset('js/modal.js') }}"></script>
+        <script>
+            //センタリングを実行する関数
+            function centeringModalSyncer() {
+
+                //画面(ウィンドウ)の幅、高さを取得
+                var w = $(window).width();
+                var h = $(window).height();
+
+                // コンテンツ(#modal-content)の幅、高さを取得
+                // jQueryのバージョンによっては、引数[{margin:true}]を指定した時、不具合を起こします。
+                var cw = $("#modal-content").outerWidth();
+                var ch = $("#modal-content").outerHeight();
+
+                //センタリングを実行する
+                $("#modal-content").css({
+                    "left": ((w - cw) / 2) + "px",
+                    "top": ((h - ch) / 2) + "px"
+                });
+            }
+        </script>
+    @endpush
 @endsection

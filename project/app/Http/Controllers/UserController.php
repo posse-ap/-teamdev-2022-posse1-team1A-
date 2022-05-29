@@ -31,9 +31,8 @@ class UserController extends Controller
         return redirect()->route('user_result', ['keyword' => $keyword]);
     }
 
-    public function result($keyword = "")
+    public function result($keyword = "", Request $request)
     {
-
         $query = User::query()->where('account_status_id', AccountStatus::getActiveId());
         if (!empty($keyword)) {
 
@@ -62,8 +61,10 @@ class UserController extends Controller
         } else {
             $users = $query->where('role_id', Role::getUserId())->where('is_search_target', true)->whereNotIn('id', [Auth::id()])->paginate(20);
         }
+        $can_start_chat = $request->can_start_chat;
+        $ticket_counts = $request->ticket_counts;
 
-        return view('user.search', compact('users', 'keyword'));
+        return view('user.search', compact('users', 'keyword', 'can_start_chat', 'ticket_counts'));
     }
 
     public function userPage(Request $request)
