@@ -5,8 +5,9 @@
 4.php artisan key:generate  
 5.composer install  
 6.php artisan migrate --seed  
-7.npm install  
-8.npm run dev 
+7.php artisan storage:link  
+8.npm install  
+9.npm run dev 
 
 # .envについて
 skyway,paypayについては説明書の中に記載したAPIキーを利用してください。
