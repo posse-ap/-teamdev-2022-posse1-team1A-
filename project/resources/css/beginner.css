@@ -1,0 +1,106 @@
+section {
+    padding: 80px 0;
+}
+
+.fv {
+    background-image: url(/images/FV.png?445b4a35092a97d5e0e28c030466ff63);
+    background-size: cover;
+}
+
+.fv-img {
+    width: 100vw;
+    margin-right: calc(50% - 100vw);
+}
+
+.about-img {
+    z-index: 0;
+}
+
+.ellipse {
+    position: absolute;
+    width: 1200px;
+    height: 700px;
+    background: #ebf5ff;
+    border-radius: 50%;
+    top: 20px;
+    left: -20px;
+    z-index: -10;
+}
+
+.cta {
+    box-shadow: 5px 5px 0 #668bed;
+}
+
+.triangle {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid #668bed;
+}
+
+.notes:before {
+    position: absolute;
+    bottom: -10px;
+    left: calc(50% - 50px);
+    width: 100px;
+    height: 5px;
+    content: "";
+    border-radius: 3px;
+    background: #668bed;
+}
+
+.ticket-function {
+    width: 30%;
+}
+
+.bg-orange {
+    background-color: #F7931D;
+}
+
+@media (max-width: 767.98px) {
+    section {
+        padding: 40px 0;
+    }
+
+    .fv-img {
+        margin-left: 20vw;
+    }
+
+    .triangle {
+        border-left: 15px solid transparent;
+        border-right: 15px solid transparent;
+        border-top: 15px solid #668bed;
+    }
+
+    .ticket-function {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 639.98px) {
+    .ticket-function {
+        width: 100%;
+    }
+}
+
+.index {
+    border-bottom: 3px solid #668bed;
+}
+
+.philosophy-sentence {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    left: -50px;
+}
+
+@media (max-width: 767.98px) {
+    .philosophy-sentence {
+        left: -30px;
+    }
+}

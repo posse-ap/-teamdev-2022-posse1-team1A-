@@ -63,5 +63,12 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'have_ticket' => \App\Http\Middleware\TicketCheck::class,
+        'calling_finish_check' => \App\Http\Middleware\CallingIsFinished::class,
+        'admin_check' => \App\Http\Middleware\AdminCheck::class,
+        'active_user_check' => \App\Http\Middleware\ActiveUserCheck::class,
+        'chat_finish_check' => \App\Http\Middleware\ChatFinishCheck::class,
+        'chat_start_check' => \App\Http\Middleware\ChatStartCheck::class,
+        'is_my_chat' => \App\Http\Middleware\MyChatCheck::class,
     ];
 }

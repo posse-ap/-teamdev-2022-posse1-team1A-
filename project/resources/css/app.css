@@ -1,3 +1,135 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.text-gray-200 {
+    color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+
+.text-gray-800 {
+    --tw-text-opacity: 1;
+    color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+.bg-gray-700 {      
+    --tw-bg-opacity: 1;
+    background-color: rgb(48 56 65 / var(--tw-bg-opacity));
+}
+
+.bg-gray-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(107 114 128 / var(--tw-bg-opacity));
+}
+
+.mr-1 {
+    margin-right: 0.25rem;
+}
+
+.bg-yellow-700 {
+    --tw-bg-opacity: 1;
+    background-color: yellow;
+}
+
+.bg-yellow-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(254 210 1 / var(--tw-bg-opacity));
+}
+
+.bg-lightblue-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(102 139 237 / var(--tw-bg-opacity));
+}
+
+.count {
+    position: absolute;
+    top: -6px;
+    right: -5px;
+    height: 20px;
+    width: 20px;
+    overflow: hidden;
+    background: red;
+    color: white;
+    text-align: center;
+    border-radius: 100%;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+}
+
+.fa {
+    color: blue;
+    font-size: 22px;
+}
+
+.bg-blue-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(6 22 99 / var(--tw-bg-opacity));
+}
+
+.bg-lightblue-200 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(227 245 254 / var(--tw-bg-opacity));
+}
+
+.bg-red-500 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(252 113 113 / var(--tw-bg-opacity));
+}
+
+.bg-grey-100 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(249 249 249 / var(--tw-bg-opacity));
+}
+
+.text-blue-800 {
+    color: #071764;
+}
+
+.text-5xl {
+    font-size: 3rem; /* 48px */
+    line-height: 1;
+}
+
+.bg-blue {
+    background-color: #668bed;
+}
+
+.text-blue {
+    color: #668bed;
+}
+
+.text-navy {
+    color: #061663;
+}
+
+.text-6xl {
+    font-size: 4rem;
+}
+
+.shadow-2xl {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+
+.bg-blue {
+    background-color: #668bed;
+}
+
+.text-blue {
+    color: #668bed;
+}
+
+.text-navy {
+    color: #061663;
+}
+
+.bg-navy {
+    background-color: #061663;
+}
+
+.bg-lightgray-200{
+    background-color: #E7F1FE;
+}
+
+.bg-yellow-50{
+    --tw-bg-opacity: 1;
+    background-color: rgb(254 237 182 / var(--tw-bg-opacity));
+}

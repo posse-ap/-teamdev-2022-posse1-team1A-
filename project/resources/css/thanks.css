@@ -1,0 +1,26 @@
+.text-blue {
+    color: #668bed;
+}
+
+.bg-blue {
+    background-color: #668bed;
+}
+
+.notes {
+    z-index: -10;
+}
+
+.note-box {
+    z-index: -20;
+}
+
+.notes:before {
+    position: absolute;
+    bottom: -10px;
+    left: calc(50% - 50px);
+    width: 100px;
+    height: 5px;
+    content: "";
+    border-radius: 3px;
+    background: #668bed;
+}
