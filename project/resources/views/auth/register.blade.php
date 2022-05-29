@@ -76,17 +76,19 @@
 @section('content')
     @include('components.user-header')
     <main class="container mx-auto font-normal mb-12 bg-slate-50">
-        <div class="mt-16 max-w-xl mx-auto">
-            <h1 class="text-xl text-center py-3">新規登録</h1>
+        <div class="mt-16 max-w-2xl mx-auto">
+            <h1 class="text-center text-2xl md:text-4xl mb-12">新規登録</h1>
 
-            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" class="text-sm md:text-base">
                 @csrf
 
                 {{-- name --}}
                 <div class="relative user-icon max-w-xs mx-auto mb-10">
-                    <img class="h-40 w-auto mx-auto overflow-hidden rounded-full" src={{ asset('img/user-icon.jpeg') }}
-                        alt="ユーザーアイコン" id="figure-image">
-                    <div class="pulus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full" id="user-icon-button">
+                    <div class="h-40 w-40 mx-auto overflow-hidden rounded-full">
+                        <img class="w-full h-full object-cover" src={{ asset('img/user-icon.jpeg') }}
+                            alt="ユーザーアイコン" id="figure-image">
+                    </div>
+                    <div class="plus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full" id="user-icon-button">
                     </div>
                     <input type="file" name="icon" class="hidden" id="user-icon-input" accept="image/*">
                     @error('icon')
@@ -247,16 +249,16 @@
                     </div>
                 </div>
 
-                <div class="mb-9 px-5 md:leading-loose leading-10">
-                    <span class="md:inline block">匿名回答者としてのサービス利用を行いますか？</span>
+                <div class="mb-5 px-5 md:leading-loose leading-10">
+                    <span class="md:inline block">匿名回答者としてのサービス利用を行いますか？<span class="text-red-600">*</span></span>
                     <label><input class="ml-4 mr-2" type="radio" name="is_search_target" value="1" checked>はい</label>
                     <label><input class="ml-4 mr-2" type="radio" name="is_search_target" value="0">いいえ</label>
                 </div>
 
-                <div class="px-5 md:leading-loose leading-10 text-center ml-auto mr-auto">
+                <label class="px-5 md:leading-loose leading-10 text-left items-center my-5">
                     <input class="mr-2 border border-gray-300 bg-gray-200 checked:bg-gray-500 checked:border-gray-300"
                         type="checkbox" name="terms_of_service">
-                    <span class="md:inline block">Anoveyの
+                    <span class="inline block">Anoveyの
                         <a class="text-blue underline" href="{{ route('terms_of_service') }}">
                             利用規約</a>
                         に同意する</span>
@@ -265,7 +267,7 @@
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
-                </div>
+                </label>
 
                 <button
                     class="block bg-lightblue-500 hover:bg-blue-300 text-white sm:text-base text-xs py-2 px-4 rounded mx-auto mb-5 w-60">

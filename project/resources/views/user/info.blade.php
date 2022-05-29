@@ -38,8 +38,9 @@
             </div>
             <div class="pt-16">
                 <h1 class="text-center text-2xl lg:text-4xl mb-12">アカウント情報</h1>
-                <img class="h-40 w-auto mx-auto overflow-hidden rounded-full mb-5" src="{{ $userInfo->icon }}"
-                    alt="ユーザーアイコン">
+                <div class="h-40 w-40 mx-auto overflow-hidden rounded-full mb-10">
+                    <img class="w-full h-full object-cover" src="{{ $userInfo->icon }}" alt="ユーザーアイコン">
+                </div>
                 <div class="grid grid-cols-2 md:gap-28 gap-8 mb-9">
                     <div class="col-span-1 text-right">氏名</div>
                     <div class="col-span-1">{{ $userInfo->name }}</div>
@@ -82,7 +83,7 @@
                     <button href="{{ route('logout') }}"
                         class="block mt-5 text-gray-500 sm:text-base text-xs py-1 px-4 rounded mx-auto mb-5 w-60 text-center"
                         onclick="event.preventDefault();
-                                            this.closest('form').submit();">
+                                                this.closest('form').submit();">
                         ログアウト
                     </button>
                 </form>
