@@ -27,7 +27,7 @@ class ChatRecordSeeder extends Seeder
             ],
             [
                 'chat_id' => 1,
-                'user_id' => 4,
+                'user_id' => 5,
                 'comment' => 'こちらこそよろしくお願いします。',
                 'created_at' => "2022-04-16 18:53:02",
                 'updated_at' => "2022-04-16 18:53:02",
