@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         'admin_check' => \App\Http\Middleware\AdminCheck::class,
         'active_user_check' => \App\Http\Middleware\ActiveUserCheck::class,
         'chat_finish_check' => \App\Http\Middleware\ChatFinishCheck::class,
+        'chat_start_check' => \App\Http\Middleware\ChatStartCheck::class,
         'is_my_chat' => \App\Http\Middleware\MyChatCheck::class,
     ];
 }

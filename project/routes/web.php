@@ -22,7 +22,7 @@ require __DIR__ . '/auth.php';
 Route::get('/', 'App\Http\Controllers\UserController@index')->name('user_index');
 Route::post('/', 'App\Http\Controllers\UserController@search')->name('user_search');
 Route::get('/beginner', 'App\Http\Controllers\UserController@beginner')->name('user_beginner');
-Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result');
+Route::get('/search/{keyword?}', 'App\Http\Controllers\UserController@result')->name('user_result')->middleware('chat_start_check');
 
 Route::get('/terms-of-service', function () {
     return view('user.terms-of-service');
