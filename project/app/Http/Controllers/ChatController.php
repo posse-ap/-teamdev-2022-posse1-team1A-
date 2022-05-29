@@ -12,6 +12,7 @@ use App\Mail\ChangedSchedule;
 use App\Mail\PartnerEnteredCall;
 use App\Mail\CancelledSchedule;
 use App\Mail\StoppedReception;
+use App\Mail\NewChat;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,12 @@ class ChatController extends Controller
             Chat::insert($insert_data);
             $chat_id = Chat::insertGetId($insert_data);
         }
+
+        // メール
+        $client = User::find(Auth::id());
+        $respondent = User::find($request->respondent_user_id);
+        Mail::to($respondent->email)->send(new NewChat($respondent, $client));
+
         return redirect()->route('chat.index', compact('chat_id'));
     }
 
