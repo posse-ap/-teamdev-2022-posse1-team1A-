@@ -88,8 +88,9 @@
                 <input type="hidden" name="id" value="{{ $userInfo->id }}">
                 <h1 class="text-center text-4xl mb-12">アカウント編集</h1>
                 <div class="relative user-icon max-w-xs mx-auto mb-10">
-                    <img class="h-40 w-auto mx-auto overflow-hidden rounded-full" src={{ asset($userInfo->icon) }}
-                        alt="ユーザーアイコン" id="figure-image">
+                    <div class="h-40 w-40 mx-auto overflow-hidden rounded-full">
+                        <img class="w-auto h-auto" src={{ asset($userInfo->icon) }} alt="ユーザーアイコン" id="figure-image">
+                    </div>
                     <div class="pulus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full" id="user-icon-button">
                     </div>
                     <input value="{{ $userInfo->icon }}" type="file" name="icon" class="hidden"
@@ -233,7 +234,7 @@
                 </div>
                 <div class="mb-9 px-5 md:leading-loose leading-10">
                     <div class="md:flex md:items-center">
-                        <p class="mb-1 md:mb-0">匿名回答者としてのサービス利用を行いますか？</p>
+                        <p class="mb-1 md:mb-0">匿名回答者としてのサービス利用を行いますか？<span class="text-red-600">*</span></p>
                         <div class="flex">
                             <label class="flex items-center"><input class="md:ml-4 mr-1" type="radio"
                                     name="is_search_target" value="1" @checked($userInfo->is_search_target == 1)>はい</label>
