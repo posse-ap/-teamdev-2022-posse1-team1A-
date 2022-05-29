@@ -30,6 +30,7 @@ class User extends Authenticatable
         'is_search_target',
         'account_status_id',
         'role_id',
+        'peer_id',
         'password',
     ];
 
@@ -66,22 +67,27 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Chat', 'respondent_user_id')->count();
     }
-    
+
     public static function getDefaultIcon()
     {
         return 'img/user-icon.jpeg';
     }
 
+    public function rewards()
+    {
+        return $this->belongsTo('App\Models\Reward', 'user_id');
+    }
+
     public function current_client_users()
     {
-        return $this->hasMany(Chat::class,'respondent_user_id')->where('is_finished', ChatStatus::getIsChattingId());
+        return $this->hasMany(Chat::class, 'respondent_user_id')->where('is_finished', ChatStatus::getIsChattingId());
     }
 
     public function client_chats()
     {
         return $this->hasMany(Chat::class, 'client_user_id');
     }
-    
+
     public function respondent_chats()
     {
         return $this->hasMany(Chat::class, 'respondent_user_id');

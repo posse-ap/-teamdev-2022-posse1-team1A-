@@ -25,10 +25,6 @@
         window.addEventListener('DOMContentLoaded', function() {
             document.getElementById("user-icon-button").addEventListener("click", () => {
                 document.getElementById("user-icon-input").click()
-                setTimeout(() => {
-                    const figureImage = document.getElementById('figure-image')
-                    figureImage.setAttribute('src', '/img/user-icon.jpeg')
-                }, 500);
             });
         });
     </script>
@@ -239,10 +235,10 @@
                     <div class="md:flex md:items-center">
                         <p class="mb-1 md:mb-0">匿名回答者としてのサービス利用を行いますか？</p>
                         <div class="flex">
-                            <label class="flex items-center"><input class="md:ml-4 mr-1" type="radio" name="is_search_target" value="1"
-                                    @checked($userInfo->is_search_target == 1)>はい</label>
-                            <label class="flex items-center"><input class="ml-4 mr-1" type="radio" name="is_search_target" value="0"
-                                    @checked($userInfo->is_search_target == 0)>いいえ</label>
+                            <label class="flex items-center"><input class="md:ml-4 mr-1" type="radio"
+                                    name="is_search_target" value="1" @checked($userInfo->is_search_target == 1)>はい</label>
+                            <label class="flex items-center"><input class="ml-4 mr-1" type="radio"
+                                    name="is_search_target" value="0" @checked($userInfo->is_search_target == 0)>いいえ</label>
                         </div>
                     </div>
                     @error('is_search_target')
@@ -268,7 +264,7 @@
 
                 input.addEventListener('input', (event) => {
                     if (event.target.files.length === 0) {
-                        figureImage.setAttribute('src', '/img/user-icon.jpeg')
+                        figureImage.setAttribute('src', '/{{ $userInfo->icon }}')
                     } else {
                         let [file] = event.target.files
 

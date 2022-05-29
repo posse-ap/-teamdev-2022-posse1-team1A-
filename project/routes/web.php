@@ -85,6 +85,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/userlist/active', 'App\Http\Controllers\AdminController@accountActive')->name('userlist_accountActive');
 
         Route::get('/call-evaluation', 'App\Http\Controllers\AdminController@callEvaluation')->name('call_evaluation');
+
+        Route::get('/reward-list', 'App\Http\Controllers\AdminController@rewardList')->name('reward_list');
+        Route::post('/reward-list', 'App\Http\Controllers\AdminController@rewardListPaid')->name('reward_list_paid');
+
         Route::get('/contact-us', function () {
             return view('admin.contact-us');
         })->name('contact-us');
