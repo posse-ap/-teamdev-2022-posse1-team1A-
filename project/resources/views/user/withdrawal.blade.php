@@ -8,7 +8,7 @@
 @section('content')
     @include('components.user-header')
 
-    <main>
+    <main class="min-h-screen">
         <section class="pt-5 mb-20">
             <div class="container mx-auto px-6">
                 <div>
