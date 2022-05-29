@@ -79,7 +79,7 @@
         <div class="mt-16 max-w-xl mx-auto">
             <h1 class="text-xl text-center py-3">新規登録</h1>
 
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                 @csrf
 
                 {{-- name --}}
