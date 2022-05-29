@@ -130,7 +130,7 @@ class UserController extends Controller
             $icon->storeAs('', $icon->getClientOriginalName(), 'public');
             $iconPath = 'storage/' . $icon->getClientOriginalName();
         } else {
-            $iconPath = User::getDefaultIcon();
+            $iconPath = $user->icon;
         }
         $user->update([
             'name' => $request->name,
