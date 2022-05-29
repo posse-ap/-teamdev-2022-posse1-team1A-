@@ -91,7 +91,7 @@
                     <div class="h-40 w-40 mx-auto overflow-hidden rounded-full">
                         <img class="w-full h-full object-cover" src={{ asset($userInfo->icon) }} alt="ユーザーアイコン" id="figure-image">
                     </div>
-                    <div class="pulus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full" id="user-icon-button">
+                    <div class="pulus-icon absolute h-10 w-10 left-48 bg-lightblue-500 rounded-full cursor-pointer" id="user-icon-button">
                     </div>
                     <input value="{{ $userInfo->icon }}" type="file" name="icon" class="hidden"
                         id="user-icon-input" accept="image/*">
