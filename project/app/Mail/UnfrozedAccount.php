@@ -29,7 +29,7 @@ class UnfrozedAccount extends Mailable
     public function build()
     {
         return $this->view('mails.unfroze_account')
-        ->subject('サービスの利用が解除されました【Anovey】')
+        ->subject('アカウント停止が解除されました【Anovey】')
         ->with(['user' => $this->user]);
     }
 }
