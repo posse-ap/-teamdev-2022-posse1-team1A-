@@ -102,7 +102,7 @@ class UserController extends Controller
 
     public function userEdit()
     {
-        $userId = 1;
+        $userId = Auth::id();
         $userInfo = User::find($userId);
         return view('user.edit', compact('userInfo'));
     }
@@ -113,7 +113,6 @@ class UserController extends Controller
             'name' => 'required',
             'nickname' => 'required',
             'email' => 'required|email',
-            'icon' => 'required',
             'telephone_number' => 'required|numeric',
             'company' => 'required',
             'department' => 'required',
