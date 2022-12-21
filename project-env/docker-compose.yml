@@ -1,11 +1,11 @@
 version: '3'
 
 volumes:
-  db-volume:
   maildir: {}
 
 services:
   php:
+    container_name: app
     build: ./docker/php
     volumes:
       - ../project:/var/www
@@ -21,8 +21,9 @@ services:
       - php
 
   db:
-    platform: linux/x86_64
-    image: 'mysql/mysql-server:8.0'
+    container_name: db
+    platform: linux/amd64
+    image: 'mysql:latest'
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: laravel
@@ -33,7 +34,6 @@ services:
     volumes:
       - ./docker/db/data:/var/lib/mysql
       - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./docker/db/sql:/docker-entrypoint-initdb.d
     ports:
       - 3306:3306
   
